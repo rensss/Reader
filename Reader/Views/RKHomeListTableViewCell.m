@@ -42,11 +42,12 @@
     self.coverImage = coverImage;
     coverImage.backgroundColor = [UIColor cyanColor];
     [bgView addSubview:coverImage];
+    CGFloat height = 100;
+    CGFloat width = height*kCoverImageWidth/kCoverImageHeight;
     [coverImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(60);
+        make.size.mas_equalTo(CGSizeMake(width, height));
         make.top.equalTo(bgView).mas_offset(10);
         make.left.equalTo(bgView).mas_offset(10);
-        make.bottom.equalTo(bgView).mas_offset(0);
     }];
     
     UILabel *name = [UILabel new];

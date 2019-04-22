@@ -22,6 +22,7 @@
 		1A18892E226D7BC900289476 /* RKFileManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A18892D226D7BC900289476 /* RKFileManage.m */; };
 		1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188930226D7BEB00289476 /* RKLoadingView.m */; };
 		1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188931226D7BEB00289476 /* RKAlertMessage.m */; };
+		1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188939226DB93E00289476 /* RKBookImprotViewController.m */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		1A188931226D7BEB00289476 /* RKAlertMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKAlertMessage.m; sourceTree = "<group>"; };
 		1A188932226D7BEB00289476 /* RKLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKLoadingView.h; sourceTree = "<group>"; };
 		1A188933226D7BEB00289476 /* RKAlertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertMessage.h; sourceTree = "<group>"; };
+		1A188938226DB93E00289476 /* RKBookImprotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKBookImprotViewController.h; sourceTree = "<group>"; };
+		1A188939226DB93E00289476 /* RKBookImprotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBookImprotViewController.m; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.debug.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,10 +119,8 @@
 		1A18890D226D774C00289476 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A188919226D79B300289476 /* RKHomeListViewController.h */,
-				1A18891A226D79B300289476 /* RKHomeListViewController.m */,
-				1A18891C226D7A2D00289476 /* RKSettingViewController.h */,
-				1A18891D226D7A2D00289476 /* RKSettingViewController.m */,
+				1A188937226DB90F00289476 /* Home */,
+				1A188936226DB90200289476 /* Setting */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -189,6 +190,26 @@
 				1A188930226D7BEB00289476 /* RKLoadingView.m */,
 			);
 			path = AlertMessage;
+			sourceTree = "<group>";
+		};
+		1A188936226DB90200289476 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1A18891C226D7A2D00289476 /* RKSettingViewController.h */,
+				1A18891D226D7A2D00289476 /* RKSettingViewController.m */,
+				1A188938226DB93E00289476 /* RKBookImprotViewController.h */,
+				1A188939226DB93E00289476 /* RKBookImprotViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		1A188937226DB90F00289476 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1A188919226D79B300289476 /* RKHomeListViewController.h */,
+				1A18891A226D79B300289476 /* RKHomeListViewController.m */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		296C8907161B58EE0DDBEC40 /* Frameworks */ = {
@@ -334,6 +355,7 @@
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,
 				1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */,
 				1A188924226D7AC300289476 /* RKModel.m in Sources */,
+				1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */,
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
 				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,
 				1A18892E226D7BC900289476 /* RKFileManage.m in Sources */,

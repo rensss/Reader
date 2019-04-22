@@ -51,7 +51,6 @@
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(self.view);
     }];
-    
 }
 
 - (void)settingClick {
