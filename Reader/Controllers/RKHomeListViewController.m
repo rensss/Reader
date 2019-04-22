@@ -45,6 +45,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = 100;
+    tableView.alwaysBounceHorizontal = YES;
     tableView.tableFooterView = [UIView new];
     [tableView autoPinEdgesToSuperviewEdges];
     
