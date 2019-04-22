@@ -22,8 +22,10 @@ fprintf(stderr,"%s %s",[str UTF8String], [[NSString stringWithFormat:FORMAT, ##_
 NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 
 #pragma mark - 通用类
-#import <R_category/R_categorys.h>
+
+#import <Masonry.h>
 #import <PureLayout/PureLayout.h>
+#import <R_category/R_categorys.h>
 #import <YYModel/YYModel.h>
 #import "RKNavigationController.h" // 导航控制
 #import "RKViewController.h" // 基类
@@ -34,9 +36,9 @@ NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 #import "RKFileManage.h" // 文件管理
 
 #pragma mark - model
-//#import "RKModel.h" // model 基类
-//#import "RKBook.h" // book对象
-//#import "RKChapter.h" // 章节
+#import "RKModel.h" // model 基类
+#import "RKBook.h" // book对象
+#import "RKChapter.h" // 章节
 
 #pragma mark - 常用宏定义
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width

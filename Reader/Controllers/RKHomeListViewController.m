@@ -47,10 +47,8 @@
     tableView.rowHeight = 100;
     tableView.alwaysBounceHorizontal = YES;
     tableView.tableFooterView = [UIView new];
-    [tableView autoPinEdgesToSuperviewEdges];
+    [tableView autoPinEdgesToSuperviewSafeArea];
     
-    //    // 赋值底部安全区域高度
-    //    [RKUserConfiguration sharedInstance].viewControllerSafeAreaBottomHeight = self.safeAreaInsets.bottom;
 }
 
 - (void)settingClick {
@@ -61,7 +59,7 @@
 #pragma mark - delegate
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.dataArray.count>0?self.dataArray.count:3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
