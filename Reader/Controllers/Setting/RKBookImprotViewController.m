@@ -90,7 +90,7 @@
  *  This method is called whenever a file has been uploaded.
  */
 - (void)webUploader:(GCDWebUploader*)uploader didUploadFileAtPath:(NSString*)path {
-    RKLog(@"didUploadFileAtPath---->\n");
+    RKLog(@"didUploadFileAtPath---->\n %@",path);
     // 保存&解析
     [[RKFileManager shareInstance] saveBookWithPath:path];
     
