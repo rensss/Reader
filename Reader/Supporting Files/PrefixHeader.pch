@@ -1,0 +1,70 @@
+//
+//  PrefixHeader.pch
+//  Reader
+//
+//  Created by Rzk on 2019/4/22.
+//  Copyright © 2019 Rzk. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// 自定义log
+#define NSLog(FORMAT, ...) {\
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];\
+[dateFormatter setDateStyle:NSDateFormatterMediumStyle];\
+[dateFormatter setTimeStyle:NSDateFormatterShortStyle];\
+[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS "]; \
+NSString *str = [dateFormatter stringFromDate:[NSDate date]];\
+fprintf(stderr,"%s %s",[str UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);\
+}
+#define RKLog(...)\
+NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
+
+#pragma mark - 通用类
+#import <R_category/R_categorys.h>
+#import <PureLayout/PureLayout.h>
+#import <YYModel/YYModel.h>
+#import "RKNavigationController.h" // 导航控制
+#import "RKViewController.h" // 基类
+
+//#import "RKAlertMessage.h" // 弹窗
+//#import "RKLoadingView.h" // loading
+//
+//#import "RKFileManage.h" // 文件管理
+
+#pragma mark - model
+//#import "RKModel.h" // model 基类
+//#import "RKBook.h" // book对象
+//#import "RKChapter.h" // 章节
+
+#pragma mark - 常用宏定义
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+
+// 电池条高度
+#define kStatusHight [[UIApplication sharedApplication] statusBarFrame].size.height
+// 底部安全区域
+#define VIEWSAFEAREAINSETS(view) ({UIEdgeInsets i; if(@available(iOS 11.0, *)) {i = view.safeAreaInsets;} else {i = UIEdgeInsetsZero;} i;})
+#define kSafeAreaBottom ({CGFloat i; if(@available(iOS 11.0, *)) {i = 34.0f;} else {i = 0.0f;} i;})
+
+// 首页封面图原宽高
+#define kCoverImageWidth 236
+#define kCoverImageHeight 337
+
+// 阅读页 底部状态栏颜色
+#define kReadViewBottomTintColor [UIColor colorWithHexString:@"707070"]
+
+// 书籍存放文件夹路径
+#define kBookSavePath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Books"]
+
+// 书籍解析文件存放路径
+#define kBookAnalysisSavePath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/BooksAnalysis"]
+
+// 首页列表上数据
+#define kHomeBookListsPath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/BookLists.plist"]
+
+// 用户配置信息存放路径
+#define kUserConfigutationPATH [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/userConfig.plist"]
+
+#endif /* PrefixHeader_pch */

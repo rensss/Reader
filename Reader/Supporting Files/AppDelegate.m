@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "RKHomeListViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    RKHomeListViewController *listVC = [[RKHomeListViewController alloc] init];
+    RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:listVC];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

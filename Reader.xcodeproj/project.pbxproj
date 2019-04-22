@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1A1888F8226D709100289476 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1888F7226D709100289476 /* AppDelegate.m */; };
-		1A1888FB226D709100289476 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1888FA226D709100289476 /* ViewController.m */; };
-		1A1888FE226D709100289476 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1888FC226D709100289476 /* Main.storyboard */; };
 		1A188900226D709200289476 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1888FF226D709200289476 /* Assets.xcassets */; };
 		1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A188901226D709200289476 /* LaunchScreen.storyboard */; };
 		1A188906226D709200289476 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188905226D709200289476 /* main.m */; };
+		1A188915226D78C000289476 /* RKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188914226D78C000289476 /* RKNavigationController.m */; };
+		1A188918226D792200289476 /* RKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188917226D792200289476 /* RKViewController.m */; };
+		1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A18891A226D79B300289476 /* RKHomeListViewController.m */; };
+		1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A18891D226D7A2D00289476 /* RKSettingViewController.m */; };
+		1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
 /* End PBXBuildFile section */
 
@@ -20,13 +23,21 @@
 		1A1888F3226D709100289476 /* Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1888F6226D709100289476 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A1888F7226D709100289476 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1A1888F9226D709100289476 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1A1888FA226D709100289476 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		1A1888FD226D709100289476 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A1888FF226D709200289476 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A188902226D709200289476 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A188904226D709200289476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A188905226D709200289476 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1A188912226D780800289476 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		1A188913226D78C000289476 /* RKNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKNavigationController.h; sourceTree = "<group>"; };
+		1A188914226D78C000289476 /* RKNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKNavigationController.m; sourceTree = "<group>"; };
+		1A188916226D792200289476 /* RKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKViewController.h; sourceTree = "<group>"; };
+		1A188917226D792200289476 /* RKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKViewController.m; sourceTree = "<group>"; };
+		1A188919226D79B300289476 /* RKHomeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKHomeListViewController.h; sourceTree = "<group>"; };
+		1A18891A226D79B300289476 /* RKHomeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKHomeListViewController.m; sourceTree = "<group>"; };
+		1A18891C226D7A2D00289476 /* RKSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSettingViewController.h; sourceTree = "<group>"; };
+		1A18891D226D7A2D00289476 /* RKSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSettingViewController.m; sourceTree = "<group>"; };
+		1A18891F226D7A8600289476 /* RKHomeListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKHomeListTableViewCell.h; sourceTree = "<group>"; };
+		1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKHomeListTableViewCell.m; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.debug.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,17 +76,73 @@
 		1A1888F5226D709100289476 /* Reader */ = {
 			isa = PBXGroup;
 			children = (
+				1A188910226D776B00289476 /* Base */,
+				1A18890F226D776200289476 /* Models */,
+				1A18890E226D775A00289476 /* Views */,
+				1A18890D226D774C00289476 /* Controllers */,
+				1A18890C226D774100289476 /* Utills */,
+				1A188911226D778500289476 /* Supporting Files */,
+			);
+			path = Reader;
+			sourceTree = "<group>";
+		};
+		1A18890C226D774100289476 /* Utills */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utills;
+			sourceTree = "<group>";
+		};
+		1A18890D226D774C00289476 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A188919226D79B300289476 /* RKHomeListViewController.h */,
+				1A18891A226D79B300289476 /* RKHomeListViewController.m */,
+				1A18891C226D7A2D00289476 /* RKSettingViewController.h */,
+				1A18891D226D7A2D00289476 /* RKSettingViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1A18890E226D775A00289476 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1A18891F226D7A8600289476 /* RKHomeListTableViewCell.h */,
+				1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1A18890F226D776200289476 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1A188910226D776B00289476 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				1A188913226D78C000289476 /* RKNavigationController.h */,
+				1A188914226D78C000289476 /* RKNavigationController.m */,
+				1A188916226D792200289476 /* RKViewController.h */,
+				1A188917226D792200289476 /* RKViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		1A188911226D778500289476 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				1A1888F6226D709100289476 /* AppDelegate.h */,
 				1A1888F7226D709100289476 /* AppDelegate.m */,
-				1A1888F9226D709100289476 /* ViewController.h */,
-				1A1888FA226D709100289476 /* ViewController.m */,
-				1A1888FC226D709100289476 /* Main.storyboard */,
 				1A1888FF226D709200289476 /* Assets.xcassets */,
 				1A188901226D709200289476 /* LaunchScreen.storyboard */,
 				1A188904226D709200289476 /* Info.plist */,
 				1A188905226D709200289476 /* main.m */,
+				1A188912226D780800289476 /* PrefixHeader.pch */,
 			);
-			path = Reader;
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		296C8907161B58EE0DDBEC40 /* Frameworks */ = {
@@ -92,7 +159,6 @@
 				EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */,
 				A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -124,6 +190,7 @@
 		1A1888EB226D709100289476 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = RK;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Rzk;
 				TargetAttributes = {
@@ -157,7 +224,6 @@
 			files = (
 				1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */,
 				1A188900226D709200289476 /* Assets.xcassets in Resources */,
-				1A1888FE226D709100289476 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,23 +281,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1888FB226D709100289476 /* ViewController.m in Sources */,
+				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
+				1A188918226D792200289476 /* RKViewController.m in Sources */,
+				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
+				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,
 				1A188906226D709200289476 /* main.m in Sources */,
 				1A1888F8226D709100289476 /* AppDelegate.m in Sources */,
+				1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1A1888FC226D709100289476 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1A1888FD226D709100289476 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1A188901226D709200289476 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -361,7 +423,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Reader/Info.plist;
+				DEVELOPMENT_TEAM = 2MC8B96QW9;
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +442,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Reader/Info.plist;
+				DEVELOPMENT_TEAM = 2MC8B96QW9;
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

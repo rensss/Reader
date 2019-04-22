@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RKHomeListTableViewCell.h
 //  Reader
 //
 //  Created by Rzk on 2019/4/22.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface RKHomeListTableViewCell : UITableViewCell
 
 @end
 
+NS_ASSUME_NONNULL_END
