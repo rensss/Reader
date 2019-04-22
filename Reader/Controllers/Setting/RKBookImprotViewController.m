@@ -91,15 +91,14 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didUploadFileAtPath:(NSString*)path {
     RKLog(@"didUploadFileAtPath---->\n");
-    // 保存
-//    [RKFileManager threadedTaskAllocationWithFile:path];
-//
+    // 保存&解析
+    [[RKFileManager shareInstance] saveBookWithPath:path];
+    
 //    NSString *title = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
-//
+
 //    NSString *alertMessageStr = [NSString stringWithFormat:@"%@ 上传成功",title];
-//
 //    RKAlertMessage(alertMessageStr,self.view);
-//
+
 //    [self reloadTableView];
 }
 

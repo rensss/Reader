@@ -33,7 +33,7 @@ NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 #import "RKAlertMessage.h" // 弹窗
 #import "RKLoadingView.h" // loading
 
-#import "RKFileManage.h" // 文件管理
+#import "RKFileManager.h" // 文件管理
 
 #pragma mark - model
 #import "RKModel.h" // model 基类

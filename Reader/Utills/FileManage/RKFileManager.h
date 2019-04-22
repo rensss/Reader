@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RKFileManage : NSObject
+@interface RKFileManager : NSObject
 
 /// 文件管理单例
 + (instancetype)shareInstance;
@@ -17,6 +17,9 @@
 #pragma mark - 增
 /// 添加书籍
 - (void)saveBookWithPath:(NSString *)path;
+
+/// 解析书籍
+- (void)bookAnalysis;
 
 #pragma mark - 删
 #pragma mark - 改

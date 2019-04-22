@@ -51,7 +51,7 @@
 		1A188926226D7AEC00289476 /* RKBook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBook.m; sourceTree = "<group>"; };
 		1A188928226D7B1200289476 /* RKChapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChapter.h; sourceTree = "<group>"; };
 		1A188929226D7B1200289476 /* RKChapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKChapter.m; sourceTree = "<group>"; };
-		1A18892C226D7BC900289476 /* RKFileManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKFileManage.h; sourceTree = "<group>"; };
+		1A18892C226D7BC900289476 /* RKFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKFileManager.h; sourceTree = "<group>"; };
 		1A18892D226D7BC900289476 /* RKFileManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKFileManage.m; sourceTree = "<group>"; };
 		1A188930226D7BEB00289476 /* RKLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKLoadingView.m; sourceTree = "<group>"; };
 		1A188931226D7BEB00289476 /* RKAlertMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKAlertMessage.m; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		1A18892B226D7BB500289476 /* FileManage */ = {
 			isa = PBXGroup;
 			children = (
-				1A18892C226D7BC900289476 /* RKFileManage.h */,
+				1A18892C226D7BC900289476 /* RKFileManager.h */,
 				1A18892D226D7BC900289476 /* RKFileManage.m */,
 			);
 			path = FileManage;

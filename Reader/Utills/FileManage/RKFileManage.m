@@ -1,22 +1,22 @@
 //
-//  RKFileManage.m
+//  RKFileManager.m
 //  Reader
 //
 //  Created by RZK on 2019/4/20.
 //  Copyright © 2019 RZK. All rights reserved.
 //
 
-#import "RKFileManage.h"
+#import "RKFileManager.h"
 
-@interface RKFileManage ()
+@interface RKFileManager ()
 
 
 
 @end
 
-@implementation RKFileManage
+@implementation RKFileManager
 
-static RKFileManage *_fileManage;
+static RKFileManager *_fileManager;
 
 #pragma mark - 单例
 + (instancetype)shareInstance {
@@ -24,10 +24,10 @@ static RKFileManage *_fileManage;
 	static dispatch_once_t onceToken;
 	
 	dispatch_once(&onceToken, ^{
-		_fileManage = [[RKFileManage alloc] init];
+		_fileManager = [[RKFileManager alloc] init];
 	});
 	
-	return _fileManage;
+	return _fileManager;
 }
 
 - (instancetype)init
@@ -53,21 +53,26 @@ static RKFileManage *_fileManage;
 	
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		_fileManage = [super allocWithZone:zone];
+		_fileManager = [super allocWithZone:zone];
 	});
 	
-	return _fileManage;
+	return _fileManager;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-	return _fileManage;
+	return _fileManager;
 }
 
 #pragma mark - func
 #pragma mark - 增
 /// 添加书籍
 - (void)saveBookWithPath:(NSString *)path {
-	
+    [self bookAnalysis];
+}
+
+/// 解析书籍
+- (void)bookAnalysis {
+    
 }
 
 
