@@ -34,14 +34,20 @@
     
     UIView *bgView = [UIView new];
     [self.contentView addSubview:bgView];
-    [bgView autoPinEdgesToSuperviewEdges];
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(self.contentView);
+    }];
     
     UIImageView *coverImage = [UIImageView new];
     self.coverImage = coverImage;
     coverImage.backgroundColor = [UIColor cyanColor];
     [bgView addSubview:coverImage];
-    [coverImage autoSetDimension:ALDimensionWidth toSize:60];
-    [coverImage autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(5, 5, 5, 0) excludingEdge:ALEdgeRight];
+    [coverImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(60);
+        make.top.equalTo(bgView).mas_offset(10);
+        make.left.equalTo(bgView).mas_offset(10);
+        make.bottom.equalTo(bgView).mas_offset(0);
+    }];
     
     UILabel *name = [UILabel new];
     self.name = name;
@@ -49,42 +55,43 @@
     name.text = @"书名";
     name.textColor = [UIColor blackColor];
     name.font = [UIFont systemFontOfSize:16];
-    [name autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:coverImage withOffset:8];
     
     UILabel *chapter = [UILabel new];
     self.chapter = chapter;
     [bgView addSubview:chapter];
     chapter.text = @"当前章节";
-    chapter.font = [UIFont systemFontOfSize:10];
+    chapter.font = [UIFont systemFontOfSize:14];
     chapter.textColor = [UIColor darkTextColor];
-    [chapter autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:coverImage withOffset:8];
     
     UILabel *progress = [UILabel new];
     self.progress = progress;
     [bgView addSubview:progress];
     progress.text = @"0.00%";
-    progress.font = [UIFont systemFontOfSize:10];
+    progress.font = [UIFont systemFontOfSize:12];
     progress.textColor = [UIColor darkTextColor];
-    [progress autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:coverImage withOffset:8];
     
     UILabel *size = [UILabel new];
     self.size = size;
     [bgView addSubview:size];
     size.text = @"0.00M";
-    size.font = [UIFont systemFontOfSize:10];
+    size.font = [UIFont systemFontOfSize:12];
     size.textColor = [UIColor darkTextColor];
-    [size autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:coverImage withOffset:8];
-    
+
     NSArray *sub = @[name,chapter,progress,size];
-    [sub autoDistributeViewsAlongAxis:ALAxisVertical alignedTo:ALAttributeVertical withFixedSpacing:5];
+    [sub mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(coverImage.mas_right).mas_offset(8);
+    }];
+    [sub mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:8 leadSpacing:10 tailSpacing:10];
     
     UIImageView *topImage = [UIImageView new];
     self.topImage = topImage;
     [bgView addSubview:topImage];
     topImage.image = [UIImage imageNamed:@"top"];
-    [topImage autoSetDimensionsToSize:CGSizeMake(18, 18)];
-    [topImage autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:5];
-    [topImage autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:5];
+    [topImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(18, 18));
+        make.right.mas_offset(-5);
+        make.top.mas_offset(5);
+    }];
 }
 
 #pragma mark - setting

@@ -478,6 +478,7 @@
 				DEVELOPMENT_TEAM = 2MC8B96QW9;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -497,6 +498,7 @@
 				DEVELOPMENT_TEAM = 2MC8B96QW9;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

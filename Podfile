@@ -4,7 +4,6 @@ platform :ios, '9.0'
 
 target 'Reader' do
   pod 'Masonry'
-	pod 'PureLayout'
 	pod 'R_category'
 	pod 'YYModel'
 	pod 'GCDWebServer/WebUploader'

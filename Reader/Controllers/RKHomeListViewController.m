@@ -44,10 +44,13 @@
     [self.view addSubview:self.tableView];
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.rowHeight = 100;
-    tableView.alwaysBounceHorizontal = YES;
+    tableView.rowHeight = 110;
+    tableView.alwaysBounceVertical = YES;
     tableView.tableFooterView = [UIView new];
-    [tableView autoPinEdgesToSuperviewSafeArea];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.view);
+    }];
     
 }
 
@@ -68,6 +71,7 @@
     
     if (!cell) {
         cell = [[RKHomeListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return cell;
