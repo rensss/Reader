@@ -17,7 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    // 初始化
+    [RKFileManage shareInstance];
+    // 首页
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     RKHomeListViewController *listVC = [[RKHomeListViewController alloc] init];
     RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:listVC];
