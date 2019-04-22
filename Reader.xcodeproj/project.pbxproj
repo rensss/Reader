@@ -16,6 +16,9 @@
 		1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A18891A226D79B300289476 /* RKHomeListViewController.m */; };
 		1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A18891D226D7A2D00289476 /* RKSettingViewController.m */; };
 		1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */; };
+		1A188924226D7AC300289476 /* RKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188923226D7AC300289476 /* RKModel.m */; };
+		1A188927226D7AEC00289476 /* RKBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188926226D7AEC00289476 /* RKBook.m */; };
+		1A18892A226D7B1200289476 /* RKChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188929226D7B1200289476 /* RKChapter.m */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +41,12 @@
 		1A18891D226D7A2D00289476 /* RKSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSettingViewController.m; sourceTree = "<group>"; };
 		1A18891F226D7A8600289476 /* RKHomeListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKHomeListTableViewCell.h; sourceTree = "<group>"; };
 		1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKHomeListTableViewCell.m; sourceTree = "<group>"; };
+		1A188922226D7AC300289476 /* RKModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKModel.h; sourceTree = "<group>"; };
+		1A188923226D7AC300289476 /* RKModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKModel.m; sourceTree = "<group>"; };
+		1A188925226D7AEC00289476 /* RKBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKBook.h; sourceTree = "<group>"; };
+		1A188926226D7AEC00289476 /* RKBook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBook.m; sourceTree = "<group>"; };
+		1A188928226D7B1200289476 /* RKChapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChapter.h; sourceTree = "<group>"; };
+		1A188929226D7B1200289476 /* RKChapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKChapter.m; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.debug.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +125,12 @@
 		1A18890F226D776200289476 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A188922226D7AC300289476 /* RKModel.h */,
+				1A188923226D7AC300289476 /* RKModel.m */,
+				1A188925226D7AEC00289476 /* RKBook.h */,
+				1A188926226D7AEC00289476 /* RKBook.m */,
+				1A188928226D7B1200289476 /* RKChapter.h */,
+				1A188929226D7B1200289476 /* RKChapter.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,8 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A188927226D7AEC00289476 /* RKBook.m in Sources */,
 				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
+				1A18892A226D7B1200289476 /* RKChapter.m in Sources */,
 				1A188918226D792200289476 /* RKViewController.m in Sources */,
+				1A188924226D7AC300289476 /* RKModel.m in Sources */,
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
 				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,
 				1A188906226D709200289476 /* main.m in Sources */,
