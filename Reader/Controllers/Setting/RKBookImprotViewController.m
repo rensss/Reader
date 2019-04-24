@@ -91,7 +91,6 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didUploadFileAtPath:(NSString*)path {
     RKLog(@"didUploadFileAtPath---->\n %@",path);
-#warning - 未解析
     // 保存&解析
     [[RKFileManager shareInstance] saveBookWithPath:path];
     

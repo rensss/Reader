@@ -19,11 +19,24 @@
 - (void)saveBookWithPath:(NSString *)path;
 
 /// 解析书籍
-- (void)bookAnalysis;
+- (NSString *)bookAnalysisWithFilePath:(NSString *)path;
 
 #pragma mark - 删
-#pragma mark - 改
-#pragma mark - 查
 
+
+#pragma mark - 查
+/// 获取首页书籍列表
+- (NSMutableArray *)getHomeList;
+
+#pragma mark - func
+/// 书籍解码 返回内容
+- (NSString *)encodeWithFilePath:(NSString *)path;
+
+/**
+ 计算文件的大小，单位为 M
+ @param path 文件路径
+ @return 大小(M)
+ */
+- (CGFloat)getFileSize:(NSString *)path;
 
 @end

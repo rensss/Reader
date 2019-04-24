@@ -105,8 +105,8 @@
     
     self.name.text = book.name;
     self.chapter.text = book.chapter.chapterName;
-    self.progress.text = [NSString stringWithFormat:@"%.2f",book.progress];
-    self.size.text = [NSString stringWithFormat:@"%.2f",book.size/1024];
+    self.progress.text = [NSString stringWithFormat:@"%.2f%%",book.progress];
+    self.size.text = [NSString stringWithFormat:@"%.2fM",book.size];
     if (book.isTop) {
         self.topImage.hidden = NO;
     } else {

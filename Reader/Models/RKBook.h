@@ -11,6 +11,7 @@
 
 @interface RKBook : RKModel
 
+@property (nonatomic, copy) NSString *bookID; /**< 书籍ID*/
 @property (nonatomic, copy) NSString *coverImage; /**< 封面图*/
 @property (nonatomic, copy) NSString *name; /**< 书名*/
 @property (nonatomic, copy) NSString *path; /**< 存放地址*/
@@ -19,7 +20,7 @@
 @property (nonatomic, assign) NSInteger allChapters; /**< 总章节数*/
 @property (nonatomic, strong) RKChapter *chapter; /**< 当前章节*/
 @property (nonatomic, strong) NSMutableArray *chapters; /**< 所有章节*/
-@property (nonatomic, assign) CGFloat size; /**< 大小(Kb)*/
+@property (nonatomic, assign) CGFloat size; /**< 大小*/
 @property (nonatomic, assign) NSTimeInterval addDate; /**< 添加时间*/
 @property (nonatomic, assign) NSTimeInterval lastReadDate; /**< 最后阅读*/
 @property (nonatomic, assign) BOOL isTop; /**< 是否置顶*/

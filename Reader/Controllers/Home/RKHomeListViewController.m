@@ -61,7 +61,7 @@
 #pragma mark - delegate
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count>0?self.dataArray.count:3;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -73,6 +73,8 @@
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    cell.book = self.dataArray[indexPath.row];
+    
     return cell;
 }
 
@@ -80,5 +82,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+#pragma mark - getting
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = [[RKFileManager shareInstance] getHomeList];
+    }
+    return _dataArray;
 }
 @end

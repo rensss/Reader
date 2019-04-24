@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RKModel : NSObject <NSCoding>
+@interface RKModel : NSObject
 
 @end
