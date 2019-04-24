@@ -44,6 +44,7 @@ static RKFileManager *_fileManager;
             }
         } else {
             RKLog(@"文件已存在\nkBookSavePath:%@",kBookSavePath);
+            RKLog(@"书籍列表\n%@",kHomeBookListsPath);
         }
     }
     return self;
@@ -68,8 +69,10 @@ static RKFileManager *_fileManager;
 /// 添加书籍
 - (void)saveBookWithPath:(NSString *)path {
     
-    __block RKBook *book = [RKBook new];
-    book.name = [path componentsSeparatedByString:@"/"].lastObject;
+    RKBook *book = [RKBook new];
+    // 书名 带扩展名
+    NSString *name = [path componentsSeparatedByString:@"/"].lastObject;
+    book.name = [name componentsSeparatedByString:@"."].firstObject;
     book.path = path;
     book.size = [self getFileSize:path];
     book.addDate = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
