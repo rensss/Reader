@@ -61,6 +61,10 @@ NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 // 书籍存放文件夹路径
 #define kBookSavePath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Books"]
 
+// 解析好的书籍章节存放的路径
+#define kBookAnalysisPath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/BookAnalysis"]
+
+
 // 首页列表上数据
 #define kHomeBookListsPath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/BookLists.plist"]
 

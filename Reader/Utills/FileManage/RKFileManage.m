@@ -36,15 +36,26 @@ static RKFileManager *_fileManager;
     if (self) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         BOOL isDir;
+        RKLog(@"书籍列表\n%@",kHomeBookListsPath);
+
         // 先判断目录是否存在，不存在才创建
         if  (![fileManager fileExistsAtPath:kBookSavePath isDirectory:&isDir]) {
             BOOL res = [fileManager createDirectoryAtPath:kBookSavePath withIntermediateDirectories:YES attributes:nil error:nil];
+            
             if (res) {
                 RKLog(@"文件已创建\nkBookSavePath:%@",kBookSavePath);
             }
         } else {
             RKLog(@"文件已存在\nkBookSavePath:%@",kBookSavePath);
-            RKLog(@"书籍列表\n%@",kHomeBookListsPath);
+        }
+        
+        if (![fileManager fileExistsAtPath:kBookAnalysisPath isDirectory:&isDir]) {
+            BOOL res = [fileManager createDirectoryAtPath:kBookAnalysisPath withIntermediateDirectories:YES attributes:nil error:nil];
+            if (res) {
+                RKLog(@"文件已创建\nkBookAnalysisPath:%@",kBookAnalysisPath);
+            }
+        } else {
+            RKLog(@"文件已存在\nkBookAnalysisPath:%@",kBookAnalysisPath);
         }
     }
     return self;
@@ -83,7 +94,10 @@ static RKFileManager *_fileManager;
     // 开线程解析
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         book.content = [self bookAnalysisWithFilePath:path];
-        
+        NSMutableArray *chapters = [NSMutableArray array];
+        [self separateChapter:&chapters content:book.content];
+        book.chapters = chapters;
+        [self saveChaptersWithBook:book];
     });
 }
 
@@ -116,6 +130,10 @@ static RKFileManager *_fileManager;
     return content;
 }
 
+/// 保存书籍章节
+- (void)saveChaptersWithBook:(RKBook *)book {
+    
+}
 
 #pragma mark - 查
 /// 获取首页书籍列表
@@ -215,26 +233,29 @@ static RKFileManager *_fileManager;
             NSInteger local = range.location;
             if (idx == 0) {
                 RKChapter *model = [[RKChapter alloc] init];
-//                model.title = @"开始";
-//                NSUInteger len = local;
-//                model.contentFrame = [RKUserConfiguration sharedInstance].readViewFrame;
+                model.title = @"开始";
+                NSUInteger len = local;
+                model.location = 0;
+                model.length = len;
 //                model.content = [content substringWithRange:NSMakeRange(0, len)];
                 [*chapters addObject:model];
             }
             
             if (idx > 0 ) {
                 RKChapter *model = [[RKChapter alloc] init];
-//                model.title = [content substringWithRange:lastRange];
-//                NSUInteger len = local-lastRange.location;
-//                model.contentFrame = [RKUserConfiguration sharedInstance].readViewFrame;
+                model.title = [content substringWithRange:lastRange];
+                NSUInteger len = local-lastRange.location;
+                model.location = local;
+                model.length = len;
 //                model.content = [content substringWithRange:NSMakeRange(lastRange.location, len)];
                 [*chapters addObject:model];
             }
             
             if (idx == match.count-1) {
                 RKChapter *model = [[RKChapter alloc] init];
-//                model.title = [content substringWithRange:range];
-//                model.contentFrame = [RKUserConfiguration sharedInstance].readViewFrame;
+                model.title = [content substringWithRange:range];
+                model.location = local;
+                model.length = content.length-local;
 //                model.content = [content substringWithRange:NSMakeRange(local, content.length-local)];
                 [*chapters addObject:model];
             }
@@ -242,8 +263,7 @@ static RKFileManager *_fileManager;
         }];
     } else {// 没找出章节
         RKChapter *model = [[RKChapter alloc] init];
-//        model.title = @"开始";
-//        model.contentFrame = [RKUserConfiguration sharedInstance].readViewFrame;
+        model.title = @"开始";
 //        model.content = content;
         [*chapters addObject:model];
     }
