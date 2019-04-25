@@ -8,12 +8,14 @@
 
 #import "RKReadPageViewController.h"
 #import "RKReadViewController.h"
+#import "RKReadMenuView.h"
 
 @interface RKReadPageViewController ()
 <
 UIPageViewControllerDelegate,
 UIPageViewControllerDataSource,
-UIGestureRecognizerDelegate
+UIGestureRecognizerDelegate,
+RKReadMenuViewDelegate
 >
 
 @property (nonatomic, strong) UIPageViewController *pageViewController; /**< 显示内容的VC*/
@@ -115,15 +117,15 @@ UIGestureRecognizerDelegate
 //        return ;
 //    }
 //
-//    // 设置状态栏的颜色
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-//
+    // 设置状态栏的颜色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+
 //    self.isShowMenu = YES;
-//    // 菜单view
-//    RKReadMenuView *menu = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book];
-//    menu.delegate = self;
-//    [menu showToView:self.view];
-//
+    // 菜单view
+    RKReadMenuView *menu = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
+    menu.delegate = self;
+    [menu show];
+
 //    __weak typeof(self) weakSelf = self;
 //    // 菜单消失
 //    [menu dismissBlock:^{
@@ -159,6 +161,11 @@ UIGestureRecognizerDelegate
         return NO;
     }
     return  YES;
+}
+
+#pragma mark -- RKReadMenuViewDelegate
+- (void)didClickCloseBtn {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIPageViewControllerDataSource And UIPageViewControllerDelegate

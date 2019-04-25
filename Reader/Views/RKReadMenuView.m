@@ -14,25 +14,29 @@
 
 @property (nonatomic, strong) UIButton *bgButton; /**< 大Button*/
 @property (nonatomic, strong) UIView *navBar; /**< 顶部导航条*/
-
-
+@property (nonatomic, strong) UILabel *title; /**< 书名*/
+@property (nonatomic, strong) UIButton *closeBtn; /**< 关闭按钮*/
 
 @property (nonatomic, strong) UIView *bottomView; /**< 底部view*/
+@property (nonatomic, strong) UIButton *lastChapter; /**< 上一章*/
+@property (nonatomic, strong) UIButton *nextChapter; /**< 下一章*/
 
 @end
 
 @implementation RKReadMenuView
 
 /**
-初始化菜单view
-@param frame 大小
-@param book 书籍信息
-@return 菜单
-*/
-- (instancetype)initWithFrame:(CGRect)frame withBook:(RKBook *)book {
+ 初始化菜单view
+ @param frame 大小
+ @param book 书籍信息
+ @param superView 父view
+ @return 菜单
+ */
+- (instancetype)initWithFrame:(CGRect)frame withBook:(RKBook *)book withSuperView:(UIView *)superView {
     self = [super initWithFrame:frame];
     if (self) {
         _book = book;
+        [superView addSubview:self];
         [self initUI];
     }
     return self;
@@ -63,7 +67,26 @@
     }];
     
     UILabel *title = [UILabel new];
+    self.title = title;
+    [navBar addSubview:title];
+    title.text = self.book.name;
+    title.textColor = [UIColor whiteColor];
+    title.font = [UIFont systemFontOfSize:18];
+    title.textAlignment = NSTextAlignmentCenter;
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(kStatusHight);
+        make.height.mas_equalTo(44);
+    }];
     
+    UIButton *closeBtn = [UIButton new];
+    self.closeBtn = closeBtn;
+    [closeBtn setImage:[UIImage imageNamed:@"关闭白"] forState:UIControlStateNormal];
+    [closeBtn addTarget:self action:@selector(clickCloseBtn) forControlEvents:UIControlEventTouchUpInside];
+    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.centerY.mas_equalTo(title);
+        make.width.height.mas_equalTo(35);
+    }];
     
     // 底部view
     UIView *bottomView = [UIView new];
@@ -77,12 +100,11 @@
         make.height.mas_equalTo(height);
     }];
     
+//    [self layoutIfNeeded];
 }
 
 /// 显示
-- (void)showToView:(UIView *)superView {
-    
-    [superView addSubview:self];
+- (void)show {
     
     [UIView animateWithDuration:0.25f animations:^{
         self.navBar.y = 0;
@@ -90,7 +112,7 @@
     }];
 }
 
-#pragma mark - 点击时间
+#pragma mark - 点击事件
 /// 消失
 -  (void)bgClick {
     
@@ -104,5 +126,12 @@
 //        }
     }];
 }
+/// 关闭
+- (void)clickCloseBtn {
+    if ([self.delegate respondsToSelector:@selector(didClickCloseBtn)]) {
+        [self.delegate didClickCloseBtn];
+    }
+}
+
 
 @end
