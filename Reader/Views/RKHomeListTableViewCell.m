@@ -104,7 +104,7 @@
     _book = book;
     
     self.name.text = book.name;
-    self.chapter.text = book.chapter.chapterName;
+    self.chapter.text = book.chapter.title;
     self.progress.text = [NSString stringWithFormat:@"%.2f%%",book.progress];
     self.size.text = [NSString stringWithFormat:@"%.2fM",book.size];
     if (book.isTop) {
