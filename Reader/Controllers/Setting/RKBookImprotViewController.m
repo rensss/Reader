@@ -70,6 +70,10 @@
     self.addressLabel.attributedText = attributedStr;
 }
 
+- (void)reloadTableView {
+    [self.tableView reloadData];
+}
+
 #pragma mark - 点击
 - (void)tapAddress:(UITapGestureRecognizer *)gesture {
     UIActivityViewController *acitivityVC = [[UIActivityViewController alloc] initWithActivityItems:@[ self.webUploader.serverURL.absoluteString ] applicationActivities:nil];
@@ -83,7 +87,7 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didDownloadFileAtPath:(NSString*)path {
     RKLog(@"didDownloadFileAtPath---->\n");
-//    [self reloadTableView];
+    [self reloadTableView];
 }
 
 /**
@@ -97,8 +101,10 @@
     NSString *title = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
     NSString *alertMessageStr = [NSString stringWithFormat:@"%@ 上传成功",title];
     RKAlertMessage(alertMessageStr,self.view);
-
-//    [self reloadTableView];
+    
+    [self.dataArray addObject:title];
+    
+    [self reloadTableView];
 }
 
 /**
@@ -106,7 +112,7 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didMoveItemFromPath:(NSString*)fromPath toPath:(NSString*)toPath {
     RKLog(@"didMoveItemFromPath---->\n");
-//    [self reloadTableView];
+    [self reloadTableView];
 }
 
 /**
@@ -117,7 +123,11 @@
     // 更新首页数据
     [[RKFileManager shareInstance] deleteBookWithPath:path];
     
-//    [self reloadTableView];
+    NSString *title = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
+
+    [self.dataArray removeObject:title];
+    
+    [self reloadTableView];
 }
 
 /**
@@ -125,7 +135,7 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didCreateDirectoryAtPath:(NSString*)path {
     RKLog(@"didCreateDirectoryAtPath---->\n");
-//    [self reloadTableView];
+    [self reloadTableView];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -140,8 +150,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    NSString *name = [self.dataArray[indexPath.row] componentsSeparatedByString:@"/"].lastObject;
+    cell.textLabel.text = name;
     
     return cell;
 }
@@ -162,6 +172,16 @@
         _webUploader.footer = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey];
     }
     return _webUploader;
+}
+
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        NSFileManager *manager = [NSFileManager defaultManager];
+        //获取数据
+        NSArray *files = [manager contentsOfDirectoryAtPath:kBookSavePath error:nil];
+        _dataArray = [NSMutableArray arrayWithArray:files];
+    }
+    return _dataArray;
 }
 
 @end
