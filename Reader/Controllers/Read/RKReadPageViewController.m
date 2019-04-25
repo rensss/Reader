@@ -84,6 +84,29 @@ UIGestureRecognizerDelegate
     [self.view addSubview:_pageViewController.view];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // 隐藏导航栏
+    self.navigationController.delegate = self;
+    
+    // 屏幕常亮
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // 禁止侧滑返回
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    // 关闭屏幕常亮
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+}
+
 #pragma mark - 手势事件
 - (void)showToolMenu {
     

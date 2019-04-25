@@ -105,7 +105,20 @@
     if (!book.content) {
         RKLoadingView *loadingView = [[RKLoadingView alloc] initWithMessage:@"加载中..."];
         [loadingView showInView:self.view];
+        
+        // 加载内容
         book.content = [[RKFileManager shareInstance] encodeWithFilePath:book.path];
+        
+        // 读取章节数据
+        NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *dict in [NSMutableArray arrayWithContentsOfFile:path]) {
+            RKChapter *chapter = [RKChapter mj_objectWithKeyValues:dict];
+            [array addObject:chapter];
+        }
+        book.chapters = array;
+        book.currentChapter = array[book.currentChapterNum];
+        
         [loadingView stop];
         if (!book.content) {
             RKAlertMessage(@"解析失败,请确认编码格式", self.view);

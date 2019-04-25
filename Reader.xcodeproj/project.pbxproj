@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */; };
 		1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AE2271A877006568A5 /* RKReadViewController.m */; };
+		1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8B12271B713006568A5 /* RKReadMenuView.m */; };
 		1A1888F8226D709100289476 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1888F7226D709100289476 /* AppDelegate.m */; };
 		1A188900226D709200289476 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1888FF226D709200289476 /* Assets.xcassets */; };
 		1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A188901226D709200289476 /* LaunchScreen.storyboard */; };
@@ -33,6 +34,8 @@
 		1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadPageViewController.m; sourceTree = "<group>"; };
 		1A16F8AD2271A877006568A5 /* RKReadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadViewController.h; sourceTree = "<group>"; };
 		1A16F8AE2271A877006568A5 /* RKReadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadViewController.m; sourceTree = "<group>"; };
+		1A16F8B02271B713006568A5 /* RKReadMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadMenuView.h; sourceTree = "<group>"; };
+		1A16F8B12271B713006568A5 /* RKReadMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadMenuView.m; sourceTree = "<group>"; };
 		1A1888F3226D709100289476 /* Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1888F6226D709100289476 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A1888F7226D709100289476 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 			children = (
 				1A18891F226D7A8600289476 /* RKHomeListTableViewCell.h */,
 				1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */,
+				1A16F8B02271B713006568A5 /* RKReadMenuView.h */,
+				1A16F8B12271B713006568A5 /* RKReadMenuView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
 				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,
 				1A18892E226D7BC900289476 /* RKFileManage.m in Sources */,
+				1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */,
 				1A188906226D709200289476 /* main.m in Sources */,
 				1A1888F8226D709100289476 /* AppDelegate.m in Sources */,
 				1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */,
