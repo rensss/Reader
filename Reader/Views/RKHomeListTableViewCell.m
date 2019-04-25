@@ -103,7 +103,7 @@
     _book = book;
     
     self.name.text = book.name;
-    self.chapter.text = book.chapter.title;
+    self.chapter.text = book.currentChapter.title;
     self.coverImage.image = [UIImage imageNamed:book.coverImage];
     self.progress.text = [NSString stringWithFormat:@"%.2f%%",book.progress];
     self.size.text = [NSString stringWithFormat:@"%.2fM",book.size];

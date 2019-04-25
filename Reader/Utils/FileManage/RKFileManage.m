@@ -90,24 +90,24 @@ static RKFileManager *_fileManager;
     book.addDate = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
     book.bookID = [NSString stringWithFormat:@"%@_%f",[book.name md5Encrypt],book.addDate];
     
-    [_fileManager addHomeListWithBook:book];
-    
     // 开线程解析
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         book.content = [self bookAnalysisWithFilePath:path];
         
-        //计算代码运行时间
+        // 计算代码运行时间
         CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
         
         NSMutableArray *chapters = [NSMutableArray array];
         [self separateChapter:&chapters content:book.content];
         book.chapters = chapters;
+        book.allChapters = chapters.count;
         
         CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
-        //打印运行时间
+        // 打印运行时间
         RKLog(@"separateChapter ----- Linked in %f ms", linkTime * 1000.0);
         
         [self saveChaptersWithBook:book];
+        [self addHomeListWithBook:book];
     });
 }
 
@@ -118,11 +118,24 @@ static RKFileManager *_fileManager;
     if (!bookList) {
         bookList = [NSMutableArray array];
     }
-    NSDictionary *bookDict = book.mj_keyValues;
+    
+    NSMutableDictionary *bookDict = book.mj_keyValues;
+    if ([[bookDict allKeys] containsObject:@"content"]) {
+        [bookDict removeObjectForKey:@"content"];
+    }
+    if ([[bookDict allKeys] containsObject:@"chapters"]) {
+        [bookDict removeObjectForKey:@"chapters"];
+    }
+    if ([[bookDict allKeys] containsObject:@"chapter"]) {
+        [bookDict removeObjectForKey:@"chapter"];
+    }
     [bookList addObject:bookDict];
     [bookList writeToFile:kHomeBookListsPath atomically:YES];
     
     RKLog(@"%@\n%@",bookDict,bookList);
+    
+    // 首页刷新
+    self.isNeedRefresh = YES;
 }
 
 /// 解析书籍
@@ -174,6 +187,8 @@ static RKFileManager *_fileManager;
         }
     }
     [bookList writeToFile:kHomeBookListsPath atomically:YES];
+    // 首页刷新
+    self.isNeedRefresh = YES;
 }
 
 - (void)deleteAnalysisWithPath:(NSString *)path {

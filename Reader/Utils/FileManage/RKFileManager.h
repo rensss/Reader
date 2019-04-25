@@ -10,6 +10,8 @@
 
 @interface RKFileManager : NSObject
 
+@property (nonatomic, assign) BOOL isNeedRefresh; /**< 是否需要刷新数据*/
+
 /// 文件管理单例
 + (instancetype)shareInstance;
 

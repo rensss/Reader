@@ -9,7 +9,7 @@
 #import "RKHomeListViewController.h"
 #import "RKSettingViewController.h"
 #import "RKHomeListTableViewCell.h"
-
+#import "RKReadPageViewController.h"
 
 @interface RKHomeListViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
@@ -31,6 +31,25 @@
     [super viewWillAppear:animated];
     
     // 刷新界面
+    if ([RKFileManager shareInstance].isNeedRefresh) {
+        // 原数组
+        NSMutableArray *books = self.dataArray;
+        // 新数组
+        self.dataArray = [[RKFileManager shareInstance] getHomeList];
+        
+        // 原数组加载过的内容赋值到新数组
+        for (RKBook *originBook in books) {
+            for (RKBook *newBook in self.dataArray) {
+                if ([originBook.bookID isEqualToString:newBook.bookID]) {
+                    newBook.content = originBook.content;
+                    newBook.chapters = originBook.chapters;
+                }
+            }
+        }
+        
+        [self.tableView reloadData];
+        [RKFileManager shareInstance].isNeedRefresh = NO;
+    }
 }
 
 #pragma mark - 函数
@@ -73,7 +92,8 @@
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    cell.book = self.dataArray[indexPath.row];
+    RKBook *book = self.dataArray[indexPath.row];
+    cell.book = book;
     
     return cell;
 }
@@ -81,7 +101,22 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    RKBook *book = self.dataArray[indexPath.row];
+    if (!book.content) {
+        RKLoadingView *loadingView = [[RKLoadingView alloc] initWithMessage:@"加载中..."];
+        [loadingView showInView:self.view];
+        book.content = [[RKFileManager shareInstance] encodeWithFilePath:book.path];
+        [loadingView stop];
+        if (!book.content) {
+            RKAlertMessage(@"解析失败,请确认编码格式", self.view);
+            return;
+        }
+    }
+    // 创建阅读页面
+    RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
+    readPageVC.book = book;
+    RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:readPageVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - getting
