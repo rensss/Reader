@@ -101,19 +101,19 @@
 				1A18890F226D776200289476 /* Models */,
 				1A18890E226D775A00289476 /* Views */,
 				1A18890D226D774C00289476 /* Controllers */,
-				1A18890C226D774100289476 /* Utills */,
+				1A18890C226D774100289476 /* Utils */,
 				1A188911226D778500289476 /* Supporting Files */,
 			);
 			path = Reader;
 			sourceTree = "<group>";
 		};
-		1A18890C226D774100289476 /* Utills */ = {
+		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				1A18892B226D7BB500289476 /* FileManage */,
 				1A18892F226D7BCD00289476 /* AlertMessage */,
 			);
-			path = Utills;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		1A18890D226D774C00289476 /* Controllers */ = {
