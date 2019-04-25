@@ -115,8 +115,8 @@
 - (void)webUploader:(GCDWebUploader*)uploader didDeleteItemAtPath:(NSString*)path {
     RKLog(@"didDeleteItemAtPath---->\n");
     // 更新首页数据
-//    [RKFileManager updateHomeListData:NO filePath:path];
-//
+    [[RKFileManager shareInstance] deleteBookWithPath:path];
+    
 //    [self reloadTableView];
 }
 

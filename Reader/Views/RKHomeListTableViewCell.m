@@ -40,7 +40,6 @@
     
     UIImageView *coverImage = [UIImageView new];
     self.coverImage = coverImage;
-    coverImage.backgroundColor = [UIColor cyanColor];
     [bgView addSubview:coverImage];
     CGFloat height = 100;
     CGFloat width = height*kCoverImageWidth/kCoverImageHeight;
@@ -105,6 +104,7 @@
     
     self.name.text = book.name;
     self.chapter.text = book.chapter.title;
+    self.coverImage.image = [UIImage imageNamed:book.coverImage];
     self.progress.text = [NSString stringWithFormat:@"%.2f%%",book.progress];
     self.size.text = [NSString stringWithFormat:@"%.2fM",book.size];
     if (book.isTop) {

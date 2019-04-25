@@ -22,7 +22,8 @@
 - (NSString *)bookAnalysisWithFilePath:(NSString *)path;
 
 #pragma mark - 删
-
+/// 删除书籍
+- (void)deleteBookWithPath:(NSString *)path;
 
 #pragma mark - 查
 /// 获取首页书籍列表

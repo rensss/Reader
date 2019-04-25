@@ -84,6 +84,7 @@ static RKFileManager *_fileManager;
     // 书名 带扩展名
     NSString *name = [path componentsSeparatedByString:@"/"].lastObject;
     book.name = [name componentsSeparatedByString:@"."].firstObject;
+    book.coverImage = [NSString stringWithFormat:@"cover%d",arc4random()%10+1];
     book.path = path;
     book.size = [self getFileSize:path];
     book.addDate = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
@@ -94,9 +95,18 @@ static RKFileManager *_fileManager;
     // 开线程解析
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         book.content = [self bookAnalysisWithFilePath:path];
+        
+        //计算代码运行时间
+        CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+        
         NSMutableArray *chapters = [NSMutableArray array];
         [self separateChapter:&chapters content:book.content];
         book.chapters = chapters;
+        
+        CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+        //打印运行时间
+        RKLog(@"separateChapter ----- Linked in %f ms", linkTime * 1000.0);
+        
         [self saveChaptersWithBook:book];
     });
 }
@@ -125,14 +135,65 @@ static RKFileManager *_fileManager;
     
     CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
     //打印运行时间
-    RKLog(@"Linked in %f ms", linkTime * 1000.0);
+    RKLog(@"encodeWithFilePath ----- Linked in %f ms", linkTime * 1000.0);
     
     return content;
 }
 
 /// 保存书籍章节
 - (void)saveChaptersWithBook:(RKBook *)book {
+    //计算代码运行时间
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
     
+    // plist 名称
+    NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
+    
+    NSMutableArray *chapters = [NSMutableArray array];
+    for (RKChapter *chapter in book.chapters ) {
+        [chapters addObject:chapter.mj_keyValues];
+    }
+    [chapters writeToFile:path atomically:YES];
+    
+    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+    //打印运行时间
+    RKLog(@"saveChaptersWithBook ----- Linked in %f ms", linkTime * 1000.0);
+}
+
+#pragma mark - 删
+/// 删除书籍
+- (void)deleteBookWithPath:(NSString *)path {
+    // 删除解析文件
+    [self deleteAnalysisWithPath:path];
+    // 删除首页列表数据
+    NSMutableArray *bookList = [[NSMutableArray alloc] initWithContentsOfFile:kHomeBookListsPath];
+    for (NSInteger i = 0; i < bookList.count; i++) {
+        NSDictionary *dict = bookList[i];
+        if ([dict[@"path"] isEqualToString:path]) {
+            [bookList removeObjectAtIndex:i];
+            break;
+        }
+    }
+    [bookList writeToFile:kHomeBookListsPath atomically:YES];
+}
+
+- (void)deleteAnalysisWithPath:(NSString *)path {
+    NSMutableArray *arr = [self getHomeList];
+    RKBook *deleteBook;
+    for (RKBook *book in arr) {
+        if ([book.path isEqualToString:path]) {
+            deleteBook = book;
+            break;
+        }
+    }
+    if (deleteBook) {
+        NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,deleteBook.bookID];
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSError *error;
+        [manager removeItemAtPath:path error:&error];
+        if (error) {
+            RKLog(@"%@",error);
+        }
+    }
 }
 
 #pragma mark - 查
