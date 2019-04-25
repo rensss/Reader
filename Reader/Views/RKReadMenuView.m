@@ -14,6 +14,9 @@
 
 @property (nonatomic, strong) UIButton *bgButton; /**< 大Button*/
 @property (nonatomic, strong) UIView *navBar; /**< 顶部导航条*/
+
+
+
 @property (nonatomic, strong) UIView *bottomView; /**< 底部view*/
 
 @end
@@ -47,13 +50,31 @@
         make.top.left.bottom.right.mas_offset(0);
     }];
     
+    // 顶部view
     UIView *navBar = [UIView new];
     self.navBar = navBar;
     [bgButton addSubview:navBar];
+    navBar.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
+    CGFloat topOffset = kStatusHight + 44;
     [navBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
-        make.left.mas_equalTo(0);
-//        make.height.mas_equalTo();
+        make.top.mas_equalTo(-topOffset);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(topOffset);
+    }];
+    
+    UILabel *title = [UILabel new];
+    
+    
+    // 底部view
+    UIView *bottomView = [UIView new];
+    self.bottomView = bottomView;
+    [self addSubview:bottomView];
+    bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
+    CGFloat height = kSafeAreaBottom + 140;
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(bgButton.mas_height);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(height);
     }];
     
 }
