@@ -75,7 +75,7 @@
     title.textAlignment = NSTextAlignmentCenter;
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(kStatusHight);
-        make.height.mas_equalTo(44);
+        make.centerX.mas_equalTo(navBar.centerX);
     }];
     
     UIButton *closeBtn = [UIButton new];
