@@ -21,6 +21,9 @@
 @property (nonatomic, strong) UIButton *lastChapter; /**< 上一章*/
 @property (nonatomic, strong) UIButton *nextChapter; /**< 下一章*/
 
+@property (nonatomic, copy) void(^dismissBlock)(void); /**< 消失回调*/
+@property (nonatomic, copy) void(^closeBlock)(void); /**< 消失回调*/
+
 @end
 
 @implementation RKReadMenuView
@@ -51,7 +54,7 @@
     [self addSubview:bgButton];
     [bgButton addTarget:self action:@selector(bgClick) forControlEvents:UIControlEventTouchUpInside];
     [bgButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_offset(0);
+        make.edges.equalTo(self).insets(UIEdgeInsetsZero);
     }];
     
     // 顶部view
@@ -61,8 +64,8 @@
     navBar.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
     CGFloat topOffset = kStatusHight + 44;
     [navBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(-topOffset);
-        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(bgButton.mas_top);
+        make.left.right.mas_equalTo(bgButton);
         make.height.mas_equalTo(topOffset);
     }];
     
@@ -80,36 +83,59 @@
     
     UIButton *closeBtn = [UIButton new];
     self.closeBtn = closeBtn;
+    [navBar addSubview:closeBtn];
     [closeBtn setImage:[UIImage imageNamed:@"关闭白"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(clickCloseBtn) forControlEvents:UIControlEventTouchUpInside];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
-        make.centerY.mas_equalTo(title);
+        make.top.mas_equalTo(kStatusHight);
+        make.centerY.mas_equalTo(title.mas_centerY);
         make.width.height.mas_equalTo(35);
     }];
     
     // 底部view
     UIView *bottomView = [UIView new];
     self.bottomView = bottomView;
-    [self addSubview:bottomView];
+    [bgButton addSubview:bottomView];
     bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
     CGFloat height = kSafeAreaBottom + 140;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(bgButton.mas_height);
-        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(bgButton.mas_bottom);
+        make.left.right.mas_equalTo(bgButton);
         make.height.mas_equalTo(height);
     }];
     
-//    [self layoutIfNeeded];
+    [self layoutIfNeeded];
 }
 
 /// 显示
 - (void)show {
     
     [UIView animateWithDuration:0.25f animations:^{
-        self.navBar.y = 0;
-        self.bottomView.maxY = self.height;
+        CGFloat topOffset = kStatusHight + 44;
+        [self.navBar mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(0);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(topOffset);
+        }];
+        CGFloat height = kSafeAreaBottom + 140;
+        [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.bgButton.mas_bottom);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(height);
+        }];
+        // 注意需要再执行一次更新约束
+        [self layoutIfNeeded];
     }];
+}
+
+/// 消失回调
+- (void)dismissWithHandler:(void(^)(void))handler {
+    self.dismissBlock = handler;
+}
+
+/// 关闭回调
+- (void)closeBlock:(void(^)(void))handler {
+    self.closeBlock = handler;
 }
 
 #pragma mark - 点击事件
@@ -117,20 +143,52 @@
 -  (void)bgClick {
     
     [UIView animateWithDuration:0.25f animations:^{
-        self.navBar.maxY = 0;
-        self.bottomView.y = self.height;
+        CGFloat topOffset = kStatusHight + 44;
+        [self.navBar mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.bgButton.mas_top);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(topOffset);
+        }];
+        CGFloat height = kSafeAreaBottom + 140;
+        [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.bgButton.mas_bottom);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(height);
+        }];
+        // 注意需要再执行一次更新约束
+        [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
-//        if (self.dismissBlock) {
-//            self.dismissBlock();
-//        }
+        if (self.dismissBlock) {
+            self.dismissBlock();
+        }
     }];
 }
+
 /// 关闭
 - (void)clickCloseBtn {
-    if ([self.delegate respondsToSelector:@selector(didClickCloseBtn)]) {
-        [self.delegate didClickCloseBtn];
-    }
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        CGFloat topOffset = kStatusHight + 44;
+        [self.navBar mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.bgButton.mas_top);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(topOffset);
+        }];
+        CGFloat height = kSafeAreaBottom + 140;
+        [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.bgButton.mas_bottom);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(height);
+        }];
+        // 注意需要再执行一次更新约束
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+        if (self.closeBlock) {
+            self.closeBlock();
+        }
+    }];
 }
 
 

@@ -13,9 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol RKReadMenuViewDelegate <NSObject>
 
-/// 关闭
-- (void)didClickCloseBtn;
-
 @end
 
 
@@ -35,6 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 显示
 - (void)show;
+
+/// 消失 带回调
+- (void)dismissWithHandler:(void(^)(void))handler;
+
+/// 关闭回调
+- (void)closeBlock:(void(^)(void))handler;
 
 @end
 

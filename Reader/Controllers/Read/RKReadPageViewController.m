@@ -26,6 +26,8 @@ RKReadMenuViewDelegate
 @property (nonatomic, assign) NSInteger chapterNext; /**< 上/下 一章节*/
 @property (nonatomic, assign) NSInteger pageNext; /**< 上/下 一页*/
 
+@property (nonatomic, assign) BOOL isShowMenu; /**< 是否已弹出菜单*/
+
 @end
 
 @implementation RKReadPageViewController
@@ -112,45 +114,41 @@ RKReadMenuViewDelegate
 #pragma mark - 手势事件
 - (void)showToolMenu {
     
-//    // 若已显示菜单则忽略
-//    if (self.isShowMenu) {
-//        return ;
-//    }
-//
+    // 若已显示菜单则忽略
+    if (self.isShowMenu) {
+        return ;
+    }
+
     // 设置状态栏的颜色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 
-//    self.isShowMenu = YES;
+    self.isShowMenu = YES;
     // 菜单view
     RKReadMenuView *menu = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
     menu.delegate = self;
     [menu show];
 
-//    __weak typeof(self) weakSelf = self;
-//    // 菜单消失
-//    [menu dismissBlock:^{
-//        weakSelf.isShowMenu = NO;
-//
-//
-//        // 改变状态栏的颜色
+    __weak typeof(self) weakSelf = self;
+    // 菜单消失
+    [menu dismissWithHandler:^{
+        weakSelf.isShowMenu = NO;
+
+        // 改变状态栏的颜色
 //        if ([[RKUserConfiguration sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
 //            // 设置状态栏的颜色
 //            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 //        }else {
-//            // 设置状态栏的颜色
-//            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+            // 设置状态栏的颜色
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 //        }
-//
-//        //        // 设置状态栏的颜色
-//        //        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-//    }];
-//
-//    // 退出阅读
-//    [menu closeBlock:^{
-//        // 设置状态栏的颜色
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-//        [weakSelf dissmiss];
-//    }];
+    }];
+
+    // 退出阅读
+    [menu closeBlock:^{
+        // 设置状态栏的颜色
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+        [weakSelf dissmiss];
+    }];
 }
 
 #pragma mark - 代理
