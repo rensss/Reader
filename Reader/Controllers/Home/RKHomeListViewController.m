@@ -109,6 +109,12 @@
         // 加载内容
         book.content = [[RKFileManager shareInstance] encodeWithFilePath:book.path];
         
+        if (book.content.length == 0) {
+            [loadingView stop];
+            RKAlertMessage(@"解析失败,请确认编码格式", self.view);
+            return;
+        }
+        
         // 读取章节数据
         NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
         NSMutableArray *array = [NSMutableArray array];
@@ -117,13 +123,12 @@
             [array addObject:chapter];
         }
         book.chapters = array;
-        book.currentChapter = array[book.currentChapterNum];
+        RKChapter *chapter = array[book.currentChapterNum];
+        chapter.content = [book.content substringWithRange:NSMakeRange(chapter.location, chapter.length)];
+        book.currentChapter = chapter;
         
         [loadingView stop];
-        if (!book.content) {
-            RKAlertMessage(@"解析失败,请确认编码格式", self.view);
-            return;
-        }
+       
     }
     // 创建阅读页面
     RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
