@@ -26,6 +26,9 @@
 /// 删除书籍
 - (void)deleteBookWithPath:(NSString *)path;
 
+/// 删除全部书籍
+- (void)clearAllBooksWithResult:(void(^)(BOOL isSuccess))handler;
+
 #pragma mark - 查
 /// 获取首页书籍列表
 - (NSMutableArray *)getHomeList;

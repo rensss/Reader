@@ -77,7 +77,7 @@
     title.font = [UIFont systemFontOfSize:18];
     title.textAlignment = NSTextAlignmentCenter;
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kStatusHight);
+        make.bottom.mas_equalTo(navBar.mas_bottom);
         make.centerX.mas_equalTo(navBar.centerX);
     }];
     
@@ -87,7 +87,7 @@
     [closeBtn setImage:[UIImage imageNamed:@"关闭白"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(clickCloseBtn) forControlEvents:UIControlEventTouchUpInside];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kStatusHight);
+        make.left.mas_equalTo(15);
         make.centerY.mas_equalTo(title.mas_centerY);
         make.width.height.mas_equalTo(35);
     }];

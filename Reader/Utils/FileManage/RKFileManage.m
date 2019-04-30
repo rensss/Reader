@@ -209,6 +209,52 @@ static RKFileManager *_fileManager;
     }
 }
 
+/// 删除全部书籍
+- (void)clearAllBooksWithResult:(void(^)(BOOL isSuccess))handler {
+    // 删除首页列表数据
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    if ([manager fileExistsAtPath:kHomeBookListsPath]) {
+        [manager removeItemAtPath:kHomeBookListsPath error:&error];
+    }
+    if (error) {
+        RKLog(@"%@",error);
+        if (handler) {
+            handler(NO);
+            return;
+        }
+    }
+    
+    // 删除所有书籍缓存 BookAnalysis
+    NSDirectoryEnumerator *dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:kBookAnalysisPath];
+    NSString *fileName;
+    while (fileName = [dirEnum nextObject]) {
+        [manager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",kBookAnalysisPath,fileName] error:&error];
+        if (handler) {
+            handler(NO);
+            return;
+        }
+    }
+    
+    // 删除Books下所有数据
+    dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:kBookSavePath];
+    while (fileName = [dirEnum nextObject]) {
+        [manager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",kBookSavePath,fileName] error:&error];
+        if (error) {
+            RKLog(@"%@",error);
+            if (handler) {
+                handler(NO);
+                return;
+            }
+        }
+    }
+    
+    if (handler) {
+        handler(YES);
+    }
+}
+
+
 #pragma mark - 查
 /// 获取首页书籍列表
 - (NSMutableArray *)getHomeList {
