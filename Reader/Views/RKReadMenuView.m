@@ -77,7 +77,9 @@
     title.font = [UIFont systemFontOfSize:18];
     title.textAlignment = NSTextAlignmentCenter;
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(navBar.mas_bottom);
+//        make.top.mas_equalTo(kStatusHight);
+        make.bottom.mas_equalTo(navBar.mas_bottom).mas_offset(-10);
+//        make.centerY.mas_equalTo(navBar.mas_centerY).mas_offset(-kStatusHight);
         make.centerX.mas_equalTo(navBar.centerX);
     }];
     
