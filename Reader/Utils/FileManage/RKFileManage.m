@@ -81,12 +81,10 @@ static RKFileManager *_fileManager;
 - (void)saveBookWithPath:(NSString *)path {
     
     RKBook *book = [RKBook new];
-    // 书名 带扩展名
-    NSString *name = [path componentsSeparatedByString:@"/"].lastObject;
-    book.name = [name componentsSeparatedByString:@"."].firstObject;
+    book.name = path;
     book.coverImage = [NSString stringWithFormat:@"cover%d",arc4random()%10+1];
     book.path = path;
-    book.size = [self getFileSize:path];
+    book.size = [self getFileSize:[kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]]];
     book.addDate = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
     book.bookID = [NSString stringWithFormat:@"%@_%f",[book.name md5Encrypt],book.addDate];
     
@@ -231,6 +229,11 @@ static RKFileManager *_fileManager;
 #pragma mark - func
 - (NSString *)encodeWithFilePath:(NSString *)path {
     
+//    path = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    
+    // 拼接路径
+    path = [kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]];
+    
     NSError *error = NULL;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (!content) {
@@ -238,6 +241,8 @@ static RKFileManager *_fileManager;
             RKLog(@"NSUTF8StringEncoding -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
+        } else {
+            RKLog(@"NSUTF8StringEncoding -- 解码成功");
         }
     }
     if (!content) {
@@ -246,6 +251,8 @@ static RKFileManager *_fileManager;
             RKLog(@"GBK -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
+        } else {
+            RKLog(@"GBK -- 解码成功");
         }
     }
     if (!content) {
@@ -256,6 +263,8 @@ static RKFileManager *_fileManager;
             RKLog(@"kCFStringEncodingGB_18030_2000 -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
+        } else {
+            RKLog(@"kCFStringEncodingGB_18030_2000 -- 解码成功");
         }
     }
     if (!content) {

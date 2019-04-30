@@ -102,7 +102,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RKBook *book = self.dataArray[indexPath.row];
-    if (!book.content) {
+    if (book.content.length == 0) {
         RKLoadingView *loadingView = [[RKLoadingView alloc] initWithMessage:@"加载中..."];
         [loadingView showInView:self.view];
         
@@ -114,22 +114,21 @@
             RKAlertMessage(@"解析失败,请确认编码格式", self.view);
             return;
         }
-        
-        // 读取章节数据
-        NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
-        NSMutableArray *array = [NSMutableArray array];
-        for (NSDictionary *dict in [NSMutableArray arrayWithContentsOfFile:path]) {
-            RKChapter *chapter = [RKChapter mj_objectWithKeyValues:dict];
-            [array addObject:chapter];
-        }
-        book.chapters = array;
-        RKChapter *chapter = array[book.currentChapterNum];
-        chapter.content = [book.content substringWithRange:NSMakeRange(chapter.location, chapter.length)];
-        book.currentChapter = chapter;
-        
         [loadingView stop];
-       
     }
+    
+    // 读取章节数据
+    NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSDictionary *dict in [NSMutableArray arrayWithContentsOfFile:path]) {
+        RKChapter *chapter = [RKChapter mj_objectWithKeyValues:dict];
+        [array addObject:chapter];
+    }
+    book.chapters = array;
+    RKChapter *chapter = array[book.currentChapterNum];
+    chapter.content = [book.content substringWithRange:NSMakeRange(chapter.location, chapter.length)];
+    book.currentChapter = chapter;
+    
     // 创建阅读页面
     RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
     readPageVC.book = book;

@@ -95,10 +95,13 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didUploadFileAtPath:(NSString*)path {
     RKLog(@"didUploadFileAtPath---->\n %@",path);
-    // 保存&解析
-    [[RKFileManager shareInstance] saveBookWithPath:path];
     
+    // 截取书名 带扩展
     NSString *title = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
+    
+    // 保存&解析
+    [[RKFileManager shareInstance] saveBookWithPath:title];
+    
     NSString *alertMessageStr = [NSString stringWithFormat:@"%@ 上传成功",title];
     RKAlertMessage(alertMessageStr,self.view);
     
