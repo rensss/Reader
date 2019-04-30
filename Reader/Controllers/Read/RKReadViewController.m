@@ -7,8 +7,11 @@
 //
 
 #import "RKReadViewController.h"
+#import "RKReadView.h"
 
 @interface RKReadViewController ()
+
+@property (nonatomic, strong) RKReadView *readView; /**< view*/
 
 @end
 
@@ -16,17 +19,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.view addSubview:self.readView];
+    [self.readView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(kStatusHight + 20, 20, kSafeAreaBottom + 20, 20));
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - getting
+- (RKReadView *)readView {
+    if (!_readView) {
+        _readView = [[RKReadView alloc] init];
+        _readView.content = self.chapter.content;
+    }
+    return _readView;
 }
-*/
 
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A03F1BC22730FAE000BB1E8 /* RKReadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A03F1BB22730FAE000BB1E8 /* RKReadView.m */; };
+		1A077627227854EB0073794E /* RKUserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A077626227854EB0073794E /* RKUserConfig.m */; };
 		1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */; };
 		1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AE2271A877006568A5 /* RKReadViewController.m */; };
 		1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8B12271B713006568A5 /* RKReadMenuView.m */; };
@@ -33,6 +34,8 @@
 /* Begin PBXFileReference section */
 		1A03F1BA22730FAE000BB1E8 /* RKReadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadView.h; sourceTree = "<group>"; };
 		1A03F1BB22730FAE000BB1E8 /* RKReadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadView.m; sourceTree = "<group>"; };
+		1A077625227854EB0073794E /* RKUserConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKUserConfig.h; sourceTree = "<group>"; };
+		1A077626227854EB0073794E /* RKUserConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKUserConfig.m; sourceTree = "<group>"; };
 		1A16F8AA2271A86A006568A5 /* RKReadPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadPageViewController.h; sourceTree = "<group>"; };
 		1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadPageViewController.m; sourceTree = "<group>"; };
 		1A16F8AD2271A877006568A5 /* RKReadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadViewController.h; sourceTree = "<group>"; };
@@ -88,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A077624227854CF0073794E /* UserConfig */ = {
+			isa = PBXGroup;
+			children = (
+				1A077625227854EB0073794E /* RKUserConfig.h */,
+				1A077626227854EB0073794E /* RKUserConfig.m */,
+			);
+			path = UserConfig;
+			sourceTree = "<group>";
+		};
 		1A16F8A922716CA3006568A5 /* Read */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +145,7 @@
 		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1A077624227854CF0073794E /* UserConfig */,
 				1A18892B226D7BB500289476 /* FileManage */,
 				1A18892F226D7BCD00289476 /* AlertMessage */,
 			);
@@ -379,6 +392,7 @@
 				1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */,
 				1A188927226D7AEC00289476 /* RKBook.m in Sources */,
 				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
+				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
 				1A18892A226D7B1200289476 /* RKChapter.m in Sources */,
 				1A188918226D792200289476 /* RKViewController.m in Sources */,
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,

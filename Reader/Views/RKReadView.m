@@ -35,18 +35,18 @@
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path, NULL, self.bounds);
     // 步骤 4
-//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.content];
-//    NSDictionary *attribute = [[RKUserConfiguration sharedInstance] parserAttribute];
-//    [attributedString setAttributes:attribute range:NSMakeRange(0, self.content.length)];
-//    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
-//    CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
-//                                                CFRangeMake(0, [attributedString length]), path, NULL);
-//    // 步骤 5
-//    CTFrameDraw(frame, context);
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.content];
+    NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
+    [attributedString setAttributes:attribute range:NSMakeRange(0, self.content.length)];
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
+                                                CFRangeMake(0, [attributedString length]), path, NULL);
+    // 步骤 5
+    CTFrameDraw(frame, context);
     // 步骤 6
-//    CFRelease(frame);
+    CFRelease(frame);
     CFRelease(path);
-//    CFRelease(framesetter);
+    CFRelease(framesetter);
 }
 
 @end
