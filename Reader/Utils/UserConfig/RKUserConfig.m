@@ -18,15 +18,13 @@
 @synthesize bottomPadding = _bottomPadding;
 @synthesize rightPadding = _rightPadding;
 
-@synthesize readViewFrame = _readViewFrame;
-
 @synthesize bgImageName = _bgImageName;
 
 @synthesize fontSize = _fontSize;
 @synthesize lineSpace = _lineSpace;
 @synthesize fontColor = _fontColor;
 
-
+#pragma mark - lifeCycle
 + (instancetype)sharedInstance
 {
     static id sharedInstance;
