@@ -9,18 +9,33 @@
 #import "RKChapter.h"
 #import <CoreText/CoreText.h>
 
+@interface RKChapter ()
+
+@property (nonatomic,strong) NSMutableArray *pageArray; /**< 分页内容 */
+
+@end
+
+
 @implementation RKChapter
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _pageArray = [NSMutableArray array];
+    }
+    return self;
+}
 
 - (void)setContent:(NSString *)content {
     _content = content;
     
-    
+    [self paginateWithBounds:[RKUserConfig sharedInstance].readViewFrame];
 }
 
 - (void)paginateWithBounds:(CGRect)bounds {
     
     // 页码个数
-    NSMutableArray *pageArray;
+    [self.pageArray removeAllObjects];
     // 内容显示属性
     NSAttributedString *attrString;
     // 当前指向的位置
@@ -29,9 +44,12 @@
     CGPathRef path;
     // 内容字符串
     NSMutableAttributedString *attrStr;
-    attrStr = [[NSMutableAttributedString  alloc] initWithString:self.content];
+    attrStr = [[NSMutableAttributedString alloc] initWithString:self.content];
     // 内容显示的属性(字号/字体/颜色...)
-    NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
+    NSDictionary *attribute = @{
+                                NSFontAttributeName:[UIFont systemFontOfSize:[RKUserConfig sharedInstance].fontSize],
+                                NSForegroundColorAttributeName:[UIColor colorWithHexString:[RKUserConfig sharedInstance].fontColor]
+                                };
     [attrStr setAttributes:attribute range:NSMakeRange(0, attrStr.length)];
     attrString = [attrStr copy];
     
@@ -53,18 +71,18 @@
         }
         if (samePlaceRepeatCount > 1) {
             // 退出循环前检查一下最后一页是否已经加上
-            if (pageArray.count == 0) {
-                [pageArray addObject:@(currentOffset)];
+            if (self.pageArray.count == 0) {
+                [self.pageArray addObject:@(currentOffset)];
             } else {
-                NSUInteger lastOffset = [[pageArray lastObject] integerValue];
+                NSUInteger lastOffset = [[self.pageArray lastObject] integerValue];
                 if (lastOffset != currentOffset) {
-                    [pageArray addObject:@(currentOffset)];
+                    [self.pageArray addObject:@(currentOffset)];
                 }
             }
             break;
         }
         
-        [pageArray addObject:@(currentOffset)];
+        [self.pageArray addObject:@(currentOffset)];
         
         CTFrameRef frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(currentInnerOffset, 0), path, NULL);
         CFRange range = CTFrameGetVisibleStringRange(frame);
@@ -80,7 +98,22 @@
     
     CGPathRelease(path);
     CFRelease(frameSetter);
-    self.allPages = pageArray.count;
+    self.allPages = self.pageArray.count;
+}
+
+/// 根据页码取出 当页内容
+- (NSString *)stringOfPage:(NSUInteger)index {
+    if (index >= self.pageArray.count) {
+        index = self.pageArray.count - 1;
+    }
+    NSUInteger local = [self.pageArray[index] integerValue];
+    NSUInteger length;
+    if (index < self.allPages - 1 ) {
+        length = [self.pageArray[index+1] integerValue] - [self.pageArray[index] integerValue];
+    } else {
+        length = self.content.length - [self.pageArray[index] integerValue];
+    }
+    return [self.content substringWithRange:NSMakeRange(local, length)];
 }
 
 @end

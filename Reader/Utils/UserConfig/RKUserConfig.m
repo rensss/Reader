@@ -153,7 +153,7 @@
     rect.origin.y = self.topPadding;
     rect.origin.x = self.leftPadding;
     rect.size.width = rect.size.width - self.leftPadding - self.rightPadding;
-    rect.size.height = rect.size.height - self.topPadding - self.bottomPadding;
+    rect.size.height = rect.size.height - self.topPadding - self.bottomPadding - kSafeAreaBottom;
     return rect;
 }
 

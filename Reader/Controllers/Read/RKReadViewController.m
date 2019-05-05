@@ -30,7 +30,7 @@
 - (RKReadView *)readView {
     if (!_readView) {
         _readView = [[RKReadView alloc] init];
-        _readView.content = self.chapter.content;
+        _readView.content = self.content;
     }
     return _readView;
 }

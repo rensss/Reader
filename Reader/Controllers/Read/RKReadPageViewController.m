@@ -170,38 +170,41 @@ RKReadMenuViewDelegate
 #pragma mark -- 返回上一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     
-//    self.pageNext = self.currentPage;
-//    self.chapterNext = self.currentChapter;
-//
-//    if (self.pageNext == 0 && self.chapterNext == 0) {
-//        return nil;
-//    }
-//    if (self.pageNext == 0) {
-//        self.chapterNext--;
-//        self.pageNext = self.book.chapters[self.chapterNext].pageCount - 1;
-//    }else {
-//        self.pageNext--;
-//    }
-//
-//    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+    self.pageNext = self.currentPage;
+    self.chapterNext = self.currentChapter;
+
+    if (self.pageNext == 0 && self.chapterNext == 0) {
+        return nil;
+    }
+    if (self.pageNext == 0) {
+        self.chapterNext--;
+        // 上一章节最后一页
+//        self.pageNext = self.chapters[self.chapterNext].pageCount - 1;
+    }else {
+        self.pageNext--;
+    }
+
+    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
 #pragma mark -- 返回下一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     
-//    self.pageNext = self.currentPage;
-//    self.chapterNext = self.currentChapter;
-//    if (self.pageNext == self.book.chapters.lastObject.pageCount - 1 && self.chapterNext == self.book.chapters.count - 1) {
-//        return nil;
-//    }
-//    if (self.pageNext == self.book.chapters[self.chapterNext].pageCount - 1) {
-//        self.chapterNext ++;
-//        self.pageNext = 0;
-//    }else {
-//        self.pageNext ++;
-//    }
-//    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+    self.pageNext = self.currentPage;
+    self.chapterNext = self.currentChapter;
+    // 最后一章 && 最后一页
+    if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
+        return nil;
+    }
+    // 本章节的最后一页
+    if (self.pageNext == self.book.currentChapter.allPages - 1) {
+        self.chapterNext ++;
+        self.pageNext = 0;
+    }else {
+        self.pageNext ++;
+    }
+    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
@@ -210,14 +213,14 @@ RKReadMenuViewDelegate
     RKLog(@"didFinishAnimating -- %@ -- completed:%@",finished?@YES:@NO,completed?@YES:@NO);
     
     if (completed) {
-//        self.currentChapter = self.chapterNext;
-//        self.currentPage = self.pageNext;
-//        [self updateLocalBookData];
+        self.currentChapter = self.chapterNext;
+        self.currentPage = self.pageNext;
+        [self updateLocalBookData];
     } else {
-        //        RKReadViewController *readViewVC = (RKReadViewController *)previousViewControllers.firstObject;
-        //        RKLog(@"%ld -- %ld -|- %ld -- %ld",self.currentChapter,self.currentPage,readViewVC.chapter,readViewVC.page);
-        //        self.currentPage = readViewVC.page;
-        //        self.currentChapter = readViewVC.chapter;
+//        RKReadViewController *readViewVC = (RKReadViewController *)previousViewControllers.firstObject;
+//        RKLog(@"%ld -- %ld -|- %ld -- %ld",self.currentChapter,self.currentPage,readViewVC.chapter,readViewVC.page);
+//        self.currentPage = readViewVC.page;
+//        self.currentChapter = readViewVC.chapter;
     }
 }
 
@@ -236,8 +239,21 @@ RKReadMenuViewDelegate
     
     // 创建一个新的控制器类，并且分配给相应的数据
     RKReadViewController *readVC = [[RKReadViewController alloc] init];
+    
+    // 准备章节
+    RKChapter *Chapter = self.book.chapters[chapter];
+    Chapter.content = [self.book.content substringWithRange:NSMakeRange(Chapter.location, Chapter.length)];
+    Chapter.page = page;
+    self.book.currentChapter = Chapter;
+    
+    // 修改当前book对象的信息
+    self.book.currentChapterNum = chapter;
+    self.book.currentPage = page;
+    
     readVC.chapter = self.book.currentChapter;
-//    // 切换章节时 可能需要重新规划字体显示内容
+    readVC.content = [Chapter stringOfPage:page];
+    
+    // 切换章节时 可能需要重新规划字体显示内容
 //    if (self.currentChapter != chapter) {
 //        [self.book.chapters[chapter] updateFont];
 //    }
@@ -255,7 +271,7 @@ RKReadMenuViewDelegate
 #pragma mark -- 保存阅读进度
 /// 保存阅读进度
 - (void)updateLocalBookData {
-    
+#warning - 保存阅读进度
 //    self.listBook.readProgress.chapter = self.currentChapter;
 //    self.listBook.readProgress.page = self.currentPage;
 //    self.listBook.readProgress.progress = self.currentChapter*1.0f/self.book.chapters.count;

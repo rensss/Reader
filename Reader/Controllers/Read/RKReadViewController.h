@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RKReadViewController : RKViewController
 
 @property (nonatomic, strong) RKChapter *chapter; /**< 当前章节*/
+@property (nonatomic, copy) NSString *content; /**< 内容*/
 
 @end
 

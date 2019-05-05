@@ -18,4 +18,7 @@
 //@property (nonatomic, copy) NSString *chapterName; /**< 章节名*/
 @property (nonatomic, copy) NSString *content; /**< 内容*/
 
+/// 根据页码取出 当页内容
+- (NSString *)stringOfPage:(NSUInteger)index;
+
 @end
