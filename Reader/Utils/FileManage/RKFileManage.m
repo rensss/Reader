@@ -20,14 +20,14 @@ static RKFileManager *_fileManager;
 
 #pragma mark - 单例
 + (instancetype)shareInstance {
-	
-	static dispatch_once_t onceToken;
-	
-	dispatch_once(&onceToken, ^{
-		_fileManager = [[RKFileManager alloc] init];
-	});
-	
-	return _fileManager;
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        _fileManager = [[RKFileManager alloc] init];
+    });
+    
+    return _fileManager;
 }
 
 - (instancetype)init
@@ -37,7 +37,7 @@ static RKFileManager *_fileManager;
         NSFileManager *fileManager = [NSFileManager defaultManager];
         BOOL isDir;
         RKLog(@"书籍列表\n%@",kHomeBookListsPath);
-
+        
         // 先判断目录是否存在，不存在才创建
         if  (![fileManager fileExistsAtPath:kBookSavePath isDirectory:&isDir]) {
             BOOL res = [fileManager createDirectoryAtPath:kBookSavePath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -62,17 +62,17 @@ static RKFileManager *_fileManager;
 }
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
-	
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_fileManager = [super allocWithZone:zone];
-	});
-	
-	return _fileManager;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _fileManager = [super allocWithZone:zone];
+    });
+    
+    return _fileManager;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-	return _fileManager;
+    return _fileManager;
 }
 
 #pragma mark - func
@@ -230,7 +230,7 @@ static RKFileManager *_fileManager;
     NSString *fileName;
     while (fileName = [dirEnum nextObject]) {
         [manager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",kBookAnalysisPath,fileName] error:&error];
-        if (handler) {
+        if (error && handler) {
             handler(NO);
             return;
         }

@@ -88,6 +88,7 @@
                 [RKFileManager shareInstance].isNeedRefresh = YES;
                 
                 RKLog(@"是否是主线程 ------- %@",[NSThread isMainThread]?@"YES":@"NO");
+                
                 if (isSuccess) {
                     RKAlertMessage(@"删除成功", weakSelf.view);
                 } else {

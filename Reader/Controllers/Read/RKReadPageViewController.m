@@ -252,6 +252,7 @@ RKReadMenuViewDelegate
     
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
+    RKLog(@"\n%@\n",readVC.content);
     
     // 切换章节时 可能需要重新规划字体显示内容
 //    if (self.currentChapter != chapter) {
