@@ -166,8 +166,7 @@
     [[RKFileManager shareInstance] setIsNeedRefresh:NO];
     NSInteger bookIndex = [self.dataArray indexOfObject:book];
     [self.dataArray removeObjectAtIndex:bookIndex];
-//    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathWithIndex:bookIndex]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView reloadData];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - getting
