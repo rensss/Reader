@@ -9,4 +9,6 @@ target 'Reader' do
   pod 'MJExtension'
 	pod 'GCDWebServer/WebUploader'
 	pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'SWTableViewCell', '0.3.7'
+  
 end

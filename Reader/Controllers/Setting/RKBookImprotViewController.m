@@ -123,12 +123,12 @@
  */
 - (void)webUploader:(GCDWebUploader*)uploader didDeleteItemAtPath:(NSString*)path {
     RKLog(@"didDeleteItemAtPath---->\n");
+    // 截取书名 带扩展
+    NSString *name = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
     // 更新首页数据
-    [[RKFileManager shareInstance] deleteBookWithPath:path];
+    [[RKFileManager shareInstance] deleteBookWithName:name];
     
-    NSString *title = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
-
-    [self.dataArray removeObject:title];
+    [self.dataArray removeObject:name];
     
     [self reloadTableView];
 }

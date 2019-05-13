@@ -24,7 +24,7 @@
 
 #pragma mark - 删
 /// 删除书籍
-- (void)deleteBookWithPath:(NSString *)path;
+- (void)deleteBookWithName:(NSString *)name;
 
 /// 删除全部书籍
 - (void)clearAllBooksWithResult:(void(^)(BOOL isSuccess))handler;

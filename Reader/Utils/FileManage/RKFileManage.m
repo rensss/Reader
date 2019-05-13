@@ -172,28 +172,34 @@ static RKFileManager *_fileManager;
 
 #pragma mark - 删
 /// 删除书籍
-- (void)deleteBookWithPath:(NSString *)path {
+- (void)deleteBookWithName:(NSString *)name {
     // 删除解析文件
-    [self deleteAnalysisWithPath:path];
+    [self deleteAnalysisWithName:name];
+    
     // 删除首页列表数据
     NSMutableArray *bookList = [[NSMutableArray alloc] initWithContentsOfFile:kHomeBookListsPath];
     for (NSInteger i = 0; i < bookList.count; i++) {
         NSDictionary *dict = bookList[i];
-        if ([dict[@"path"] isEqualToString:path]) {
+        if ([dict[@"path"] isEqualToString:name]) {
             [bookList removeObjectAtIndex:i];
             break;
         }
     }
     [bookList writeToFile:kHomeBookListsPath atomically:YES];
+    
+    // 删除文件
+    [self deleteBookFileWithName:name];
+    
     // 首页刷新
     self.isNeedRefresh = YES;
 }
 
-- (void)deleteAnalysisWithPath:(NSString *)path {
+/// 删除解析文件
+- (void)deleteAnalysisWithName:(NSString *)name {
     NSMutableArray *arr = [self getHomeList];
     RKBook *deleteBook;
     for (RKBook *book in arr) {
-        if ([book.path isEqualToString:path]) {
+        if ([book.name isEqualToString:name]) {
             deleteBook = book;
             break;
         }
@@ -251,6 +257,17 @@ static RKFileManager *_fileManager;
     
     if (handler) {
         handler(YES);
+    }
+}
+
+/// 删除书籍文件
+- (void)deleteBookFileWithName:(NSString *)name {
+    NSString *path = [NSString stringWithFormat:@"%@/%@",kBookSavePath,name];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error;
+    [manager removeItemAtPath:path error:&error];
+    if (error) {
+        RKLog(@"%@",error);
     }
 }
 

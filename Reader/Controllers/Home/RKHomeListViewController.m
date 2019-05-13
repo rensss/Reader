@@ -11,7 +11,8 @@
 #import "RKHomeListTableViewCell.h"
 #import "RKReadPageViewController.h"
 
-@interface RKHomeListViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface RKHomeListViewController () <UITableViewDelegate,UITableViewDataSource,SWTableViewCellDelegate>
+
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, strong) NSMutableArray *dataArray; /**< 数据源*/
 
@@ -89,14 +90,26 @@
     
     if (!cell) {
         cell = [[RKHomeListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     RKBook *book = self.dataArray[indexPath.row];
     cell.book = book;
     
+    NSMutableArray *btns = [NSMutableArray array];
+    // 删除
+    NSAttributedString *delete = [[NSAttributedString alloc] initWithString:@"删除"
+                                                               attributes:@{
+                                                                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
+                                                                            NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                                            }];
+    [btns sw_addUtilityButtonWithColor:[UIColor redColor] attributedTitle:delete];
+    [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    cell.delegate = self;
+    
     return cell;
 }
+
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,6 +149,27 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+#pragma mark -
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
+    return YES;
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
+    return YES;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    RKLog(@"--------=-");
+    RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
+    RKBook *book = listCell.book;
+    [[RKFileManager shareInstance] deleteBookWithName:book.name];
+    [[RKFileManager shareInstance] setIsNeedRefresh:NO];
+    NSInteger bookIndex = [self.dataArray indexOfObject:book];
+    [self.dataArray removeObjectAtIndex:bookIndex];
+//    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathWithIndex:bookIndex]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
+}
+
 #pragma mark - getting
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
@@ -143,4 +177,5 @@
     }
     return _dataArray;
 }
+
 @end

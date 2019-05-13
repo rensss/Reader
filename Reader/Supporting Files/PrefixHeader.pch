@@ -27,6 +27,7 @@ NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 #import <R_category/R_categorys.h>
 #import "MJExtension.h"
 //#import <YYModel/YYModel.h>
+#import <SWTableViewCell.h>
 
 #import "RKNavigationController.h" // 导航控制
 #import "RKViewController.h" // 基类
