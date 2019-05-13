@@ -79,7 +79,7 @@
 }
 
 #pragma mark - delegate
-#pragma mark - UITableViewDataSource
+#pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -111,7 +111,7 @@
 }
 
 
-#pragma mark - UITableViewDelegate
+#pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RKBook *book = self.dataArray[indexPath.row];
@@ -149,7 +149,7 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-#pragma mark -
+#pragma mark -- SWTableViewCellDelegate
 - (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
     return YES;
 }
