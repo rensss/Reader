@@ -44,4 +44,9 @@
  */
 - (CGFloat)getFileSize:(NSString *)path;
 
+
+// 系统磁盘信息相关
++ (long long)freeDiskSpaceInBytes;
++ (long long)totalDiskSpaceInBytes;
++ (NSString *)humanReadableStringFromBytes:(unsigned long long)byteCount;
 @end

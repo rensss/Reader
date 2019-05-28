@@ -7,6 +7,8 @@
 //
 
 #import "RKFileManager.h"
+#include <sys/param.h>
+#include <sys/mount.h>
 
 @interface RKFileManager ()
 
@@ -417,4 +419,42 @@ static RKFileManager *_fileManager;
     }
 }
 
+
+/// 手机剩余空间
++ (long long)freeDiskSpaceInBytes {
+    struct statfs buf;
+    long long freespace = -1;
+    if(statfs("/var", &buf) >= 0){
+        freespace = (long long)(buf.f_bsize * buf.f_bfree);
+    }
+    return freespace;
+}
+
+/// 手机总空间
++ (long long)totalDiskSpaceInBytes {
+    struct statfs buf;
+    long long freespace = 0;
+    if (statfs("/", &buf) >= 0) {
+        freespace = (long long)buf.f_bsize * buf.f_blocks;
+    }
+    if (statfs("/private/var", &buf) >= 0) {
+        freespace += (long long)buf.f_bsize * buf.f_blocks;
+    }
+    return freespace;
+}
+
+/// 计算文件大小
++ (NSString *)humanReadableStringFromBytes:(unsigned long long)byteCount {
+    float numberOfBytes = byteCount;
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = [NSArray arrayWithObjects:@"bytes",@"KB",@"MB",@"GB",@"TB",@"PB",@"EB",@"ZB",@"YB",nil];
+    
+    while (numberOfBytes > 1024) {
+        numberOfBytes /= 1024;
+        multiplyFactor++;
+    }
+    
+    return [NSString stringWithFormat:@"%4.2f %@",numberOfBytes, [tokens objectAtIndex:multiplyFactor]];
+}
 @end
