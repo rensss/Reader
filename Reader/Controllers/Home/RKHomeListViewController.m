@@ -105,6 +105,20 @@
                                                                             }];
     [btns sw_addUtilityButtonWithColor:[UIColor redColor] attributedTitle:delete];
     [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    
+    // 置顶
+    NSString *topTitle = @"置顶";
+    if (book.isTop) {
+        topTitle = @"取消置顶";
+    }
+    NSAttributedString *top = [[NSAttributedString alloc] initWithString:topTitle
+                                                              attributes:@{
+                                                                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
+                                                                           NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                                           }];
+    [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"c8402d"] attributedTitle:top];
+    [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    
     cell.delegate = self;
     
     return cell;
@@ -159,14 +173,48 @@
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    RKLog(@"--------=-");
+    RKLog(@"---- index:%ld",(long)index);
+    
     RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
     RKBook *book = listCell.book;
-    [[RKFileManager shareInstance] deleteBookWithName:book.name];
-    [[RKFileManager shareInstance] setIsNeedRefresh:NO];
-    NSInteger bookIndex = [self.dataArray indexOfObject:book];
-    [self.dataArray removeObjectAtIndex:bookIndex];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    if (index == 0) {
+        [[RKFileManager shareInstance] deleteBookWithName:book.name];
+        [[RKFileManager shareInstance] setIsNeedRefresh:NO];
+        NSInteger bookIndex = [self.dataArray indexOfObject:book];
+        [self.dataArray removeObjectAtIndex:bookIndex];
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
+    if (index == 1) {
+        book.isTop = !book.isTop;
+        
+        if (book.isTop) {
+            [self.dataArray removeObject:book];
+            [self.dataArray insertObject:book atIndex:0];
+        } else {
+            NSInteger index = 0;
+            for (RKBook *subBook in self.dataArray) {
+                if (subBook.isTop) {
+                    index++;
+                }
+            }
+            
+            [self.dataArray removeObject:book];
+            if (index == 0) {
+                [self.dataArray insertObject:book atIndex:0];
+            } else {
+                if (index > [self.dataArray count]) {
+                    [self.dataArray addObject:book];
+                } else {
+                    [self.dataArray insertObject:book atIndex:index];
+                }
+            }
+        }
+        
+        [[RKFileManager shareInstance] saveBookList:self.dataArray];
+        
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - getting

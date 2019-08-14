@@ -273,6 +273,15 @@ RKReadMenuViewDelegate
 /// 保存阅读进度
 - (void)updateLocalBookData {
 #warning - 保存阅读进度
+    
+    MMKV *mmkv = [MMKV defaultMMKV];
+    
+    [mmkv setObject:@{@"ddd":@"DDD"} forKey:@"dict"];
+    
+    NSDictionary *dict = [mmkv getObjectOfClass:[NSDictionary class] forKey:@"dict"];
+    
+    RKLog(@"%@",dict);
+    
 //    self.listBook.readProgress.chapter = self.currentChapter;
 //    self.listBook.readProgress.page = self.currentPage;
 //    self.listBook.readProgress.progress = self.currentChapter*1.0f/self.book.chapters.count;

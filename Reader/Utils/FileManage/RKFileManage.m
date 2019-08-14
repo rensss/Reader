@@ -273,7 +273,40 @@ static RKFileManager *_fileManager;
     }
 }
 
+#pragma mark - 改
+/**
+ 更新列表数据
+ @param book 书籍
+ @return 首页列表
+ */
+- (NSMutableArray *)updateWithBook:(RKBook *)book {
+    NSMutableArray *bookList = [self getHomeList];
+    NSInteger index = 0;
+    for (RKBook *subBook in bookList) {
+        index++;
+        if ([subBook.bookID isEqualToString:book.bookID]) {
+            break;
+        }
+    }
+    
+    [bookList replaceObjectAtIndex:index withObject:book];
+    
+    return bookList;
+}
 
+/**
+ 保存首页列表
+ @param bookList 首页列表
+ */
+- (void)saveBookList:(NSMutableArray *)bookList {
+    NSMutableArray *bookDicts = [NSMutableArray array];
+    for (RKBook *book in bookList) {
+        [bookDicts addObject:book.mj_keyValues];
+    }
+    
+    [bookDicts writeToFile:kHomeBookListsPath atomically:YES];
+    RKLog(@"---- save:%@",bookDicts);
+}
 #pragma mark - 查
 /// 获取首页书籍列表
 - (NSMutableArray *)getHomeList {

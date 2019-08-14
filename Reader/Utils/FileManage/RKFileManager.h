@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RKBook.h" // book对象
 
 @interface RKFileManager : NSObject
 
@@ -28,6 +29,20 @@
 
 /// 删除全部书籍
 - (void)clearAllBooksWithResult:(void(^)(BOOL isSuccess))handler;
+
+#pragma mark - 改
+/**
+ 保存首页列表
+ @param bookList 首页列表
+ */
+- (void)saveBookList:(NSMutableArray *)bookList;
+
+/**
+ 更新列表数据
+ @param book 书籍
+ @return 首页列表
+ */
+- (NSMutableArray *)updateWithBook:(RKBook *)book;
 
 #pragma mark - 查
 /// 获取首页书籍列表
