@@ -10,5 +10,6 @@ target 'Reader' do
 	pod 'GCDWebServer/WebUploader'
 	pod 'MBProgressHUD', '~> 1.1.0'
   pod 'SWTableViewCell', '0.3.7'
+  pod 'MMKV'
   
 end
