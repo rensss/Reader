@@ -36,6 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户设置单例
 + (instancetype)sharedInstance;
 
+
+/**
+ 显示属性
+ @return 属性字典
+ */
+- (NSDictionary *)parserAttribute;
+
 @end
 
 NS_ASSUME_NONNULL_END

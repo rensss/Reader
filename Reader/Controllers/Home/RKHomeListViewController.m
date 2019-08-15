@@ -153,10 +153,6 @@
     }
     book.chapters = array;
     RKChapter *chapter = array[book.currentChapterNum];
-    chapter.content = [book.content substringWithRange:NSMakeRange(chapter.location, chapter.length)];
-    if (book.currentChapterNum == 0 && [chapter.content length] == 0) {
-        chapter.content = @"开始";
-    }
     book.currentChapter = chapter;
     
     // 创建阅读页面

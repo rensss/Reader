@@ -194,7 +194,7 @@ RKReadMenuViewDelegate
         self.pageNext--;
     }
 
-    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+//    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
@@ -214,13 +214,13 @@ RKReadMenuViewDelegate
     } else {
         self.pageNext ++;
     }
-    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+//    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
 // 页面跳转回调
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
-    RKLog(@"didFinishAnimating -- %@ -- completed:%@",finished?@YES:@NO,completed?@YES:@NO);
+//    RKLog(@"didFinishAnimating -- %@ -- completed:%@",finished?@YES:@NO,completed?@YES:@NO);
     
     if (completed) {
         self.currentChapter = self.chapterNext;
@@ -236,10 +236,10 @@ RKReadMenuViewDelegate
 
 // 页面将要跳转
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
-    RKLog(@"willTransitionToViewControllers");
+//    RKLog(@"willTransitionToViewControllers");
     //    self.currentChapter = self.chapterNext;
     //    self.currentPage = self.pageNext;
-    RKLog(@"%ld -|- %ld",self.currentChapter,self.currentPage);
+//    RKLog(@"%ld -|- %ld",self.currentChapter,self.currentPage);
 }
 
 
@@ -273,7 +273,13 @@ RKReadMenuViewDelegate
     
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
-    RKLog(@"\n%@\n",readVC.content);
+    
+    // 排除开始页内容为空
+    if (self.book.currentChapterNum == 0 && [readVC.content length] == 0) {
+        readVC.content = @"开始";
+    }
+    
+//    RKLog(@"\n%@\n",readVC.content);
     
     // 切换章节时 可能需要重新规划字体显示内容
 //    if (self.currentChapter != chapter) {

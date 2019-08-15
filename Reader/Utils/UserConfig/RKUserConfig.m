@@ -189,4 +189,20 @@
     }
 }
 
+
+/**
+ 内容显示的属性(字号/字体/颜色...)
+ @return 属性字典
+ */
+- (NSDictionary *)parserAttribute {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[NSForegroundColorAttributeName] = [UIColor colorWithHexString:self.fontColor];
+    dict[NSFontAttributeName] = [UIFont systemFontOfSize:self.fontSize];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = self.lineSpace;
+    paragraphStyle.alignment = NSTextAlignmentJustified;
+    dict[NSParagraphStyleAttributeName] = paragraphStyle;
+    return [dict copy];
+}
+
 @end

@@ -45,12 +45,9 @@
     // 内容字符串
     NSMutableAttributedString *attrStr;
     attrStr = [[NSMutableAttributedString alloc] initWithString:self.content];
+    
     // 内容显示的属性(字号/字体/颜色...)
-    NSDictionary *attribute = @{
-                                NSFontAttributeName:[UIFont systemFontOfSize:[RKUserConfig sharedInstance].fontSize],
-                                NSForegroundColorAttributeName:[UIColor colorWithHexString:[RKUserConfig sharedInstance].fontColor]
-                                };
-    [attrStr setAttributes:attribute range:NSMakeRange(0, attrStr.length)];
+    [attrStr setAttributes:[[RKUserConfig sharedInstance] parserAttribute] range:NSMakeRange(0, attrStr.length)];
     attrString = [attrStr copy];
     
     frameSetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef) attrString);

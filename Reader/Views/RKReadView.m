@@ -36,11 +36,7 @@
     CGPathAddRect(path, NULL, self.bounds);
     // 步骤 4
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.content];
-    NSDictionary *attribute = @{
-                                NSFontAttributeName:[UIFont systemFontOfSize:[RKUserConfig sharedInstance].fontSize],
-                                NSForegroundColorAttributeName:[UIColor colorWithHexString:[RKUserConfig sharedInstance].fontColor]
-                                };
-    [attributedString setAttributes:attribute range:NSMakeRange(0, self.content.length)];
+    [attributedString setAttributes:[[RKUserConfig sharedInstance] parserAttribute] range:NSMakeRange(0, self.content.length)];
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
                                                 CFRangeMake(0, [attributedString length]), path, NULL);
