@@ -52,13 +52,16 @@
 /// 书籍解码 返回内容
 - (NSString *)encodeWithFilePath:(NSString *)path;
 
+/// 拆分章节 章节放入数组
+- (void)separateChapter:(NSMutableArray * __autoreleasing *)chapters content:(NSString *)content;
+
+#pragma mark -- other
 /**
  计算文件的大小，单位为 M
  @param path 文件路径
  @return 大小(M)
  */
 - (CGFloat)getFileSize:(NSString *)path;
-
 
 // 系统磁盘信息相关
 + (long long)freeDiskSpaceInBytes;

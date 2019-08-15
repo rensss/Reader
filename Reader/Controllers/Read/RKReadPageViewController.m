@@ -28,6 +28,8 @@ RKReadMenuViewDelegate
 
 @property (nonatomic, assign) BOOL isShowMenu; /**< 是否已弹出菜单*/
 
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle; /**< 状态栏颜色*/
+
 @end
 
 @implementation RKReadPageViewController
@@ -111,6 +113,10 @@ RKReadMenuViewDelegate
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.statusBarStyle;
+}
+
 #pragma mark - 手势事件
 - (void)showToolMenu {
     
@@ -120,7 +126,9 @@ RKReadMenuViewDelegate
     }
 
     // 设置状态栏的颜色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    self.statusBarStyle = UIStatusBarStyleLightContent;
+    [self setNeedsStatusBarAppearanceUpdate];
+
 
     self.isShowMenu = YES;
     // 菜单view
@@ -138,15 +146,17 @@ RKReadMenuViewDelegate
 //            // 设置状态栏的颜色
 //            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 //        }else {
-            // 设置状态栏的颜色
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+        // 设置状态栏的颜色
+        weakSelf.statusBarStyle = UIStatusBarStyleDefault;
+        [weakSelf setNeedsStatusBarAppearanceUpdate];
 //        }
     }];
 
     // 退出阅读
     [menu closeBlock:^{
         // 设置状态栏的颜色
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+        weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
+        [weakSelf setNeedsStatusBarAppearanceUpdate];
         [weakSelf dissmiss];
     }];
 }
@@ -180,7 +190,7 @@ RKReadMenuViewDelegate
         self.chapterNext--;
         // 上一章节最后一页
 //        self.pageNext = self.chapters[self.chapterNext].pageCount - 1;
-    }else {
+    } else {
         self.pageNext--;
     }
 
@@ -201,7 +211,7 @@ RKReadMenuViewDelegate
     if (self.pageNext == self.book.currentChapter.allPages - 1) {
         self.chapterNext ++;
         self.pageNext = 0;
-    }else {
+    } else {
         self.pageNext ++;
     }
     RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
@@ -242,7 +252,18 @@ RKReadMenuViewDelegate
     
     // 准备章节
     RKChapter *Chapter = self.book.chapters[chapter];
-    Chapter.content = [self.book.content substringWithRange:NSMakeRange(Chapter.location, Chapter.length)];
+    NSRange contentRange = NSMakeRange(Chapter.location, Chapter.length);
+    
+    if (Chapter.location > self.book.content.length) {
+        RKAlertMessage(@"错误 code:3", self.view);
+        return nil;
+    }
+    
+    if (contentRange.location+contentRange.length > self.book.content.length) {
+        RKAlertMessage(@"错误 code:4", self.view);
+        return nil;
+    }
+    Chapter.content = [self.book.content substringWithRange:contentRange];
     Chapter.page = page;
     self.book.currentChapter = Chapter;
     
@@ -272,25 +293,27 @@ RKReadMenuViewDelegate
 #pragma mark -- 保存阅读进度
 /// 保存阅读进度
 - (void)updateLocalBookData {
-#warning - 保存阅读进度
     
-    MMKV *mmkv = [MMKV defaultMMKV];
-    
-    [mmkv setObject:@{@"ddd":@"DDD"} forKey:@"dict"];
-    
-    NSDictionary *dict = [mmkv getObjectOfClass:[NSDictionary class] forKey:@"dict"];
-    
-    RKLog(@"%@",dict);
-    
-//    self.listBook.readProgress.chapter = self.currentChapter;
-//    self.listBook.readProgress.page = self.currentPage;
-//    self.listBook.readProgress.progress = self.currentChapter*1.0f/self.book.chapters.count;
-//    self.listBook.readProgress.title = self.book.chapters[self.currentChapter].title;
+//    MMKV *mmkv = [MMKV defaultMMKV];
 //
-//    RKReadViewController *readVC = (RKReadViewController *)self.pageViewController.viewControllers.firstObject;
-//    readVC.listBook = self.listBook;
+//    [mmkv setObject:@[@"1",@{@"ddd":@"DDD"},@"3"] forKey:@"dict"];
 //
-//    [RKFileManager updateHomeListDataWithListBook:self.listBook];
+//    NSArray *array = [mmkv getObjectOfClass:[NSArray class] forKey:@"dict"];
+//
+//    RKLog(@"%@",array);
+    
+    self.book.currentPage = self.currentPage;
+    self.book.currentChapterNum = self.currentChapter;
+    
+    NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+
+    for (RKBook *subBook in bookList) {
+        if ([subBook.bookID isEqualToString:self.book.bookID]) {
+            subBook.currentChapterNum = self.currentChapter;
+            subBook.currentPage = self.currentPage;
+        }
+    }
+    [[RKFileManager shareInstance] saveBookList:bookList];
 }
 
 #pragma mark -- 退出阅读

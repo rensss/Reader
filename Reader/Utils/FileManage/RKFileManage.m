@@ -92,19 +92,27 @@ static RKFileManager *_fileManager;
     
     // 开线程解析
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        book.content = [self bookAnalysisWithFilePath:path];
         
         // 计算代码运行时间
         CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+        
+        book.content = [self bookAnalysisWithFilePath:path];
+
+        CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+        // 打印运行时间
+        NSLog(@"---- bookAnalysisWithFilePath Linked in %f ms", linkTime * 1000.0);
+        
+        // 计算代码运行时间
+        startTime = CFAbsoluteTimeGetCurrent();
         
         NSMutableArray *chapters = [NSMutableArray array];
         [self separateChapter:&chapters content:book.content];
         book.chapters = chapters;
         book.allChapters = chapters.count;
         
-        CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+        linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
         // 打印运行时间
-        RKLog(@"separateChapter ----- Linked in %f ms", linkTime * 1000.0);
+        RKLog(@"---- separateChapter ---- Linked in %f ms", linkTime * 1000.0);
         
         [self saveChaptersWithBook:book];
         [self addHomeListWithBook:book];
@@ -132,7 +140,7 @@ static RKFileManager *_fileManager;
     [bookList addObject:bookDict];
     [bookList writeToFile:kHomeBookListsPath atomically:YES];
     
-    RKLog(@"%@\n%@",bookDict,bookList);
+    RKLog(@"---- %@\n%@",bookDict,bookList);
     
     // 首页刷新
     self.isNeedRefresh = YES;
@@ -141,14 +149,7 @@ static RKFileManager *_fileManager;
 /// 解析书籍
 - (NSString *)bookAnalysisWithFilePath:(NSString *)path {
     
-    //计算代码运行时间
-    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
-    
     NSString *content = [self encodeWithFilePath:path];
-    
-    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
-    //打印运行时间
-    RKLog(@"encodeWithFilePath ----- Linked in %f ms", linkTime * 1000.0);
     
     return content;
 }
@@ -169,7 +170,7 @@ static RKFileManager *_fileManager;
     
     CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
     //打印运行时间
-    RKLog(@"saveChaptersWithBook ----- Linked in %f ms", linkTime * 1000.0);
+    RKLog(@"---- Linked in %f ms", linkTime * 1000.0);
 }
 
 #pragma mark - 删
@@ -212,7 +213,7 @@ static RKFileManager *_fileManager;
         NSError *error;
         [manager removeItemAtPath:path error:&error];
         if (error) {
-            RKLog(@"%@",error);
+            RKLog(@"---- %@",error);
         }
     }
 }
@@ -226,7 +227,7 @@ static RKFileManager *_fileManager;
         [manager removeItemAtPath:kHomeBookListsPath error:&error];
     }
     if (error) {
-        RKLog(@"%@",error);
+        RKLog(@"---- %@",error);
         if (handler) {
             handler(NO);
             return;
@@ -249,7 +250,7 @@ static RKFileManager *_fileManager;
     while (fileName = [dirEnum nextObject]) {
         [manager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",kBookSavePath,fileName] error:&error];
         if (error) {
-            RKLog(@"%@",error);
+            RKLog(@"---- %@",error);
             if (handler) {
                 handler(NO);
                 return;
@@ -269,7 +270,7 @@ static RKFileManager *_fileManager;
     NSError *error;
     [manager removeItemAtPath:path error:&error];
     if (error) {
-        RKLog(@"%@",error);
+        RKLog(@"---- %@",error);
     }
 }
 
@@ -305,7 +306,7 @@ static RKFileManager *_fileManager;
     }
     
     [bookDicts writeToFile:kHomeBookListsPath atomically:YES];
-    RKLog(@"---- save:%@",bookDicts);
+//    RKLog(@"---- save:%@",bookDicts);
 }
 #pragma mark - 查
 /// 获取首页书籍列表
@@ -325,6 +326,7 @@ static RKFileManager *_fileManager;
 }
 
 #pragma mark - func
+#pragma mark -- 解码
 - (NSString *)encodeWithFilePath:(NSString *)path {
     
 //    path = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
@@ -336,21 +338,21 @@ static RKFileManager *_fileManager;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (!content) {
         if (error) {
-            RKLog(@"NSUTF8StringEncoding -- 解码错误 -- %@",error.domain);
+            RKLog(@"---- NSUTF8StringEncoding -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
         } else {
-            RKLog(@"NSUTF8StringEncoding -- 解码成功");
+            RKLog(@"---- NSUTF8StringEncoding -- 解码成功");
         }
     }
     if (!content) {
         content = [NSString stringWithContentsOfFile:path encoding:0x80000632 error:&error];
         if (error) {
-            RKLog(@"GBK -- 解码错误 -- %@",error.domain);
+            RKLog(@"---- GBK -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
         } else {
-            RKLog(@"GBK -- 解码成功");
+            RKLog(@"---- GBK -- 解码成功");
         }
     }
     if (!content) {
@@ -358,11 +360,11 @@ static RKFileManager *_fileManager;
         // 文件内容转换成字符串类型
         content = [NSString stringWithContentsOfFile:path encoding:enc error:&error];
         if (error) {
-            RKLog(@"kCFStringEncodingGB_18030_2000 -- 解码错误 -- %@",error.domain);
+            RKLog(@"---- kCFStringEncodingGB_18030_2000 -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
         } else {
-            RKLog(@"kCFStringEncodingGB_18030_2000 -- 解码成功");
+            RKLog(@"---- kCFStringEncodingGB_18030_2000 -- 解码成功");
         }
     }
     if (!content) {
@@ -371,6 +373,62 @@ static RKFileManager *_fileManager;
     return content;
 }
 
+/// 拆分章节 章节放入数组
+- (void)separateChapter:(NSMutableArray * __autoreleasing *)chapters content:(NSString *)content {
+    [*chapters removeAllObjects];
+    
+    // 正则匹配
+    NSString *parten = @"(\\s)*[第]{0,1}[0-9一二三四五六七八九十百千万]+[章回节卷集幕计][ \t]*(\\s)*";
+    NSError *error = NULL;
+    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSArray *match = [reg matchesInString:content options:NSMatchingReportCompletion range:NSMakeRange(0, [content length])];
+    RKLog(@"---- 章节个数 -- %lu",(unsigned long)match.count);
+    
+    // 第一章
+    NSRange firstRange = ((NSTextCheckingResult *)match.firstObject).range;
+    
+    // 初始
+    RKChapter *model = [[RKChapter alloc] init];
+    model.title = @"开始";
+    model.location = 0;
+    model.length = firstRange.location;
+    [*chapters addObject:model];
+    
+    if (match.count != 0) {
+        NSRange currentRange = [(NSTextCheckingResult *)match[0] range];
+
+        NSUInteger count = [match count];
+        for (int i = 0; i < count; i++) {
+            if (i < count - 1) {
+                NSRange nextRange = [(NSTextCheckingResult *)match[i+1] range];
+                NSInteger local = nextRange.location;
+                
+                RKChapter *model = [[RKChapter alloc] init];
+                model.title = [content substringWithRange:currentRange];
+                model.location = currentRange.location;
+                model.length = local - model.location;
+                [*chapters addObject:model];
+                
+                currentRange = nextRange;
+            }
+        }
+        
+        RKChapter *model = [[RKChapter alloc] init];
+        model.title = [content substringWithRange:[(NSTextCheckingResult *)match.lastObject range]];
+        model.location = [(NSTextCheckingResult *)match.lastObject range].location;
+        model.length = content.length - model.location;
+        [*chapters addObject:model];
+        
+//        RKLog(@"---- %ld",(long)[*chapters count]);
+    } else {// 没找出章节
+        RKChapter *model = [[RKChapter alloc] init];
+        model.title = @"开始";
+        [*chapters addObject:model];
+    }
+}
+
+#pragma mark -- other
 /**
  计算文件的大小，单位为 M
  @param path 文件路径
@@ -379,7 +437,7 @@ static RKFileManager *_fileManager;
 - (CGFloat)getFileSize:(NSString *)path {
     // 转码
     NSString *filePath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    RKLog(@"转码\npath:%@\nfilePath:%@",path,filePath);
+    RKLog(@"---- 转码\npath:%@\nfilePath:%@",path,filePath);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     float filesize = -1.0f;
     if ([fileManager fileExistsAtPath:path]) {
@@ -394,64 +452,9 @@ static RKFileManager *_fileManager;
             filesize = size/1000.0/1000.0;
         }
     }
-    RKLog(@"文件大小 -- %f",filesize);
+    RKLog(@"---- 文件大小 -- %f",filesize);
     return filesize;
 }
-
-/// 拆分章节 章节放入数组
-- (void)separateChapter:(NSMutableArray * __autoreleasing *)chapters content:(NSString *)content {
-    [*chapters removeAllObjects];
-    
-    // 正则匹配
-    NSString *parten = @"(\\s)+[第]{0,1}[0-9一二三四五六七八九十百千万]+[章回节卷集幕计][ \t]*(\\S)*";
-    NSError *error = NULL;
-    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten options:NSRegularExpressionCaseInsensitive error:&error];
-    
-    NSArray* match = [reg matchesInString:content options:NSMatchingReportCompletion range:NSMakeRange(0, [content length])];
-    RKLog(@"章节个数 -- %lu",(unsigned long)match.count);
-    if (match.count != 0) {
-        __block NSRange lastRange = NSMakeRange(0, 0);
-        [match enumerateObjectsUsingBlock:^(NSTextCheckingResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSRange range = [obj range];
-            NSInteger local = range.location;
-            if (idx == 0) {
-                RKChapter *model = [[RKChapter alloc] init];
-                model.title = @"开始";
-                NSUInteger len = local;
-                model.location = 0;
-                model.length = len;
-//                model.content = [content substringWithRange:NSMakeRange(0, len)];
-                [*chapters addObject:model];
-            }
-            
-            if (idx > 0 ) {
-                RKChapter *model = [[RKChapter alloc] init];
-                model.title = [content substringWithRange:lastRange];
-                NSUInteger len = local-lastRange.location;
-                model.location = local;
-                model.length = len;
-//                model.content = [content substringWithRange:NSMakeRange(lastRange.location, len)];
-                [*chapters addObject:model];
-            }
-            
-            if (idx == match.count-1) {
-                RKChapter *model = [[RKChapter alloc] init];
-                model.title = [content substringWithRange:range];
-                model.location = local;
-                model.length = content.length-local;
-//                model.content = [content substringWithRange:NSMakeRange(local, content.length-local)];
-                [*chapters addObject:model];
-            }
-            lastRange = range;
-        }];
-    } else {// 没找出章节
-        RKChapter *model = [[RKChapter alloc] init];
-        model.title = @"开始";
-//        model.content = content;
-        [*chapters addObject:model];
-    }
-}
-
 
 /// 手机剩余空间
 + (long long)freeDiskSpaceInBytes {
@@ -490,4 +493,5 @@ static RKFileManager *_fileManager;
     
     return [NSString stringWithFormat:@"%4.2f %@",numberOfBytes, [tokens objectAtIndex:multiplyFactor]];
 }
+
 @end
