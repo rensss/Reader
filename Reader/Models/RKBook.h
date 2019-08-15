@@ -22,6 +22,7 @@
 @property (nonatomic, assign) NSTimeInterval addDate; /**< 添加时间*/
 @property (nonatomic, assign) NSTimeInterval lastReadDate; /**< 最后阅读*/
 @property (nonatomic, assign) BOOL isTop; /**< 是否置顶*/
+@property (nonatomic, copy) NSString *chapterName; /**< 章节名*/
 
 @property (nonatomic, assign) NSInteger currentChapterNum; /**< 第几章*/
 @property (nonatomic, assign) NSInteger currentPage; /**< 第几页*/

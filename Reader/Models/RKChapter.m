@@ -105,7 +105,8 @@
     }
     NSUInteger local = [self.pageArray[index] integerValue];
     NSUInteger length;
-    if (index < self.allPages - 1 ) {
+//    if (index < self.allPages - 1 ) {
+    if (index < self.pageArray.count - 1 ) {
         length = [self.pageArray[index+1] integerValue] - [self.pageArray[index] integerValue];
     } else {
         length = self.content.length - [self.pageArray[index] integerValue];

@@ -270,7 +270,7 @@ RKReadMenuViewDelegate
     // 修改当前book对象的信息
     self.book.currentChapterNum = chapter;
     self.book.currentPage = page;
-    
+    RKLog(@"---- %ld",page);
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
     
@@ -307,19 +307,32 @@ RKReadMenuViewDelegate
 //    NSArray *array = [mmkv getObjectOfClass:[NSArray class] forKey:@"dict"];
 //
 //    RKLog(@"%@",array);
-    
-    self.book.currentPage = self.currentPage;
-    self.book.currentChapterNum = self.currentChapter;
-    
-    NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
-
-    for (RKBook *subBook in bookList) {
-        if ([subBook.bookID isEqualToString:self.book.bookID]) {
-            subBook.currentChapterNum = self.currentChapter;
-            subBook.currentPage = self.currentPage;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        self.book.currentPage = self.currentPage;
+        self.book.currentChapterNum = self.currentChapter;
+        RKLog(@"---- %ld",self.currentPage);
+        if (self.currentChapter == 0 && self.currentPage == 0) {
+            self.book.progress = 0.0f;
+            self.book.chapterName = @"开始";
+        } else {
+            NSRange pageRange = [self.book.content rangeOfString:[self.book.currentChapter stringOfPage:self.book.currentPage]];
+            self.book.progress = (pageRange.location + pageRange.length)*1.0f/[self.book.content length]*1.0f;
+            self.book.chapterName = self.book.currentChapter.title;
         }
-    }
-    [[RKFileManager shareInstance] saveBookList:bookList];
+        
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+        
+        for (RKBook *subBook in bookList) {
+            if ([subBook.bookID isEqualToString:self.book.bookID]) {
+                subBook.currentChapterNum = self.currentChapter;
+                subBook.currentPage = self.currentPage;
+                subBook.progress = self.book.progress;
+                subBook.chapterName = self.book.chapterName;
+            }
+        }
+        [[RKFileManager shareInstance] saveBookList:bookList];
+        [RKFileManager shareInstance].isNeedRefresh = YES;
+    });
 }
 
 #pragma mark -- 退出阅读
