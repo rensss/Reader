@@ -26,6 +26,12 @@
     }];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    RKLog(@"---- ddd");
+}
+
 #pragma mark - getting
 - (RKReadView *)readView {
     if (!_readView) {

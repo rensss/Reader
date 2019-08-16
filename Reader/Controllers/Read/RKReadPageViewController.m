@@ -30,21 +30,14 @@ RKReadMenuViewDelegate
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle; /**< 状态栏颜色*/
 
+@property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
+
 @end
 
 @implementation RKReadPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    // 改变状态栏的颜色
-//    if ([[RKUserConfiguration sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
-//        // 设置状态栏的颜色
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-//    }else {
-//        // 设置状态栏的颜色
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-//    }
     
     // 添加点击手势
     [self.view addGestureRecognizer:({
@@ -55,7 +48,7 @@ RKReadMenuViewDelegate
     
     // 设置UIPageViewController的配置项
     NSDictionary *options = @{UIPageViewControllerOptionInterPageSpacingKey : @(20)};
-    //        NSDictionary *options = @{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)};
+//        NSDictionary *options = @{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)};
     
     // 根据给定的属性实例化UIPageViewController
     _pageViewController = [[UIPageViewController alloc]
@@ -145,10 +138,10 @@ RKReadMenuViewDelegate
 //        if ([[RKUserConfiguration sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
 //            // 设置状态栏的颜色
 //            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-//        }else {
-        // 设置状态栏的颜色
-        weakSelf.statusBarStyle = UIStatusBarStyleDefault;
-        [weakSelf setNeedsStatusBarAppearanceUpdate];
+//        } else {
+            // 设置状态栏的颜色
+            weakSelf.statusBarStyle = UIStatusBarStyleDefault;
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
 //        }
     }];
 
@@ -350,6 +343,26 @@ RKReadMenuViewDelegate
     
     self.currentChapter = book.currentChapterNum;
     self.currentPage = book.currentPage;
+}
+
+
+- (NSArray <id <UIPreviewActionItem>> *)previewActionItems {
+    return self.previewActionArray;
+}
+
+- (NSMutableArray *)previewActionArray {
+    if (!_previewActionArray) {
+        UIPreviewAction *deleteAnalysisAction = [UIPreviewAction actionWithTitle:@"删除缓存" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+            RKLog(@"---- 删除缓存");
+        }];
+        UIPreviewAction *backAction = [UIPreviewAction actionWithTitle:@"返回" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+            RKLog(@"---- 返回");
+        }];
+        
+        _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,backAction, nil];
+        
+    }
+    return _previewActionArray;
 }
 
 @end

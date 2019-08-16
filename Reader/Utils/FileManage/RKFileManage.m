@@ -140,7 +140,7 @@ static RKFileManager *_fileManager;
     [bookList addObject:bookDict];
     [bookList writeToFile:kHomeBookListsPath atomically:YES];
     
-    RKLog(@"---- %@\n%@",bookDict,bookList);
+    RKLog(@"---- %@\n%lu",bookDict,(unsigned long)[bookList count]);
     
     // 首页刷新
     self.isNeedRefresh = YES;

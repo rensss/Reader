@@ -11,7 +11,7 @@
 #import "RKHomeListTableViewCell.h"
 #import "RKReadPageViewController.h"
 
-@interface RKHomeListViewController () <UITableViewDelegate,UITableViewDataSource,SWTableViewCellDelegate>
+@interface RKHomeListViewController () <UITableViewDelegate,UITableViewDataSource,SWTableViewCellDelegate,UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, strong) NSMutableArray *dataArray; /**< 数据源*/
@@ -78,6 +78,39 @@
     [self.navigationController pushViewController:settingVC animated:YES];
 }
 
+- (RKBook *)analysisBookContentWithBook:(RKBook *)book {
+    // 获取内容
+    if (book.content.length == 0) {
+        RKLoadingView *loadingView = [[RKLoadingView alloc] initWithMessage:@"加载中..."];
+        [loadingView showInView:self.view];
+        
+        // 加载内容
+        book.content = [[RKFileManager shareInstance] encodeWithFilePath:book.path];
+        
+        if (book.content.length == 0) {
+            [loadingView stop];
+            RKAlertMessage(@"解析失败,请确认编码格式", self.view);
+            return nil;
+        }
+        [loadingView stop];
+    }
+    
+    // 读取章节数据
+    if ([book.chapters count] == 0) {
+        NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *dict in [NSMutableArray arrayWithContentsOfFile:path]) {
+            RKChapter *chapter = [RKChapter mj_objectWithKeyValues:dict];
+            [array addObject:chapter];
+        }
+        book.chapters = array;
+        RKChapter *chapter = array[book.currentChapterNum];
+        book.currentChapter = chapter;
+    }
+    
+    return book;
+}
+
 #pragma mark - delegate
 #pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -91,6 +124,16 @@
     if (!cell) {
         cell = [[RKHomeListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    // 注册需要实现 Touch 效果的view， 这里是 用力按下cell,弹出预览小视图，同时上滑底部出现若干个选项（peek功能）
+    // 首先判断设备系统是否支持，否则会崩溃
+    if ([self respondsToSelector:@selector(traitCollection)]) {
+        if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
+            if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+                [self registerForPreviewingWithDelegate:self sourceView:cell];
+            }
+        }
     }
     
     RKBook *book = self.dataArray[indexPath.row];
@@ -107,10 +150,7 @@
     [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
     
     // 置顶
-    NSString *topTitle = @"置顶";
-    if (book.isTop) {
-        topTitle = @"取消置顶";
-    }
+    NSString *topTitle = book.isTop ? @"取消置顶" : @"置顶";
     NSAttributedString *top = [[NSAttributedString alloc] initWithString:topTitle
                                                               attributes:@{
                                                                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
@@ -129,31 +169,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RKBook *book = self.dataArray[indexPath.row];
-    if (book.content.length == 0) {
-        RKLoadingView *loadingView = [[RKLoadingView alloc] initWithMessage:@"加载中..."];
-        [loadingView showInView:self.view];
-        
-        // 加载内容
-        book.content = [[RKFileManager shareInstance] encodeWithFilePath:book.path];
-        
-        if (book.content.length == 0) {
-            [loadingView stop];
-            RKAlertMessage(@"解析失败,请确认编码格式", self.view);
-            return;
-        }
-        [loadingView stop];
-    }
     
-    // 读取章节数据
-    NSString *path = [NSString stringWithFormat:@"%@/%@.plist",kBookAnalysisPath,book.bookID];
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSDictionary *dict in [NSMutableArray arrayWithContentsOfFile:path]) {
-        RKChapter *chapter = [RKChapter mj_objectWithKeyValues:dict];
-        [array addObject:chapter];
+    RKBook *analysisBook = [self analysisBookContentWithBook:book];
+    if (analysisBook) {
+        book = analysisBook;
     }
-    book.chapters = array;
-    RKChapter *chapter = array[book.currentChapterNum];
-    book.currentChapter = chapter;
     
     // 创建阅读页面
     RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
@@ -214,6 +234,41 @@
         
         [self.tableView reloadData];
     }
+}
+
+#pragma mark -- UIViewControllerPreviewingDelegate
+// If you return nil, a preview presentation will not be performed
+- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location {
+    
+    // 获取按压的cell所在行，[previewingContext sourceView]就是按压的那个视图
+    NSIndexPath *indexPath = [_tableView indexPathForCell: (UITableViewCell *)[previewingContext sourceView]];
+    
+    // 调整不被虚化的范围，按压的那个cell不被虚化
+    CGRect rect = CGRectMake(0, 0, self.view.width, 110);
+    previewingContext.sourceRect = rect;
+    
+    RKHomeListTableViewCell *cell = (RKHomeListTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    RKLog(@"---- %@ ---- book:%@",NSStringFromCGPoint(location),cell.book.name);
+    
+    RKBook *analysisBook = [self analysisBookContentWithBook:cell.book];
+    if (analysisBook) {
+        cell.book = analysisBook;
+    }
+    
+    // 创建阅读页面
+    RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
+    readPageVC.book = cell.book;
+//    RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:readPageVC];
+//    readPageVC.recordPreviewActionItems = self.recordPreviewActionItems;
+
+    // 设定预览的界面，preferredContentSize决定了预览视图的大小
+//    nav.preferredContentSize = CGSizeMake(0.0f, 500.0f);
+    
+    return readPageVC;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit {
+    [self presentViewController:viewControllerToCommit animated:YES completion:nil];
 }
 
 #pragma mark - getting
