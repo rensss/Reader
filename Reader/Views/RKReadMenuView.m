@@ -96,7 +96,8 @@
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(navBar.mas_bottom).mas_offset(-10);
         make.left.mas_equalTo(15);
-        make.width.height.mas_equalTo(24);
+        make.width.mas_equalTo(24);
+        make.height.mas_equalTo(24);
     }];
     
     // 书名
@@ -109,8 +110,8 @@
     title.textAlignment = NSTextAlignmentCenter;
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(closeBtn.mas_centerY);
-        make.centerX.mas_equalTo(navBar.centerX);
-        make.left.mas_equalTo(closeBtn.mas_right);
+//        make.centerX.mas_equalTo(navBar.centerX);
+        make.left.mas_equalTo(closeBtn.mas_right).mas_offset(0);
         make.right.mas_equalTo(navBar.mas_right);
     }];
     
