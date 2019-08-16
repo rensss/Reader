@@ -324,7 +324,17 @@ static RKFileManager *_fileManager;
     
     NSMutableArray *bookDicts = [NSMutableArray array];
     for (RKBook *book in bookList) {
-        [bookDicts addObject:book.mj_keyValues];
+        NSMutableDictionary *bookDict = book.mj_keyValues;
+        if ([[bookDict allKeys] containsObject:@"content"]) {
+            [bookDict removeObjectForKey:@"content"];
+        }
+        if ([[bookDict allKeys] containsObject:@"chapters"]) {
+            [bookDict removeObjectForKey:@"chapters"];
+        }
+        if ([[bookDict allKeys] containsObject:@"chapter"]) {
+            [bookDict removeObjectForKey:@"chapter"];
+        }
+        [bookDicts addObject:bookDict];
     }
     
     [bookDicts writeToFile:kHomeBookListsPath atomically:YES];

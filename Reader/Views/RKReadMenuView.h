@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 关闭回调
 - (void)closeBlock:(void(^)(void))handler;
 
+/// 章节跳转
+- (void)shouldChangeChapter:(void(^)(BOOL isNextChapter))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

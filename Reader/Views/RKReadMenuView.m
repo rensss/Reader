@@ -23,6 +23,7 @@
 
 @property (nonatomic, copy) void(^dismissBlock)(void); /**< 消失回调*/
 @property (nonatomic, copy) void(^closeBlock)(void); /**< 消失回调*/
+@property (nonatomic, copy) void(^changeChapterBlock)(BOOL); /**< 上/下一章节*/
 
 @end
 
@@ -69,6 +70,7 @@
         make.height.mas_equalTo(topOffset);
     }];
     
+    // 书名
     UILabel *title = [UILabel new];
     self.title = title;
     [navBar addSubview:title];
@@ -82,6 +84,7 @@
         make.width.mas_equalTo(280);
     }];
     
+    // 关闭按钮
     UIButton *closeBtn = [UIButton new];
     self.closeBtn = closeBtn;
     [navBar addSubview:closeBtn];
@@ -106,6 +109,30 @@
     }];
     
     [self layoutIfNeeded];
+    
+    // 上/下 章节
+    UIButton *lastChapter = [[UIButton alloc] init];
+    self.lastChapter = lastChapter;
+    [bottomView addSubview:lastChapter];
+    lastChapter.tintColor = [UIColor whiteColor];
+    [lastChapter setImage:[[UIImage imageNamed:@"上一章"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [lastChapter mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(10);
+        make.left.mas_equalTo(10);
+    }];
+    [lastChapter addTarget:self action:@selector(changChaperClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *nextChapter = [[UIButton alloc] init];
+    self.nextChapter = nextChapter;
+    [bottomView addSubview:nextChapter];
+    nextChapter.tintColor = [UIColor whiteColor];
+    [nextChapter setImage:[[UIImage imageNamed:@"下一章"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [nextChapter mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
+    }];
+    [nextChapter addTarget:self action:@selector(changChaperClick:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 /// 显示
@@ -137,6 +164,11 @@
 /// 关闭回调
 - (void)closeBlock:(void(^)(void))handler {
     self.closeBlock = handler;
+}
+
+/// 章节跳转
+- (void)shouldChangeChapter:(void(^)(BOOL isNextChapter))handler {
+    self.changeChapterBlock = handler;
 }
 
 #pragma mark - 点击事件
@@ -190,6 +222,13 @@
             self.closeBlock();
         }
     }];
+}
+
+/// 章节跳转
+- (void)changChaperClick:(UIButton *)btn {
+    if (self.changeChapterBlock) {
+        self.changeChapterBlock(btn == self.nextChapter);
+    }
 }
 
 

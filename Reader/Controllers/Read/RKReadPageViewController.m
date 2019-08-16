@@ -149,6 +149,37 @@ RKReadMenuViewDelegate
         [weakSelf setNeedsStatusBarAppearanceUpdate];
         [weakSelf dissmiss];
     }];
+    
+    // 章节跳转
+    [menu shouldChangeChapter:^(BOOL isNextChapter) {
+        if (isNextChapter) {
+            // 最后一章
+            if (weakSelf.currentChapter == weakSelf.book.chapters.count - 1) {
+                RKAlertMessage(@"没有下一章了~", weakSelf.view);
+                return;
+            }
+            // 直接返回下一章
+            weakSelf.pageNext = 0;
+            weakSelf.chapterNext = weakSelf.currentChapter + 1;
+            
+        }else {
+            // 第一章的最后一页
+            if (weakSelf.currentChapter == 0) {
+                RKAlertMessage(@"没有上一章了~", weakSelf.view);
+                return;
+            }
+            weakSelf.pageNext = 0;
+            weakSelf.chapterNext = weakSelf.currentChapter - 1;
+        }
+        
+        // 设置当前显示的readVC
+        [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.chapterNext andPage:weakSelf.pageNext]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        // 更新阅读记录
+        weakSelf.currentPage = 0;
+        weakSelf.currentChapter = weakSelf.chapterNext;
+        [weakSelf updateLocalBookData];
+    }];
 }
 
 #pragma mark - 代理
@@ -180,7 +211,8 @@ RKReadMenuViewDelegate
     if (self.pageNext == 0) {
         self.chapterNext--;
         // 上一章节最后一页
-//        self.pageNext = self.chapters[self.chapterNext].pageCount - 1;
+        RKChapter *lastChapter = self.book.chapters[self.chapterNext];
+        self.pageNext = lastChapter.allPages - 1;
     } else {
         self.pageNext--;
     }
@@ -295,7 +327,7 @@ RKReadMenuViewDelegate
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         self.book.currentPage = self.currentPage;
         self.book.currentChapterNum = self.currentChapter;
-        RKLog(@"---- %ld",self.currentPage);
+//        RKLog(@"---- %ld",self.currentPage);
         if (self.currentChapter == 0 && self.currentPage == 0) {
             self.book.progress = 0.0f;
             self.book.chapterName = @"开始";

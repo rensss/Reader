@@ -29,7 +29,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    RKLog(@"---- ddd");
+//    RKLog(@"---- ddd");
 }
 
 #pragma mark - getting
