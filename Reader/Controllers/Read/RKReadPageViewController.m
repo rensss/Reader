@@ -14,8 +14,7 @@
 <
 UIPageViewControllerDelegate,
 UIPageViewControllerDataSource,
-UIGestureRecognizerDelegate,
-RKReadMenuViewDelegate
+UIGestureRecognizerDelegate
 >
 
 @property (nonatomic, strong) UIPageViewController *pageViewController; /**< 显示内容的VC*/
@@ -119,11 +118,9 @@ RKReadMenuViewDelegate
     self.statusBarStyle = UIStatusBarStyleLightContent;
     [self setNeedsStatusBarAppearanceUpdate];
 
-
     self.isShowMenu = YES;
     // 菜单view
     RKReadMenuView *menu = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
-    menu.delegate = self;
     [menu show];
 
     __weak typeof(self) weakSelf = self;
@@ -132,14 +129,15 @@ RKReadMenuViewDelegate
         weakSelf.isShowMenu = NO;
 
         // 改变状态栏的颜色
-//        if ([[RKUserConfiguration sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
-//            // 设置状态栏的颜色
-//            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-//        } else {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+            // 设置状态栏的颜色
+            weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
+        } else {
             // 设置状态栏的颜色
             weakSelf.statusBarStyle = UIStatusBarStyleDefault;
             [weakSelf setNeedsStatusBarAppearanceUpdate];
-//        }
+        }
     }];
 
     // 退出阅读
@@ -179,6 +177,34 @@ RKReadMenuViewDelegate
         weakSelf.currentPage = 0;
         weakSelf.currentChapter = weakSelf.chapterNext;
         [weakSelf updateLocalBookData];
+    }];
+    
+    // 行间距
+    [menu shouldChangeLineSpace:^{
+        
+        
+//        weakSelf.book.currentChapter
+    }];
+    
+    // 目录
+    [menu shouldShowBookCatalog:^{
+        
+
+    }];
+    
+    // 夜间模式
+    [menu shouldChangeNightModle:^(BOOL isOpen) {
+        
+        if (isOpen) {
+            
+        } else {
+            
+        }
+    }];
+    
+    // 打开设置
+    [menu shouldOpenSetting:^{
+        
     }];
 }
 
@@ -294,7 +320,7 @@ RKReadMenuViewDelegate
     // 修改当前book对象的信息
     self.book.currentChapterNum = chapter;
     self.book.currentPage = page;
-    RKLog(@"---- %ld",page);
+//    RKLog(@"---- %ld",page);
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
     

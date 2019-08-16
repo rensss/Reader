@@ -9,17 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-
-@protocol RKReadMenuViewDelegate <NSObject>
-
-@end
-
-
 @interface RKReadMenuView : UIView
-
-
-@property (nonatomic, weak) id<RKReadMenuViewDelegate> delegate; /**< 代理*/
 
 /**
  初始化菜单view
@@ -33,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 显示
 - (void)show;
 
+/// 消失
+- (void)dismiss;
+
 /// 消失 带回调
 - (void)dismissWithHandler:(void(^)(void))handler;
 
@@ -41,6 +34,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 章节跳转
 - (void)shouldChangeChapter:(void(^)(BOOL isNextChapter))handler;
+
+/// 改变行间距
+- (void)shouldChangeLineSpace:(void(^)(void))hanlder;
+
+/// 打开目录
+- (void)shouldShowBookCatalog:(void(^)(void))handler;
+
+/// 是否打开夜间模式
+- (void)shouldChangeNightModle:(void(^)(BOOL isOpen))handler;
+
+/// 打开设置
+- (void)shouldOpenSetting:(void(^)(void))handler;
 
 @end
 
