@@ -35,8 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 章节跳转
 - (void)shouldChangeChapter:(void(^)(BOOL isNextChapter))handler;
 
+/// 改变字号
+- (void)shouldChangeFontSize:(void(^)(void))handler;
+
 /// 改变行间距
-- (void)shouldChangeLineSpace:(void(^)(void))hanlder;
+- (void)shouldChangeLineSpace:(void(^)(void))handler;
 
 /// 打开目录
 - (void)shouldShowBookCatalog:(void(^)(void))handler;

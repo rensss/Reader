@@ -179,27 +179,54 @@ UIGestureRecognizerDelegate
         [weakSelf updateLocalBookData];
     }];
     
+    // 字号
+    [menu shouldChangeFontSize:^{
+        // 设置当前显示的readVC
+        [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        // 更新阅读记录
+        [weakSelf updateLocalBookData];
+    }];
+    
     // 行间距
     [menu shouldChangeLineSpace:^{
         
+        // 设置当前显示的readVC
+        [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         
-//        weakSelf.book.currentChapter
+        // 更新阅读记录
+        [weakSelf updateLocalBookData];
     }];
     
     // 目录
     [menu shouldShowBookCatalog:^{
         
-
     }];
     
     // 夜间模式
     [menu shouldChangeNightModle:^(BOOL isOpen) {
         
         if (isOpen) {
-            
+            [RKUserConfig sharedInstance].fontColor = @"ffffff";
+            [RKUserConfig sharedInstance].bgImageName = @"reader_bg_2";
         } else {
-            
+            [RKUserConfig sharedInstance].fontColor = @"000000";
+            [RKUserConfig sharedInstance].bgImageName = @"reader_bg_3";
         }
+        
+        // 改变状态栏的颜色
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+            // 设置状态栏的颜色
+            weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
+        } else {
+            // 设置状态栏的颜色
+            weakSelf.statusBarStyle = UIStatusBarStyleDefault;
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
+        }
+        
+        // 设置当前显示的readVC
+        [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 打开设置

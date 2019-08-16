@@ -92,6 +92,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)setLineSpace:(CGFloat)lineSpace {
+    _lineSpace = lineSpace;
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:lineSpace forKey:@"lineSpace"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)setFontColor:(NSString *)fontColor {
     _fontColor = fontColor;
     

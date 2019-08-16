@@ -21,6 +21,10 @@
 @property (nonatomic, strong) UIButton *lastChapter; /**< 上一章*/
 @property (nonatomic, strong) UIButton *nextChapter; /**< 下一章*/
 
+@property (nonatomic, strong) UIButton *reduceButton; /**< 减小字体*/
+@property (nonatomic, strong) UILabel *fontSize; /**< 字号*/
+@property (nonatomic, strong) UIButton *increaseButton; /**< 增大字体*/
+
 @property (nonatomic, strong) UIButton *smallSpace; /**< 小行间距*/
 @property (nonatomic, strong) UIButton *middleSpace; /**< 中行间距*/
 @property (nonatomic, strong) UIButton *bigSpace; /**< 大行间距*/
@@ -32,6 +36,7 @@
 @property (nonatomic, copy) void(^dismissBlock)(void); /**< 消失回调*/
 @property (nonatomic, copy) void(^closeBlock)(void); /**< 关闭回调*/
 @property (nonatomic, copy) void(^changeChapterBlock)(BOOL); /**< 上/下一章节*/
+@property (nonatomic, copy) void(^fontSizrChangeBlock)(void); /**< 改变字号*/
 @property (nonatomic, copy) void(^lineSpaceBlock)(void); /**< 行间距回调*/
 @property (nonatomic, copy) void(^catalogBlock)(void); /**< 目录回调*/
 @property (nonatomic, copy) void(^nightModeBlock)(BOOL); /**< 夜间模式回调*/
@@ -105,7 +110,7 @@
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(closeBtn.mas_centerY);
         make.centerX.mas_equalTo(navBar.centerX);
-        make.left.mas_equalTo(title.mas_right);
+        make.left.mas_equalTo(closeBtn.mas_right);
         make.right.mas_equalTo(navBar.mas_right);
     }];
     
@@ -148,6 +153,27 @@
     }];
     [nextChapter addTarget:self action:@selector(changChaperClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    // 字号
+    [bottomView addSubview:self.fontSize];
+    [self.fontSize mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.lastChapter.mas_centerY);
+        make.centerX.mas_equalTo(bottomView);
+    }];
+    
+    [bottomView addSubview:self.reduceButton];
+    [self.reduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.fontSize.mas_centerY);
+        make.right.mas_equalTo(self.fontSize.mas_left).mas_offset(-12);
+        make.width.height.mas_equalTo(26);
+    }];
+    
+    [bottomView addSubview:self.increaseButton];
+    [self.increaseButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.fontSize.mas_centerY);
+        make.left.mas_equalTo(self.fontSize.mas_right).mas_offset(12);
+        make.width.height.mas_equalTo(26);
+    }];
+    
     // 行间距
     [bottomView addSubview:self.smallSpace];
     [bottomView addSubview:self.middleSpace];
@@ -174,7 +200,7 @@
     [self.nightButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.chaptersButton.mas_width);
         make.height.mas_equalTo(self.chaptersButton.mas_height);
-        make.left.mas_equalTo(self.chaptersButton.mas_right).with.mas_offset(8);
+        make.left.mas_equalTo(self.chaptersButton.mas_right).with.mas_offset(12);
         make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
     }];
     
@@ -183,7 +209,7 @@
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.chaptersButton.mas_width);
         make.height.mas_equalTo(self.chaptersButton.mas_height);
-        make.left.mas_equalTo(self.nightButton.mas_right).with.mas_offset(8);
+        make.left.mas_equalTo(self.nightButton.mas_right).with.mas_offset(12);
         make.centerY.mas_equalTo(self.nightButton.mas_centerY);
     }];
     
@@ -251,9 +277,13 @@
     self.changeChapterBlock = handler;
 }
 
+- (void)shouldChangeFontSize:(void (^)(void))handler {
+    self.fontSizrChangeBlock = handler;
+}
+
 /// 改变行间距
-- (void)shouldChangeLineSpace:(void(^)(void))hanlder {
-    self.lineSpaceBlock = hanlder;
+- (void)shouldChangeLineSpace:(void(^)(void))handler {
+    self.lineSpaceBlock = handler;
 }
 
 /// 打开目录
@@ -310,37 +340,63 @@
     }
 }
 
+- (void)fontSizeClick:(UIButton *)btn {
+    CGFloat fontSize = [RKUserConfig sharedInstance].fontSize;
+    
+    if (btn == self.reduceButton) {
+        if (fontSize == 10) {
+            RKAlertMessageShowInWindow(@"太小了！");
+            return;
+        }
+        [RKUserConfig sharedInstance].fontSize = fontSize-1;
+    } else {
+        if (fontSize == 30) {
+            RKAlertMessageShowInWindow(@"太大了！");
+            return;
+        }
+        [RKUserConfig sharedInstance].fontSize = fontSize+1;
+    }
+
+    self.fontSize.text = [NSString stringWithFormat:@"%.0f",[RKUserConfig sharedInstance].fontSize];
+    
+    if (self.fontSizrChangeBlock) {
+        self.fontSizrChangeBlock();
+    }
+}
+
 - (void)spaceClick:(UIButton *)btn {
     
-    if (!btn.selected && btn == self.smallSpace) {
+    if (btn.selected) {
+        return;
+    }
+    
+    if (btn == self.smallSpace) {
         self.smallSpace.selected = YES;
         self.middleSpace.selected = NO;
         self.bigSpace.selected = NO;
         
-        [RKUserConfig sharedInstance].lineSpace = 5;
+        [RKUserConfig sharedInstance].lineSpace = 5.0f;
     }
     
-    if (!btn.selected && btn == self.middleSpace) {
+    if (btn == self.middleSpace) {
         self.smallSpace.selected = NO;
         self.middleSpace.selected = YES;
         self.bigSpace.selected = NO;
         
-        [RKUserConfig sharedInstance].lineSpace = 10;
+        [RKUserConfig sharedInstance].lineSpace = 10.0f;
     }
     
-    if (!btn.selected && btn == self.bigSpace) {
+    if (btn == self.bigSpace) {
         self.smallSpace.selected = NO;
         self.middleSpace.selected = NO;
         self.bigSpace.selected = YES;
         
-        [RKUserConfig sharedInstance].lineSpace = 15;
+        [RKUserConfig sharedInstance].lineSpace = 15.0f;
     }
     
     if (self.lineSpaceBlock) {
         self.lineSpaceBlock();
     }
-    
-    [self dismiss];
 }
 
 - (void)chaptersClick:(UIButton *)btn {
@@ -366,6 +422,39 @@
 }
 
 #pragma mark - getting
+- (UILabel *)fontSize {
+    if (!_fontSize) {
+        _fontSize = [[UILabel alloc] init];
+        
+        _fontSize.textColor = [UIColor whiteColor];
+        _fontSize.font = [UIFont systemFontOfSize:18];
+        _fontSize.textAlignment = NSTextAlignmentCenter;
+        _fontSize.text = [NSString stringWithFormat:@"%.0f",[RKUserConfig sharedInstance].fontSize];
+    }
+    return _fontSize;
+}
+
+- (UIButton *)reduceButton {
+    if (!_reduceButton) {
+        _reduceButton = [[UIButton alloc] init];
+        
+        [_reduceButton setBackgroundImage:[UIImage imageNamed:@"字体减小"] forState:UIControlStateNormal];
+        [_reduceButton addTarget:self action:@selector(fontSizeClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _reduceButton;
+}
+
+- (UIButton *)increaseButton {
+    if (!_increaseButton) {
+        _increaseButton = [[UIButton alloc] init];
+        
+        [_increaseButton setBackgroundImage:[UIImage imageNamed:@"字体增大"] forState:UIControlStateNormal];
+        [_increaseButton addTarget:self action:@selector(fontSizeClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _increaseButton;
+}
+
+
 - (UIButton *)bigSpace {
     if (!_bigSpace) {
         _bigSpace = [[UIButton alloc] init];
