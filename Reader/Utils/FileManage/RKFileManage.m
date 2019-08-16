@@ -87,7 +87,7 @@ static RKFileManager *_fileManager;
     book.coverImage = [NSString stringWithFormat:@"cover%d",arc4random()%10+1];
     book.path = path;
     book.size = [self getFileSize:[kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]]];
-    book.addDate = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
+    book.addDate = [[NSDate date] timeIntervalSince1970];
     book.bookID = [NSString stringWithFormat:@"%@_%f",[book.name md5Encrypt],book.addDate];
     
     // 开线程解析
@@ -299,7 +299,29 @@ static RKFileManager *_fileManager;
  保存首页列表
  @param bookList 首页列表
  */
-- (void)saveBookList:(NSMutableArray *)bookList {
+- (void)saveBookList:(NSMutableArray<RKBook *> *)bookList {
+    
+    [bookList sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        
+        RKBook *book1 = obj1;
+        RKBook *book2 = obj2;
+        
+        if (book1.isTop && book2.isTop) {
+            return NSOrderedSame;
+        }
+        if (book1.isTop && !book2.isTop) {
+            return NSOrderedAscending;
+        }
+        if (!book1.isTop && book2.isTop) {
+            return NSOrderedDescending;
+        }
+        if (book1.lastReadDate > book2.lastReadDate) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+    
     NSMutableArray *bookDicts = [NSMutableArray array];
     for (RKBook *book in bookList) {
         [bookDicts addObject:book.mj_keyValues];

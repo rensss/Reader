@@ -164,7 +164,6 @@
     return cell;
 }
 
-
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -178,8 +177,7 @@
     // 创建阅读页面
     RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
     readPageVC.book = book;
-    RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:readPageVC];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:readPageVC animated:YES completion:nil];
 }
 
 #pragma mark -- SWTableViewCellDelegate

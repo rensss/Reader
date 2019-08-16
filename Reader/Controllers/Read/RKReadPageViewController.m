@@ -85,8 +85,6 @@ RKReadMenuViewDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    // 隐藏导航栏
-    self.navigationController.delegate = self;
     
     // 屏幕常亮
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -95,8 +93,7 @@ RKReadMenuViewDelegate
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    // 禁止侧滑返回
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    [self updateLocalBookData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -177,6 +174,7 @@ RKReadMenuViewDelegate
     self.chapterNext = self.currentChapter;
 
     if (self.pageNext == 0 && self.chapterNext == 0) {
+        RKAlertMessage(@"前面没有了!", self.view);
         return nil;
     }
     if (self.pageNext == 0) {
@@ -198,6 +196,7 @@ RKReadMenuViewDelegate
     self.chapterNext = self.currentChapter;
     // 最后一章 && 最后一页
     if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
+        RKAlertMessage(@"已经看完了!", self.view);
         return nil;
     }
     // 本章节的最后一页
@@ -293,13 +292,6 @@ RKReadMenuViewDelegate
 /// 保存阅读进度
 - (void)updateLocalBookData {
     
-//    MMKV *mmkv = [MMKV defaultMMKV];
-//
-//    [mmkv setObject:@[@"1",@{@"ddd":@"DDD"},@"3"] forKey:@"dict"];
-//
-//    NSArray *array = [mmkv getObjectOfClass:[NSArray class] forKey:@"dict"];
-//
-//    RKLog(@"%@",array);
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         self.book.currentPage = self.currentPage;
         self.book.currentChapterNum = self.currentChapter;
@@ -321,6 +313,7 @@ RKReadMenuViewDelegate
                 subBook.currentPage = self.currentPage;
                 subBook.progress = self.book.progress;
                 subBook.chapterName = self.book.chapterName;
+                subBook.lastReadDate = [[NSDate date] timeIntervalSince1970];
             }
         }
         [[RKFileManager shareInstance] saveBookList:bookList];
@@ -331,8 +324,6 @@ RKReadMenuViewDelegate
 #pragma mark -- 退出阅读
 /// 关闭页面
 - (void)dissmiss {
-    // 侧滑返回
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     // 关闭
     [self dismissViewControllerAnimated:YES completion:nil];
 }
