@@ -25,7 +25,9 @@
 //    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.edges.equalTo(self.view);
 //    }];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName]];
+    UIImage *image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
+    self.view.layer.contents = (id)image.CGImage;
+    self.view.layer.contentsGravity = kCAGravityResizeAspect;
     
     [self.view addSubview:self.readView];
     
