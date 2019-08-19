@@ -108,6 +108,14 @@
         book.currentChapter = chapter;
     }
     
+    // 重新解析章节
+//    NSMutableArray *chaptersArray = [NSMutableArray array];
+//    [[RKFileManager shareInstance] separateChapter:&chaptersArray content:book.content];
+//    if ([chaptersArray count] > 0) {
+//        book.chapters = chaptersArray;
+//        [[RKFileManager shareInstance] saveChaptersWithBook:book];
+//    }
+    
     return book;
 }
 

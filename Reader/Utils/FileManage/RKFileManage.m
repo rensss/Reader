@@ -410,7 +410,13 @@ static RKFileManager *_fileManager;
     [*chapters removeAllObjects];
     
     // 正则匹配
-    NSString *parten = @"(\\s)*[第]{0,1}[0-9一二三四五六七八九十百千万]+[章回节卷集幕计][ \t]*(\\s)*";
+    NSString *parten;
+//    parten = @"(\\s)*[第]{0,1}[0-9一二三四五六七八九十百千万]+[章回节卷集幕计][ \t]*(\\S)+?";
+    parten = @"(\\s)+[第]{0,1}[0-9一二三四五六七八九十百千万]+[章回节卷集幕计][ \t]*(\\S)*";
+//    parten = @"(\\s)*[第]{0,1}[0-9一二三四五六七八九十百千万]+[章回节卷集幕计][ \t]*(\\S)*";
+//    parten = @"^.{0,6}(第[0-9一两二三四五六七八九十零百千]{1,6}(章|节|集|卷|部|篇|回)|楔子|前言|引子)([ \\s:]{0,2}|:)([^\\s]{0,36})$";
+//    parten = @"(\\s)*([第]{0,1}[0-9一两二三四五六七八九十零百千]{1,6}(章|节|集|卷|部|篇|回)|楔子|前言|引子)([ \\s:]{0,2}|:)([^\\s]{0,36})$";
+    
     NSError *error = NULL;
     NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten options:NSRegularExpressionCaseInsensitive error:&error];
     
@@ -437,7 +443,7 @@ static RKFileManager *_fileManager;
                 NSInteger local = nextRange.location;
                 
                 RKChapter *model = [[RKChapter alloc] init];
-                model.title = [content substringWithRange:currentRange];
+                model.title = [[content substringWithRange:currentRange] stringByTrimmingWhitespaceAndAllNewLine];
                 model.location = currentRange.location;
                 model.length = local - model.location;
                 [*chapters addObject:model];

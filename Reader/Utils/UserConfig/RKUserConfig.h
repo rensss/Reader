@@ -28,10 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 // 阅读页背景图
 @property (nonatomic, copy) NSString *bgImageName; /**< 背景图*/
 
-// 内容展示相关配置  字号/行间距/字体颜色
+// 内容展示相关配置  字号/行间距/字体颜色/字体
 @property (nonatomic, assign) CGFloat fontSize; /**< 字号*/
 @property (nonatomic, assign) CGFloat lineSpace; /**< 行间距*/
 @property (nonatomic, copy) NSString *fontColor; /**< 字体颜色*/
+@property (nonatomic, copy) NSString *fontName; /**< 字体*/
 
 /// 用户设置单例
 + (instancetype)sharedInstance;

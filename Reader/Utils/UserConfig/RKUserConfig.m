@@ -23,6 +23,7 @@
 @synthesize fontSize = _fontSize;
 @synthesize lineSpace = _lineSpace;
 @synthesize fontColor = _fontColor;
+@synthesize fontName = _fontName;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -106,6 +107,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)setFontName:(NSString *)fontName {
+    _fontName = fontName;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:fontName forKey:@"fontName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - getting
 - (UIPageViewControllerTransitionStyle)transitionStyle {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"transitionStyle"]) {
@@ -127,7 +135,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"topPadding"]) {
         return [[NSUserDefaults standardUserDefaults] floatForKey:@"topPadding"];
     } else {
-        return kStatusHight + 20;
+        return 20;
     }
 }
 
@@ -157,7 +165,7 @@
 
 - (CGRect)readViewFrame {
     CGRect rect = [UIApplication sharedApplication].keyWindow.bounds;
-    rect.origin.y = self.topPadding;
+    rect.origin.y = kStatusHight + self.topPadding;
     rect.origin.x = self.leftPadding;
     rect.size.width = rect.size.width - self.leftPadding - self.rightPadding;
     rect.size.height = rect.size.height - self.topPadding - self.bottomPadding - kSafeAreaBottom;
@@ -196,6 +204,13 @@
     }
 }
 
+- (NSString *)fontName {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"fontName"]) {
+        return [[NSUserDefaults standardUserDefaults] stringForKey:@"fontName"];
+    } else {
+        return @"YuppySC-Regular";
+    }
+}
 
 /**
  内容显示的属性(字号/字体/颜色...)
@@ -204,7 +219,13 @@
 - (NSDictionary *)parserAttribute {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[NSForegroundColorAttributeName] = [UIColor colorWithHexString:self.fontColor];
-    dict[NSFontAttributeName] = [UIFont systemFontOfSize:self.fontSize];
+    if (self.fontName.length > 0) {
+        // YuppySC-Regular
+        UIFont *font = [UIFont fontWithName:self.fontName size:self.fontSize];
+        dict[NSFontAttributeName] = font;
+    } else {
+        dict[NSFontAttributeName] = [UIFont systemFontOfSize:self.fontSize];
+    }
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = self.lineSpace;
     paragraphStyle.alignment = NSTextAlignmentJustified;

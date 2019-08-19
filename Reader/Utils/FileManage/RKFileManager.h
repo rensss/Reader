@@ -23,6 +23,9 @@
 /// 解析书籍
 - (NSString *)bookAnalysisWithFilePath:(NSString *)path;
 
+/// 保存书籍章节
+- (void)saveChaptersWithBook:(RKBook *)book;
+
 #pragma mark - 删
 /// 删除书籍
 - (void)deleteBookWithName:(NSString *)name;
