@@ -1,5 +1,5 @@
 //
-//  RKReadSettingViewController.h
+//  RKFontSetttingViewController.h
 //  Reader
 //
 //  Created by Rzk on 2019/8/19.
@@ -10,13 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RKReadSettingViewController : RKViewController
+@interface RKFontSetttingViewController : RKViewController
 
-/**
- 刷新回调
- @param handler 回调
- */
-- (void)needRefresh:(void(^)(void))handler;
+@property (nonatomic, copy) void(^callBack)(void); /**< 回调*/
 
 @end
 

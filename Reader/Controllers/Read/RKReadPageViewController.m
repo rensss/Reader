@@ -9,6 +9,7 @@
 #import "RKReadPageViewController.h"
 #import "RKReadViewController.h"
 #import "RKReadMenuView.h"
+#import "RKReadSettingViewController.h"
 
 @interface RKReadPageViewController ()
 <
@@ -46,12 +47,12 @@ UIGestureRecognizerDelegate
     })];
     
     // 设置UIPageViewController的配置项
-    NSDictionary *options = @{UIPageViewControllerOptionInterPageSpacingKey : @(20)};
+    NSDictionary *options = @{UIPageViewControllerOptionInterPageSpacingKey : @(80)};
 //        NSDictionary *options = @{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)};
     
     // 根据给定的属性实例化UIPageViewController
     _pageViewController = [[UIPageViewController alloc]
-                           initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                           initWithTransitionStyle:[RKUserConfig sharedInstance].transitionStyle navigationOrientation:[RKUserConfig sharedInstance].navigationOrientation
                            options:options];
     
     // 设置UIPageViewController代理和数据源
@@ -76,6 +77,9 @@ UIGestureRecognizerDelegate
     
     // 设置UIPageViewController 尺寸
     _pageViewController.view.frame = self.view.bounds;
+    
+//    //是否双面显示，默认为NO
+//    _pageViewController.doubleSided = YES;
     
     // 在页面上，显示UIPageViewController对象的View
     [self addChildViewController:_pageViewController];
@@ -183,9 +187,6 @@ UIGestureRecognizerDelegate
     [menu shouldChangeFontSize:^{
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-        
-        // 更新阅读记录
-        [weakSelf updateLocalBookData];
     }];
     
     // 行间距
@@ -193,9 +194,6 @@ UIGestureRecognizerDelegate
         
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-        
-        // 更新阅读记录
-        [weakSelf updateLocalBookData];
     }];
     
     // 目录
@@ -231,7 +229,23 @@ UIGestureRecognizerDelegate
     
     // 打开设置
     [menu shouldOpenSetting:^{
-        
+        RKReadSettingViewController *settingVC = [[RKReadSettingViewController alloc] init];
+        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];
+        [settingVC needRefresh:^{
+            // 改变状态栏的颜色
+            if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+                // 设置状态栏的颜色
+                weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
+                [weakSelf setNeedsStatusBarAppearanceUpdate];
+            } else {
+                // 设置状态栏的颜色
+                weakSelf.statusBarStyle = UIStatusBarStyleDefault;
+                [weakSelf setNeedsStatusBarAppearanceUpdate];
+            }
+            // 设置当前显示的readVC
+            [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        }];
+        [self presentViewController:nav animated:YES completion:nil];
     }];
 }
 
@@ -250,9 +264,31 @@ UIGestureRecognizerDelegate
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - UIPageViewControllerDataSource And UIPageViewControllerDelegate
+#pragma mark - UIPageViewControllerDataSource
 #pragma mark -- 返回上一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    
+    if ([RKUserConfig sharedInstance].isAllNextPage) {
+        
+//        self.pageNext = self.currentPage;
+//        self.chapterNext = self.currentChapter;
+//        // 最后一章 && 最后一页
+//        if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
+//            RKAlertMessage(@"已经看完了!", self.view);
+//            return nil;
+//        }
+//        // 本章节的最后一页
+//        if (self.pageNext == self.book.currentChapter.allPages - 1) {
+//            self.chapterNext ++;
+//            self.pageNext = 0;
+//        } else {
+//            self.pageNext ++;
+//        }
+//
+//        // 设置当前显示的readVC
+//        [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.chapterNext andPage:self.pageNext]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+//        return nil;
+    }
     
     self.pageNext = self.currentPage;
     self.chapterNext = self.currentChapter;
@@ -295,19 +331,17 @@ UIGestureRecognizerDelegate
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
+#pragma mark -- UIPageViewControllerDelegate
 // 页面跳转回调
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
 //    RKLog(@"didFinishAnimating -- %@ -- completed:%@",finished?@YES:@NO,completed?@YES:@NO);
     
-    if (completed) {
+    if (finished && completed) {
+        // 无论有无翻页，只要动画结束就恢复交互。
+        pageViewController.view.userInteractionEnabled = YES;
         self.currentChapter = self.chapterNext;
         self.currentPage = self.pageNext;
         [self updateLocalBookData];
-    } else {
-//        RKReadViewController *readViewVC = (RKReadViewController *)previousViewControllers.firstObject;
-//        RKLog(@"%ld -- %ld -|- %ld -- %ld",self.currentChapter,self.currentPage,readViewVC.chapter,readViewVC.page);
-//        self.currentPage = readViewVC.page;
-//        self.currentChapter = readViewVC.chapter;
     }
 }
 
@@ -347,7 +381,7 @@ UIGestureRecognizerDelegate
     // 修改当前book对象的信息
     self.book.currentChapterNum = chapter;
     self.book.currentPage = page;
-//    RKLog(@"---- %ld",page);
+
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
     
@@ -355,21 +389,6 @@ UIGestureRecognizerDelegate
     if (self.book.currentChapterNum == 0 && [readVC.content length] == 0) {
         readVC.content = @"开始";
     }
-    
-//    RKLog(@"\n%@\n",readVC.content);
-    
-    // 切换章节时 可能需要重新规划字体显示内容
-//    if (self.currentChapter != chapter) {
-//        [self.book.chapters[chapter] updateFont];
-//    }
-//    // 内容
-//    readVC.content = [self.book.chapters[chapter] stringOfPage:page];
-//    readVC.chapter = chapter;
-//    readVC.page = page;
-//    readVC.bookChapter = self.book.chapters[chapter];
-//    readVC.chapters = self.book.chapters.count;
-//    readVC.listBook = self.listBook;
-    
     return readVC;
 }
 
@@ -388,6 +407,9 @@ UIGestureRecognizerDelegate
             NSRange pageRange = [self.book.content rangeOfString:[self.book.currentChapter stringOfPage:self.book.currentPage]];
             self.book.progress = (pageRange.location + pageRange.length)*1.0f/[self.book.content length]*1.0f;
             self.book.chapterName = self.book.currentChapter.title;
+            if (self.book.progress > 1) {
+                self.book.progress = 1;
+            }
         }
         
         NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];

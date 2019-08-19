@@ -24,6 +24,7 @@
 @synthesize lineSpace = _lineSpace;
 @synthesize fontColor = _fontColor;
 @synthesize fontName = _fontName;
+@synthesize isAllNextPage = _isAllNextPage;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -48,6 +49,13 @@
     _navigationOrientation = navigationOrientation;
     
     [[NSUserDefaults standardUserDefaults] setInteger:navigationOrientation forKey:@"navigationOrientation"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsAllNextPage:(BOOL)isAllNextPage {
+    _isAllNextPage = isAllNextPage;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isAllNextPage forKey:@"isAllNextPage"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -128,6 +136,14 @@
         return [[NSUserDefaults standardUserDefaults] integerForKey:@"navigationOrientation"];
     } else {
         return UIPageViewControllerNavigationOrientationHorizontal;
+    }
+}
+
+- (BOOL)isAllNextPage {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAllNextPage"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isAllNextPage"];
+    } else {
+        return YES;
     }
 }
 

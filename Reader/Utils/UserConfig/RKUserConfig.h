@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) UIPageViewControllerTransitionStyle transitionStyle; /**< 翻页模式*/
 @property (nonatomic, assign) UIPageViewControllerNavigationOrientation navigationOrientation; /**< 上下/左右 翻页*/
 
+@property (nonatomic, assign) BOOL isAllNextPage; /**< 点击左侧翻下一页*/
+
 // 上左下右 边距
 @property (nonatomic, assign) CGFloat topPadding; /**< 上边距*/
 @property (nonatomic, assign) CGFloat leftPadding; /**< 左边距*/
@@ -33,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat lineSpace; /**< 行间距*/
 @property (nonatomic, copy) NSString *fontColor; /**< 字体颜色*/
 @property (nonatomic, copy) NSString *fontName; /**< 字体*/
+
+@property (nonatomic, assign) BOOL isNeedRefreshView; /**< 是否需要刷新界面*/
 
 /// 用户设置单例
 + (instancetype)sharedInstance;

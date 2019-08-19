@@ -28,8 +28,11 @@
 		1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188930226D7BEB00289476 /* RKLoadingView.m */; };
 		1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188931226D7BEB00289476 /* RKAlertMessage.m */; };
 		1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188939226DB93E00289476 /* RKBookImprotViewController.m */; };
+		1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */; };
+		1AAF323B230AA796008C5E45 /* RKSelectImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */; };
 		1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */; };
 		1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */; };
+		1AC0C8DF230A9D7C00194C48 /* RKSelectImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
 /* End PBXBuildFile section */
 
@@ -76,9 +79,15 @@
 		1A188933226D7BEB00289476 /* RKAlertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertMessage.h; sourceTree = "<group>"; };
 		1A188938226DB93E00289476 /* RKBookImprotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKBookImprotViewController.h; sourceTree = "<group>"; };
 		1A188939226DB93E00289476 /* RKBookImprotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBookImprotViewController.m; sourceTree = "<group>"; };
+		1AAF3236230AA449008C5E45 /* RKFontSetttingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKFontSetttingViewController.h; sourceTree = "<group>"; };
+		1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKFontSetttingViewController.m; sourceTree = "<group>"; };
+		1AAF3239230AA796008C5E45 /* RKSelectImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSelectImageCollectionViewCell.h; sourceTree = "<group>"; };
+		1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSelectImageCollectionViewCell.m; sourceTree = "<group>"; };
 		1AC0C8D8230A41F100194C48 /* RKReadSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadSettingViewController.h; sourceTree = "<group>"; };
 		1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadSettingViewController.m; sourceTree = "<group>"; };
 		1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YuppySC-Regular.otf"; sourceTree = "<group>"; };
+		1AC0C8DD230A9D7C00194C48 /* RKSelectImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSelectImageViewController.h; sourceTree = "<group>"; };
+		1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSelectImageViewController.m; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.debug.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +123,10 @@
 				1A16F8AE2271A877006568A5 /* RKReadViewController.m */,
 				1AC0C8D8230A41F100194C48 /* RKReadSettingViewController.h */,
 				1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */,
+				1AC0C8DD230A9D7C00194C48 /* RKSelectImageViewController.h */,
+				1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */,
+				1AAF3236230AA449008C5E45 /* RKFontSetttingViewController.h */,
+				1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -178,6 +191,8 @@
 				1A16F8B12271B713006568A5 /* RKReadMenuView.m */,
 				1A03F1BA22730FAE000BB1E8 /* RKReadView.h */,
 				1A03F1BB22730FAE000BB1E8 /* RKReadView.m */,
+				1AAF3239230AA796008C5E45 /* RKSelectImageCollectionViewCell.h */,
+				1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -398,7 +413,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC0C8DF230A9D7C00194C48 /* RKSelectImageViewController.m in Sources */,
 				1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */,
+				1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */,
 				1A188927226D7AEC00289476 /* RKBook.m in Sources */,
 				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
 				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
@@ -414,6 +431,7 @@
 				1A18892E226D7BC900289476 /* RKFileManage.m in Sources */,
 				1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */,
 				1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */,
+				1AAF323B230AA796008C5E45 /* RKSelectImageCollectionViewCell.m in Sources */,
 				1A188906226D709200289476 /* main.m in Sources */,
 				1A1888F8226D709100289476 /* AppDelegate.m in Sources */,
 				1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */,
