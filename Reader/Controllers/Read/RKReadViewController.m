@@ -27,7 +27,7 @@
 //    }];
     UIImage *image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
     self.view.layer.contents = (id)image.CGImage;
-    self.view.layer.contentsGravity = kCAGravityResizeAspect;
+    self.view.layer.contentsGravity = kCAGravityResizeAspectFill;
     
     [self.view addSubview:self.readView];
     
