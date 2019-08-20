@@ -30,4 +30,6 @@
 @property (nonatomic, strong) RKChapter *currentChapter; /**< 当前章节*/
 @property (nonatomic, assign) NSInteger allChapters; /**< 总章节数*/
 
+@property (nonatomic, assign) BOOL isNeedRefreshChapters; /**< 是否需要重新解析章节*/
+
 @end

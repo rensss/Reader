@@ -451,8 +451,19 @@ UIGestureRecognizerDelegate
 
 - (NSMutableArray *)previewActionArray {
     if (!_previewActionArray) {
+        __weak typeof(self) weakSelf = self;
         UIPreviewAction *deleteAnalysisAction = [UIPreviewAction actionWithTitle:@"删除缓存" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             RKLog(@"---- 删除缓存");
+            
+            NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+            
+            for (RKBook *subBook in bookList) {
+                if ([subBook.bookID isEqualToString:weakSelf.book.bookID]) {
+                    subBook.isNeedRefreshChapters = YES;
+                }
+            }
+            [[RKFileManager shareInstance] saveBookList:bookList];
+            [RKFileManager shareInstance].isNeedRefresh = YES;
         }];
         UIPreviewAction *backAction = [UIPreviewAction actionWithTitle:@"返回" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             RKLog(@"---- 返回");

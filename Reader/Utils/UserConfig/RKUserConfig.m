@@ -180,11 +180,7 @@
 }
 
 - (CGRect)readViewFrame {
-    CGRect rect = [UIApplication sharedApplication].keyWindow.bounds;
-    rect.origin.y = kStatusHight + self.topPadding;
-    rect.origin.x = self.leftPadding;
-    rect.size.width = rect.size.width - self.leftPadding - self.rightPadding;
-    rect.size.height = rect.size.height - self.topPadding - self.bottomPadding - kSafeAreaBottom;
+    CGRect rect = CGRectMake(self.leftPadding, kStatusHight + self.topPadding, kScreenWidth - self.leftPadding - self.rightPadding, kScreenHeight - self.topPadding - kStatusHight - self.bottomPadding - (kSafeAreaBottom));
     return rect;
 }
 

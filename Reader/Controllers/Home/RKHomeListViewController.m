@@ -31,24 +31,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     // 刷新界面
     if ([RKFileManager shareInstance].isNeedRefresh) {
-        // 原数组
-        NSMutableArray *books = self.dataArray;
-        // 新数组
-        self.dataArray = [[RKFileManager shareInstance] getHomeList];
-        
-        // 原数组加载过的内容赋值到新数组
-        for (RKBook *originBook in books) {
-            for (RKBook *newBook in self.dataArray) {
-                if ([originBook.bookID isEqualToString:newBook.bookID]) {
-                    newBook.content = originBook.content;
-                    newBook.chapters = originBook.chapters;
-                }
-            }
-        }
-        
-        [self.tableView reloadData];
+        [self needReloadData];
         [RKFileManager shareInstance].isNeedRefresh = NO;
     }
 }
@@ -109,14 +99,45 @@
     }
     
     // 重新解析章节
-//    NSMutableArray *chaptersArray = [NSMutableArray array];
-//    [[RKFileManager shareInstance] separateChapter:&chaptersArray content:book.content];
-//    if ([chaptersArray count] > 0) {
-//        book.chapters = chaptersArray;
-//        [[RKFileManager shareInstance] saveChaptersWithBook:book];
-//    }
+    if (book.isNeedRefreshChapters) {
+        NSMutableArray *chaptersArray = [NSMutableArray array];
+        [[RKFileManager shareInstance] separateChapter:&chaptersArray content:book.content];
+        if ([chaptersArray count] > 0) {
+            book.chapters = chaptersArray;
+            [[RKFileManager shareInstance] saveChaptersWithBook:book];
+        }
+        
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+        
+        for (RKBook *subBook in bookList) {
+            if ([subBook.bookID isEqualToString:book.bookID]) {
+                subBook.isNeedRefreshChapters = NO;
+            }
+        }
+        [[RKFileManager shareInstance] saveBookList:bookList];
+        [self needReloadData];
+    }
     
     return book;
+}
+
+- (void)needReloadData {
+    // 原数组
+    NSMutableArray *books = self.dataArray;
+    // 新数组
+    self.dataArray = [[RKFileManager shareInstance] getHomeList];
+    
+    // 原数组加载过的内容赋值到新数组
+    for (RKBook *originBook in books) {
+        for (RKBook *newBook in self.dataArray) {
+            if ([originBook.bookID isEqualToString:newBook.bookID]) {
+                newBook.content = originBook.content;
+                newBook.chapters = originBook.chapters;
+            }
+        }
+    }
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - delegate
