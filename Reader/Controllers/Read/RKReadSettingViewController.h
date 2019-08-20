@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RKReadSettingViewController : RKViewController
 
+@property (nonatomic, strong) RKBook *book; /**< 书籍对象*/
+
 /**
  刷新回调
  @param handler 回调

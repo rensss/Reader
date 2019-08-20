@@ -31,6 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (self.type == RKSelectImageTypeBgImage) {
+        self.navigationItem.title = @"阅读背景";
+    } else {
+        self.navigationItem.title = @"书籍封面";
+    }
+    
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveClick)];
     self.navigationItem.rightBarButtonItem = saveItem;
     
@@ -47,6 +53,19 @@
         
         self.callBack();
     }
+    
+    if (self.type == RKSelectImageTypeCoverImage) {
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+        
+        for (RKBook *subBook in bookList) {
+            if ([subBook.bookID isEqualToString:self.book.bookID]) {
+                subBook.coverImage = self.dataArray[self.selectIndex.item];
+            }
+        }
+        [[RKFileManager shareInstance] saveBookList:bookList];
+        [RKFileManager shareInstance].isNeedRefresh = YES;
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

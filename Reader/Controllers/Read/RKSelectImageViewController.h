@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, RKSelectImageType) {
 
 @interface RKSelectImageViewController : RKViewController
 
+@property (nonatomic, strong) RKBook *book; /**< 书籍对象*/
 @property (nonatomic, assign) RKSelectImageType type; /**< 类型*/
 @property (nonatomic, copy) void(^callBack)(void); /**< 回调*/
 

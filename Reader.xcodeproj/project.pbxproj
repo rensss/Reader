@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A03F1BC22730FAE000BB1E8 /* RKReadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A03F1BB22730FAE000BB1E8 /* RKReadView.m */; };
 		1A077627227854EB0073794E /* RKUserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A077626227854EB0073794E /* RKUserConfig.m */; };
+		1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */; };
+		1A07E6EE230B9CB5006FB45C /* LingWaiSC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A07E6EB230B9BC0006FB45C /* LingWaiSC-Medium.otf */; };
 		1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */; };
 		1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AE2271A877006568A5 /* RKReadViewController.m */; };
 		1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8B12271B713006568A5 /* RKReadMenuView.m */; };
@@ -41,6 +43,8 @@
 		1A03F1BB22730FAE000BB1E8 /* RKReadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadView.m; sourceTree = "<group>"; };
 		1A077625227854EB0073794E /* RKUserConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKUserConfig.h; sourceTree = "<group>"; };
 		1A077626227854EB0073794E /* RKUserConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKUserConfig.m; sourceTree = "<group>"; };
+		1A07E6EB230B9BC0006FB45C /* LingWaiSC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LingWaiSC-Medium.otf"; sourceTree = "<group>"; };
+		1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hannotate.ttc; sourceTree = "<group>"; };
 		1A16F8AA2271A86A006568A5 /* RKReadPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadPageViewController.h; sourceTree = "<group>"; };
 		1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadPageViewController.m; sourceTree = "<group>"; };
 		1A16F8AD2271A877006568A5 /* RKReadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadViewController.h; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 				1A188905226D709200289476 /* main.m */,
 				1A188912226D780800289476 /* PrefixHeader.pch */,
 				1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */,
+				1A07E6EB230B9BC0006FB45C /* LingWaiSC-Medium.otf */,
+				1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -353,6 +359,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A07E6EE230B9CB5006FB45C /* LingWaiSC-Medium.otf in Resources */,
+				1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */,
 				1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */,
 				1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */,
 				1A188900226D709200289476 /* Assets.xcassets in Resources */,

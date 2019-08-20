@@ -230,6 +230,7 @@ UIGestureRecognizerDelegate
     // 打开设置
     [menu shouldOpenSetting:^{
         RKReadSettingViewController *settingVC = [[RKReadSettingViewController alloc] init];
+        settingVC.book = self.book;
         RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];
         [settingVC needRefresh:^{
             // 改变状态栏的颜色

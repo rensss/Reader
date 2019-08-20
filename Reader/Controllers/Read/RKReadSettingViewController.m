@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"设置";
+    
     UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneClick)];
     self.navigationItem.rightBarButtonItem = doneItem;
     
@@ -54,6 +56,7 @@
     
     if ([self.dataArray[indexPath.row] isEqualToString:@"封面图"]) {
         RKSelectImageViewController *selectImageVC = [[RKSelectImageViewController alloc] init];
+        selectImageVC.book = self.book;
         selectImageVC.type = RKSelectImageTypeCoverImage;
         [self.navigationController pushViewController:selectImageVC animated:YES];
     }
