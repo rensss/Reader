@@ -11,6 +11,7 @@
 		1A077627227854EB0073794E /* RKUserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A077626227854EB0073794E /* RKUserConfig.m */; };
 		1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */; };
 		1A07E6EE230B9CB5006FB45C /* LingWaiSC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A07E6EB230B9BC0006FB45C /* LingWaiSC-Medium.otf */; };
+		1A07E6F1230BEBEC006FB45C /* RKChaptersListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A07E6F0230BEBEC006FB45C /* RKChaptersListView.m */; };
 		1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */; };
 		1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8AE2271A877006568A5 /* RKReadViewController.m */; };
 		1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8B12271B713006568A5 /* RKReadMenuView.m */; };
@@ -45,6 +46,8 @@
 		1A077626227854EB0073794E /* RKUserConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKUserConfig.m; sourceTree = "<group>"; };
 		1A07E6EB230B9BC0006FB45C /* LingWaiSC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LingWaiSC-Medium.otf"; sourceTree = "<group>"; };
 		1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hannotate.ttc; sourceTree = "<group>"; };
+		1A07E6EF230BEBEC006FB45C /* RKChaptersListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChaptersListView.h; sourceTree = "<group>"; };
+		1A07E6F0230BEBEC006FB45C /* RKChaptersListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKChaptersListView.m; sourceTree = "<group>"; };
 		1A16F8AA2271A86A006568A5 /* RKReadPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadPageViewController.h; sourceTree = "<group>"; };
 		1A16F8AB2271A86A006568A5 /* RKReadPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadPageViewController.m; sourceTree = "<group>"; };
 		1A16F8AD2271A877006568A5 /* RKReadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadViewController.h; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 				1A03F1BB22730FAE000BB1E8 /* RKReadView.m */,
 				1AAF3239230AA796008C5E45 /* RKSelectImageCollectionViewCell.h */,
 				1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */,
+				1A07E6EF230BEBEC006FB45C /* RKChaptersListView.h */,
+				1A07E6F0230BEBEC006FB45C /* RKChaptersListView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */,
 				1A188927226D7AEC00289476 /* RKBook.m in Sources */,
 				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
+				1A07E6F1230BEBEC006FB45C /* RKChaptersListView.m in Sources */,
 				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
 				1A18892A226D7B1200289476 /* RKChapter.m in Sources */,
 				1A188918226D792200289476 /* RKViewController.m in Sources */,

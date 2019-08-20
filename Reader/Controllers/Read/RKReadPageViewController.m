@@ -10,6 +10,7 @@
 #import "RKReadViewController.h"
 #import "RKReadMenuView.h"
 #import "RKReadSettingViewController.h"
+#import "RKChaptersListView.h"
 
 @interface RKReadPageViewController ()
 <
@@ -198,7 +199,18 @@ UIGestureRecognizerDelegate
     
     // 目录
     [menu shouldShowBookCatalog:^{
+        RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:weakSelf.view.bounds withBook:weakSelf.book withSuperView:weakSelf.view];
+        // 显示
+        [chaptersListView show];
         
+        [chaptersListView didSelectChapter:^{
+            // 更新阅读记录
+            weakSelf.currentPage = 0;
+            weakSelf.currentChapter = weakSelf.book.currentChapterNum;
+            // 设置当前显示的readVC
+            [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+            [weakSelf updateLocalBookData];
+        }];
     }];
     
     // 夜间模式

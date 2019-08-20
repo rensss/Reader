@@ -110,9 +110,9 @@
     title.textAlignment = NSTextAlignmentCenter;
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(closeBtn.mas_centerY);
-//        make.centerX.mas_equalTo(navBar.centerX);
-        make.left.mas_equalTo(closeBtn.mas_right).mas_offset(0);
-        make.right.mas_equalTo(navBar.mas_right);
+        make.centerX.mas_equalTo(navBar.mas_centerX);
+//        make.left.mas_equalTo(closeBtn.mas_right).mas_offset(0);
+//        make.right.mas_equalTo(navBar.mas_right);
     }];
     
     // 底部view
