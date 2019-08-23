@@ -41,10 +41,10 @@
         
         [self addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.right.mas_equalTo(self.mas_left);
+            make.top.mas_equalTo(kStatusHight);
+            make.left.mas_equalTo(self.mas_left).mas_offset(-260);
             make.width.mas_equalTo(260);
-            make.height.mas_equalTo(kScreenHeight);
+            make.height.mas_equalTo(kScreenHeight-kSafeAreaBottom-20);
         }];
         
         [self layoutIfNeeded];
@@ -70,11 +70,8 @@
 - (void)show {
 
     [UIView animateWithDuration:0.25f animations:^{
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left);
-            make.width.mas_equalTo(260);
-            make.height.mas_equalTo(kScreenHeight);
         }];
         // 注意需要再执行一次更新约束
         [self layoutIfNeeded];
@@ -85,11 +82,8 @@
 
 - (void)dismiss {
     [UIView animateWithDuration:0.25f animations:^{
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.right.mas_equalTo(self.mas_left);
-            make.width.mas_equalTo(260);
-            make.height.mas_equalTo(kScreenHeight);
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.mas_left).mas_offset(-260);
         }];
         // 注意需要再执行一次更新约束
         [self layoutIfNeeded];
@@ -113,7 +107,6 @@
 
 #pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    RKLog(@"---- count=%lu",(unsigned long)[self.book.chapters count]);
     return [self.book.chapters count];
 }
 
@@ -126,11 +119,18 @@
     
     RKChapter *chapter = self.book.chapters[indexPath.row];
     cell.textLabel.text = [chapter.title stringByTrimmingCharactersInSet];
+    cell.backgroundColor = [UIColor clearColor];
     
     if (indexPath.row == self.book.currentChapterNum) {
         cell.textLabel.textColor = [UIColor grayColor];
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
+        }
     } else {
         cell.textLabel.textColor = [UIColor blackColor];
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
+        }
     }
     
     return cell;
@@ -150,11 +150,15 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
         
+        UIImage *image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
+        _tableView.layer.contents = (id)image.CGImage;
+        _tableView.layer.contentsGravity = kCAGravityResizeAspectFill;
+        
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-        _tableView.contentInset = UIEdgeInsetsMake(kStatusHight + 20, 0, kSafeAreaBottom + 20, 0);
+//        _tableView.contentInset = UIEdgeInsetsMake(kStatusHight + 20, 0, kSafeAreaBottom + 20, 0);
         
         _tableView.tableFooterView = [UIView new];
     }

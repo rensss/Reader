@@ -401,11 +401,10 @@
 }
 
 - (void)chaptersClick:(UIButton *)btn {
+    [self dismiss];
     if (self.catalogBlock) {
         self.catalogBlock();
     }
-    
-    [self dismiss];
 }
 
 - (void)nightClick:(UIButton *)btn {
