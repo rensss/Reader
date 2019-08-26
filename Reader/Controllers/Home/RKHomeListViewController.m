@@ -175,8 +175,11 @@
                                                                             NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
                                                                             NSForegroundColorAttributeName: [UIColor whiteColor]
                                                                             }];
-    [btns sw_addUtilityButtonWithColor:[UIColor redColor] attributedTitle:delete];
+    // 海棠红
+    [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f03752"] attributedTitle:delete];
     [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    
+    
     
     // 置顶
     NSString *topTitle = book.isTop ? @"取消置顶" : @"置顶";
@@ -185,8 +188,17 @@
                                                                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
                                                                            NSForegroundColorAttributeName: [UIColor whiteColor]
                                                                            }];
-    [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"c8402d"] attributedTitle:top];
-    [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    
+    if (book.isTop) {
+        // 香叶红 f1939c
+        [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f07c82"] attributedTitle:top];
+        [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    } else {
+
+        // 合欢红 f0a1a8
+        [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f0a1a8"] attributedTitle:top];
+        [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    }
     
     cell.delegate = self;
     

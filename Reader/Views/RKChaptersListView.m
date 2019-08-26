@@ -124,12 +124,12 @@
     if (indexPath.row == self.book.currentChapterNum) {
         cell.textLabel.textColor = [UIColor grayColor];
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
-            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.5f];
         }
     } else {
         cell.textLabel.textColor = [UIColor blackColor];
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
-            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff"];
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.8f];
         }
     }
     
