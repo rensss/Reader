@@ -8,13 +8,15 @@
 
 #import "RKReadMenuView.h"
 
+#define kBottomViewHeight 170
+
 @interface RKReadMenuView ()
 
 @property (nonatomic, strong) RKBook *book; /**< 书籍*/
 
 @property (nonatomic, strong) UIButton *bgButton; /**< 大Button*/
 @property (nonatomic, strong) UIView *navBar; /**< 顶部导航条*/
-@property (nonatomic, strong) UILabel *title; /**< 书名*/
+@property (nonatomic, strong) UILabel *chapterLabel; /**< 章节名*/
 @property (nonatomic, strong) UIButton *closeBtn; /**< 关闭按钮*/
 
 @property (nonatomic, strong) UIView *bottomView; /**< 底部view*/
@@ -33,6 +35,8 @@
 @property (nonatomic, strong) UIButton *nightButton; /**< 夜间模式*/
 @property (nonatomic, strong) UIButton *settingButton; /**< 设置*/
 
+@property (nonatomic, strong) UILabel *title; /**< 书名*/
+
 @property (nonatomic, copy) void(^dismissBlock)(void); /**< 消失回调*/
 @property (nonatomic, copy) void(^closeBlock)(void); /**< 关闭回调*/
 @property (nonatomic, copy) void(^changeChapterBlock)(BOOL); /**< 上/下一章节*/
@@ -41,6 +45,8 @@
 @property (nonatomic, copy) void(^catalogBlock)(void); /**< 目录回调*/
 @property (nonatomic, copy) void(^nightModeBlock)(BOOL); /**< 夜间模式回调*/
 @property (nonatomic, copy) void(^settingBlock)(void); /**< 设置回调*/
+
+@property (nonatomic, assign) NSInteger currentIndex; /**< 当前章节索引*/
 
 @end
 
@@ -101,14 +107,8 @@
     }];
     
     // 书名
-    UILabel *title = [UILabel new];
-    self.title = title;
-    [navBar addSubview:title];
-    title.text = self.book.name;
-    title.textColor = [UIColor whiteColor];
-    title.font = [UIFont systemFontOfSize:18];
-    title.textAlignment = NSTextAlignmentCenter;
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+    [navBar addSubview:self.chapterLabel];
+    [self.chapterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(closeBtn.mas_centerY);
         make.centerX.mas_equalTo(navBar.mas_centerX);
 //        make.left.mas_equalTo(closeBtn.mas_right).mas_offset(0);
@@ -120,7 +120,7 @@
     self.bottomView = bottomView;
     [bgButton addSubview:bottomView];
     bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
-    CGFloat height = kSafeAreaBottom + 140;
+    CGFloat height = kSafeAreaBottom + kBottomViewHeight;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(bgButton.mas_bottom);
         make.left.right.mas_equalTo(bgButton);
@@ -193,7 +193,7 @@
         make.width.mas_equalTo(24);
         make.height.mas_equalTo(24);
         make.left.mas_equalTo(15);
-        make.bottom.mas_equalTo( -(kSafeAreaBottom + 5));
+        make.top.mas_equalTo(self.smallSpace.mas_bottom).with.mas_offset(5);
     }];
     
     // 夜间
@@ -214,6 +214,13 @@
         make.centerY.mas_equalTo(self.nightButton.mas_centerY);
     }];
     
+    [bottomView addSubview:self.title];
+    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(self.bottomView);
+        make.height.mas_equalTo(30);
+        make.top.mas_equalTo(self.chaptersButton.mas_bottom).with.mas_offset(8);
+    }];
+    
     [self layoutIfNeeded];
 }
 
@@ -227,7 +234,7 @@
             make.left.right.mas_equalTo(self.bgButton);
             make.height.mas_equalTo(topOffset);
         }];
-        CGFloat height = kSafeAreaBottom + 140;
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight;
         [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(self.bgButton.mas_bottom);
             make.left.right.mas_equalTo(self.bgButton);
@@ -247,7 +254,7 @@
             make.left.right.mas_equalTo(self.bgButton);
             make.height.mas_equalTo(topOffset);
         }];
-        CGFloat height = kSafeAreaBottom + 140;
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight;
         [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgButton.mas_bottom);
             make.left.right.mas_equalTo(self.bgButton);
@@ -318,7 +325,7 @@
             make.left.right.mas_equalTo(self.bgButton);
             make.height.mas_equalTo(topOffset);
         }];
-        CGFloat height = kSafeAreaBottom + 140;
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight;
         [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgButton.mas_bottom);
             make.left.right.mas_equalTo(self.bgButton);
@@ -336,8 +343,28 @@
 
 /// 章节跳转
 - (void)changChaperClick:(UIButton *)btn {
+    
+    BOOL isNextChapter = btn == self.nextChapter;
+    
+    if (isNextChapter) {
+        if (self.currentIndex + 1 >= [self.book.chapters count] - 1) {
+            self.currentIndex = [self.book.chapters count] - 1;
+        } else {
+            self.currentIndex += 1;
+        }
+    } else {
+        if (self.currentIndex - 1 <= 0) {
+            self.currentIndex = 0;
+        } else {
+            self.currentIndex -= 1;
+        }
+    }
+    
+    RKChapter *chapter = self.book.chapters[self.currentIndex];
+    self.chapterLabel.text = chapter.title;
+    
     if (self.changeChapterBlock) {
-        self.changeChapterBlock(btn == self.nextChapter);
+        self.changeChapterBlock(isNextChapter);
     }
 }
 
@@ -549,6 +576,29 @@
         [_settingButton addTarget:self action:@selector(settingClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _settingButton;
+}
+
+- (UILabel *)chapterLabel {
+    if (!_chapterLabel) {
+        _chapterLabel = [[UILabel alloc] init];
+        _chapterLabel.textColor = [UIColor whiteColor];
+        _chapterLabel.font = [UIFont systemFontOfSize:18];
+        _chapterLabel.textAlignment = NSTextAlignmentCenter;
+        _chapterLabel.text = self.book.currentChapter.title;
+        self.currentIndex = self.book.currentChapterNum;
+    }
+    return _chapterLabel;
+}
+
+- (UILabel *)title {
+    if (!_title) {
+        _title = [[UILabel alloc] init];
+        _title.text = self.book.name;
+        _title.textColor = [UIColor whiteColor];
+        _title.font = [UIFont systemFontOfSize:18];
+        _title.textAlignment = NSTextAlignmentCenter;
+    }
+    return _title;
 }
 
 @end
