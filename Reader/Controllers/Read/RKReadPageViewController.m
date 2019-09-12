@@ -477,11 +477,16 @@ UIGestureRecognizerDelegate
             [[RKFileManager shareInstance] saveBookList:bookList];
             [RKFileManager shareInstance].isNeedRefresh = YES;
         }];
+        
+        UIPreviewAction *deleteBookAction = [UIPreviewAction actionWithTitle:@"xxxx" style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+            
+        }];
+        
         UIPreviewAction *backAction = [UIPreviewAction actionWithTitle:@"返回" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             RKLog(@"---- 返回");
         }];
         
-        _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,backAction, nil];
+        _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,deleteBookAction,backAction, nil];
         
     }
     return _previewActionArray;
