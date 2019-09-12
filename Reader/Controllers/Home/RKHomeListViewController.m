@@ -31,16 +31,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
     // 刷新界面
     if ([RKFileManager shareInstance].isNeedRefresh) {
         [self needReloadData];
         [RKFileManager shareInstance].isNeedRefresh = NO;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    
 }
 
 #pragma mark - 函数
