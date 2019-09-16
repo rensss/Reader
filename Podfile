@@ -11,6 +11,5 @@ target 'Reader' do
 	pod 'MBProgressHUD', '~> 1.1.0'
   pod 'SWTableViewCell', '0.3.7'
   pod 'MMKV'
-  pod 'QMUIKit'
 
 end

@@ -32,9 +32,8 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc {
+    RKLog(@"---> %@ 销毁",[self class])
 }
 
 #pragma mark -- UIGestureRecognizerDelegate
@@ -71,10 +70,6 @@
 // 返回
 - (void)THNvigationBarLeftButtonItemClick {
     [self popViewControllerAnimated:YES];
-}
-
-- (void)dealloc {
-    RKLog(@"---> %@ 销毁",[self class])
 }
 
 @end
