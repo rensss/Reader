@@ -17,6 +17,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+//    // 启动 QMUI 的样式配置模板
+//    [QMUIConfigurationTemplate setupConfigurationTemplate];
+//    // 将全局样式渲染出来
+//    [QMUIConfigurationManager renderGlobalAppearances];
+    
     // 初始化
     [RKFileManager shareInstance];
     // 首页
