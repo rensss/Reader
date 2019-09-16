@@ -41,7 +41,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
 }
 
 #pragma mark - 函数
@@ -62,11 +61,6 @@
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(self.view);
     }];
-}
-
-- (void)settingClick {
-    RKSettingViewController *settingVC = [RKSettingViewController new];
-    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 - (RKBook *)analysisBookContentWithBook:(RKBook *)book {
@@ -139,6 +133,12 @@
     }
     
     [self.tableView reloadData];
+}
+
+#pragma mark - 点击事件
+- (void)settingClick {
+    RKSettingViewController *settingVC = [RKSettingViewController new];
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 #pragma mark - delegate

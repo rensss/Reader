@@ -307,6 +307,13 @@ static RKFileManager *_fileManager;
         RKBook *book2 = obj2;
         
         if (book1.isTop && book2.isTop) {
+            if ([RKUserConfig sharedInstance].isRefreshTop) {
+                if (book1.lastReadDate > book2.lastReadDate) {
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedDescending;
+                }
+            }
             return NSOrderedSame;
         }
         if (book1.isTop && !book2.isTop) {

@@ -456,7 +456,7 @@ UIGestureRecognizerDelegate
     self.currentPage = book.currentPage;
 }
 
-
+#pragma mark - 3d Touch
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems {
     return self.previewActionArray;
 }
@@ -478,15 +478,15 @@ UIGestureRecognizerDelegate
             [RKFileManager shareInstance].isNeedRefresh = YES;
         }];
         
-        UIPreviewAction *deleteBookAction = [UIPreviewAction actionWithTitle:@"xxxx" style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            
-        }];
+//        UIPreviewAction *deleteBookAction = [UIPreviewAction actionWithTitle:@"xxxx" style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+//
+//        }];
         
         UIPreviewAction *backAction = [UIPreviewAction actionWithTitle:@"返回" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             RKLog(@"---- 返回");
         }];
         
-        _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,deleteBookAction,backAction, nil];
+        _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,backAction, nil];
         
     }
     return _previewActionArray;

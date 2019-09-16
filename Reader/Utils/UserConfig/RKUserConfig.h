@@ -38,9 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isNeedRefreshView; /**< 是否需要刷新界面*/
 
+@property (nonatomic, assign) BOOL isRefreshTop; /**< 置顶书籍是否需要按时间排序*/
+
 /// 用户设置单例
 + (instancetype)sharedInstance;
-
 
 /**
  显示属性

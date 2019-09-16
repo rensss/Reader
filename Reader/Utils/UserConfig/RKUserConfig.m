@@ -26,6 +26,8 @@
 @synthesize fontName = _fontName;
 @synthesize isAllNextPage = _isAllNextPage;
 
+@synthesize isRefreshTop = _isRefreshTop;
+
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
 {
@@ -119,6 +121,13 @@
     _fontName = fontName;
     
     [[NSUserDefaults standardUserDefaults] setObject:fontName forKey:@"fontName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsRefreshTop:(BOOL)isRefreshTop {
+    _isRefreshTop = isRefreshTop;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isRefreshTop forKey:@"isRefreshTop"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -221,6 +230,14 @@
         return [[NSUserDefaults standardUserDefaults] stringForKey:@"fontName"];
     } else {
         return @"YuppySC-Regular";
+    }
+}
+
+- (BOOL)isRefreshTop {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isRefreshTop"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isRefreshTop"];
+    } else {
+        return NO;
     }
 }
 

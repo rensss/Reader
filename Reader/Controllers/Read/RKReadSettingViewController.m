@@ -40,6 +40,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)switchChangeValue:(UISwitch *)switchBtn {
+    switchBtn.on = !switchBtn.on;
+    [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
+}
+
 #pragma mark - func
 /**
  刷新回调
@@ -52,7 +57,7 @@
 #pragma mark - 代理
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([self.dataArray[indexPath.row] isEqualToString:@"封面图"]) {
         RKSelectImageViewController *selectImageVC = [[RKSelectImageViewController alloc] init];
@@ -74,6 +79,7 @@
         [self.navigationController pushViewController:fontVC animated:YES];
     }
 }
+
 #pragma mark -- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dataArray count];
@@ -88,6 +94,14 @@
     
     cell.textLabel.text = self.dataArray[indexPath.row];
     
+    if ([self.dataArray[indexPath.row] isEqualToString:@"置顶是否按时间排序"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].isRefreshTop;
+        switchBtn.tag = 10000;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
     return cell;
 }
 
@@ -99,7 +113,6 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
-        
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
@@ -108,6 +121,7 @@
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSMutableArray arrayWithObjects:
+                      @"置顶是否按时间排序",
                       @"封面图",
                       @"背景图",
                       @"字体",
