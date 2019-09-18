@@ -10,7 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, RKImprotShowType) {
+    RKImprotShowTypePush,
+    RKImprotShowTypePresent,
+};
+
 @interface RKBookImprotViewController : RKViewController
+
+@property (nonatomic, assign) RKImprotShowType showType; /**< 显示类型*/
 
 @end
 

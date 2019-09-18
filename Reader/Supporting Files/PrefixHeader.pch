@@ -87,6 +87,10 @@ flag = NO; \
 #define TOP_MARGIN (NAV_BAR_HEIGHT + kStatusHight)
 
 
+// 3D touch 快速启动
+#define RKShortcutQuickReadItemType @"RKShortcutQuickReadItemType"
+#define RKShortcutImportItemType @"RKShortcutImportItemType"
+
 // 首页封面图原宽高
 #define kCoverImageWidth 236
 #define kCoverImageHeight 337

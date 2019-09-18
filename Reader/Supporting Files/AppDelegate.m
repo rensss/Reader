@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RKHomeListViewController.h"
+#import "RKBookImprotViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,32 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
+//    // Override point for customization after application launch.
+//    BOOL shouldPerformAdditionalDelegateHandling = true;
+//
+//
+//    // If a shortcut was launched, display its information and take the appropriate action
+//    if let shortcutItem = launchOptions?[UIApplicationLaunchOptions ShortcutItemKey] as? UIApplicationShortcutItem {
+//        launchedShortcutItem = shortcutItem
+//
+//        // This will block "performActionForShortcutItem:completionHandler" from being called.
+//        shouldPerformAdditionalDelegateHandling = false
+//    }
+    
+    // Launch Code
+    
+    if (@available(iOS 9.1, *)) {
+        UIApplicationShortcutIcon *quickReadIcon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeBookmark];
+        UIApplicationShortcutItem *quickRead = [[UIApplicationShortcutItem alloc] initWithType:RKShortcutQuickReadItemType localizedTitle:@"快速阅读" localizedSubtitle:nil icon:quickReadIcon userInfo:nil];
+        
+        UIApplicationShortcutIcon *importIcon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeInvitation];
+        UIApplicationShortcutItem *importBook = [[UIApplicationShortcutItem alloc] initWithType:RKShortcutImportItemType localizedTitle:@"导入书籍" localizedSubtitle:nil icon:importIcon userInfo:nil];
+        
+        application.shortcutItems = @[quickRead, importBook];
+    }
+    
     // 初始化
     [RKFileManager shareInstance];
     // 首页
@@ -25,7 +52,8 @@
     RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:listVC];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-    
+
+//    return shouldPerformAdditionalDelegateHandling;
     return YES;
 }
 
@@ -49,6 +77,21 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending) {
+        // 用于处理来自 ShortcutItem 的唤醒动作，我们的 App 一开始有一大堆的界面广告之类的，调用早的话，tabbarController 还没创建，就没办法定位发动跳转的界面了
+        // 所以还是稍等下，等 tabbarController 创建好了我们再继续处理跳转逻辑
+        // 另外，这里仅仅处理首次启动时来自 ShortcutItem 的跳转逻辑，如果是从后台唤醒的话，请使用 -application:performActionForShortcutItem: completionHandler:这个回调
+//        __weak typeof(self) weakSelf = self;
+//        [[RACObserve(self, tabbarController) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(MTGroupTabbarController *tabbarController) {
+//            __strong typeof(weakSelf) stongSelf = weakSelf;
+//            if (stongSelf.launchedShortcutItem && tabbarController) {
+//                [stongSelf handleShortCutItem:stongSelf.launchedShortcutItem];
+//
+//                // 这里在首次启动完后，将这个 property 置 nil ，以防从后台唤醒的时候重复调用上面的方法
+//                stongSelf.launchedShortcutItem = nil;
+//            }
+//        }];
+    }
 }
 
 
@@ -56,5 +99,66 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    RKLog(@"shortcut");
+    RKLog(@"---- %@",[UIApplication sharedApplication].keyWindow.rootViewController);
+    if ([shortcutItem.type isEqualToString:RKShortcutQuickReadItemType]) {
+        RKAlertMessageShowInWindow(@"快速阅读");
+    }
+    if ([shortcutItem.type isEqualToString:RKShortcutImportItemType]) {
+        RKAlertMessageShowInWindow(@"导入书籍");
+        
+//        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[RKBookImprotViewController class]]) {
+//            return;
+//        }
+        RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
+        importVC.showType = RKImprotShowTypePresent;
+        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
+        importVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+            RKLog(@"---- modalPresent");
+        }];
+    }
+}
+
+#pragma mark - func
+// 处理 Quick Action 的跳转操作的方法
+- (BOOL)handleShortCutItem:(UIApplicationShortcutItem *)shortcutItem {
+    BOOL handled = NO;
+
+    if (!shortcutItem) {
+        return NO;
+    }
+
+    // 切换到首页
+//    MTGroupTabbarController *tabBarController = self.tabbarController;
+//    tabBarController.selectedIndex = 0;
+//    MTNavigationController *destinationViewController = (MTNavigationController *)tabBarController.selectedViewController;
+//    UIViewController *homePageViewController = destinationViewController.topViewController;
+//
+//    if ([shortcutItem.type isEqualToString:METShortcutSearchItemType]) {
+//        handled = YES;
+//
+//        // 跳转到搜索页面
+//        ......
+//
+//    } else if ([shortcutItem.type isEqualToString:METShortcutCouponItemType]) {
+//        handled = YES;
+//
+//        // 先判断是否有登录，没有的话先登录再跳转美团券列表页
+//        ......
+//
+//    } else if ([shortcutItem.type isEqualToString:METShortcutScanItemType]) {
+//        handled = YES;
+//
+//        // 跳转到扫一扫
+//        ......
+//
+//    } else {
+//        // do nothing
+//    }
+
+    return handled;
+}
 
 @end

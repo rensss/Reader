@@ -584,7 +584,7 @@
 			baseConfigurationReference = EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
@@ -606,7 +606,7 @@
 			baseConfigurationReference = A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";

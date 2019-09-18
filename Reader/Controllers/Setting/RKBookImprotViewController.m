@@ -38,6 +38,12 @@
 
 #pragma mark - func
 - (void)initUI {
+    
+    if (self.showType == RKImprotShowTypePresent) {
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeClick)];
+        self.navigationItem.leftBarButtonItem = item;
+    }
+    
     UILabel *addressLabel = [UILabel new];
     self.addressLabel = addressLabel;
     [self.view addSubview:addressLabel];
@@ -75,6 +81,10 @@
 }
 
 #pragma mark - 点击
+- (void)closeClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)tapAddress:(UITapGestureRecognizer *)gesture {
     UIActivityViewController *acitivityVC = [[UIActivityViewController alloc] initWithActivityItems:@[ self.webUploader.serverURL.absoluteString ] applicationActivities:nil];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:acitivityVC animated:YES completion:nil];
