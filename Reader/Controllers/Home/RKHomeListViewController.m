@@ -219,6 +219,7 @@
     // 创建阅读页面
     RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
     readPageVC.book = book;
+    readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:readPageVC animated:YES completion:nil];
 }
 
@@ -308,6 +309,7 @@
 }
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit {
+    viewControllerToCommit.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:viewControllerToCommit animated:YES completion:nil];
 }
 
