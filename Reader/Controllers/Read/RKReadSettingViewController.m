@@ -41,7 +41,6 @@
 }
 
 - (void)switchChangeValue:(UISwitch *)switchBtn {
-    switchBtn.on = !switchBtn.on;
     [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
 }
 
@@ -57,7 +56,7 @@
 #pragma mark - 代理
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([self.dataArray[indexPath.row] isEqualToString:@"封面图"]) {
         RKSelectImageViewController *selectImageVC = [[RKSelectImageViewController alloc] init];
