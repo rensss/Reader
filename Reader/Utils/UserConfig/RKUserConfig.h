@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isRefreshTop; /**< 置顶书籍是否需要按时间排序*/
 
+@property (nonatomic, assign) float nightAlpha; /**< 夜间模式 字体透明度*/
+
 /// 用户设置单例
 + (instancetype)sharedInstance;
 

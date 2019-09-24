@@ -37,6 +37,11 @@
 
 @property (nonatomic, strong) UILabel *title; /**< 书名*/
 
+@property (nonatomic, assign) NSInteger currentIndex; /**< 当前章节索引*/
+
+@property (nonatomic, strong) UISlider *alphaSlider; /**< 字体透明度*/
+@property (nonatomic, assign) CGFloat alphaSliderHeight; /**< 滑动条高度*/
+
 @property (nonatomic, copy) void(^dismissBlock)(void); /**< 消失回调*/
 @property (nonatomic, copy) void(^closeBlock)(void); /**< 关闭回调*/
 @property (nonatomic, copy) void(^changeChapterBlock)(BOOL); /**< 上/下一章节*/
@@ -45,8 +50,7 @@
 @property (nonatomic, copy) void(^catalogBlock)(void); /**< 目录回调*/
 @property (nonatomic, copy) void(^nightModeBlock)(BOOL); /**< 夜间模式回调*/
 @property (nonatomic, copy) void(^settingBlock)(void); /**< 设置回调*/
-
-@property (nonatomic, assign) NSInteger currentIndex; /**< 当前章节索引*/
+@property (nonatomic, copy) void(^alphaChangeBlock)(CGFloat); /**< 透明度改变回调*/
 
 @end
 
@@ -72,6 +76,12 @@
 #pragma mark - 函数
 /// 初始化UI
 - (void)initUI {
+    
+    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+        self.alphaSliderHeight = 50;
+    } else {
+        self.alphaSlider.hidden = YES;
+    }
     
     UIButton *bgButton = [UIButton new];
     self.bgButton = bgButton;
@@ -111,8 +121,6 @@
     [self.chapterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(closeBtn.mas_centerY);
         make.centerX.mas_equalTo(navBar.mas_centerX);
-//        make.left.mas_equalTo(closeBtn.mas_right).mas_offset(0);
-//        make.right.mas_equalTo(navBar.mas_right);
     }];
     
     // 底部view
@@ -120,7 +128,7 @@
     self.bottomView = bottomView;
     [bgButton addSubview:bottomView];
     bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
-    CGFloat height = kSafeAreaBottom + kBottomViewHeight;
+    CGFloat height = kSafeAreaBottom + kBottomViewHeight + self.alphaSliderHeight;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(bgButton.mas_bottom);
         make.left.right.mas_equalTo(bgButton);
@@ -221,6 +229,14 @@
         make.top.mas_equalTo(self.chaptersButton.mas_bottom).with.mas_offset(8);
     }];
     
+    [bottomView addSubview:self.alphaSlider];
+    [self.alphaSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.title).with.mas_offset(20);
+        make.height.mas_equalTo(30);
+        make.left.mas_offset(30);
+        make.right.mas_offset(-30);
+    }];
+    
     [self layoutIfNeeded];
 }
 
@@ -234,7 +250,7 @@
             make.left.right.mas_equalTo(self.bgButton);
             make.height.mas_equalTo(topOffset);
         }];
-        CGFloat height = kSafeAreaBottom + kBottomViewHeight;
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight + self.alphaSliderHeight;
         [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(self.bgButton.mas_bottom);
             make.left.right.mas_equalTo(self.bgButton);
@@ -254,7 +270,7 @@
             make.left.right.mas_equalTo(self.bgButton);
             make.height.mas_equalTo(topOffset);
         }];
-        CGFloat height = kSafeAreaBottom + kBottomViewHeight;
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight + self.alphaSliderHeight;
         [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgButton.mas_bottom);
             make.left.right.mas_equalTo(self.bgButton);
@@ -309,6 +325,10 @@
     self.settingBlock = handler;
 }
 
+- (void)fontAlphaChange:(void (^)(CGFloat))handler {
+    self.alphaChangeBlock = handler;
+}
+
 #pragma mark - 点击事件
 /// 消失
 -  (void)bgClick {
@@ -325,7 +345,7 @@
             make.left.right.mas_equalTo(self.bgButton);
             make.height.mas_equalTo(topOffset);
         }];
-        CGFloat height = kSafeAreaBottom + kBottomViewHeight;
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight + self.alphaSliderHeight;
         [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgButton.mas_bottom);
             make.left.right.mas_equalTo(self.bgButton);
@@ -436,6 +456,26 @@
 
 - (void)nightClick:(UIButton *)btn {
     btn.selected = !btn.selected;
+    
+    if (btn.selected) {
+        self.alphaSliderHeight = 50;
+        self.alphaSlider.hidden = NO;
+    } else {
+        self.alphaSliderHeight = 0;
+        self.alphaSlider.hidden = YES;
+    }
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        CGFloat height = kSafeAreaBottom + kBottomViewHeight + self.alphaSliderHeight;
+        [self.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.bgButton.mas_bottom);
+            make.left.right.mas_equalTo(self.bgButton);
+            make.height.mas_equalTo(height);
+        }];
+        // 注意需要再执行一次更新约束
+        [self layoutIfNeeded];
+    }];
+    
     if (self.nightModeBlock) {
         self.nightModeBlock(btn.selected);
     }
@@ -446,6 +486,12 @@
         self.settingBlock();
     }
     [self dismiss];
+}
+
+- (void)sliderValueChange:(UISlider *)slider {
+    if (self.alphaChangeBlock) {
+        self.alphaChangeBlock(slider.value);
+    }
 }
 
 #pragma mark - getting
@@ -599,6 +645,23 @@
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
+}
+
+- (UISlider *)alphaSlider {
+    if (!_alphaSlider) {
+        _alphaSlider = [[UISlider alloc] init];
+        _alphaSlider.minimumTrackTintColor = [UIColor clearColor];
+        _alphaSlider.maximumTrackTintColor = [UIColor clearColor];
+        _alphaSlider.maximumValue = 1;
+        _alphaSlider.minimumValue = 0;
+        _alphaSlider.value = [RKUserConfig sharedInstance].nightAlpha;
+        _alphaSlider.minimumTrackTintColor = [UIColor whiteColor];      // 滑轮左边颜色，如果设置了左边的图片就不会显示
+        _alphaSlider.maximumTrackTintColor = [UIColor blackColor];      // 滑轮右边颜色，如果设置了右边的图片就不会显示
+        _alphaSlider.thumbTintColor = [UIColor whiteColor];             // 设置了滑轮的颜色，如果设置了滑轮的样式图片就不会显示
+        
+        [_alphaSlider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _alphaSlider;
 }
 
 @end

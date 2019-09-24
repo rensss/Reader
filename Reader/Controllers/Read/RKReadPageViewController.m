@@ -217,7 +217,6 @@ UIGestureRecognizerDelegate
     [menu shouldChangeNightModle:^(BOOL isOpen) {
         
         if (isOpen) {
-            [RKUserConfig sharedInstance].fontColor = @"ffffff";
             [RKUserConfig sharedInstance].bgImageName = @"black";
         } else {
             [RKUserConfig sharedInstance].fontColor = @"000000";
@@ -259,6 +258,12 @@ UIGestureRecognizerDelegate
             [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         }];
         [self presentViewController:nav animated:YES completion:nil];
+    }];
+    
+    [menu fontAlphaChange:^(CGFloat alpha) {
+        [RKUserConfig sharedInstance].nightAlpha = alpha;
+        // 设置当前显示的readVC
+        [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
 }
 

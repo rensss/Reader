@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 打开设置
 - (void)shouldOpenSetting:(void(^)(void))handler;
 
+/// 字体透明度
+- (void)fontAlphaChange:(void(^)(CGFloat alpha))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

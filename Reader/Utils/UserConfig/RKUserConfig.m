@@ -27,6 +27,7 @@
 @synthesize isAllNextPage = _isAllNextPage;
 
 @synthesize isRefreshTop = _isRefreshTop;
+@synthesize nightAlpha = _nightAlpha;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -128,6 +129,13 @@
     _isRefreshTop = isRefreshTop;
     
     [[NSUserDefaults standardUserDefaults] setBool:isRefreshTop forKey:@"isRefreshTop"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setNightAlpha:(float)nightAlpha {
+    _nightAlpha = nightAlpha;
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:nightAlpha forKey:@"nightAlpha"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -241,13 +249,25 @@
     }
 }
 
+- (float)nightAlpha {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"nightAlpha"]) {
+        return [[NSUserDefaults standardUserDefaults] floatForKey:@"nightAlpha"];
+    } else {
+        return 1.0f;
+    }
+}
+
 /**
  内容显示的属性(字号/字体/颜色...)
  @return 属性字典
  */
 - (NSDictionary *)parserAttribute {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[NSForegroundColorAttributeName] = [UIColor colorWithHexString:self.fontColor];
+    if ([self.bgImageName isEqualToString:@"black"]) {
+        dict[NSForegroundColorAttributeName] = [UIColor colorWithWhite:1 alpha:self.nightAlpha];
+    } else {
+        dict[NSForegroundColorAttributeName] = [UIColor colorWithHexString:self.fontColor];
+    }
     if (self.fontName.length > 0) {
         // YuppySC-Regular
         UIFont *font = [UIFont fontWithName:self.fontName size:self.fontSize];
