@@ -47,7 +47,7 @@
 - (void)saveClick {
     if (self.type == RKSelectImageTypeBgImage && self.selectIndex && self.callBack) {
         [RKUserConfig sharedInstance].bgImageName = self.dataArray[self.selectIndex.item];
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             [RKUserConfig sharedInstance].fontColor = @"ffffff";
         }
         

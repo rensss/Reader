@@ -123,12 +123,12 @@
     
     if (indexPath.row == self.book.currentChapterNum) {
         cell.textLabel.textColor = [UIColor grayColor];
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.5f];
         }
     } else {
         cell.textLabel.textColor = [UIColor blackColor];
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.8f];
         }
     }
@@ -151,6 +151,9 @@
         _tableView = [[UITableView alloc] init];
         
         UIImage *image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+            image = [UIImage imageWithColor:[UIColor blackColor]];
+        }
         _tableView.layer.contents = (id)image.CGImage;
         _tableView.layer.contentsGravity = kCAGravityResizeAspectFill;
         

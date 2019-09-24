@@ -134,7 +134,7 @@ UIGestureRecognizerDelegate
         weakSelf.isShowMenu = NO;
 
         // 改变状态栏的颜色
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             // 设置状态栏的颜色
             weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
             [weakSelf setNeedsStatusBarAppearanceUpdate];
@@ -218,14 +218,14 @@ UIGestureRecognizerDelegate
         
         if (isOpen) {
             [RKUserConfig sharedInstance].fontColor = @"ffffff";
-            [RKUserConfig sharedInstance].bgImageName = @"reader_bg_2";
+            [RKUserConfig sharedInstance].bgImageName = @"black";
         } else {
             [RKUserConfig sharedInstance].fontColor = @"000000";
             [RKUserConfig sharedInstance].bgImageName = @"reader_bg_3";
         }
         
         // 改变状态栏的颜色
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             // 设置状态栏的颜色
             weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
             [weakSelf setNeedsStatusBarAppearanceUpdate];
@@ -246,7 +246,7 @@ UIGestureRecognizerDelegate
         RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];
         [settingVC needRefresh:^{
             // 改变状态栏的颜色
-            if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+            if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
                 // 设置状态栏的颜色
                 weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
                 [weakSelf setNeedsStatusBarAppearanceUpdate];

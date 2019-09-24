@@ -558,9 +558,9 @@
         [_nightButton addTarget:self action:@selector(nightClick:) forControlEvents:UIControlEventTouchUpInside];
         
         // 改变默认状态
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"]) {
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             _nightButton.selected = YES;
-        }else {
+        } else {
             _nightButton.selected = NO;
         }
     }

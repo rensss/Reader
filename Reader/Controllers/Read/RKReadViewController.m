@@ -21,11 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.view addSubview:self.bgImageView];
-//    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.view);
-//    }];
     UIImage *image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
+    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+        image = [UIImage imageWithColor:[UIColor blackColor]];
+    }
     self.view.layer.contents = (id)image.CGImage;
     self.view.layer.contentsGravity = kCAGravityResizeAspectFill;
     
@@ -50,6 +49,9 @@
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
         _bgImageView.image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+            _bgImageView.image = [UIImage imageWithColor:[UIColor blackColor]];
+        }
     }
     return _bgImageView;
 }
