@@ -26,10 +26,14 @@
     self.navigationItem.title = @"Reader";
     
     [self initUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveQuickReadNotification:) name:RKShortcutQuickReadItemType object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+        
+    [self setNeedsStatusBarAppearanceUpdate];
     
     // 刷新界面
     if ([RKFileManager shareInstance].isNeedRefresh) {
@@ -38,9 +42,9 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
+#pragma mark - 通知
+- (void)didReceiveQuickReadNotification:(NSNotification *)notification {
+    [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 #pragma mark - 函数

@@ -231,7 +231,7 @@
     
     [bottomView addSubview:self.alphaSlider];
     [self.alphaSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.title).with.mas_offset(20);
+        make.top.mas_equalTo(self.title.mas_bottom).with.mas_offset(10);
         make.height.mas_equalTo(30);
         make.left.mas_offset(30);
         make.right.mas_offset(-30);

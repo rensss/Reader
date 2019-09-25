@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RKHomeListViewController.h"
 #import "RKBookImprotViewController.h"
+#import "RKReadPageViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,21 +19,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
-//    // Override point for customization after application launch.
-//    BOOL shouldPerformAdditionalDelegateHandling = true;
-//
-//
-//    // If a shortcut was launched, display its information and take the appropriate action
-//    if let shortcutItem = launchOptions?[UIApplicationLaunchOptions ShortcutItemKey] as? UIApplicationShortcutItem {
-//        launchedShortcutItem = shortcutItem
-//
-//        // This will block "performActionForShortcutItem:completionHandler" from being called.
-//        shouldPerformAdditionalDelegateHandling = false
-//    }
-    
-    // Launch Code
     
     if (@available(iOS 9.1, *)) {
         UIApplicationShortcutIcon *quickReadIcon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeBookmark];
@@ -53,7 +39,6 @@
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 
-//    return shouldPerformAdditionalDelegateHandling;
     return YES;
 }
 
@@ -102,22 +87,30 @@
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
     RKLog(@"shortcut");
     RKLog(@"---- %@",[UIApplication sharedApplication].keyWindow.rootViewController);
+    
     if ([shortcutItem.type isEqualToString:RKShortcutQuickReadItemType]) {
-        RKAlertMessageShowInWindow(@"快速阅读");
-    }
-    if ([shortcutItem.type isEqualToString:RKShortcutImportItemType]) {
-        RKAlertMessageShowInWindow(@"导入书籍");
         
-//        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[RKBookImprotViewController class]]) {
+        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[RKReadPageViewController class]]) {
+            return;
+        } else {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:RKShortcutQuickReadItemType object:nil];
+            });
+        }
+    }
+    
+    if ([shortcutItem.type isEqualToString:RKShortcutImportItemType]) {
+        
+//        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[RKNavigationController class]]) {
 //            return;
 //        }
-        RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
-        importVC.showType = RKImprotShowTypePresent;
-        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
-        importVC.modalPresentationStyle = UIModalPresentationFullScreen;
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-            RKLog(@"---- modalPresent");
-        }];
+//        RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
+//        importVC.showType = RKImprotShowTypePresent;
+//        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
+//        importVC.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+//            RKLog(@"---- modalPresent");
+//        }];
     }
 }
 
