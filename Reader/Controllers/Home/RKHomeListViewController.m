@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     self.navigationItem.title = @"Reader";
     
     [self initUI];
@@ -32,8 +32,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-        
-    [self setNeedsStatusBarAppearanceUpdate];
+    
+    if (@available(iOS 13.0, *)) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+    } else {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    }
     
     // 刷新界面
     if ([RKFileManager shareInstance].isNeedRefresh) {

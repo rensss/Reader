@@ -29,8 +29,6 @@ UIGestureRecognizerDelegate
 
 @property (nonatomic, assign) BOOL isShowMenu; /**< 是否已弹出菜单*/
 
-@property (nonatomic, assign) UIStatusBarStyle statusBarStyle; /**< 状态栏颜色*/
-
 @property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
 
 @end
@@ -97,6 +95,17 @@ UIGestureRecognizerDelegate
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    // 改变状态栏的颜色
+    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    } else {
+        if (@available(iOS 13.0, *)) {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+        } else {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        }
+    }
+    
     [self updateLocalBookData];
 }
 
@@ -107,10 +116,6 @@ UIGestureRecognizerDelegate
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return self.statusBarStyle;
-}
-
 #pragma mark - 手势事件
 - (void)showToolMenu {
     
@@ -118,10 +123,13 @@ UIGestureRecognizerDelegate
     if (self.isShowMenu) {
         return ;
     }
-
-    // 设置状态栏的颜色
-    self.statusBarStyle = UIStatusBarStyleLightContent;
-    [self setNeedsStatusBarAppearanceUpdate];
+    
+    // 改变状态栏的颜色
+//    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    } else {
+//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    }
 
     self.isShowMenu = YES;
     // 菜单view
@@ -135,21 +143,18 @@ UIGestureRecognizerDelegate
 
         // 改变状态栏的颜色
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-            // 设置状态栏的颜色
-            weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
-            [weakSelf setNeedsStatusBarAppearanceUpdate];
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
         } else {
-            // 设置状态栏的颜色
-            weakSelf.statusBarStyle = UIStatusBarStyleDefault;
-            [weakSelf setNeedsStatusBarAppearanceUpdate];
+            if (@available(iOS 13.0, *)) {
+                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+            } else {
+                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+            }
         }
     }];
 
     // 退出阅读
     [menu closeBlock:^{
-        // 设置状态栏的颜色
-        weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
-        [weakSelf setNeedsStatusBarAppearanceUpdate];
         [weakSelf dissmiss];
     }];
     
@@ -223,16 +228,16 @@ UIGestureRecognizerDelegate
             [RKUserConfig sharedInstance].bgImageName = @"reader_bg_3";
         }
         
-        // 改变状态栏的颜色
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-            // 设置状态栏的颜色
-            weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
-            [weakSelf setNeedsStatusBarAppearanceUpdate];
-        } else {
-            // 设置状态栏的颜色
-            weakSelf.statusBarStyle = UIStatusBarStyleDefault;
-            [weakSelf setNeedsStatusBarAppearanceUpdate];
-        }
+//        // 改变状态栏的颜色
+//        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+//            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//        } else {
+//            if (@available(iOS 13.0, *)) {
+//                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+//            } else {
+//                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//            }
+//        }
         
         // 设置当前显示的readVC
         [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
@@ -246,13 +251,13 @@ UIGestureRecognizerDelegate
         [settingVC needRefresh:^{
             // 改变状态栏的颜色
             if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-                // 设置状态栏的颜色
-                weakSelf.statusBarStyle = UIStatusBarStyleLightContent;
-                [weakSelf setNeedsStatusBarAppearanceUpdate];
+                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
             } else {
-                // 设置状态栏的颜色
-                weakSelf.statusBarStyle = UIStatusBarStyleDefault;
-                [weakSelf setNeedsStatusBarAppearanceUpdate];
+                if (@available(iOS 13.0, *)) {
+                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+                } else {
+                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+                }
             }
             // 设置当前显示的readVC
             [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
