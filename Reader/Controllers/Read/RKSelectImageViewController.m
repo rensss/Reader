@@ -49,6 +49,8 @@
         [RKUserConfig sharedInstance].bgImageName = self.dataArray[self.selectIndex.item];
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             [RKUserConfig sharedInstance].fontColor = @"ffffff";
+        } else {
+            [RKUserConfig sharedInstance].fontColor = @"000000";
         }
         
         self.callBack();
