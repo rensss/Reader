@@ -46,6 +46,11 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+}
+
 #pragma mark - 通知
 - (void)didReceiveQuickReadNotification:(NSNotification *)notification {
     [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];

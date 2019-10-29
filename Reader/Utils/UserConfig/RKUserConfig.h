@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) float nightAlpha; /**< 夜间模式 字体透明度*/
 
+@property (nonatomic, assign) BOOL isAutoRead; /**< 是否自动阅读*/
+
 /// 用户设置单例
 + (instancetype)sharedInstance;
 

@@ -29,6 +29,8 @@
 @synthesize isRefreshTop = _isRefreshTop;
 @synthesize nightAlpha = _nightAlpha;
 
+@synthesize isAutoRead = _isAutoRead;
+
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
 {
@@ -129,6 +131,13 @@
     _isRefreshTop = isRefreshTop;
     
     [[NSUserDefaults standardUserDefaults] setBool:isRefreshTop forKey:@"isRefreshTop"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsAutoRead:(BOOL)isAutoRead {
+    _isAutoRead = isAutoRead;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isAutoRead forKey:@"isAutoRead"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -244,6 +253,14 @@
 - (BOOL)isRefreshTop {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isRefreshTop"]) {
         return [[NSUserDefaults standardUserDefaults] boolForKey:@"isRefreshTop"];
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isAutoRead {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAutoRead"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isAutoRead"];
     } else {
         return NO;
     }

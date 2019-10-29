@@ -38,7 +38,13 @@
     RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:listVC];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([RKUserConfig sharedInstance].isAutoRead) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:RKShortcutQuickReadItemType object:nil];            
+        }
+    });
+    
     return YES;
 }
 

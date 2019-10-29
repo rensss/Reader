@@ -41,7 +41,12 @@
 }
 
 - (void)switchChangeValue:(UISwitch *)switchBtn {
-    [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
+    if (switchBtn.tag == 10000) {
+        [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
+    }
+    if (switchBtn.tag == 10001) {
+        [RKUserConfig sharedInstance].isAutoRead = switchBtn.on;
+    }
 }
 
 #pragma mark - func
@@ -101,6 +106,14 @@
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
+    if ([self.dataArray[indexPath.row] isEqualToString:@"是否自动阅读"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].isAutoRead;
+        switchBtn.tag = 10001;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
     return cell;
 }
 
@@ -121,6 +134,7 @@
     if (!_dataArray) {
         _dataArray = [NSMutableArray arrayWithObjects:
                       @"置顶是否按时间排序",
+                      @"是否自动阅读",
                       @"封面图",
                       @"背景图",
                       @"字体",
