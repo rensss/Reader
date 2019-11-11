@@ -116,6 +116,14 @@ UIGestureRecognizerDelegate
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    return true;
+}
+
 #pragma mark - 手势事件
 - (void)showToolMenu {
     

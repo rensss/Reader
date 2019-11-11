@@ -38,10 +38,12 @@
 //    }];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-//    RKLog(@"---- ddd");
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    return true;
 }
 
 #pragma mark - getting

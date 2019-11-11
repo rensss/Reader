@@ -18,15 +18,18 @@
     [super viewDidLoad];
     
     self.navigationBar.translucent = NO;
-    //设置导航栏标题颜色
+    // 设置导航栏标题颜色
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     
-    //设置item的颜色
+    // 设置item的颜色
     self.navigationBar.tintColor = [UIColor blackColor];
     
-    //手势返回
+//    // 阴影颜色
+//    self.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;
+    
+    // 手势返回
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.interactivePopGestureRecognizer.delegate = self;
     }

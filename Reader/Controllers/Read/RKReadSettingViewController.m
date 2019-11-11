@@ -26,6 +26,9 @@
     
     self.navigationItem.title = @"设置";
     
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"返回"] style:UIBarButtonItemStylePlain target:self action:@selector(backClick)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    
     UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneClick)];
     self.navigationItem.rightBarButtonItem = doneItem;
     
@@ -37,6 +40,10 @@
 
 #pragma mark - 点击事件
 - (void)doneClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)backClick {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
