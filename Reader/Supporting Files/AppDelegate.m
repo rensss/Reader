@@ -13,10 +13,12 @@
 
 @interface AppDelegate ()
 
+
 @end
 
-@implementation AppDelegate
+UIBackgroundTaskIdentifier backgroundTaskIdentifier;
 
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -58,6 +60,15 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    /*
+     当应用进入后台，什么时候会被系统杀死，并不会通知app。那么如果需要什么状态记录的话，需放在此函数中。
+     */
+    backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
+        // 程序在进入后台一定时间后（application.backgroundTimeRemaining，我测试是180秒），若还未结束后台任务，则会响应该回调，若已结束，则不会进入该回调
+        // 实测25秒 调用后还有5秒
+        RKLog(@"beginBackgroundTaskWithExpirationHandler");
+    }];
 }
 
 
@@ -88,6 +99,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // 在后台时被用户杀死 将调用此函数
+    RKLog(@"---- Terminate");
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {

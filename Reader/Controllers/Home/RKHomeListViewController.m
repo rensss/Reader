@@ -46,12 +46,9 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-}
 
 #pragma mark - 通知
+/// 快速阅读通知
 - (void)didReceiveQuickReadNotification:(NSNotification *)notification {
     [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
@@ -148,6 +145,22 @@
     [self.tableView reloadData];
 }
 
+/// 开始阅读
+/// @param book 书籍对象
+- (void)startReadWithBook:(RKBook *)book {
+    RKBook *readBook = book;
+    RKBook *analysisBook = [self analysisBookContentWithBook:readBook];
+    if (analysisBook) {
+        readBook = analysisBook;
+    }
+    
+    // 创建阅读页面
+    RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
+    readPageVC.book = readBook;
+    readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:readPageVC animated:YES completion:nil];
+}
+
 #pragma mark - 点击事件
 - (void)settingClick {
     RKSettingViewController *settingVC = [RKSettingViewController new];
@@ -224,16 +237,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RKBook *book = self.dataArray[indexPath.row];
     
-    RKBook *analysisBook = [self analysisBookContentWithBook:book];
-    if (analysisBook) {
-        book = analysisBook;
-    }
-    
-    // 创建阅读页面
-    RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
-    readPageVC.book = book;
-    readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:readPageVC animated:YES completion:nil];
+    [self startReadWithBook:book];
 }
 
 #pragma mark -- SWTableViewCellDelegate

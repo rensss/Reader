@@ -369,7 +369,7 @@ UIGestureRecognizerDelegate
     
     if (finished && completed) {
         // 无论有无翻页，只要动画结束就恢复交互。
-        pageViewController.view.userInteractionEnabled = YES;
+//        pageViewController.view.userInteractionEnabled = YES;
         self.currentChapter = self.chapterNext;
         self.currentPage = self.pageNext;
         [self updateLocalBookData];
