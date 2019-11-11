@@ -1,0 +1,42 @@
+PODS:
+  - GCDWebServer/Core (3.5.3)
+  - GCDWebServer/WebUploader (3.5.3):
+    - GCDWebServer/Core
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.1.0)
+  - MJExtension (3.1.0)
+  - MMKV (1.0.22)
+  - R_category (0.0.8)
+  - SWTableViewCell (0.3.7)
+
+DEPENDENCIES:
+  - GCDWebServer/WebUploader
+  - Masonry
+  - MBProgressHUD (~> 1.1.0)
+  - MJExtension
+  - MMKV
+  - R_category
+  - SWTableViewCell (= 0.3.7)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GCDWebServer
+    - Masonry
+    - MBProgressHUD
+    - MJExtension
+    - MMKV
+    - R_category
+    - SWTableViewCell
+
+SPEC CHECKSUMS:
+  GCDWebServer: c0ab22c73e1b84f358d1e2f74bf6afd1c60829f2
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJExtension: 6b69b3bef2864fd550ce1a184eda219e321209d2
+  MMKV: 99b05c376c0eb412b468ba1d3e6813502edeaa24
+  R_category: abb3d864d530f44cf61e6fa28a13ce11c044689d
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+
+PODFILE CHECKSUM: 8452a94ddd7fa3738d40c3d08d376443d6ce9149
+
+COCOAPODS: 1.6.1
