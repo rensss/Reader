@@ -90,6 +90,13 @@ UIGestureRecognizerDelegate
     
     // 屏幕常亮
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    [UIApplication sharedApplication].statusBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -116,10 +123,6 @@ UIGestureRecognizerDelegate
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
-
 - (BOOL)prefersHomeIndicatorAutoHidden {
     return true;
 }
@@ -131,6 +134,8 @@ UIGestureRecognizerDelegate
     if (self.isShowMenu) {
         return ;
     }
+    
+    [UIApplication sharedApplication].statusBarHidden = NO;
     
     // 改变状态栏的颜色
 //    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
@@ -147,8 +152,11 @@ UIGestureRecognizerDelegate
     __weak typeof(self) weakSelf = self;
     // 菜单消失
     [menu dismissWithHandler:^{
+        
+        [UIApplication sharedApplication].statusBarHidden = YES;
+        
         weakSelf.isShowMenu = NO;
-
+        
         // 改变状态栏的颜色
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;

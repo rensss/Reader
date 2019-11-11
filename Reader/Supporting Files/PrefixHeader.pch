@@ -47,8 +47,6 @@ NSLog(@"%s %d\n%@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
-// 电池条高度
-#define kStatusHight [[UIApplication sharedApplication] statusBarFrame].size.height
 // 安全区域
 #define VIEWSAFEAREAINSETS \
 ({ \
@@ -85,6 +83,21 @@ flag = NO; \
 })
 #define NAV_BAR_HEIGHT (44)
 #define TOP_MARGIN (NAV_BAR_HEIGHT + kStatusHight)
+
+// 电池条高度
+#define kStatusHight \
+({\
+CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height; \
+BOOL flag; \
+if (height == 0) { \
+if (kIS_IPHONEX) { \
+height = 44; \
+} else { \
+height = 20; \
+} \
+} \
+(height); \
+})
 
 
 // 3D touch 快速启动
