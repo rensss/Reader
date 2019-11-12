@@ -31,6 +31,8 @@
 		1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188930226D7BEB00289476 /* RKLoadingView.m */; };
 		1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188931226D7BEB00289476 /* RKAlertMessage.m */; };
 		1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188939226DB93E00289476 /* RKBookImprotViewController.m */; };
+		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
+		1A34E0C8237ABFF100D27799 /* Hanzipen.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1A34E0C7237ABFF100D27799 /* Hanzipen.ttc */; };
 		1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */; };
 		1AAF323B230AA796008C5E45 /* RKSelectImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */; };
 		1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */; };
@@ -86,6 +88,9 @@
 		1A188933226D7BEB00289476 /* RKAlertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertMessage.h; sourceTree = "<group>"; };
 		1A188938226DB93E00289476 /* RKBookImprotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKBookImprotViewController.h; sourceTree = "<group>"; };
 		1A188939226DB93E00289476 /* RKBookImprotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBookImprotViewController.m; sourceTree = "<group>"; };
+		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
+		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
+		1A34E0C7237ABFF100D27799 /* Hanzipen.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Hanzipen.ttc; path = "../../../../已导出的字体/HanziPen SC/Hanzipen.ttc"; sourceTree = "<group>"; };
 		1AAF3236230AA449008C5E45 /* RKFontSetttingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKFontSetttingViewController.h; sourceTree = "<group>"; };
 		1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKFontSetttingViewController.m; sourceTree = "<group>"; };
 		1AAF3239230AA796008C5E45 /* RKSelectImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSelectImageCollectionViewCell.h; sourceTree = "<group>"; };
@@ -198,6 +203,8 @@
 				1A16F8B12271B713006568A5 /* RKReadMenuView.m */,
 				1A03F1BA22730FAE000BB1E8 /* RKReadView.h */,
 				1A03F1BB22730FAE000BB1E8 /* RKReadView.m */,
+				1A34E0C22379637800D27799 /* RKReadStatusBar.h */,
+				1A34E0C32379637800D27799 /* RKReadStatusBar.m */,
 				1AAF3239230AA796008C5E45 /* RKSelectImageCollectionViewCell.h */,
 				1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */,
 				1A07E6EF230BEBEC006FB45C /* RKChaptersListView.h */,
@@ -243,6 +250,7 @@
 				1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */,
 				1A07E6EB230B9BC0006FB45C /* LingWaiSC-Medium.otf */,
 				1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */,
+				1A34E0C7237ABFF100D27799 /* Hanzipen.ttc */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -366,6 +374,7 @@
 			files = (
 				1A07E6EE230B9CB5006FB45C /* LingWaiSC-Medium.otf in Resources */,
 				1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */,
+				1A34E0C8237ABFF100D27799 /* Hanzipen.ttc in Resources */,
 				1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */,
 				1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */,
 				1A188900226D709200289476 /* Assets.xcassets in Resources */,
@@ -432,6 +441,7 @@
 				1A188927226D7AEC00289476 /* RKBook.m in Sources */,
 				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
 				1A07E6F1230BEBEC006FB45C /* RKChaptersListView.m in Sources */,
+				1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */,
 				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
 				1A18892A226D7B1200289476 /* RKChapter.m in Sources */,
 				1A188918226D792200289476 /* RKViewController.m in Sources */,

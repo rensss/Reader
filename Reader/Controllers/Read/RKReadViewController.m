@@ -8,11 +8,13 @@
 
 #import "RKReadViewController.h"
 #import "RKReadView.h"
+#import "RKReadStatusBar.h"
 
 @interface RKReadViewController ()
 
 @property (nonatomic, strong) UIImageView *bgImageView; /**< 背景底图*/
 @property (nonatomic, strong) RKReadView *readView; /**< view*/
+@property (nonatomic, strong) RKReadStatusBar *statusBar; /**< 底部状态栏*/
 
 @end
 
@@ -29,6 +31,8 @@
     self.view.layer.contentsGravity = kCAGravityResizeAspectFill;
     
     [self.view addSubview:self.readView];
+    
+    [self.view addSubview:self.statusBar];
     
 #warning - masonry
 //    RKUserConfig *userConfig = [RKUserConfig sharedInstance];
@@ -65,6 +69,13 @@
         _readView.content = self.content;
     }
     return _readView;
+}
+
+- (RKReadStatusBar *)statusBar {
+    if (!_statusBar) {
+        _statusBar = [[RKReadStatusBar alloc] initWithFrame:[RKUserConfig sharedInstance].readStatusBarFrame];
+    }
+    return _statusBar;
 }
 
 @end

@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 阅读页大小
 @property (nonatomic, assign) CGRect readViewFrame; /**< 阅读页大小*/
 
+@property (nonatomic, assign) CGRect readStatusBarFrame; /**< 状态栏*/
+
 // 阅读页背景图
 @property (nonatomic, copy) NSString *bgImageName; /**< 背景图*/
 

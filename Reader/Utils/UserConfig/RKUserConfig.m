@@ -210,6 +210,11 @@
     return rect;
 }
 
+- (CGRect)readStatusBarFrame {
+    CGRect rect = CGRectMake(0, kScreenHeight - (kSafeAreaBottom) - 13, kScreenWidth, 26);
+    return rect;
+}
+
 - (NSString *)bgImageName {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bgImageName"]) {
         return [[NSUserDefaults standardUserDefaults] stringForKey:@"bgImageName"];

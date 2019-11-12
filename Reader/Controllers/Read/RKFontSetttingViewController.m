@@ -84,6 +84,10 @@
     if ([self.dataArray[indexPath.row] isEqualToString:@"手札体"]) {
         self.selectFontName = @"HannotateSC-W5";
     }
+    
+    if ([self.dataArray[indexPath.row] isEqualToString:@"翩翩体"]) {
+        self.selectFontName = @"HanziPenSC-W5";
+    }
 }
 #pragma mark -- UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -131,6 +135,14 @@
         }
     }
     
+    if ([self.dataArray[indexPath.row] isEqualToString:@"翩翩体"]) {
+        cell.textLabel.font = [UIFont fontWithName:@"HanziPenSC-W5" size:kFontSize];
+        if ([[RKUserConfig sharedInstance].fontName isEqualToString:@"HanziPenSC-W5"]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            self.index = indexPath.row;
+        }
+    }
+    
     return cell;
 }
 
@@ -157,6 +169,7 @@
                       @"雅痞",
                       @"凌慧体",
                       @"手札体",
+                      @"翩翩体",
                       nil];
     }
     return _dataArray;

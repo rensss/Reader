@@ -88,7 +88,6 @@ flag = NO; \
 #define kStatusHight \
 ({\
 CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height; \
-BOOL flag; \
 if (height == 0) { \
 if (kIS_IPHONEX) { \
 height = 44; \

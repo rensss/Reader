@@ -25,6 +25,7 @@
 		<string>YuppySC-Regular.otf</string>
 		<string>LingWaiSC-Medium.otf</string>
 		<string>Hannotate.ttc</string>
+		<string>Hanzipen.ttc</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
