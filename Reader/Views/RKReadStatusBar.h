@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RKReadStatusBar : UIView
 
+@property (nonatomic, strong) RKBook *book; /**< 书籍*/
+
 @end
 
 NS_ASSUME_NONNULL_END

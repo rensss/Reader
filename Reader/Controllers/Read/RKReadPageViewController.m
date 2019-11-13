@@ -423,6 +423,7 @@ UIGestureRecognizerDelegate
 
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
+    readVC.book = self.book;
     
     // 排除开始页内容为空
     if (self.book.currentChapterNum == 0 && [readVC.content length] == 0) {

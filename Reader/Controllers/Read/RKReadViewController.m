@@ -74,6 +74,7 @@
 - (RKReadStatusBar *)statusBar {
     if (!_statusBar) {
         _statusBar = [[RKReadStatusBar alloc] initWithFrame:[RKUserConfig sharedInstance].readStatusBarFrame];
+        _statusBar.book = self.book;
     }
     return _statusBar;
 }
