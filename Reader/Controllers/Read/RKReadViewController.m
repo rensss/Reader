@@ -33,13 +33,6 @@
     [self.view addSubview:self.readView];
     
     [self.view addSubview:self.statusBar];
-    
-#warning - masonry
-//    RKUserConfig *userConfig = [RKUserConfig sharedInstance];
-//    [self.readView mas_makeConstraints:^(MASConstraintMaker *make) {
-////        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(kStatusHight + 20, 20, kSafeAreaBottom + 20, 20));
-//        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(kStatusHight + userConfig.topPadding, userConfig.leftPadding, kSafeAreaBottom + userConfig.bottomPadding, userConfig.rightPadding));
-//    }];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -48,6 +41,10 @@
 
 - (BOOL)prefersHomeIndicatorAutoHidden {
     return true;
+}
+
+- (void)dealloc {
+    [self.statusBar remove];
 }
 
 #pragma mark - getting

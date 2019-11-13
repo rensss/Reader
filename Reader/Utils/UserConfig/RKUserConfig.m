@@ -211,7 +211,7 @@
 }
 
 - (CGRect)readStatusBarFrame {
-    CGRect rect = CGRectMake(0, kScreenHeight - (kSafeAreaBottom) - 13, kScreenWidth, 26);
+    CGRect rect = CGRectMake(0, kScreenHeight - (kSafeAreaBottom) - 16, kScreenWidth, 24);
     return rect;
 }
 
