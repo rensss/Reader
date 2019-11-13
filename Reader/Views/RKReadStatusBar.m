@@ -40,8 +40,8 @@
         
         [self addSubview:self.time];
         [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(12);
-            make.top.equalTo(self).mas_offset(0);
+            make.height.mas_equalTo(10);
+            make.top.equalTo(self).mas_offset(1);
             make.left.equalTo(self).mas_offset(3);
         }];
         
@@ -49,12 +49,12 @@
         [self.batteryNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
             make.left.equalTo(self).mas_offset(3);
-            make.top.equalTo(self.time.mas_bottom).mas_offset(2);
+            make.top.equalTo(self.time.mas_bottom).mas_offset(1);
         }];
         
         [self addSubview:self.batteryImage];
         [self.batteryImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(8);
+            make.height.mas_equalTo(7);
             make.centerY.equalTo(self.batteryNum);
             make.left.equalTo(self.batteryNum.mas_right).mas_offset(3);
         }];
@@ -122,10 +122,14 @@
         self.batteryImage.image = [[UIImage imageNamed:@"battery5"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
     
-    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-        self.batteryImage.tintColor = [UIColor colorWithWhite:1 alpha:[RKUserConfig sharedInstance].nightAlpha];
+    if ([UIDevice currentDevice].batteryState == UIDeviceBatteryStateCharging) {
+        self.batteryImage.tintColor = [UIColor systemGreenColor];
     } else {
-        self.batteryImage.tintColor = [UIColor colorWithHexString:[RKUserConfig sharedInstance].fontColor];
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+            self.batteryImage.tintColor = [UIColor colorWithWhite:1 alpha:[RKUserConfig sharedInstance].nightAlpha];
+        } else {
+            self.batteryImage.tintColor = [UIColor colorWithHexString:[RKUserConfig sharedInstance].fontColor];
+        }
     }
 }
 
@@ -196,7 +200,7 @@
 - (UILabel *)time {
     if (!_time) {
         _time = [[UILabel alloc] init];
-        _time.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize-1];
+        _time.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize-3];
     }
     return _time;
 }
@@ -211,7 +215,7 @@
 - (UILabel *)batteryNum {
     if (!_batteryNum) {
         _batteryNum = [[UILabel alloc] init];
-        _batteryNum.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize-1];
+        _batteryNum.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize-3];
     }
     return _batteryNum;
 }
