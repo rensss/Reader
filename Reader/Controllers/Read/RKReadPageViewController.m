@@ -264,17 +264,21 @@ UIGestureRecognizerDelegate
         RKReadSettingViewController *settingVC = [[RKReadSettingViewController alloc] init];
         settingVC.book = self.book;
         RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];
+        // 强制不可下拉返回
+//        if (@available(iOS 13.0, *)) {
+//            [nav setModalInPresentation:YES];
+//        }
         [settingVC needRefresh:^{
-            // 改变状态栏的颜色
-            if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-            } else {
-                if (@available(iOS 13.0, *)) {
-                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-                } else {
-                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-                }
-            }
+//            // 改变状态栏的颜色
+//            if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+//                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//            } else {
+//                if (@available(iOS 13.0, *)) {
+//                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+//                } else {
+//                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//                }
+//            }
             // 设置当前显示的readVC
             [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         }];

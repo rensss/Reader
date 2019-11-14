@@ -41,15 +41,15 @@
         [self addSubview:self.time];
         [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
-            make.top.equalTo(self).mas_offset(1);
             make.left.equalTo(self).mas_offset(3);
+            make.bottom.equalTo(self).mas_offset(-1);
         }];
         
         [self addSubview:self.batteryNum];
         [self.batteryNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
+            make.top.equalTo(self).mas_offset(1);
             make.left.equalTo(self).mas_offset(3);
-            make.top.equalTo(self.time.mas_bottom).mas_offset(1);
         }];
         
         [self addSubview:self.batteryImage];
@@ -71,10 +71,12 @@
             make.centerY.equalTo(self);
         }];
         
+        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveBatteryStateDidChangeNotification:) name:UIDeviceBatteryStateDidChangeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveBatteryLevelDidChangeNotification:) name:UIDeviceBatteryLevelDidChangeNotification object:nil];
         
-        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+        [self checkBattery:[UIDevice currentDevice]];
     }
     return self;
 }
@@ -86,7 +88,6 @@
 
 #pragma mark - func
 - (void)updateCurrentTime {
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm:ss"];
 
@@ -94,8 +95,6 @@
     NSString *currentTimeString = [formatter stringFromDate:datenow];
     
     self.time.text = currentTimeString;
-    
-    [self checkBatteryLevel:[UIDevice currentDevice].batteryLevel];
 }
 
 - (void)remove {
@@ -104,25 +103,28 @@
 }
 
 /// 根据电量设置图片
-- (void)checkBatteryLevel:(float)level {
+- (void)checkBattery:(UIDevice *)device {
+    
+    float level = device.batteryLevel;
     
     RKLog(@"---- level = %f",level);
+    
     self.batteryNum.text = [NSString stringWithFormat:@"%.0f",level*100];
-    if (level > 0 && level <= 0.1f) {
+    if (level > 0 && level < 0.2f) {
         self.batteryImage.image = [[UIImage imageNamed:@"battery0"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    } else if (level > 0.1f && level <= 0.2f) {
+    } else if (level >= 0.2f && level < 0.4f) {
         self.batteryImage.image = [[UIImage imageNamed:@"battery1"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    } else if (level > 0.2f && level <= 0.4f) {
+    } else if (level >= 0.4f && level < 0.6f) {
         self.batteryImage.image = [[UIImage imageNamed:@"battery2"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    } else if (level > 0.4f && level <= 0.6f) {
+    } else if (level >= 0.6f && level < 0.8f) {
         self.batteryImage.image = [[UIImage imageNamed:@"battery3"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    } else if (level > 0.6f && level <= 0.8f) {
+    } else if (level >= 0.8f && level < 0.9f) {
         self.batteryImage.image = [[UIImage imageNamed:@"battery4"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     } else {
         self.batteryImage.image = [[UIImage imageNamed:@"battery5"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
     
-    if ([UIDevice currentDevice].batteryState == UIDeviceBatteryStateCharging) {
+    if (device.batteryState == UIDeviceBatteryStateCharging) {
         self.batteryImage.tintColor = [UIColor systemGreenColor];
     } else {
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
@@ -169,11 +171,13 @@
 
 #pragma mark - 通知
 - (void)didReciveBatteryLevelDidChangeNotification:(NSNotification *)notification {
-    RKLog(@"---- level");
+    UIDevice *device = notification.object;
+    [self checkBattery:device];
 }
 
 - (void)didReciveBatteryStateDidChangeNotification:(NSNotification *)notification {
-    RKLog(@"---- State");
+    UIDevice *device = notification.object;
+    [self checkBattery:device];
 }
 
 #pragma mark - setting
