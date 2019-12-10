@@ -127,6 +127,10 @@ UIGestureRecognizerDelegate
     return true;
 }
 
+//- (UIViewController *)childViewControllerForHomeIndicatorAutoHidden {
+//    return self;
+//}
+
 #pragma mark - 手势事件
 - (void)showToolMenu {
     
