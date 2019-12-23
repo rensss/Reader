@@ -162,17 +162,14 @@
 /// 开始阅读
 /// @param book 书籍对象
 - (void)startReadWithBook:(RKBook *)book {
-    RKBook *readBook = book;
-    RKBook *analysisBook = [self analysisBookContentWithBook:readBook];
+    RKBook *analysisBook = [self analysisBookContentWithBook:book];
     if (analysisBook) {
-        readBook = analysisBook;
+        // 创建阅读页面
+        RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
+        readPageVC.book = analysisBook;
+        readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:readPageVC animated:YES completion:nil];
     }
-    
-    // 创建阅读页面
-    RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
-    readPageVC.book = readBook;
-    readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:readPageVC animated:YES completion:nil];
 }
 
 #pragma mark - 点击事件

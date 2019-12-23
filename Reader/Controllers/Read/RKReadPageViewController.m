@@ -452,11 +452,13 @@ UIGestureRecognizerDelegate
             self.book.progress = 0.0f;
             self.book.chapterName = @"开始";
         } else {
-            NSRange pageRange = [self.book.content rangeOfString:[self.book.currentChapter stringOfPage:self.book.currentPage]];
-            self.book.progress = (pageRange.location + pageRange.length)*1.0f/[self.book.content length]*1.0f;
-            self.book.chapterName = self.book.currentChapter.title;
-            if (self.book.progress > 1) {
-                self.book.progress = 1;
+            if (self.book.currentChapter) {
+                NSRange pageRange = [self.book.content rangeOfString:[self.book.currentChapter stringOfPage:self.book.currentPage]];
+                self.book.progress = (pageRange.location + pageRange.length)*1.0f/[self.book.content length]*1.0f;
+                self.book.chapterName = self.book.currentChapter.title;
+                if (self.book.progress > 1) {
+                    self.book.progress = 1;
+                }
             }
         }
         

@@ -76,7 +76,9 @@
         // 注意需要再执行一次更新约束
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.book.currentChapterNum inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        if ([self.book.chapters count] > 0) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.book.currentChapterNum inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];            
+        }
     }];
 }
 
