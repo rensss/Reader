@@ -45,7 +45,7 @@
     CGFloat width = height*kCoverImageWidth/kCoverImageHeight;
     [coverImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(width, height));
-        make.top.equalTo(bgView).mas_offset(10);
+        make.top.equalTo(bgView).mas_offset(5);
         make.left.equalTo(bgView).mas_offset(10);
     }];
     

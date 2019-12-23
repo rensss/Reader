@@ -28,6 +28,7 @@
     [self initUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveQuickReadNotification:) name:RKShortcutQuickReadItemType object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAutoReadNotification:) name:RKAutoReadNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,6 +52,19 @@
 /// 快速阅读通知
 - (void)didReceiveQuickReadNotification:(NSNotification *)notification {
     [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
+- (void)didReceiveAutoReadNotification:(NSNotification *)notification {
+    
+    RKBook *autoRead;
+    for (RKBook *book in self.dataArray) {
+        if ([book.name isEqualToString:[RKUserConfig sharedInstance].lastReadBookName]) {
+            autoRead = book;
+        }
+    }
+    if (autoRead) {
+        [self startReadWithBook:autoRead];        
+    }
 }
 
 #pragma mark - 函数

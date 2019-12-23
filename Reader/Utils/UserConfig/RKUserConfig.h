@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isAutoRead; /**< 是否自动阅读*/
 
+@property (nonatomic, copy) NSString *lastReadBookName; /**< 最近阅读*/
+
 /// 用户设置单例
 + (instancetype)sharedInstance;
 

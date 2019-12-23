@@ -30,6 +30,7 @@
 @synthesize nightAlpha = _nightAlpha;
 
 @synthesize isAutoRead = _isAutoRead;
+@synthesize lastReadBookName = _lastReadBookName;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -138,6 +139,13 @@
     _isAutoRead = isAutoRead;
     
     [[NSUserDefaults standardUserDefaults] setBool:isAutoRead forKey:@"isAutoRead"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setLastReadBookName:(NSString *)lastReadBookName {
+    _lastReadBookName = lastReadBookName;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:lastReadBookName forKey:@"lastReadBookName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -268,6 +276,14 @@
         return [[NSUserDefaults standardUserDefaults] boolForKey:@"isAutoRead"];
     } else {
         return NO;
+    }
+}
+
+- (NSString *)lastReadBookName {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"lastReadBookName"]) {
+        return [[NSUserDefaults standardUserDefaults] stringForKey:@"lastReadBookName"];
+    } else {
+        return @"";
     }
 }
 

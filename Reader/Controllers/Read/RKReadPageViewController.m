@@ -460,6 +460,8 @@ UIGestureRecognizerDelegate
             }
         }
         
+        [RKUserConfig sharedInstance].lastReadBookName = self.book.name;
+        
         NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
         
         for (RKBook *subBook in bookList) {

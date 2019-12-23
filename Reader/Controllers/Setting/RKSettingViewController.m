@@ -34,7 +34,15 @@
     }];
 }
 
-#pragma mark - func
+#pragma mark - 事件
+- (void)switchChangeValue:(UISwitch *)switchBtn {
+    if (switchBtn.tag == 10000) {
+        [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
+    }
+    if (switchBtn.tag == 10001) {
+        [RKUserConfig sharedInstance].isAutoRead = switchBtn.on;
+    }
+}
 
 
 #pragma mark - delegate
@@ -53,18 +61,34 @@
     
     cell.textLabel.text = self.dataArr[indexPath.row];
     
+    if ([self.dataArr[indexPath.row] isEqualToString:@"置顶是否按时间排序"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].isRefreshTop;
+        switchBtn.tag = 10000;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    if ([self.dataArr[indexPath.row] isEqualToString:@"是否自动阅读"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].isAutoRead;
+        switchBtn.tag = 10001;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
     return cell;
 }
 
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
+    if ([self.dataArr[indexPath.row] isEqualToString:@"局域网导入"]) {
         RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
         [self.navigationController pushViewController:importVC animated:YES];
     }
     
-    if (indexPath.row == 1) {
+    if ([self.dataArr[indexPath.row] isEqualToString:@"删除全部书籍"]) {
         
         __weak typeof(self) weakSelf = self;
         
@@ -105,16 +129,17 @@
         
         [self presentViewController:alertController animated:YES completion:nil];
     }
-    
-    if (indexPath.row == 2) {
-        
-    }
 }
 
 #pragma mark - getting
 - (NSMutableArray *)dataArr {
     if (!_dataArr) {
-        _dataArr = [NSMutableArray arrayWithObjects:@"局域网导入",@"删除全部书籍", nil];
+        _dataArr = [NSMutableArray arrayWithObjects:
+                    @"置顶是否按时间排序",
+                    @"是否自动阅读",
+                    @"局域网导入",
+                    @"删除全部书籍",
+                    nil];
     }
     return _dataArr;
 }
