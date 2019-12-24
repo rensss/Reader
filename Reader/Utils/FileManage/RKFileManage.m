@@ -373,6 +373,8 @@ static RKFileManager *_fileManager;
     // 拼接路径
     path = [kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]];
     
+    [self getEncodeWithTxtFile:path];
+    
     NSError *error = NULL;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (!content) {
@@ -473,7 +475,74 @@ static RKFileManager *_fileManager;
     }
 }
 
-#pragma mark -- other
+#pragma mark -- Utils
+- (void)getEncodeWithTxtFile:(NSString *)path {
+    NSArray *arrEncoding = @[@(NSASCIIStringEncoding),
+                             @(NSNEXTSTEPStringEncoding),
+                             @(NSJapaneseEUCStringEncoding),
+                             @(NSUTF8StringEncoding),
+                             @(NSISOLatin1StringEncoding),
+                             @(NSSymbolStringEncoding),
+                             @(NSNonLossyASCIIStringEncoding),
+                             @(NSShiftJISStringEncoding),
+                             @(NSISOLatin2StringEncoding),
+                             @(NSUnicodeStringEncoding),
+                             @(NSWindowsCP1251StringEncoding),
+                             @(NSWindowsCP1252StringEncoding),
+                             @(NSWindowsCP1253StringEncoding),
+                             @(NSWindowsCP1254StringEncoding),
+                             @(NSWindowsCP1250StringEncoding),
+                             @(NSISO2022JPStringEncoding),
+                             @(NSMacOSRomanStringEncoding),
+                             @(NSUTF16StringEncoding),
+                             @(NSUTF16BigEndianStringEncoding),
+                             @(NSUTF16LittleEndianStringEncoding),
+                             @(NSUTF32StringEncoding),
+                             @(NSUTF32BigEndianStringEncoding),
+                             @(NSUTF32LittleEndianStringEncoding)
+                             ];
+    
+    NSArray *arrEncodingName = @[@"NSASCIIStringEncoding",
+                                 @"NSNEXTSTEPStringEncoding",
+                                 @"NSJapaneseEUCStringEncoding",
+                                 @"NSUTF8StringEncoding",
+                                 @"NSISOLatin1StringEncoding",
+                                 @"NSSymbolStringEncoding",
+                                 @"NSNonLossyASCIIStringEncoding",
+                                 @"NSShiftJISStringEncoding",
+                                 @"NSISOLatin2StringEncoding",
+                                 @"NSUnicodeStringEncoding",
+                                 @"NSWindowsCP1251StringEncoding",
+                                 @"NSWindowsCP1252StringEncoding",
+                                 @"NSWindowsCP1253StringEncoding",
+                                 @"NSWindowsCP1254StringEncoding",
+                                 @"NSWindowsCP1250StringEncoding",
+                                 @"NSISO2022JPStringEncoding",
+                                 @"NSMacOSRomanStringEncoding",
+                                 @"NSUTF16StringEncoding",
+                                 @"NSUTF16BigEndianStringEncoding",
+                                 @"NSUTF16LittleEndianStringEncoding",
+                                 @"NSUTF32StringEncoding",
+                                 @"NSUTF32BigEndianStringEncoding",
+                                 @"NSUTF32LittleEndianStringEncoding"
+                                ];
+    
+    for (int i = 0 ; i < [arrEncoding count]; i++) {
+        unsigned long encodingCode = [arrEncoding[i] unsignedLongValue];
+        RKLog(@"---- (%@)", arrEncodingName[i]);
+        NSError *error = nil;
+        NSString *aString = [NSString stringWithContentsOfFile:path encoding:encodingCode  error:&error];
+        RKLog(@"---- Error descripetion:%@", [error localizedDescription]);
+        NSData *data = [aString dataUsingEncoding:encodingCode];
+        NSString *string = [[NSString alloc] initWithData:data encoding:encodingCode];
+        if ([string length] > 0) {
+            RKLog(@"---- %@", [string substringToIndex:100]);
+            RKLog(@"---- EncodingName:%@",arrEncodingName[i]);
+        }
+    }
+}
+
+
 /**
  计算文件的大小，单位为 M
  @param path 文件路径
