@@ -373,7 +373,7 @@ static RKFileManager *_fileManager;
     // 拼接路径
     path = [kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]];
     
-    [self getEncodeWithTxtFile:path];
+//    [self getEncodeWithTxtFile:path];
     
     NSError *error = NULL;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];

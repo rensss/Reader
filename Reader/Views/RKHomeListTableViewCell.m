@@ -53,8 +53,14 @@
     self.name = name;
     [bgView addSubview:name];
     name.text = @"书名";
+	name.numberOfLines = 2;
     name.textColor = [UIColor blackColor];
     name.font = [UIFont systemFontOfSize:16];
+	[name mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.mas_offset(10);
+		make.right.mas_offset(-10);
+		make.left.equalTo(coverImage.mas_right).mas_offset(8);
+	}];
     
     UILabel *chapter = [UILabel new];
     self.chapter = chapter;
@@ -62,28 +68,41 @@
     chapter.text = @"当前章节";
     chapter.font = [UIFont systemFontOfSize:14];
     chapter.textColor = [UIColor darkTextColor];
+	[chapter mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.right.mas_offset(-10);
+		make.left.mas_equalTo(name.mas_left);
+		make.top.mas_equalTo(name.mas_bottom).mas_offset(10);
+	}];
     
-    UILabel *progress = [UILabel new];
+	UILabel *size = [UILabel new];
+	self.size = size;
+	[bgView addSubview:size];
+	size.text = @"0.00M";
+	size.font = [UIFont systemFontOfSize:12];
+	size.textColor = [UIColor darkTextColor];
+	[size mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.right.mas_offset(-10);
+		make.bottom.mas_offset(-10);
+	}];
+	
+	UILabel *progress = [UILabel new];
     self.progress = progress;
     [bgView addSubview:progress];
     progress.text = @"0.00%";
     progress.font = [UIFont systemFontOfSize:12];
     progress.textColor = [UIColor darkTextColor];
-    
-    UILabel *size = [UILabel new];
-    self.size = size;
-    [bgView addSubview:size];
-    size.text = @"0.00M";
-    size.font = [UIFont systemFontOfSize:12];
-    size.textColor = [UIColor darkTextColor];
+	[progress mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.right.mas_equalTo(size.mas_left).mas_offset(-10);
+		make.bottom.mas_equalTo(size.mas_bottom);
+	}];
 
-    NSArray *sub = @[name,chapter,progress,size];
-    [sub mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(coverImage.mas_right).mas_offset(8);
-        make.right.mas_offset(-23);
-    }];
+//    NSArray *sub = @[name,chapter,progress,size];
+//    [sub mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(coverImage.mas_right).mas_offset(8);
+//        make.right.mas_offset(-23);
+//    }];
     // 固定每项的长高
-    [sub mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedItemLength:16 leadSpacing:10 tailSpacing:10];
+//    [sub mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedItemLength:16 leadSpacing:10 tailSpacing:10];
     // 固定每个间隔的量
 //    [sub mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:5 leadSpacing:10 tailSpacing:10];
     

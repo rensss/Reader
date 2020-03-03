@@ -26,8 +26,8 @@
     // 设置item的颜色
     self.navigationBar.tintColor = [UIColor blackColor];
     
-//    // 阴影颜色
-//    self.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;
+    // 阴影颜色
+	self.navigationBar.shadowImage = [UIImage imageWithColor:[UIColor colorWithHexString:@"#a2a3a4"]];
     
     // 手势返回
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -36,7 +36,7 @@
 }
 
 - (void)dealloc {
-//    RKLog(@"---> %@ 销毁",[self class])
+	RKLog(@"---> %@ 销毁",[self class]);
 }
 
 #pragma mark -- UIGestureRecognizerDelegate

@@ -25,7 +25,7 @@
 }
 
 - (void)dealloc {
-//    RKLog(@"---> %@ 销毁",[self class]);
+    RKLog(@"---> %@ 销毁",[self class]);
 }
 
 #pragma mark - 重写系统方法
