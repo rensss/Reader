@@ -27,7 +27,7 @@
     self.navigationBar.tintColor = [UIColor blackColor];
     
     // 阴影颜色
-	self.navigationBar.shadowImage = [UIImage imageWithColor:[UIColor colorWithHexString:@"#a2a3a4"]];
+	self.navigationBar.shadowImage = [UIImage imageWithColor:[UIColor colorWithHexString:@"#e2e3e4"]];
     
     // 手势返回
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
