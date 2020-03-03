@@ -1,1 +1,0 @@
-../../../QMUIKit/QMUIKit/QMUIComponents/QMUIBadge/UIBarItem+QMUIBadge.h
