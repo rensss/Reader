@@ -21,7 +21,6 @@
 #import "MMKV.h"
 #import "AESCrypt.h"
 #import "MMKVLog.h"
-#import "MMKVMetaInfo.hpp"
 #import "MemoryFile.h"
 #import "MiniCodedInputData.h"
 #import "MiniCodedOutputData.h"
@@ -44,7 +43,6 @@ static NSMutableDictionary *g_instanceDic;
 static NSRecursiveLock *g_instanceLock;
 id<MMKVHandler> g_callbackHandler;
 bool g_isLogRedirecting = false;
-static bool g_isInBackground = false;
 
 int DEFAULT_MMAP_SIZE;
 
@@ -54,11 +52,6 @@ int DEFAULT_MMAP_SIZE;
 
 static NSString *md5(NSString *value);
 static NSString *encodeMmapID(NSString *mmapID);
-
-enum : bool {
-	KeepSequence = false,
-	IncreaseSequence = true,
-};
 
 @implementation MMKV {
 	NSRecursiveLock *m_lock;
@@ -73,13 +66,13 @@ enum : bool {
 	MiniCodedOutputData *m_output;
 	AESCrypt *m_cryptor;
 
+	BOOL m_isInBackground;
 	BOOL m_needLoadFromFile;
 	BOOL m_hasFullWriteBack;
 
 	uint32_t m_crcDigest;
-	MMKVMetaInfo m_metaInfo;
-	int m_metaFd;
-	char *m_metaFilePtr;
+	int m_crcFd;
+	char *m_crcPtr;
 }
 
 #pragma mark - init
@@ -91,34 +84,7 @@ enum : bool {
 
 		DEFAULT_MMAP_SIZE = getpagesize();
 		MMKVInfo(@"pagesize:%d", DEFAULT_MMAP_SIZE);
-
-#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-		auto appState = [UIApplication sharedApplication].applicationState;
-		g_isInBackground = (appState == UIApplicationStateBackground);
-		MMKVInfo(@"g_isInBackground:%d, appState:%ld", g_isInBackground, appState);
-
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-#endif
 	}
-}
-
-static BOOL g_hasCalledInitializeMMKV = NO;
-static NSString *g_basePath = nil;
-
-+ (NSString *)initializeMMKV:(nullable NSString *)rootDir {
-#ifdef DEBUG
-	assert([NSThread isMainThread]);
-#endif
-	if (g_hasCalledInitializeMMKV) {
-		MMKVWarning(@"already called +initializeMMKV before, ignore this request");
-		return [self mmkvBasePath];
-	}
-	g_hasCalledInitializeMMKV = YES;
-
-	g_basePath = (rootDir != nil) ? rootDir : [self mmkvBasePath];
-
-	return [self mmkvBasePath];
 }
 
 // a generic purpose instance
@@ -144,19 +110,19 @@ static NSString *g_basePath = nil;
 		return nil;
 	}
 
+	NSString *kvPath = [MMKV mappedKVPathWithID:mmapID relativePath:relativePath];
+	if (!isFileExist(kvPath)) {
+		if (!createFile(kvPath)) {
+			MMKVError(@"fail to create file at %@", kvPath);
+			return nil;
+		}
+	}
 	NSString *kvKey = [MMKV mmapKeyWithMMapID:mmapID relativePath:relativePath];
 
 	CScopedLock lock(g_instanceLock);
 
 	MMKV *kv = [g_instanceDic objectForKey:kvKey];
 	if (kv == nil) {
-		NSString *kvPath = [MMKV mappedKVPathWithID:mmapID relativePath:relativePath];
-		if (!isFileExist(kvPath)) {
-			if (!createFile(kvPath)) {
-				MMKVError(@"fail to create file at %@", kvPath);
-				return nil;
-			}
-		}
 		kv = [[MMKV alloc] initWithMMapID:kvKey cryptKey:cryptKey path:kvPath];
 		[g_instanceDic setObject:kv forKey:kvKey];
 	}
@@ -178,10 +144,17 @@ static NSString *g_basePath = nil;
 		[self loadFromFile];
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-		[[NSNotificationCenter defaultCenter] addObserver:self
-		                                         selector:@selector(onMemoryWarning)
-		                                             name:UIApplicationDidReceiveMemoryWarningNotification
-		                                           object:nil];
+		auto appState = [UIApplication sharedApplication].applicationState;
+		if (appState == UIApplicationStateBackground) {
+			m_isInBackground = YES;
+		} else {
+			m_isInBackground = NO;
+		}
+		MMKVInfo(@"m_isInBackground:%d, appState:%ld", m_isInBackground, (long) appState);
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
 #endif
 	}
 	return self;
@@ -209,13 +182,13 @@ static NSString *g_basePath = nil;
 		m_cryptor = nullptr;
 	}
 
-	if (m_metaFilePtr != nullptr && m_metaFilePtr != MAP_FAILED) {
-		munmap(m_metaFilePtr, CRC_FILE_SIZE);
-		m_metaFilePtr = nullptr;
+	if (m_crcPtr != nullptr && m_crcPtr != MAP_FAILED) {
+		munmap(m_crcPtr, CRC_FILE_SIZE);
+		m_crcPtr = nullptr;
 	}
-	if (m_metaFd >= 0) {
-		close(m_metaFd);
-		m_metaFd = -1;
+	if (m_crcFd >= 0) {
+		close(m_crcFd);
+		m_crcFd = -1;
 	}
 }
 
@@ -230,18 +203,18 @@ static NSString *g_basePath = nil;
 }
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-+ (void)didEnterBackground {
-	CScopedLock lock(g_instanceLock);
+- (void)didEnterBackground {
+	CScopedLock lock(m_lock);
 
-	g_isInBackground = YES;
-	MMKVInfo(@"g_isInBackground:%d", g_isInBackground);
+	m_isInBackground = YES;
+	MMKVInfo(@"m_isInBackground:%d", m_isInBackground);
 }
 
-+ (void)didBecomeActive {
-	CScopedLock lock(g_instanceLock);
+- (void)didBecomeActive {
+	CScopedLock lock(m_lock);
 
-	g_isInBackground = NO;
-	MMKVInfo(@"g_isInBackground:%d", g_isInBackground);
+	m_isInBackground = NO;
+	MMKVInfo(@"m_isInBackground:%d", m_isInBackground);
 }
 #endif
 
@@ -259,17 +232,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 }
 
 - (void)loadFromFile {
-	[self prepareMetaFile];
-	if (m_metaFilePtr != nullptr && m_metaFilePtr != MAP_FAILED) {
-		m_metaInfo.read(m_metaFilePtr);
-	}
-	if (m_cryptor) {
-		if (m_metaInfo.m_version >= 2) {
-			m_cryptor->reset(m_metaInfo.m_vector, sizeof(m_metaInfo.m_vector));
-		}
-	}
-
-	m_fd = open(m_path.UTF8String, O_RDWR | O_CREAT, S_IRWXU);
+	m_fd = open(m_path.UTF8String, O_RDWR, S_IRWXU);
 	if (m_fd < 0) {
 		MMKVError(@"fail to open:%@, %s", m_path, strerror(errno));
 	} else {
@@ -327,7 +290,6 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 					}
 				}
 				if (loadFromFile) {
-					MMKVInfo(@"loading [%@] with crc %u sequence %u", m_mmapID, m_metaInfo.m_crcDigest, m_metaInfo.m_sequence);
 					NSData *inputBuffer = [NSData dataWithBytesNoCopy:m_ptr + offset length:m_actualSize freeWhenDone:NO];
 					if (m_cryptor) {
 						inputBuffer = decryptBuffer(*m_cryptor, inputBuffer);
@@ -423,10 +385,8 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	m_actualSize = 0;
 	m_crcDigest = 0;
 
-	m_metaInfo.m_crcDigest = 0;
-	[self updateIVAndIncreaseSequence:IncreaseSequence];
 	if (m_cryptor) {
-		m_cryptor->reset(m_metaInfo.m_vector, sizeof(m_metaInfo.m_vector));
+		m_cryptor->reset();
 	}
 
 	[self loadFromFile];
@@ -464,14 +424,9 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	m_fd = -1;
 	m_size = 0;
 	m_actualSize = 0;
-	m_metaInfo.m_crcDigest = 0;
 
 	if (m_cryptor) {
-		if (m_metaInfo.m_version >= 2) {
-			m_cryptor->reset(m_metaInfo.m_vector, sizeof(m_metaInfo.m_vector));
-		} else {
-			m_cryptor->reset();
-		}
+		m_cryptor->reset();
 	}
 }
 
@@ -532,7 +487,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 }
 
 - (BOOL)protectFromBackgroundWriting:(size_t)size writeBlock:(void (^)(MiniCodedOutputData *output))block {
-	if (g_isInBackground) {
+	if (m_isInBackground) {
 		static const int offset = pbFixed32Size(0);
 		static const int pagesize = getpagesize();
 		size_t realOffset = offset + m_actualSize - size;
@@ -623,8 +578,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 		}
 
 		if (m_cryptor) {
-			[self updateIVAndIncreaseSequence:KeepSequence];
-			m_cryptor->reset(m_metaInfo.m_vector, sizeof(m_metaInfo.m_vector));
+			m_cryptor->reset();
 			auto ptr = (unsigned char *) data.bytes;
 			m_cryptor->encrypt(ptr, ptr, data.length);
 		}
@@ -655,7 +609,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	char *tmpPtr = nullptr;
 	static const int offset = pbFixed32Size(0);
 
-	if (g_isInBackground) {
+	if (m_isInBackground) {
 		tmpPtr = m_ptr;
 		if (mlock(tmpPtr, offset) != 0) {
 			MMKVError(@"fail to mmap [%@], %d:%s", m_mmapID, errno, strerror(errno));
@@ -717,7 +671,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 			if (m_cryptor) {
 				m_cryptor->encrypt(ptr, ptr, size);
 			}
-			[self updateCRCDigest:ptr withSize:size increaseSequence:KeepSequence];
+			[self updateCRCDigest:ptr withSize:size];
 		}
 	}
 	return ret;
@@ -752,8 +706,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 		int offset = pbFixed32Size(0);
 		if (allData.length + offset <= m_size) {
 			if (m_cryptor) {
-				[self updateIVAndIncreaseSequence:KeepSequence];
-				m_cryptor->reset(m_metaInfo.m_vector, sizeof(m_metaInfo.m_vector));
+				m_cryptor->reset();
 				auto ptr = (unsigned char *) allData.bytes;
 				m_cryptor->encrypt(ptr, ptr, allData.length);
 			}
@@ -793,18 +746,23 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 		int offset = pbFixed32Size(0);
 		m_crcDigest = (uint32_t) crc32(0, (const uint8_t *) m_ptr + offset, (uint32_t) m_actualSize);
 
-		if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
-			[self prepareMetaFile];
-		}
-		if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
-			MMKVError(@"Meta file not valid %@", m_mmapID);
-			return NO;
-		}
-		m_metaInfo.read(m_metaFilePtr);
-		if (m_crcDigest == m_metaInfo.m_crcDigest) {
+		// for backward compatibility
+		if (!isFileExist(m_crcPath)) {
+			MMKVInfo(@"crc32 file not found:%@", m_crcPath);
 			return YES;
 		}
-		MMKVError(@"check crc [%@] fail, crc32:%u, m_crcDigest:%u", m_mmapID, m_metaInfo.m_crcDigest, m_crcDigest);
+		NSData *oData = [NSData dataWithContentsOfFile:m_crcPath];
+		uint32_t crc32 = 0;
+		@try {
+			MiniCodedInputData input(oData);
+			crc32 = input.readFixed32();
+		} @catch (NSException *exception) {
+			MMKVError(@"%@", exception);
+		}
+		if (m_crcDigest == crc32) {
+			return YES;
+		}
+		MMKVError(@"check crc [%@] fail, crc32:%u, m_crcDigest:%u", m_mmapID, crc32, m_crcDigest);
 	}
 	return NO;
 }
@@ -813,100 +771,77 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	if (m_ptr != nullptr && m_ptr != MAP_FAILED) {
 		m_crcDigest = 0;
 		int offset = pbFixed32Size(0);
-		[self updateCRCDigest:(const uint8_t *) m_ptr + offset withSize:m_actualSize increaseSequence:IncreaseSequence];
+		[self updateCRCDigest:(const uint8_t *) m_ptr + offset withSize:m_actualSize];
 	}
 }
 
-- (void)updateCRCDigest:(const uint8_t *)ptr withSize:(size_t)length increaseSequence:(bool)increaseSequence {
+- (void)updateCRCDigest:(const uint8_t *)ptr withSize:(size_t)length {
 	if (ptr == nullptr) {
 		return;
 	}
 	m_crcDigest = (uint32_t) crc32(m_crcDigest, ptr, (uint32_t) length);
 
-	if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
-		[self prepareMetaFile];
+	if (m_crcPtr == nullptr || m_crcPtr == MAP_FAILED) {
+		[self prepareCRCFile];
 	}
-	if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
+	if (m_crcPtr == nullptr || m_crcPtr == MAP_FAILED) {
 		return;
 	}
 
 	static const size_t bufferLength = pbFixed32Size(0);
-	auto hasMlock = false;
-	if (g_isInBackground) {
-		if (mlock(m_metaFilePtr, bufferLength) != 0) {
-			MMKVError(@"fail to mlock crc [%@]-%p, %d:%s", m_mmapID, m_metaFilePtr, errno, strerror(errno));
+	if (m_isInBackground) {
+		if (mlock(m_crcPtr, bufferLength) != 0) {
+			MMKVError(@"fail to mlock crc [%@]-%p, %d:%s", m_mmapID, m_crcPtr, errno, strerror(errno));
 			// just fail on this condition, otherwise app will crash anyway
 			return;
 		}
-		hasMlock = true;
 	}
 
-	m_metaInfo.m_crcDigest = m_crcDigest;
-	if (increaseSequence) {
-		m_metaInfo.m_sequence++;
+	@try {
+		MiniCodedOutputData output(m_crcPtr, bufferLength);
+		output.writeFixed32((int32_t) m_crcDigest);
+	} @catch (NSException *exception) {
+		MMKVError(@"%@", exception);
 	}
-	if (m_metaInfo.m_version == 0) {
-		m_metaInfo.m_version = 1;
-	}
-	m_metaInfo.write(m_metaFilePtr);
-
-	if (hasMlock) {
-		munlock(m_metaFilePtr, bufferLength);
+	if (m_isInBackground) {
+		munlock(m_crcPtr, bufferLength);
 	}
 }
 
-- (void)prepareMetaFile {
-	if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
+- (void)prepareCRCFile {
+	if (m_crcPtr == nullptr || m_crcPtr == MAP_FAILED) {
 		if (!isFileExist(m_crcPath)) {
 			createFile(m_crcPath);
 		}
-		m_metaFd = open(m_crcPath.UTF8String, O_RDWR, S_IRWXU);
-		if (m_metaFd < 0) {
+		m_crcFd = open(m_crcPath.UTF8String, O_RDWR, S_IRWXU);
+		if (m_crcFd < 0) {
 			MMKVError(@"fail to open:%@, %s", m_crcPath, strerror(errno));
 			removeFile(m_crcPath);
 		} else {
 			size_t size = 0;
 			struct stat st = {};
-			if (fstat(m_metaFd, &st) != -1) {
+			if (fstat(m_crcFd, &st) != -1) {
 				size = (size_t) st.st_size;
 			}
 			int fileLegth = CRC_FILE_SIZE;
 			if (size != fileLegth) {
 				size = fileLegth;
-				if (ftruncate(m_metaFd, size) != 0) {
+				if (ftruncate(m_crcFd, size) != 0) {
 					MMKVError(@"fail to truncate [%@] to size %zu, %s", m_crcPath, size, strerror(errno));
-					close(m_metaFd);
-					m_metaFd = -1;
+					close(m_crcFd);
+					m_crcFd = -1;
 					removeFile(m_crcPath);
 					return;
 				}
 			}
-			m_metaFilePtr = (char *) mmap(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, m_metaFd, 0);
-			if (m_metaFilePtr == MAP_FAILED) {
+			m_crcPtr = (char *) mmap(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, m_crcFd, 0);
+			if (m_crcPtr == MAP_FAILED) {
 				MMKVError(@"fail to mmap [%@], %s", m_crcPath, strerror(errno));
-				close(m_metaFd);
-				m_metaFd = -1;
+				close(m_crcFd);
+				m_crcFd = -1;
 			}
 		}
 	}
-}
-
-- (void)updateIVAndIncreaseSequence:(bool)increaseSequence {
-	if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
-		[self prepareMetaFile];
-	}
-	if (m_metaFilePtr == nullptr || m_metaFilePtr == MAP_FAILED) {
-		return;
-	}
-
-	if (increaseSequence) {
-		m_metaInfo.m_sequence++;
-	}
-	if (m_metaInfo.m_version < 2) {
-		m_metaInfo.m_version = 2;
-	}
-	AESCrypt::fillRandomIV(m_metaInfo.m_vector);
-	m_metaInfo.write(m_metaFilePtr);
 }
 
 #pragma mark - encryption & decryption
@@ -1331,9 +1266,6 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	CScopedLock lock(m_lock);
 	[self checkLoadData];
 
-	if ([m_dic objectForKey:key] == nil) {
-		return;
-	}
 	[m_dic removeObjectForKey:key];
 	m_hasFullWriteBack = NO;
 
@@ -1368,7 +1300,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 
 - (void)doSync:(bool)sync {
 	CScopedLock lock(m_lock);
-	if (m_needLoadFromFile || ![self isFileValid] || m_metaFilePtr == nullptr) {
+	if (m_needLoadFromFile || ![self isFileValid] || m_crcPtr == nullptr) {
 		return;
 	}
 
@@ -1376,11 +1308,12 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	if (msync(m_ptr, m_actualSize, flag) != 0) {
 		MMKVError(@"fail to msync[%d] data file of [%@]:%s", flag, m_mmapID, strerror(errno));
 	}
-	if (msync(m_metaFilePtr, CRC_FILE_SIZE, flag) != 0) {
+	if (msync(m_crcPtr, CRC_FILE_SIZE, flag) != 0) {
 		MMKVError(@"fail to msync[%d] crc-32 file of [%@]:%s", flag, m_mmapID, strerror(errno));
 	}
 }
 
+static NSString *g_basePath = nil;
 + (NSString *)mmkvBasePath {
 	if (g_basePath.length > 0) {
 		return g_basePath;
@@ -1455,10 +1388,11 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 
 	NSData *fileData = [NSData dataWithContentsOfFile:crcPath];
 	uint32_t crcFile = 0;
-	if (fileData.length > 0 && fileData.bytes) {
-		MMKVMetaInfo metaInfo;
-		metaInfo.read(fileData.bytes);
-		crcFile = metaInfo.m_crcDigest;
+	@try {
+		MiniCodedInputData input(fileData);
+		crcFile = input.readFixed32();
+	} @catch (NSException *exception) {
+		return NO;
 	}
 
 	const int offset = pbFixed32Size(0);
