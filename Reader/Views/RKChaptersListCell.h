@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RKChaptersListCell : UITableViewCell
 
 @property (nonatomic, strong) RKChapter *chapter; /**< 当前章节*/
+@property (nonatomic, assign) BOOL isCurrent; /**< 是否是当前章节*/
 
 @end
 

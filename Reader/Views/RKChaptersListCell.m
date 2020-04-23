@@ -21,25 +21,26 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.titleMarqueeView];
-        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.contentView);
-//            make.left.equalTo(self.contentView).mas_offset(8);
-//            make.right.equalTo(self.contentView).mas_offset(-8);
-        }];
+//        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.contentView);
+//            make.top.mas_offset(0);
+//            make.left.mas_offset(8);
+//            make.bottom.mas_offset(0);
+//            make.right.mas_offset(-8);
+//        }];
         
-        [self.contentView addSubview:self.titleView];
-        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(0);
-            make.left.mas_offset(8);
-            make.bottom.mas_offset(0);
-            make.right.mas_offset(-8);
-        }];
+//        [self.contentView addSubview:self.titleView];
+//        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_offset(0);
+//            make.left.mas_offset(8);
+//            make.bottom.mas_offset(0);
+//            make.right.mas_offset(-8);
+//        }];
     }
     return self;
 }
 
 #pragma mark - 代理
-
 - (NSUInteger)numberOfDataForMarqueeView:(RKMarqueeView *)marqueeView {
     return 1;
 }
@@ -72,14 +73,30 @@
 #pragma mark - setting
 - (void)setChapter:(RKChapter *)chapter {
     _chapter = chapter;
-    self.titleView.text = [self.chapter.title stringByTrimmingCharactersInSet];
+//    self.titleView.text = [self.chapter.title stringByTrimmingCharactersInSet];
+    [self.titleMarqueeView reloadData];
+}
+
+- (void)setIsCurrent:(BOOL)isCurrent {
+    _isCurrent = isCurrent;
+    
+    if (_isCurrent) {
+        [self.titleMarqueeView start];
+    } else {
+        [self.titleMarqueeView pause];
+    }
 }
 
 
 #pragma mark - getting
 - (RKMarqueeView *)titleMarqueeView {
     if (!_titleMarqueeView) {
-        _titleMarqueeView = [[RKMarqueeView alloc] initWithDirection:RKMarqueeViewDirectionLeftward];
+        _titleMarqueeView = [[RKMarqueeView alloc] initWithFrame:CGRectMake(8, 0, 244, 50) direction:RKMarqueeViewDirectionLeftward];
+//        _titleMarqueeView = [[RKMarqueeView alloc] initWithDirection:RKMarqueeViewDirectionLeftward];
+        _titleMarqueeView.timeIntervalPerScroll = 0.0f;
+        _titleMarqueeView.scrollSpeed = 60.0f;
+        _titleMarqueeView.itemSpacing = 20.0f;
+        _titleMarqueeView.delegate = self;
     }
     return _titleMarqueeView;
 }

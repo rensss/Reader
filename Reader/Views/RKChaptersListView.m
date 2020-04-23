@@ -124,6 +124,12 @@
     RKChapter *chapter = self.book.chapters[indexPath.row];
     cell.chapter = chapter;
     
+    if (indexPath.row == self.book.currentChapterNum) { // 当前章节
+        cell.isCurrent = YES;
+    } else {
+        cell.isCurrent = NO;
+    }
+    
     /*
      if (indexPath.row == self.book.currentChapterNum) { // 当前章节
          cell.textLabel.font = [UIFont boldSystemFontOfSize:20];

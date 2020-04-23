@@ -1,9 +1,9 @@
 //
 //  RKMarqueeView.m
-//  Reader
+//  RKMarqueeView
 //
-//  Created by Rzk on 2020/4/23.
-//  Copyright © 2020 Rzk. All rights reserved.
+//  Created by youyou on 16/12/5.
+//  Copyright © 2016年 iceyouyou. All rights reserved.
 //
 
 #import "RKMarqueeView.h"
@@ -494,17 +494,17 @@ static float const DEFAULT_ITEM_SPACING = 20.0f;
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^() {
-        if (self->_direction == RKMarqueeViewDirectionLeftward) {
+        if (_direction == RKMarqueeViewDirectionLeftward) {
             [self moveToNextDataIndex];
 
             CGFloat itemHeight = CGRectGetHeight(self.frame);
             CGFloat firstItemWidth = CGRectGetWidth(self.frame);
             CGFloat currentItemWidth = CGRectGetWidth(self.frame);
             CGFloat lastItemWidth = CGRectGetWidth(self.frame);
-            for (int i = 0; i < self->_items.count; i++) {
-                int index = (i + self->_firstItemIndex) % self->_items.count;
+            for (int i = 0; i < _items.count; i++) {
+                int index = (i + _firstItemIndex) % _items.count;
 
-                CGFloat itemWidth = MAX(self->_items[index].width + self->_itemSpacing, CGRectGetWidth(self.frame));
+                CGFloat itemWidth = MAX(_items[index].width + _itemSpacing, CGRectGetWidth(self.frame));
 
                 if (i == 0) {
                     firstItemWidth = itemWidth;
@@ -516,31 +516,31 @@ static float const DEFAULT_ITEM_SPACING = 20.0f;
             }
 
             // move the left item to right without animation
-            self->_items[self->_firstItemIndex].tag = self->_dataIndex;
-            self->_items[self->_firstItemIndex].width = [self itemWidthAtIndex:self->_items[self->_firstItemIndex].tag];
-            CGFloat nextItemWidth = MAX(self->_items[self->_firstItemIndex].width + self->_itemSpacing, CGRectGetWidth(self.frame));
-            [self->_items[self->_firstItemIndex] setFrame:CGRectMake(lastItemWidth, 0.0f, nextItemWidth, itemHeight)];
+            _items[_firstItemIndex].tag = _dataIndex;
+            _items[_firstItemIndex].width = [self itemWidthAtIndex:_items[_firstItemIndex].tag];
+            CGFloat nextItemWidth = MAX(_items[_firstItemIndex].width + _itemSpacing, CGRectGetWidth(self.frame));
+            [_items[_firstItemIndex] setFrame:CGRectMake(lastItemWidth, 0.0f, nextItemWidth, itemHeight)];
             if (firstItemWidth != nextItemWidth) {
                 // if the width of next item view changes, then recreate it by delegate
-                [self->_items[self->_firstItemIndex] clear];
+                [_items[_firstItemIndex] clear];
             }
-            [self updateItemView:self->_items[self->_firstItemIndex] atIndex:self->_items[self->_firstItemIndex].tag];
+            [self updateItemView:_items[_firstItemIndex] atIndex:_items[_firstItemIndex].tag];
 
             __weak __typeof(self) weakSelf = self;
-            [UIView animateWithDuration:(currentItemWidth / self->_scrollSpeed) delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [UIView animateWithDuration:(currentItemWidth / _scrollSpeed) delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
                 CGFloat lastMaxX = 0.0f;
-                for (int i = 0; i < self->_items.count; i++) {
-                    int index = (i + self->_firstItemIndex) % self->_items.count;
+                for (int i = 0; i < _items.count; i++) {
+                    int index = (i + _firstItemIndex) % _items.count;
 
-                    CGFloat itemWidth = MAX(self->_items[index].width + self->_itemSpacing, CGRectGetWidth(self.frame));
+                    CGFloat itemWidth = MAX(_items[index].width + _itemSpacing, CGRectGetWidth(self.frame));
 
                     if (i == 0) {
                         continue;
                     } else if (i == 1) {
-                        [self->_items[index] setFrame:CGRectMake(-itemWidth, 0.0f, itemWidth, itemHeight)];
+                        [_items[index] setFrame:CGRectMake(-itemWidth, 0.0f, itemWidth, itemHeight)];
                         lastMaxX = 0.0f;
                     } else {
-                        [self->_items[index] setFrame:CGRectMake(lastMaxX, 0.0f, itemWidth, itemHeight)];
+                        [_items[index] setFrame:CGRectMake(lastMaxX, 0.0f, itemWidth, itemHeight)];
                         lastMaxX = lastMaxX + itemWidth;
                     }
                 }
@@ -556,44 +556,44 @@ static float const DEFAULT_ITEM_SPACING = 20.0f;
             [self moveToNextDataIndex];
 
             CGFloat itemWidth = CGRectGetWidth(self.frame);
-            CGFloat itemHeight = CGRectGetHeight(self.frame) / self->_visibleItemCount;
+            CGFloat itemHeight = CGRectGetHeight(self.frame) / _visibleItemCount;
 
             // move the top item to bottom without animation
-            self->_items[self->_firstItemIndex].tag = self->_dataIndex;
-            if (self->_useDynamicHeight) {
-                CGFloat firstItemWidth = self->_items[self->_firstItemIndex].height;
-                self->_items[self->_firstItemIndex].height = [self itemHeightAtIndex:self->_items[self->_firstItemIndex].tag];
-                [self->_items[self->_firstItemIndex] setFrame:CGRectMake(0.0f, CGRectGetMaxY(self.bounds), itemWidth, self->_items[self->_firstItemIndex].height)];
-                if (firstItemWidth != self->_items[self->_firstItemIndex].height) {
+            _items[_firstItemIndex].tag = _dataIndex;
+            if (_useDynamicHeight) {
+                CGFloat firstItemWidth = _items[_firstItemIndex].height;
+                _items[_firstItemIndex].height = [self itemHeightAtIndex:_items[_firstItemIndex].tag];
+                [_items[_firstItemIndex] setFrame:CGRectMake(0.0f, CGRectGetMaxY(self.bounds), itemWidth, _items[_firstItemIndex].height)];
+                if (firstItemWidth != _items[_firstItemIndex].height) {
                     // if the height of next item view changes, then recreate it by delegate
-                    [self->_items[self->_firstItemIndex] clear];
+                    [_items[_firstItemIndex] clear];
                 }
             } else {
-                [self->_items[self->_firstItemIndex] setFrame:CGRectMake(0.0f, CGRectGetMaxY(self.bounds), itemWidth, itemHeight)];
+                [_items[_firstItemIndex] setFrame:CGRectMake(0.0f, CGRectGetMaxY(self.bounds), itemWidth, itemHeight)];
             }
-            [self updateItemView:self->_items[self->_firstItemIndex] atIndex:self->_items[self->_firstItemIndex].tag];
+            [self updateItemView:_items[_firstItemIndex] atIndex:_items[_firstItemIndex].tag];
 
-            if (self->_useDynamicHeight) {
-                int lastItemIndex = (int)(self->_items.count - 1 + self->_firstItemIndex) % self->_items.count;
-                CGFloat lastItemHeight = self->_items[lastItemIndex].height;
+            if (_useDynamicHeight) {
+                int lastItemIndex = (int)(_items.count - 1 + _firstItemIndex) % _items.count;
+                CGFloat lastItemHeight = _items[lastItemIndex].height;
                 __weak __typeof(self) weakSelf = self;
-                [UIView animateWithDuration:(lastItemHeight / self->_scrollSpeed) delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-                    for (int i = 0; i < self->_items.count; i++) {
-                        int index = (i + self->_firstItemIndex) % self->_items.count;
+                [UIView animateWithDuration:(lastItemHeight / _scrollSpeed) delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+                    for (int i = 0; i < _items.count; i++) {
+                        int index = (i + _firstItemIndex) % _items.count;
                         if (i == 0) {
                             continue;
                         } else if (i == 1) {
-                            [self->_items[index] setFrame:CGRectMake(CGRectGetMinX(self->_items[index].frame),
-                                                               CGRectGetMinY(self->_items[index].frame) - lastItemHeight,
+                            [_items[index] setFrame:CGRectMake(CGRectGetMinX(_items[index].frame),
+                                                               CGRectGetMinY(_items[index].frame) - lastItemHeight,
                                                                itemWidth,
-                                                               self->_items[index].height)];
-                            self->_items[index].alpha = 0.0f;
+                                                               _items[index].height)];
+                            _items[index].alpha = 0.0f;
                         } else {
-                            [self->_items[index] setFrame:CGRectMake(CGRectGetMinX(self->_items[index].frame),
-                                                               CGRectGetMinY(self->_items[index].frame) - lastItemHeight,
+                            [_items[index] setFrame:CGRectMake(CGRectGetMinX(_items[index].frame),
+                                                               CGRectGetMinY(_items[index].frame) - lastItemHeight,
                                                                itemWidth,
-                                                               self->_items[index].height)];
-                            self->_items[index].alpha = 1.0f;
+                                                               _items[index].height)];
+                            _items[index].alpha = 1.0f;
                         }
                     }
                 } completion:^(BOOL finished) {
@@ -605,20 +605,20 @@ static float const DEFAULT_ITEM_SPACING = 20.0f;
                 }];
             } else {
                 UIViewAnimationOptions animationOptions = UIViewAnimationOptionCurveEaseInOut;
-                if (self->_timeIntervalPerScroll <= 0.0) {
+                if (_timeIntervalPerScroll <= 0.0) {
                     // smooth animation
                     animationOptions = UIViewAnimationOptionCurveLinear;
                 }
                 __weak __typeof(self) weakSelf = self;
-                [UIView animateWithDuration:self->_timeDurationPerScroll delay:0.0 options:animationOptions animations:^{
-                    for (int i = 0; i < self->_items.count; i++) {
-                        int index = (i + self->_firstItemIndex) % self->_items.count;
+                [UIView animateWithDuration:_timeDurationPerScroll delay:0.0 options:animationOptions animations:^{
+                    for (int i = 0; i < _items.count; i++) {
+                        int index = (i + _firstItemIndex) % _items.count;
                         if (i == 0) {
                             continue;
                         } else if (i == 1) {
-                            [self->_items[index] setFrame:CGRectMake(0.0f, -itemHeight, itemWidth, itemHeight)];
+                            [_items[index] setFrame:CGRectMake(0.0f, -itemHeight, itemWidth, itemHeight)];
                         } else {
-                            [self->_items[index] setFrame:CGRectMake(0.0f, itemHeight * (i - 2), itemWidth, itemHeight)];
+                            [_items[index] setFrame:CGRectMake(0.0f, itemHeight * (i - 2), itemWidth, itemHeight)];
                         }
                     }
                 } completion:^(BOOL finished) {
@@ -739,4 +739,3 @@ static float const DEFAULT_ITEM_SPACING = 20.0f;
 }
 
 @end
-
