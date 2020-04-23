@@ -66,7 +66,7 @@
     // ### 在数据源不变的情况下，宽度可以仅计算一次并缓存复用。
     UILabel *content = [[UILabel alloc] init];
     content.font = [UIFont systemFontOfSize:18.0f];
-    content.text = [self.chapter.title stringByTrimmingCharactersInSet];
+    content.text = self.chapter.title;
     return content.intrinsicContentSize.width;
 }
 
@@ -92,8 +92,8 @@
 - (RKMarqueeView *)titleMarqueeView {
     if (!_titleMarqueeView) {
         _titleMarqueeView = [[RKMarqueeView alloc] initWithFrame:CGRectMake(8, 0, 244, 50) direction:RKMarqueeViewDirectionLeftward];
-//        _titleMarqueeView = [[RKMarqueeView alloc] initWithDirection:RKMarqueeViewDirectionLeftward];
         _titleMarqueeView.timeIntervalPerScroll = 0.0f;
+        _titleMarqueeView.userInteractionEnabled = NO;
         _titleMarqueeView.scrollSpeed = 60.0f;
         _titleMarqueeView.itemSpacing = 20.0f;
         _titleMarqueeView.delegate = self;
