@@ -1,0 +1,98 @@
+//
+//  RKChaptersListCell.m
+//  Reader
+//
+//  Created by Rzk on 2020/4/23.
+//  Copyright © 2020 Rzk. All rights reserved.
+//
+
+#import "RKChaptersListCell.h"
+
+@interface RKChaptersListCell () <RKMarqueeViewDelegate>
+
+@property (nonatomic, strong) RKMarqueeView *titleMarqueeView; /**< 标题*/
+@property (nonatomic, strong) UILabel *titleView; /**< 章节名*/
+
+@end
+
+@implementation RKChaptersListCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self.contentView addSubview:self.titleMarqueeView];
+        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.contentView);
+//            make.left.equalTo(self.contentView).mas_offset(8);
+//            make.right.equalTo(self.contentView).mas_offset(-8);
+        }];
+        
+        [self.contentView addSubview:self.titleView];
+        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_offset(0);
+            make.left.mas_offset(8);
+            make.bottom.mas_offset(0);
+            make.right.mas_offset(-8);
+        }];
+    }
+    return self;
+}
+
+#pragma mark - 代理
+
+- (NSUInteger)numberOfDataForMarqueeView:(RKMarqueeView *)marqueeView {
+    return 1;
+}
+
+- (void)createItemView:(UIView *)itemView forMarqueeView:(RKMarqueeView *)marqueeView {
+    UILabel *content = [[UILabel alloc] initWithFrame:itemView.bounds];
+    content.font = [UIFont systemFontOfSize:18.0f];
+    content.tag = 2345;
+    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+        content.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.6f];
+    }
+    
+    [itemView addSubview:content];
+}
+
+- (void)updateItemView:(UIView *)itemView atIndex:(NSUInteger)index forMarqueeView:(RKMarqueeView *)marqueeView {
+    UILabel *content = [itemView viewWithTag:2345];
+    content.text = [self.chapter.title stringByTrimmingCharactersInSet];
+}
+
+- (CGFloat)itemViewWidthAtIndex:(NSUInteger)index forMarqueeView:(RKMarqueeView *)marqueeView {
+    // 指定条目在显示数据源内容时的视图宽度，仅[UUMarqueeViewDirectionLeftward]时被调用。
+    // ### 在数据源不变的情况下，宽度可以仅计算一次并缓存复用。
+    UILabel *content = [[UILabel alloc] init];
+    content.font = [UIFont systemFontOfSize:18.0f];
+    content.text = [self.chapter.title stringByTrimmingCharactersInSet];
+    return content.intrinsicContentSize.width;
+}
+
+#pragma mark - setting
+- (void)setChapter:(RKChapter *)chapter {
+    _chapter = chapter;
+    self.titleView.text = [self.chapter.title stringByTrimmingCharactersInSet];
+}
+
+
+#pragma mark - getting
+- (RKMarqueeView *)titleMarqueeView {
+    if (!_titleMarqueeView) {
+        _titleMarqueeView = [[RKMarqueeView alloc] initWithDirection:RKMarqueeViewDirectionLeftward];
+    }
+    return _titleMarqueeView;
+}
+
+- (UILabel *)titleView {
+    if (!_titleView) {
+        _titleView = [[UILabel alloc] init];
+        _titleView.font = [UIFont systemFontOfSize:18.0f];
+        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+            _titleView.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.6f];
+        }
+    }
+    return _titleView;
+}
+
+@end

@@ -7,6 +7,7 @@
 //
 
 #import "RKChaptersListView.h"
+#import "RKChaptersListCell.h"
 
 @interface RKChaptersListView () <UITableViewDelegate,UITableViewDataSource>
 
@@ -113,31 +114,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
+    RKChaptersListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RKChaptersListCell class])];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
+        cell = [[RKChaptersListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([RKChaptersListCell class])];
+        cell.backgroundColor = [UIColor clearColor];
     }
     
     RKChapter *chapter = self.book.chapters[indexPath.row];
-    cell.textLabel.text = [chapter.title stringByTrimmingCharactersInSet];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.chapter = chapter;
     
-    if (indexPath.row == self.book.currentChapterNum) { // 当前章节
-//        cell.textLabel.textColor = [UIColor colorWithHexString:@"000000" withAlpha:1.0f];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:1.0f];
-        }
-    } else { // 其余章节
-//        cell.textLabel.textColor = [UIColor colorWithHexString:@"777777" withAlpha:1.0f];
-        cell.textLabel.font = [UIFont systemFontOfSize:18];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:0.6f];
-        }
-    }
+    /*
+     if (indexPath.row == self.book.currentChapterNum) { // 当前章节
+         cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+             cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:1.0f];
+         }
+     }
+     */
     
     return cell;
 }
@@ -163,11 +158,9 @@
         _tableView.layer.contents = (id)image.CGImage;
         _tableView.layer.contentsGravity = kCAGravityResizeAspectFill;
         
+        _tableView.rowHeight = 50;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-//        _tableView.contentInset = UIEdgeInsetsMake(kStatusHight + 20, 0, kSafeAreaBottom + 20, 0);
         
         _tableView.tableFooterView = [UIView new];
     }

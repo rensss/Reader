@@ -32,6 +32,8 @@
 		1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188931226D7BEB00289476 /* RKAlertMessage.m */; };
 		1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188939226DB93E00289476 /* RKBookImprotViewController.m */; };
 		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
+		1A56A2592451798500291C2D /* RKMarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56A2582451798500291C2D /* RKMarqueeView.m */; };
+		1A56A25C24517C1E00291C2D /* RKChaptersListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56A25B24517C1E00291C2D /* RKChaptersListCell.m */; };
 		1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */; };
 		1AAF323B230AA796008C5E45 /* RKSelectImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */; };
 		1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */; };
@@ -90,6 +92,10 @@
 		1A188939226DB93E00289476 /* RKBookImprotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBookImprotViewController.m; sourceTree = "<group>"; };
 		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
 		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
+		1A56A2572451798500291C2D /* RKMarqueeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKMarqueeView.h; sourceTree = "<group>"; };
+		1A56A2582451798500291C2D /* RKMarqueeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKMarqueeView.m; sourceTree = "<group>"; };
+		1A56A25A24517C1E00291C2D /* RKChaptersListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChaptersListCell.h; sourceTree = "<group>"; };
+		1A56A25B24517C1E00291C2D /* RKChaptersListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKChaptersListCell.m; sourceTree = "<group>"; };
 		1AAF3236230AA449008C5E45 /* RKFontSetttingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKFontSetttingViewController.h; sourceTree = "<group>"; };
 		1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKFontSetttingViewController.m; sourceTree = "<group>"; };
 		1AAF3239230AA796008C5E45 /* RKSelectImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSelectImageCollectionViewCell.h; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1A56A2562451795400291C2D /* MarqueeView */,
 				1A077624227854CF0073794E /* UserConfig */,
 				1A18892B226D7BB500289476 /* FileManage */,
 				1A18892F226D7BCD00289476 /* AlertMessage */,
@@ -209,6 +216,8 @@
 				1AAF323A230AA796008C5E45 /* RKSelectImageCollectionViewCell.m */,
 				1A07E6EF230BEBEC006FB45C /* RKChaptersListView.h */,
 				1A07E6F0230BEBEC006FB45C /* RKChaptersListView.m */,
+				1A56A25A24517C1E00291C2D /* RKChaptersListCell.h */,
+				1A56A25B24517C1E00291C2D /* RKChaptersListCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +302,15 @@
 				1A18891A226D79B300289476 /* RKHomeListViewController.m */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		1A56A2562451795400291C2D /* MarqueeView */ = {
+			isa = PBXGroup;
+			children = (
+				1A56A2572451798500291C2D /* RKMarqueeView.h */,
+				1A56A2582451798500291C2D /* RKMarqueeView.m */,
+			);
+			path = MarqueeView;
 			sourceTree = "<group>";
 		};
 		296C8907161B58EE0DDBEC40 /* Frameworks */ = {
@@ -438,6 +456,7 @@
 				1A07E6F1230BEBEC006FB45C /* RKChaptersListView.m in Sources */,
 				1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */,
 				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
+				1A56A2592451798500291C2D /* RKMarqueeView.m in Sources */,
 				1A18892A226D7B1200289476 /* RKChapter.m in Sources */,
 				1A188918226D792200289476 /* RKViewController.m in Sources */,
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,
@@ -455,6 +474,7 @@
 				1A1888F8226D709100289476 /* AppDelegate.m in Sources */,
 				1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */,
 				1A03F1BC22730FAE000BB1E8 /* RKReadView.m in Sources */,
+				1A56A25C24517C1E00291C2D /* RKChaptersListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
