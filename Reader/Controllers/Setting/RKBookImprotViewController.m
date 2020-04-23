@@ -69,11 +69,16 @@
     }];
     
     // 设置label内容
-    NSString *url = [NSString stringWithFormat:@"浏览器访问->%@",self.webUploader.serverURL.absoluteString];
-    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:url];
-    [attributedStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:[url rangeOfString:self.webUploader.serverURL.absoluteString]];
-    [attributedStr addAttribute:NSUnderlineColorAttributeName value:[UIColor blueColor] range:[url rangeOfString:self.webUploader.serverURL.absoluteString]];
-    self.addressLabel.attributedText = attributedStr;
+    if (self.webUploader.serverURL.absoluteString) {
+        NSString *url = [NSString stringWithFormat:@"浏览器访问->%@",self.webUploader.serverURL.absoluteString];
+        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:url];
+        NSRange urlRange = [url rangeOfString:self.webUploader.serverURL.absoluteString];
+        [attributedStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:urlRange];
+        [attributedStr addAttribute:NSUnderlineColorAttributeName value:[UIColor blueColor] range:urlRange];
+        self.addressLabel.attributedText = attributedStr;
+    } else {
+        self.addressLabel.text = @"GCDWebUploader init failed!";
+    }
 }
 
 - (void)reloadTableView {
@@ -170,7 +175,9 @@
 }
 
 #pragma mark -- UITableViewDelegate
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 #pragma mark - getting
 - (GCDWebUploader *)webUploader {
