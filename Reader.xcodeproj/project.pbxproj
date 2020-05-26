@@ -32,6 +32,9 @@
 		1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188931226D7BEB00289476 /* RKAlertMessage.m */; };
 		1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188939226DB93E00289476 /* RKBookImprotViewController.m */; };
 		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
+		1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4384D8247D171800E087F3 /* ShareViewController.m */; };
+		1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4384DA247D171800E087F3 /* MainInterface.storyboard */; };
+		1A4384E0247D171800E087F3 /* ReaderShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1A4384D5247D171800E087F3 /* ReaderShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1A56A2592451798500291C2D /* RKMarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56A2582451798500291C2D /* RKMarqueeView.m */; };
 		1A56A25C24517C1E00291C2D /* RKChaptersListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56A25B24517C1E00291C2D /* RKChaptersListCell.m */; };
 		1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF3237230AA449008C5E45 /* RKFontSetttingViewController.m */; };
@@ -42,6 +45,30 @@
 		1ADC1BFB240DFC98003C5F4B /* Hanzipen.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1A4384DE247D171800E087F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A1888EB226D709100289476 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A4384D4247D171800E087F3;
+			remoteInfo = ReaderShare;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1A4384E1247D171800E087F3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1A4384E0247D171800E087F3 /* ReaderShare.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A03F1BA22730FAE000BB1E8 /* RKReadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadView.h; sourceTree = "<group>"; };
@@ -92,6 +119,12 @@
 		1A188939226DB93E00289476 /* RKBookImprotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBookImprotViewController.m; sourceTree = "<group>"; };
 		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
 		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
+		1A4384D5247D171800E087F3 /* ReaderShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReaderShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A4384D7247D171800E087F3 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		1A4384D8247D171800E087F3 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		1A4384DB247D171800E087F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		1A4384DD247D171800E087F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A4384E5247D186D00E087F3 /* Reader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reader.entitlements; sourceTree = "<group>"; };
 		1A56A2572451798500291C2D /* RKMarqueeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKMarqueeView.h; sourceTree = "<group>"; };
 		1A56A2582451798500291C2D /* RKMarqueeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKMarqueeView.m; sourceTree = "<group>"; };
 		1A56A25A24517C1E00291C2D /* RKChaptersListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChaptersListCell.h; sourceTree = "<group>"; };
@@ -117,6 +150,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A4384D2247D171800E087F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				1A1888F5226D709100289476 /* Reader */,
+				1A4384D6247D171800E087F3 /* ReaderShare */,
 				1A1888F4226D709100289476 /* Products */,
 				82A06DB1445795B6D4520079 /* Pods */,
 				296C8907161B58EE0DDBEC40 /* Frameworks */,
@@ -163,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				1A1888F3226D709100289476 /* Reader.app */,
+				1A4384D5247D171800E087F3 /* ReaderShare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +212,7 @@
 		1A1888F5226D709100289476 /* Reader */ = {
 			isa = PBXGroup;
 			children = (
+				1A4384E5247D186D00E087F3 /* Reader.entitlements */,
 				1A188910226D776B00289476 /* Base */,
 				1A18890F226D776200289476 /* Models */,
 				1A18890E226D775A00289476 /* Views */,
@@ -304,6 +347,17 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		1A4384D6247D171800E087F3 /* ReaderShare */ = {
+			isa = PBXGroup;
+			children = (
+				1A4384D7247D171800E087F3 /* ShareViewController.h */,
+				1A4384D8247D171800E087F3 /* ShareViewController.m */,
+				1A4384DA247D171800E087F3 /* MainInterface.storyboard */,
+				1A4384DD247D171800E087F3 /* Info.plist */,
+			);
+			path = ReaderShare;
+			sourceTree = "<group>";
+		};
 		1A56A2562451795400291C2D /* MarqueeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,15 +396,34 @@
 				1A1888F0226D709100289476 /* Frameworks */,
 				1A1888F1226D709100289476 /* Resources */,
 				F3DC8A1D47C525D354203879 /* [CP] Copy Pods Resources */,
+				1A4384E1247D171800E087F3 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1A4384DF247D171800E087F3 /* PBXTargetDependency */,
 			);
 			name = Reader;
 			productName = Reader;
 			productReference = 1A1888F3226D709100289476 /* Reader.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1A4384D4247D171800E087F3 /* ReaderShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A4384E4247D171800E087F3 /* Build configuration list for PBXNativeTarget "ReaderShare" */;
+			buildPhases = (
+				1A4384D1247D171800E087F3 /* Sources */,
+				1A4384D2247D171800E087F3 /* Frameworks */,
+				1A4384D3247D171800E087F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReaderShare;
+			productName = ReaderShare;
+			productReference = 1A4384D5247D171800E087F3 /* ReaderShare.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -364,6 +437,9 @@
 				TargetAttributes = {
 					1A1888F2226D709100289476 = {
 						CreatedOnToolsVersion = 10.2.1;
+					};
+					1A4384D4247D171800E087F3 = {
+						CreatedOnToolsVersion = 11.4;
 					};
 				};
 			};
@@ -381,6 +457,7 @@
 			projectRoot = "";
 			targets = (
 				1A1888F2226D709100289476 /* Reader */,
+				1A4384D4247D171800E087F3 /* ReaderShare */,
 			);
 		};
 /* End PBXProject section */
@@ -396,6 +473,14 @@
 				1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */,
 				1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */,
 				1A188900226D709200289476 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A4384D3247D171800E087F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,7 +563,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1A4384D1247D171800E087F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1A4384DF247D171800E087F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A4384D4247D171800E087F3 /* ReaderShare */;
+			targetProxy = 1A4384DE247D171800E087F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1A188901226D709200289476 /* LaunchScreen.storyboard */ = {
@@ -487,6 +588,14 @@
 				1A188902226D709200289476 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		1A4384DA247D171800E087F3 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A4384DB247D171800E087F3 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -609,6 +718,7 @@
 			baseConfigurationReference = EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Reader/Reader.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
@@ -631,6 +741,7 @@
 			baseConfigurationReference = A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Reader/Reader.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
@@ -644,6 +755,46 @@
 				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1A4384E2247D171800E087F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KY9HF8C4PA;
+				INFOPLIST_FILE = ReaderShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader.ReaderShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A4384E3247D171800E087F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KY9HF8C4PA;
+				INFOPLIST_FILE = ReaderShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader.ReaderShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -665,6 +816,15 @@
 			buildConfigurations = (
 				1A18890A226D709200289476 /* Debug */,
 				1A18890B226D709200289476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A4384E4247D171800E087F3 /* Build configuration list for PBXNativeTarget "ReaderShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A4384E2247D171800E087F3 /* Debug */,
+				1A4384E3247D171800E087F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

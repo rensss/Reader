@@ -120,7 +120,7 @@
 //        RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
 //        importVC.showType = RKImprotShowTypePresent;
 //        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
-//        importVC.modalPresentationStyle = UIModalPresentationFullScreen;
+//        nav.modalPresentationStyle = UIModalPresentationFullScreen;
 //        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
 //            RKLog(@"---- modalPresent");
 //        }];
