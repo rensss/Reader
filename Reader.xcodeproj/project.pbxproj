@@ -125,6 +125,7 @@
 		1A4384DB247D171800E087F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		1A4384DD247D171800E087F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A4384E5247D186D00E087F3 /* Reader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reader.entitlements; sourceTree = "<group>"; };
+		1A4384E6247D302200E087F3 /* ReaderShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReaderShare.entitlements; sourceTree = "<group>"; };
 		1A56A2572451798500291C2D /* RKMarqueeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKMarqueeView.h; sourceTree = "<group>"; };
 		1A56A2582451798500291C2D /* RKMarqueeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKMarqueeView.m; sourceTree = "<group>"; };
 		1A56A25A24517C1E00291C2D /* RKChaptersListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChaptersListCell.h; sourceTree = "<group>"; };
@@ -350,6 +351,7 @@
 		1A4384D6247D171800E087F3 /* ReaderShare */ = {
 			isa = PBXGroup;
 			children = (
+				1A4384E6247D302200E087F3 /* ReaderShare.entitlements */,
 				1A4384D7247D171800E087F3 /* ShareViewController.h */,
 				1A4384D8247D171800E087F3 /* ShareViewController.m */,
 				1A4384DA247D171800E087F3 /* MainInterface.storyboard */,
@@ -762,6 +764,7 @@
 		1A4384E2247D171800E087F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReaderShare/ReaderShare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
@@ -782,6 +785,7 @@
 		1A4384E3247D171800E087F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReaderShare/ReaderShare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
