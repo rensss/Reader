@@ -85,7 +85,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.dataArr[indexPath.row] isEqualToString:@"局域网导入"]) {
         RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
-        [self.navigationController pushViewController:importVC animated:YES];
+        importVC.showType = RKImprotShowTypePresent;
+        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
+        nav.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:nav animated:YES completion:nil];
     }
     
     if ([self.dataArr[indexPath.row] isEqualToString:@"删除全部书籍"]) {

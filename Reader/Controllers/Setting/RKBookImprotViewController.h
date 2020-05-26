@@ -9,9 +9,11 @@
 #import "RKViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 书籍导入VC 显示类型
 typedef NS_ENUM(NSInteger, RKImprotShowType) {
+    /// push进入
     RKImprotShowTypePush,
+    /// 模态跳转进入
     RKImprotShowTypePresent,
 };
 
