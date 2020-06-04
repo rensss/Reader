@@ -75,7 +75,168 @@
 03
 15
 245345325
-33
+33前言
+想写一本关于自学能力的书，还真的不是一天两天的事，所以肯定不是心血来潮。
+
+等我快把初稿框架搭完，跟霍炬说起我正在写的内容时，霍炬说：
+
+你还记得吗，你第一次背个包来我家的时候，咱们聊的就是咋写本有意思的编程书……
+
+我说：
+
+真是呢！十三年就这么过去了……
+
+不过，这次真的写了。写出来的其实并不是，或者说，并不仅仅是 “一本编程书”。
+
+这本 “书” 是近些年我一直在做却没做完整的事情，讲清楚 “学习学习再学习”：
+
+学会学习之后再去学习……
+
+只不过，这一次我阐述地更具体 —— 不是 “学会学习”，而是 “学会自学” —— 这一点点的变化，让十多年前没写顺的东西，终于在这一次迎刃而解，自成体系。
+
+以前，我在写作课里讲，写好的前提就是 “Narrow down your topic” —— 把话题范围缩小缩小再缩小…… 这次算是给读者一个活生生的实例了罢。
+
+自学能力，对每个个体来说，是这个变化频率和变化幅度都在不断加大的时代里最具价值的能力。具备这个能力，不一定能直接增加一个人的幸福感（虽然实际上常常确实能），但它一定会缓解甚至消除一个人的焦虑 —— 若是在一个以肉眼可见的方式变化着的环境里生存，却心知肚明自己已然原地踏步许久，自己正在被这个时代甩在身后，谁能不焦虑呢？
+
+实际上，这些年来我写的书，都是关于学习的，无论是《把时间当作朋友》，还是《通往财富自由之路》，甚至《韭菜的自我修养》，你去看就知道，背后都是同样的目标：学习、进步 —— 甚至进化。
+
+这一次的《自学是门手艺》，首先，可以看作是之前内容的 “实践版”：
+
+完成这本书的内容，起码会习得一个新技能：编程。
+
+更为重要的是，可以把《自学是门手艺》当作之前内容的 “升级版”：
+
+自学能力，是持续学习持续成长的发动机……
+
+仔细观察整个人群，你就会发现一个惊人且惊悚的事实：
+
+至少有 99% 的人终生都没有掌握自学能力！
+
+其实这个数字根本不夸张。根据 2017 年的统计数据，从 1977 年到 2017 年，40 年间全国大学录取人数总计为 1.15 亿左右（11518.2 万），占全国人口数量的 10% 不到，另外，这其中一半以上是专科生…… 你觉得那些 4% 左右的本科毕业生中，带着自学能力走入社会的比例是多少？不夸张地讲，我觉得 1% 都是很高的比例了 —— 所以，前面提到的 99% 都是很客气的说法。
+
+绝大多数人，终其一生都没有自学过什么。他们也不是没学过，也不是没辛苦过，但事实却是：他们在有人教、有人带、有人逼的情况下都没真学明白那些基础知识…… 更可怕的是，他们学的那些东西中，绝大多数终其一生只有一个用处：考试。于是，考试过后，那些东西就 “考过即弃” 了…… 不得不承认，应试教育的确是磨灭自学能力的最有效方法。
+
+在随后的生活里，尽管能意识到自己应该学点什么，常有 “要是我也会这个东西就好了” 的想法，但基本上百分之百以无奈结束 —— 再也没有人教、再也没有人带、再也没有人逼…… 于是，每次 “决心重新做人” 都默默地改成 “继续做人” 而后逢年过节再次许愿 “重新做人”……
+
+这是有趣而又尴尬的真相：
+
+没有不学习的人。
+
+你仔细观察就知道了，就算被你认为不学无术的人，其实也在学习，只不过，他们的选择不同，他们想学的是投机取巧，并天天琢磨怎样才能更好地投机取巧……
+
+但他们不是最倒霉的人。最倒霉的人是那种人，也 “认真学了”，可总是最终落得个越来越焦虑的下场…… 经常有一些人指责另外一些人 “贩卖焦虑” —— 根据我的观察，这种指责的肤浅在于，焦虑不是被卖方贩卖的产品，焦虑其实是买方长期自行积累的结果。
+
+别人无法贩卖给你焦虑，是你自己焦虑 —— 是你自己在为自己不断积累越来越多的焦虑……
+
+然而，又有谁不想解决掉焦虑呢？又有谁不想马上解决掉焦虑呢？
+
+于是，你焦虑，你就要找解决方案。而焦虑的你找到的解决方案，就是花个钱买本书，报个班，找个老师，上个课…… 这能说是别人贩卖焦虑给你吗？
+
+自学能力强的人，并非不花钱，甚至他们花的钱可能更多。他们也花钱买书，而且买更多的书；他们也可能花钱上课，而且要上就上最好的课、最好的班；他们更经常费尽周折找到恰当的人咨询、求教、探讨 —— 所以，事实上，他们更可能花了更多的钱……
+
+但自学能力强的人不焦虑，起码他们不会因为学习以及学习过程而焦虑 —— 这是重大差别。
+
+而焦虑的大多数，并不是因为别人贩卖焦虑给他们，他们才 “拥有” 那些焦虑 —— 他们一直在焦虑，并且越来越焦虑……
+
+为什么呢？总也学不会、学不好，换做是你，你不焦虑吗？！
+
+生活质量就是这样一点一点被消磨掉的 —— 最消耗生活质量的东西，就是焦虑。
+
+我相信，若是《自学是门手艺》这本书真的有用，它的重要用处之一就是能够缓解你的焦虑，让你明白，首先焦虑没用，其次，有办法也有途径让你摆脱过往一事无成的状况，逐步产生积累，并且逐步体会到那积累的作用，甚至最后还能感觉到更多积累带来的加速度…… 到那时候，焦虑就是 “别人的事情” 了。
+
+自学没有什么 “秘诀”。它是一门手艺，并且，严格意义上来讲，它只是一门手艺。
+
+手艺的特点就是无需天分。手艺的特点就是熟练程度决定一切。从这一点上来看，自学这门手艺和擀饺子皮没什么区别 —— 就那点事，刚开始谁都笨手笨脚，但熟练了之后，就那么回事…… 而已。
+
+做什么事都有技巧，这不可否认。
+
+自学当然也有技巧…… 不过，请做好思想准备：
+
+这儿的空间，没什么新鲜……
+
+—— 这是崔健一首歌里的歌词片段，但放在这里竟然非常恰当到位。
+
+一切与自学相关的技巧都是老生常谈。
+
+中国人说，熟能生巧；老外说，Practice makes perfect —— 你看，与自学相关的技巧，干脆不分国界……
+
+—— 因为这事人类从起点开始就没变过 —— 每代人都有足够多的人在自学这件事上挣扎…… 有成的有不成的；成的之中有大成有小成…… 可有一件事同样不变：留下的文字、留下的信息，都是大成或者小成之人留下的，不成的人不声不响就销声匿迹。
+
+并且，从各国历史上来看，自学技巧这个话题从未涉及到政治，无论是在东方还是西方都是如此。结果就是，在自学能力这个小领域中，留下并流传下来的信息，几乎从未被审查，从未被摧毁，从未被侵犯，从未被扭曲 —— 真的是个特别罕见的 “纯净的领域” —— 这真的是整个人类不可想像之意外好运。
+
+这就是为什么一切的自学技巧到最后肯定是老生常谈的原因。
+
+大部分年轻人讨厌老生常谈。
+
+但这还真的是被误导的结果。年轻人被什么误导了呢？
+
+每一代人都是新鲜出生，每一代人出生时都在同一水准…… 随着时间的推移，总是庸者占绝大多数，这个 “绝大多数” 不是 51%，不是 70%，而是 99%！—— 年轻人吃亏就吃在没把这个现象考虑进来。
+
+也就是说，虽然有用的道理在不断地传播，可终究还是 99% 的人做不到做不好，于是：
+
+讲大道理的更可能是庸者、失败者，而不是成功者。
+
+人类有很多天赋。就好像我反复提到的那样，“就算不懂也会用” 是人类的特长。同样的道理，人类在这方面同样擅长：
+
+无论自己什么样，在 “判断别人到底是不是真的很成功” 上，基本上有 99% 的把握……
+
+所以，十岁不到的时候，绝大多数小朋友就 “看穿” 了父母，后来再 “看穿” 了老师…… 发现他们整天说的都是他们自己做不到的事情…… 于是误以为自己 “看穿” 了整个世界。
+
+那时候小朋友们还没学、或者没学好概率这个重要知识，于是，他们并不知道那只不过是 99% 的情况，而且更不知道 “因素的重要性与它所占的比例常常全无正相关”，所以当然不知道那自己尚未见到的 1% 才可能是最重要的……
+
+于是，99% 的小朋友们一不小心就把自己 “搭了进去”：
+
+不仅讨厌老生常谈，而且偏要对着干，干着干着就把自己变成了另外一个属于那 99% 的另外一个老生……
+
+这是 99% 的人终其一生的生动写照。
+
+做 1% 很难吗？真的很简单，有时仅仅一条就可能奏效：
+
+在自学这件事上，重视一切老生常谈……
+
+很难吗？不难，只不过是一个 “开关” 而已。
+
+当我动手写这本 “书” 的时候，是 47 岁那年（2019）的春节前 —— 显然，这个时候我也早就是一位 “老生” 了…… 并且，这些道理我已经前后讲了二十年！算是 “常谈” 甚至 “长谈” 了罢……
+
+开始在新东方教书那年，我 28 岁；用之前那一点三脚猫的编程能力辅助着去写《TOEFL 核心词汇 21 天突破》是 2003 年；后来写《把时间当作朋友》是 2007 年，这本书的印刷版出版发行是在 2009 年；再后来陆续写了很多内容，包括没有纸质版发行只有在线版的《人人都能用英语》（2013）；以及因为在罗振宇的得到 App 上开专栏，把之前写过的《学习学习再学习》重构且扩充而出版的《通往财富自由之路》（2017）；甚至连《韭菜的自我修养》（2018）都是讲思考、学习、和认知升级的……
+
+说来说去，就那些事 —— 没什么新鲜。
+
+这中间也有很多写了却没写完，或者因为写得自己不满意扔在柜子里的东西，比如《人人都是工程师》（2016）—— 哈！我就是这么坚韧，有了目标就会死不放弃…… 3 年后的今天，我终于用那个时候完全想不到的方式完成了当时的目标，并且，做到了很多 3 年前自己都完全想象不到的事情。
+
+在写当前这本《自学是门手艺》的过程中，我从一开始就干脆没想给读者带来什么 “新鲜” 的或者 “前所未见” 的自学技巧 —— 因为真的就没有，根本就没有什么新鲜的自学技巧…… 没有，真的没有 —— 至少，我自己这么久了还是真的没见识过。
+
+然而，我算是最终能做到的人。知道、得到、做到之间，均各不相同。
+
+二十年前，在拥挤的课堂里坐在台下听我讲课的小朋友们，绝大多数在当时应该没有想到他们遇到了这样一个人 —— 二十年后，刚认识我的人也不会自动知道我是这样的人。
+
+但是，这些年里，看到我在一点一点进步、从未原地踏步的人很多很多…… 我猜，所谓的 “榜样”，也不过如此了罢。
+
+不夸张地讲，这可能是当前世界上最硬核的鸡汤书了 —— 因为，虽然它就是鸡汤（李笑来自认就是个鸡汤作者），但它不是 “只是拿话糊弄你” 那种，也不是 “只不过是善意的鼓励” 那种，它是那种 “教会你人生最重要的技能” 的鸡汤，并且还不仅仅只有一种技能，起码两个：“自学能力” 和 “编程能力”…… 而这两个能力中的无论哪一种，都是能确定地提高读者未来收入的技能，对，就是 100% 地确定 —— 有个会计专业的人求职的时候说 “我还会编程” 且还能拿出作品，你看看他可不可能找不到工作？你看看他是不是能薪水更高？
+
+#! —— 这是个程序员能看懂的梗。
+
+关键在于，这个老生不是说说而已的老生，他是能够做到的人：
+
+一个末流大学的会计专业毕业的人不得已去做了销售；
+这个销售后来去国内最大的课外辅导机构当了 7 年 TOEFL/GRE/GMAT 老师；
+这个英语老师后来同时成了很多畅销书、长销书的作者；
+这个作者后来居然成了著名天使投资人；
+这个投资人后来竟然写了本关于编程入门的书籍；
+这本 “书” 最终竟然还是一个完整的产品，不仅仅是 “一本书”……
+然而呢？
+
+—— 然而，即便是这样的老生，也讲不出什么新鲜道理。
+
+因为啊，历史上留下来的所有关于自学的技巧，都是人类史上最聪明的人留下来的 —— 你我这样的人，照做就可以了…… 现在你明白怎么回事了吧？
+
+记住罢 ——
+
+千万不要一不小心就把自己搭进去……
+
+李笑来
+
+初稿完成于 2019 年 2 月 27 日
 43
 5
 65
@@ -96,6 +257,59 @@
 我/额?啊SD? FA?收到?冯S?dfsdfafsf
 
 sdfasdfsfasdfafasdf
+Thread 0 (crashed)
+ 0  CoreFoundation!__exceptionPreprocess + 0x7c
+    Found by: given as instruction pointer in context
+ 1  libobjc.A.dylib!objc_exception_throw + 0x34
+    Found by: previous frame's frame pointer
+ 2  CoreFoundation!+[NSException raise:format:] + 0x70
+    Found by: previous frame's frame pointer
+ 3  WebKit!WebKit::CompletionHandlerCallChecker::~CompletionHandlerCallChecker() + 0x8c
+    Found by: previous frame's frame pointer
+ 4  WebKit!WTF::ThreadSafeRefCounted<WebKit::CompletionHandlerCallChecker>::deref() const + 0x24
+    Found by: previous frame's frame pointer
+ 5  WebKit!WTF::BlockPtr<void ()> WTF::BlockPtr<void ()>::fromCallable<WebKit::UIDelegate::UIClient::runJavaScriptAlert(WebKit::WebPageProxy*, WTF::String const&, WebKit::WebFrameProxy*, WebCore::SecurityOriginData const&, WTF::Function<void ()>&&)::$_1>(WebKit::UIDelegate::UIClient::runJavaScriptAlert(WebKit::WebPageProxy*, WTF::String const&, WebKit::WebFrameProxy*, WebCore::SecurityOriginData const&, WTF::Function<void ()>&&)::$_1)::'lambda'(void const*)::__invoke(void const*) + 0x1c
+    Found by: previous frame's frame pointer
+ 6  libsystem_blocks.dylib!_Block_release + 0x9c
+    Found by: previous frame's frame pointer
+ 7  WebKit!WebKit::UIDelegate::UIClient::runJavaScriptAlert(WebKit::WebPageProxy*, WTF::String const&, WebKit::WebFrameProxy*, WebCore::SecurityOriginData const&, WTF::Function<void ()>&&) + 0x190
+    Found by: previous frame's frame pointer
+ 8  WebKit!WebKit::WebPageProxy::runJavaScriptAlert(unsigned long long, WebCore::SecurityOriginData const&, WTF::String const&, WTF::Ref<Messages::WebPageProxy::RunJavaScriptAlert::DelayedReply>&&) + 0x90
+    Found by: previous frame's frame pointer
+ 9  WebKit!void IPC::handleMessageDelayed<Messages::WebPageProxy::RunJavaScriptAlert, WebKit::WebPageProxy, void (WebKit::WebPageProxy::*)(unsigned long long, WebCore::SecurityOriginData const&, WTF::String const&, WTF::Ref<Messages::WebPageProxy::RunJavaScriptAlert::DelayedReply>&&)>(IPC::Connection&, IPC::Decoder&, std::__1::unique_ptr<IPC::Encoder, std::__1::default_delete<IPC::Encoder> >&, WebKit::WebPageProxy*, void (WebKit::WebPageProxy::*)(unsigned long long, WebCore::SecurityOriginData const&, WTF::String const&, WTF::Ref<Messages::WebPageProxy::RunJavaScriptAlert::DelayedReply>&&)) + 0xa0
+    Found by: previous frame's frame pointer
+10  WebKit!IPC::MessageReceiverMap::dispatchSyncMessage(IPC::Connection&, IPC::Decoder&, std::__1::unique_ptr<IPC::Encoder, std::__1::default_delete<IPC::Encoder> >&) + 0x7c
+    Found by: previous frame's frame pointer
+11  WebKit!WebKit::WebProcessProxy::didReceiveSyncMessage(IPC::Connection&, IPC::Decoder&, std::__1::unique_ptr<IPC::Encoder, std::__1::default_delete<IPC::Encoder> >&) + 0x20
+    Found by: previous frame's frame pointer
+12  WebKit!IPC::Connection::dispatchSyncMessage(IPC::Decoder&) + 0xc0
+    Found by: previous frame's frame pointer
+13  WebKit!IPC::Connection::dispatchMessage(std::__1::unique_ptr<IPC::Decoder, std::__1::default_delete<IPC::Decoder> >) + 0x88
+    Found by: previous frame's frame pointer
+14  WebKit!IPC::Connection::dispatchOneMessage() + 0xe4
+    Found by: previous frame's frame pointer
+15  JavaScriptCore!WTF::RunLoop::performWork() + 0xc4
+    Found by: previous frame's frame pointer
+16  JavaScriptCore!WTF::RunLoop::performWork(void*) + 0x20
+    Found by: previous frame's frame pointer
+17  CoreFoundation!__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 0x14
+    Found by: previous frame's frame pointer
+18  CoreFoundation!__CFRunLoopDoSource0 + 0x54
+    Found by: previous frame's frame pointer
+19  CoreFoundation!__CFRunLoopDoSources0 + 0xc8
+    Found by: previous frame's frame pointer
+20  CoreFoundation!__CFRunLoopRun + 0x414
+    Found by: previous frame's frame pointer
+21  CoreFoundation!CFRunLoopRunSpecific + 0x1b0
+    Found by: previous frame's frame pointer
+22  GraphicsServices!GSEventRunModal + 0x60
+    Found by: previous frame's frame pointer
+23  UIKit!UIApplicationMain + 0xcc
+    Found by: previous frame's frame pointer
+24  yyxunhuan!main [main.mm : 16 + 0x10]
+    Found by: previous frame's frame pointer
+25  libdyld.dylib!start + 0x0
+    Found by: previous frame's frame pointer
 ∑
 
 第四章 4
@@ -115,7 +329,7 @@ D f
 Sa
 F
 Wef
-
+asdf asdf a
 R
 Te
 Rt
@@ -132,7 +346,10 @@ w42
 34
 Df'
 R'et
-'
+'发生了会计法拉力赛就LKS级了；爱空间f
+阿萨德发斯蒂芬
+阿斯蒂芬
+asdfasd
 '
 R'
 'Rt
@@ -145,7 +362,161 @@ f'
 43' 
 '
 T'43
- 
+ 为什幺要关注提交信息
+加快 Reviewing Code 的过程
+帮助我们写好 release note
+5 年后帮你快速想起来某个分支，tag 或者 commit 增加了什么功能，改变了哪些代码
+让其他的开发者在运行 git blame 的时候想跪谢
+总之一个好的提交信息，会帮助你提高项目的整体质量
+基本要求
+第一行应该少于 50 个字。 随后是一个空行 第一行题目也可以写成：Fix issue #8976
+喜欢用 vim 的哥们把下面这行代码加入 .vimrc 文件中，来检查拼写和自动折行
+autocmd Filetype gitcommit setlocal spell textwidth=72
+永远不在 git commit 上增加 -m <msg> 或 --message=<msg> 参数，而单独写提交信息
+一个不好的例子 git commit -m "Fix login bug"
+
+一个推荐的 commit message 应该是这样：
+
+Redirect user to the requested page after login
+
+https://trello.com/path/to/relevant/card
+
+Users were being redirected to the home page after login, which is less
+useful than redirecting to the page they had originally requested before
+being redirected to the login form.
+
+* Store requested path in a session variable
+* Redirect to the stored location after successfully logging in the user
+注释最好包含一个连接指向你们项目的 issue/story/card。一个完整的连接比一个 issue numbers 更好
+提交信息中包含一个简短的故事，能让别人更容易理解你的项目
+注释要回答如下信息
+为什么这次修改是必要的？
+
+要告诉 Reviewers，你的提交包含什么改变。让他们更容易审核代码和忽略无关的改变。
+
+如何解决的问题？
+
+这可不是说技术细节。看下面的两个例子：
+
+Introduce a red/black tree to increase search speed
+Remove <troublesome gem X>, which was causing <specific description of issue introduced by gem>
+如果你的修改特别明显，就可以忽略这个。
+
+这些变化可能影响哪些地方？
+
+这是你最需要回答的问题。因为它会帮你发现在某个 branch 或 commit 中的做了过多的改动。一个提交尽量只做 1，2 个变化。
+
+你的团队应该有一个自己的行为规则，规定每个 commit 和 branch 最多能含有多少个功能修改。
+
+小提示
+使用 fix, add, change 而不是 fixed, added, changed
+永远别忘了第 2 行是空行
+用 Line break 来分割提交信息，让它在某些软件里面更容易读
+请将每次提交限定于完成一次逻辑功能。并且可能的话，适当地分解为多次小更新，以便每次小型提交都更易于理解。
+例子
+Fix bug where user can't signup.
+
+[Bug #2873942]
+
+Users were unable to register if they hadn't visited the plans
+and pricing page because we expected that tracking
+information to exist for the logs we create after a user
+signs up.  I fixed this by adding a check to the logger
+to ensure that if that information was not available
+we weren't trying to write it.
+Redirect user to the requested page after login
+
+https://trello.com/path/to/relevant/card
+
+Users were being redirected to the home page after login, which is less
+useful than redirecting to the page they had originally requested before
+being redirected to the login form.
+
+* Store requested path in a session variable
+* Redirect to the stored location after successfully logging in the user
+依赖 Github Issue 的 Commit message 格式
+这种工作方式期望团队使用 Github 的 Project 和 Issue 来管理开发任务。这时 Commit message 的 Header 部分应该包含 Issue Number。
+
+[#123] Diverting power from warp drive to torpedoes
+[Closes #123] Torpedoes now sufficiently powered
+[Closes #123][#124][#125] Torpedoes now sufficiently powered
+Message Template
+[<optional state> #issueid] (50 chars or less) summary of changes
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen or asterisk is used for the bullet, preceded by a
+single space, with blank lines in between, but conventions vary here
+Angular 规范的 Commit message 格式
+每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。
+
+<type>(<scope>): <subject>
+// 空一行
+<body>
+// 空一行
+<footer>
+其中，Header 是必需的，Body 和 Footer 可以省略。
+
+Header
+Header 部分只有一行，包括三个字段：type（必需）、scope（可选）和 subject（必需）。
+
+type 用于说明 commit 的类别，只允许使用下面 7 个标识。
+
+feat 新功能（feature）
+fix 修补 bug
+docs 文档（documentation）
+style 格式（不影响代码运行的变动）
+refactor 重构（即不是新增功能，也不是修改 bug 的代码变动）
+test 增加测试
+chore 构建过程、辅助工具的变动
+perf 提高性能
+如果 type 为 feat 和 fix，则该 commit 将肯定出现在 Change log 之中。
+
+scope 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
+
+subject 是 commit 目的的简短描述，不超过 50 个字符。
+
+以动词开头，使用第一人称现在时，比如 change，而不是 changed 或 changes
+第一个字母大写
+结尾不加句号
+Body
+Body 部分是对本次 commit 的详细描述，可以分成多行。下面是一个范例。
+
+More detailed explanatory text, if necessary.  Wrap it to
+about 72 characters or so.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+- Use a hanging indent
+应该说明代码变动的动机，以及与以前行为的对比，参考前文提到的 注释要回答如下信息。
+
+Footer
+Footer 部分只用于不兼容变动和关闭 Issue。
+
+BREAKING CHANGE: isolate scope bindings definition has changed.
+
+    To migrate the code follow the example below:
+
+    Before:
+
+    scope: {
+      myAttr: 'attribute',
+    }
+
+    After:
+
+    scope: {
+      myAttr: '@',
+    }
+
+    The removed `inject` wasn't generaly useful for directives so there should be no code using it.
+Closes #123, #245, #992
 
 第五章 5
 5s
@@ -164,9 +535,9 @@ aads;非
 ;rl'是dF 
 按说;地方; 
 SDf是;d非;a;eas
-Df'
+Df'f asd fasdf 
 Asdf'
- As;d
+ As;da sdfas
 F as
 F s
 
@@ -176,16 +547,54 @@ Asd f
 As 
 Fwe
 We
-
+ asdfasf
 5  3oiuf uaoiu ns fis jfas
-Fafh alsdfjkhdslf
+Fafh alsdfjkhdslf asd fasdf 
 We-ifasldf
 We asdfkljhweofisadf
-
+a sdfasdf
 As fdskjlfwe
 [kdsjfa;skdfjkasf
-Sf ksfasd'f as
-Dfa fdsaf 
+Sf ksfasd'f assd fasd fasd fasdf 
+as df
+as
+ df
+as
+f 
+asdhfakljshdflkjhwejhfaklwjehklajshdklfjhaks 
+ asdf arqwsdf
+sdferqwer
+ asqwqw
+f aqwreerwqerqw
+s frrqwrqw
+sdqweqwrrrrqwerqwe
+ ferwqwqwer
+asd frerqwqwqrw
+asrqwwqerrerqwfjlaskl flaskjdfkjhas hfkhaskldjhf khskdfjlkj aslfj ;laskjdf ;laksjd f;lakjsdflals;kdjf laksjdfl; kasl;dfjkalksf;laksjd flasl;dk fj;laskdjf;l ajsdlfkjal;skfjwioeujklsf;ajlsjdoiwuejklasjdfkj;a skjdfj;laksdj fjkljiejlksdkkslkjflkjl sdfkja; lskdjfkkals ;djfl;kajs flskdj f;alskdfjl;askdj flkajsdflk aslkdfj a;lsdjfa sdlkfja;s dfkjasl; fjaslkdfj a;slkdfj a;lskdfjas;l jfasl;kd fja;slkfja;lsk jfasl;kjf d;alskjflkasjdf;laksjd fljkasl;dfj lakjs;dlfk a;sdf asdfas 
+d frwqweqwrwqrqwer
+sadf qrwewrqwrqwrr
+asew3rqqwrrwrwterqqwew
+df asdfqqwqewwwrerr
+f faswqrrrwqwwrqw
+sserrrwqrwqqwe
+df fqwrwrrer
+asf sawerwrqwq
+assadferqw
+fasdf dfqerwe
+asdfasrwq
+ asddffasdf
+fasasfasdf
+fsdf
+ fasadfasasd
+afasasdf
+fasfas
+fdfasfasd
+asdfasfas df
+
+sdfsdfsadf 
+assafas df
+dfasdf aasdf
+Dfa fdsaf  asdf asdf asdf
 
 第七章 7
 7asd fjweohskjdlhf woieh hasdlf wekjhdfkaoislk
@@ -268,13 +677,83 @@ Da
  S
 f
  A
- 
+ asdf asd
 F
-S df
-As 
+S dff asdf as
+As 自学是门手艺
+没有自学能力的人没有未来
+
+作者：李笑来
+
+特别感谢霍炬（@virushuo）、洪强宁（@hongqn) 两位良师诤友在此书写作过程中给予我的巨大帮助！
+
+# pseudo-code of selfteaching in Python
+
+def teach_yourself(anything):
+    while not create():
+        learn()
+        practice()
+    return teach_yourself(another)
+
+teach_yourself(coding)
+请先行阅读 T-appendix.jupyter-installation-and-setup 以便在本地安装 Jupyterlab 而后就能用更好的体验阅读本书。
+
+有兴趣帮忙的朋友，请先行阅读 如何使用 Pull Request 为这本书校对。
+
+2019 年 3 月 23 日，新增 Markdown 版本：
+
+https://github.com/selfteaching/the-craft-of-selfteaching/tree/master/markdown
+
+目录
+01.preface（前言）
+02.proof-of-work（如何证明你真的读过这本书？）
+Part.1.A.better.teachyourself（为什么一定要掌握自学能力？）
+Part.1.B.why.start.from.learning.coding（为什么把编程当作自学的入口？）
+Part.1.C.must.learn.sth.only.by.reading（只靠阅读习得新技能）
+Part.1.D.preparation.for.reading（开始阅读前的一些准备）
+Part.1.E.1.entrance（入口）
+Part.1.E.2.values-and-their-operators（值及其相应的运算）
+Part.1.E.3.controlflow（流程控制）
+Part.1.E.4.functions（函数）
+Part.1.E.5.strings（字符串）
+Part.1.E.6.containers（数据容器）
+Part.1.E.7.files（文件）
+Part.1.F.deal-with-forward-references（如何从容应对含有过多 “过早引用” 的知识？）
+Part.1.G.The-Python-Tutorial-local（官方教程：The Python Tutorial）
+Part.2.A.clumsy-and-patience（笨拙与耐心）
+Part.2.B.deliberate-practicing（刻意练习）
+Part.2.C.why-start-from-writing-functions（为什么从函数开始？）
+Part.2.D.1-args（关于参数（上））
+Part.2.D.2-aargs（关于参数（下））
+Part.2.D.3-lambda（化名与匿名）
+Part.2.D.4-recursion（递归函数）
+Part.2.D.5-docstrings（函数的文档）
+Part.2.D.6-modules（保存到文件的函数）
+Part.2.D.7-tdd（测试驱动的开发）
+Part.2.D.8-main（可执行的 Python 文件）
+Part.2.E.deliberate-thinking（刻意思考）
+Part.3.A.conquering-difficulties（战胜难点）
+Part.3.B.1.classes-1（类 —— 面向对象编程）
+Part.3.B.2.classes-2（类 —— Python 的实现）
+Part.3.B.3.decorator-iterator-generator（函数工具）
+Part.3.B.4.regex（正则表达式）
+Part.3.B.5.bnf-ebnf-pebnf（BNF 以及 EBNF）
+Part.3.C.breaking-good-and-bad（拆解）
+Part.3.D.indispensable-illusion（刚需幻觉）
+Part.3.E.to-be-thorough（全面 —— 自学的境界）
+Part.3.F.social-selfteaching（自学者的社交）
+Part.3.G.the-golden-age-and-google（这是自学者的黄金时代）
+Part.3.H.prevent-focus-drifting（避免注意力漂移）
+Q.good-communiation（如何成为优秀沟通者）
+R.finale（自学者的终点）
+S.whats-next（下一步干什么？）
+T-appendix.editor.vscode（Visual Studio Code 的安装与配置）
+T-appendix.git-introduction（Git 简介）
+T-appendix.jupyter-installation-and-setup（Jupyterlab 的安装与配置）
+T-appendix.symbols（这些符号都代表什么？）
 F
 As
- Fa
+ Fa fsad fas
 S f
 As
  F
@@ -396,6 +875,165 @@ Dfhwiuyi sdhfy fhskjd f
 
 Sdfafsaf
 
+为什么一定要掌握自学能力？
+一句话解释清楚：
+
+没有自学能力的人没有未来。
+
+有两个因素需要深入考虑：
+
+未来的日子还很长
+这世界进步得太快
+我有个观察：
+
+很多人都会不由自主地去复刻父母的人生时刻表。
+
+比如，你也可能观察到了，父母晚婚的人自己晚婚的概率更高，父母晚育的人自己晚育的概率也更高……
+
+再比如，绝大多数人的内心深处，会不由自主地因为自己的父母在五十五岁的时候退休了，所以就默认自己也会在五十五岁前后退休…… 于是，到了四十岁前后的时候就开始认真考虑退休，在不知不觉中就彻底丧失了斗志，早早就活得跟已经老了很多岁似的。
+
+但是，这很危险，因为很多人完全没有意识到自己所面临的人生，与父母所面临的人生可能完全不一样 —— 各个方面都不一样。单举一个方面的例子，也是比较容易令人震惊的方面：
+
+全球范围内都一样，在过去的五十年里，人们的平均寿命预期增长得非常惊人……
+
+拿中国地区做例子，根据世界银行的数据统计，中国人在出生时的寿命预期，从 1960 年的 43.73 岁，增长到了 2016 年的 76.25 岁，56 年间的增幅竟然有 74.39% 之多！
+
+In [4]:
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = np.genfromtxt('life-expectancy-china-1960-2016.txt',
+                     delimiter=',',
+                     names=['x', 'y'])
+da1960  = data[0][1]
+da2016  = data[-1][1]
+increase = (da2016 - da1960) / da1960
+note = 'from {:.2f} in 1960 to {:.2f} in 2016, increased  {:.2%}'\
+    .format(da1960, da2016, increase)
+
+plt.figure(figsize=(10, 5))
+plt.plot(data['x'], data['y'])
+plt.ylabel('Life Expectancy from Birth')
+plt.tick_params(axis='x', rotation=70)
+plt.title('CHINA\n' + note)
+
+# plt.savefig('life-expectancy-china-1960-2016.png', transparent=True)
+plt.show()
+
+# data from:
+# https://databank.worldbank.org/data/reports.aspx?source=2&series=SP.DYN.LE00.IN
+
+如此发展下去，虽然人类不大可能永生不死，但平均寿命依然在持续延长是个不争的事实。与上一代不同，现在的千禧一代，需要面对的是百岁人生 —— 毫无疑问，不容置疑。
+
+这么长的人生，比默认的想象中可能要多出近一倍的人生，再叠加上另外一个因素 —— 这是个变化越来越快的世界 —— 会是什么样子？
+
+我是 1972 年出生的。从交通工具来看，我经历过出门只能靠步行，大街上都是牛车马车，机动车顶多见过拖拉机，到有自行车，到见过摩托车，到坐小汽车，到自己开车，到开有自动辅助驾驶功能的电动车…… 从阅读来看，我经历过只有新华书店，到有网络上的文字，到可以在当当上在线买到纸质书，到有了国际信用卡后可以在 Amazon 上第一时间阅读新书的电子版、听它的有声版，到现在可以很方便地获取最新知识的互动版，并直接参与讨论…… 从技能上来看，我经历过认为不识字是文盲，到不懂英语是文盲，到不懂计算机是文盲，到现在，不懂数据分析的基本与文盲无异……
+
+我也见识过很多当年很有用很赚钱很令人羡慕的技能 “突然” 变成几乎毫无价值的东西，最明显的例子是驾驶。也就是二十多年前，的哥还是很多人羡慕的职业呢！我本科的时候学的是会计专业，那时候我们还要专门练习打算盘呢！三十年之后的今天，就算有人打算盘打得再快，有什么具体用处嘛？我上中学的时候，有个人靠出版字帖赚了大钱 —— 那时候据说只要写字漂亮就能找到好工作；可今天，写字漂亮与否还是决定工作好坏的决定性因素吗？打印机很便宜啊！
+
+这两个因素叠加在一起的结果就是，这世界对很多人来说，其实是越来越残忍的。
+
+我见过太多的同龄人，早早就停止了进步，早早就被时代甩在身后，早早就因此茫然不知所措 —— 早早晚晚，你也会遇到越来越多这样的人。他们的共同特征只有一个：
+
+没有自学能力
+
+有一个统计指数，叫做人类发展指数（Human Development Index），它的曲线画出来，怎么看都有即将成为指数级上升的趋势。
+
+In [2]:
+import matplotlib.pyplot as plt
+import numpy as np
+plt.figure(figsize=(10, 5))
+
+lebdata = np.genfromtxt('life-expectancy-china-1960-2016.txt',
+                        delimiter=',',
+                        names=['x', 'y'])
+
+hdidata = np.genfromtxt('hdi-china-1870-2015.txt',
+                        delimiter=',',
+                        names=['x', 'y'])
+
+
+plt.plot(hdidata['x'], hdidata['y'], label='Human Development Index')
+plt.tick_params(axis='x', rotation=70)
+plt.title('China: 1870 - 2015')
+
+plt.plot(lebdata['x'], lebdata['y'] * 0.005, label='Life Expectancy from Birth')
+plt.plot(secondary_y=True)
+
+plt.legend()
+
+# plt.savefig('human-development-index-china-1870-2015.png', transparent=True)
+plt.show()
+
+# link:
+# https://ourworldindata.org/human-development-index
+
+# data from:
+# blob:https://ourworldindata.org/44b6da71-f79e-42ab-ab37-871e4bd256e9
+
+社会发展越来越快，你要面对的人生越来越长，在那一段与你的直觉猜想并不相同的漫漫人生路上，你居然没有磨练过自学能力，竟然只能眼睁睁地看着自己被甩下且无能为力，难道接下来要在那么长的时间里 “苦中作乐” 吗？
+
+没有未来的日子，怎么过呢？
+
+我本科学的是会计，研究生跑到国外读宏观经济学没读完，跑回国内做计算机硬件批发，再后来去新东方应聘讲授托福课程，离开新东方之后创业，再后来做投资，这期间不断地写书…… 可事实上，我的经历在这个时代并不特殊。有多少人在后来的职业生涯中所做的事情与当年大学里所学的专业相符呢？
+
+纽约联邦储蓄银行在 2012 年做过一个调查，发现人们的职业与自己大学所学专业相符的比例连 30% 都不到。而且，我猜，这个比例会持续下降的 —— 因为这世界变化快，因为大多数教育机构与世界发展脱钩的程度只能越来越严重……
+
+In [7]:
+import matplotlib.pyplot as plt
+
+labels = ['Major Match', '']
+sizes = [273, 727]
+colors = ['#E2E2E2', '#6392BF']
+explode = (0, 0.08)
+plt.figure(figsize=(7, 7))
+plt.pie(sizes,
+        labels=labels,
+        explode=explode,
+        autopct='%1.1f%%',
+        colors=colors,
+        startangle=270,
+        shadow=True)
+# plt.savefig('major-match-job.png', transparent=True)
+plt.show()
+
+# data from:
+# https://libertystreeteconomics.newyorkfed.org/2013/05/do-big-cities-help-college-graduates-find-better-jobs.html
+
+绝大多数人终生都饱受时间幻觉的拖累。
+
+小时候觉得时间太长，那是幻觉；长大了觉得时间越来越快，那还是幻觉 —— 时间从来都是匀速的。最大的幻觉在于，总是以为 “时间不够了” —— 这个幻觉最坑人。许多年前，有一次我开导我老婆。她说，“啊？得学五年才行啊？！太长了！” 我说，
+
+“你回头看看呗，想想呗，五年前你在做什么？是不是回头一看的时候，五年前就好像是昨天？道理是一样的，五年之后的某一天你回头想今天，也是 ‘一转眼五年就过去’ 了…… 只不过，你今天觉得需要时间太多，所以不肯学 —— 但是，不管你学还是不学，五年还是会 ‘一转眼就过去’ 的…… 到时候再回头，想起这事的时候，没学的你，一定会后悔 —— 事实上，你已经有很多次后悔过 ‘之前要是学了就好了’，不是吗？”
+
+现在回头看，开导是非常成功的。十多年后的今天，她已经真的可以被称为 “自学专家” —— 各种运动在她那儿都不是事。健身，可以拿个北京市亚军登上健与美杂志封面；羽毛球，可以参加专业比赛；潜水，潜遍全球所有潜水胜地，到最后拿到的各种教练证比她遇到的各地教练的都多、更高级；帆船，可以组队横跨大西洋；爬山，登上喜马拉雅……
+
+都说，人要有一技之长。那这一技究竟应该是什么呢？
+
+自学能力是唯一值得被不断磨练的长技。
+
+磨练出自学能力的好处在于，无论这世界需要我们学什么的时候，我们都可以主动去学，并且还是马上开始 —— 不需要等别人教、等别人带。
+
+哪怕有很强的自学能力的意思也并不是说，什么都能马上学会、什么都能马上学好，到最后无所不精无所不通…… 因为这里有个时间问题。无论学什么，都需要耗费时间和精力，与此同时更难的事情在于不断填补耐心以防它过早耗尽。另外，在极端的情况下，多少也面临天分问题。比如身高可能影响打篮球的表现，比如长相可能影响表演的效果，比如唱歌跑调貌似是很难修复的，比如有些人的粗心大意其实是基因决定的，等等。不过，以我的观察，无论是什么，哪怕只是学会一点点，都比不会强。哪怕只是中等水平，就足够应付生活、工作、养家糊口的需求。
+
+我在大学里学的是会计专业，毕业后找不到对口工作，只好去做销售 —— 没人教啊！怎么办？自学。也有自学不怎么样的时候，比如当年研究生课程我就读不完。后来想去新东方教书 —— 因为听说那里赚钱多 —— 可英语不怎么样啊！怎么办？自学。离开新东方去创业，时代早就变了，怎么办？自学，学的不怎么样，怎么办？硬挺。虽然创业这事后来也没怎么大成，但竟然在投资领域开花结果 —— 可赚了钱就一切平安如意了吗？并不是，要面对之前从来没可能遇到的一些险恶与困境，怎么办？自学。除了困境之外，更痛苦的发现在于对投资这件事来说，并没有受过任何有意义的训练，怎么办？自学。觉得自己理解的差不多了，一出手就失败，怎么办？接着学。
+
+我出身一般，父母是穷教师。出生在边疆小镇，儿时受到的教育也一般，也是太淘气 —— 后来也没考上什么好大学。说实话，我自认天资也一般，我就是那种被基因决定了经常马虎大意的人。岁数都这么大了，情商也都不是一般的差 —— 还是跟年轻的时候一样，经常莫名其妙就把什么人给得罪透了……
+
+但我过得一直不算差。
+
+靠什么呢？人么，一个都靠不上。到最后，我觉得只有一样东西真正可靠 —— 自学能力。于是，经年累月，我磨练出了一套属于我自己的本领：只要我觉得有必要，我什么都肯学，学什么都能学会到够用的程度…… 编程，我不是靠上课学会的；英语，不是哪个老师教我的；写作，也不是谁能教会我的；教书，没有上过师范课程；投资，更没人能教我 —— 我猜，也没人愿意教我…… 自己用的东西自己琢磨，挺好。
+
+关键在于，自学这事并不难，也不复杂，挺简单的，因为它所需要的一切都很朴素。
+
+于是，从某个层面上来看，我每天都过的很开心。为什么？因为我有未来。凭什么那么确信？因为我知道我自己有自学能力。
+
+—— 我希望你也有。
+
+准确地讲，希望你有个更好的未来。
+
+而现在我猜，此刻，你心中也是默默如此作想的罢。
+
 第十二章 12
 12
 Asf asdf sd fwef sdfdw ewf sdf we fasdf
@@ -426,6 +1064,146 @@ T
 T g
  T
 G
+为什么把编程当作自学的入口？
+很多人误以为 “编程” 是很难的事情。
+
+…… 实则不然 —— 这恰恰是我们选择 “编程” 作为自学的第一个 “执行项目” 的原因。
+
+一本关于自学能力的书，若是真的能够起到作用，那么它就必须让读者在读之前和读之后不一样 —— 比如，之前可能没有自学能力，或者自学能力很差，之后就有了一定的自学能力……
+
+然而，这很难。不但对读者来说很难，对作者来说更难 —— 我当过那么多年被学生高度评价的老师，出版过若干本畅销且长销的书籍，所以更是清楚地知道例子的重要性。
+
+道理当然很重要；可是，在传递道理的时候，例子相对来看好像更重要。
+
+同样的道理，例子不准，人就可能会理解错；例子不精彩，人就可能听不进去；例子居然可以令人震惊，那就可以做到让听众、让读者 “永生不忘”。
+
+许多年前，有位后来在美国读书已经博士毕业了的学生来信，大意是说：
+
+好多年前，我在新东方上课，听您讲，人学习就好像是动物进化一样…… 很多人很早就开始停止了进化，本质上跟猴子没啥区别。
+
+那段类比好长，我记不太清楚细节了…… 可是，当时我是出了一身汗的，因为我忽然觉得自己是一只猴子。可是，突然之间，我不想继续做猴子，更不想一直做猴子！
+
+从那之后，我好像变了一个人似的…… 现在我已经博士毕业了，觉得应该写封信告诉您，我不再是猴子了，最起码是大猩猩，而且我保证，我会一直进化。
+
+……
+
+所以啊，在我看来，写书讲课之前，最重要的工作，也是做得最多的事情，其实就是 “找到好例子” —— 那即意味着说，先要找到很多很多恰当合适的例子，而后再通过反复比较试验，挑出那个效果最好的例子。了解了这一点，将来你准备任何演讲，都会不由自主地多花一点时间在这方面，效果肯定比 “把幻灯片做得更花哨一些” 要好太多了罢？
+
+后来，我选中了一个例子：“自学编程” —— “尽量只通过阅读学会编程”。
+
+（一）
+选择它的理由，首先就在于：
+
+事实证明，它就是无论是谁都能学会的 —— 千万别不信。
+
+它老少皆宜 —— 也就是说，“只要你愿意”，根本没有年龄差异。十二岁的孩子可以学；十八岁的大学生可以学；在职工作人员可以学…… 就算你已经退休了，想学就能学，谁也拦不住你。
+
+它也不分性别，男性可以学，女性同样可以学，性别差异在这里完全不存在。
+
+它也不分国界，更没有区域差异 —— 互联网的恩惠在于，你在北京、纽约也好，老头沟、门头沟也罢，在这个领域里同样完全没有任何具体差异。
+
+尤其是在中国。现状是，中国的人口密度极高，优质教育资源的确就是稀缺…… 但在计算机科学领域，所有的所谓 “优质教育资源” 事实上完全没有任何独特的竞争力 —— 编程领域，实际上是当今世上极为罕见的 “教育机会公平之地”。又不仅在中国如此，事实上，在全球范围内也都是如此。
+
+（二）
+编程作为 “讲解如何习得自学能力的例子”，实在是太好了。
+
+首先，编程这个东西反正要自学 —— 不信你问问计算机专业的人，他们会如实告诉你的，学校里确实也教，但说实话都教得不太好……
+
+其次，编程这个东西最适合 “仅靠阅读自学” —— 这个领域发展很快，到最后，新东西出来的时候，没有老师存在，任由你是谁，都只能去阅读 “官方文档”，只此一条路。
+
+然后，也是最重要的一条，别管是不是很多人觉得编程是很难的东西，事实上它就是每个人都应该具备的技能。
+
+许多年前，不识字，被称为文盲……
+
+后来，人们反应过来了，不识英文，也是文盲，因为科学文献的主导语言是英文，读不懂英文，什么都吃不上热乎的；等菜好不容易端上来了吧，早就凉了不说，味道都常常会变……
+
+再后来，不懂基本计算机操作技能的，也算是文盲，因为他们无论做什么事情，效率都太低下了，明明可以用快捷键一下子完成的事情，却非要手动大量重复……
+
+到了最近，不懂数据分析的，也开始算作文盲了。许多年前人们惊呼信息时代来了的时候，其实暂时体会不到什么太多的不同。然而，许多年过去，互联网上的格式化数据越来越多，不仅如此，实时产出的格式化数据也越来越多，于是，数据分析不仅成了必备的能力，而且早就开始直接影响一个人的薪资水平。
+
+你作为一个个体，每天都在产生各种各样的数据，然后时时刻刻都在被别人使用着、分析着…… 然而你自己却全然没有数据分析能力，甚至不知道这事很重要，是不是感觉很可怕？你看看周边那么多人，有多大的比例想过这事？反正那些天天看机器算法生成的信息流的人好像就是全然不在意自己正在被支配……
+
+怎么办？学呗，学点编程罢 —— 巧了，这还真是个正常人都能学会的技能。
+
+（三）
+编程作为 “讲解如何习得自学能力的例子” 最好的地方在于，这个领域的知识结构，最接近每个人所面对的人生中的知识结构。
+
+这是什么意思呢？
+
+编程入门的门槛之所以高，有个比较特殊的原因：
+
+它的知识点结构不是线性的。
+
+我们在中小学里所遇到的教科书，其中每个章节所涉及到的知识点之间，全都是线性关联。第一章学好了，就有基础学第二章；在第二章的概念不会出现在第一章之中……
+
+很遗憾，编程所涉及到的知识点没办法这样组织 —— 就是不行。编程教材之所以难以读懂，就是因为它的各章中的知识点结构不是线性排列的。你经常在某一章读到不知道后面第几章才可能讲解清楚的概念。
+
+比如，几乎所有的 Python 编程书籍上来就举个例子：
+
+print('Hello, world!')
+姑且不管这个例子是否意义非凡或者意义莫名，关键在于，print() 是个函数，而函数这个概念，不可能一上来就讲清楚，只能在后面若干章之后才开始讲解……
+
+想要理解当前的知识点，需要依赖对以后才能开始学习的某个甚至多个知识点的深入了解……
+
+这种现象，可以借用一个专门的英文概念，叫做 “Forward References” —— 原本是计算机领域里的一个术语。为了配合当前的语境，姑且把它翻译为 “过早引用” 罢，或者 “前置引用” 也行。
+
+学校里的课本，都很严谨 —— 任何概念，未经声明就禁止使用。所以，学完一章，就能学下一章；跳到某一章遇到不熟悉的概念，往前翻肯定能找到……
+
+在学校里习惯了这种知识体系的人，离开学校之后马上抓瞎 —— 社会的知识结构不仅不是这样的，而且几乎全都不是这样的。工作中、生活里，充满了各式各样的 “过早引用”。为什么总是要到多年以后你才明白父母曾经说过的话那么有道理？为什么总要到孩子已经长大之后才反应过来当初自己对孩子做错过很多事情？为什么在自己成为领导之前总是以为他们只不过是在忽悠你？为什么那么多人创业失败了之后才反应过来当初投资人提醒的一些观念其实是千真万确的？—— 因为很多概念很多观念是 “过早引用”，在当时就是非常难以理解……
+
+自学编程在这方面的好处在于，在自学的过程中，其实你相当于过了一遍 “模拟人生” —— 于是，面对同样的 “过早引用”，你不会觉得那么莫名其妙，你有一套你早已在 “模拟人生” 中练就的方法论去应对。
+
+（四）
+另外一个把编程作为 “讲解如何习得自学能力的例子” 最好的地方在于，你在这个过程中将不得不习得英语 —— 起码是英文阅读能力，它能让你在不知不觉中 “脱盲”。
+
+学编程中最重要的活动就是 “阅读官方文档”。学 Python 更是如此。Python 有很多非常优秀的地方，其中一个令人无法忽视的优点就是它的文档完善程度极好。它甚至有专门的文档生成工具，Sphinx：
+
+Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.
+
+It was originally created for the Python documentation, and it has excellent facilities for the documentation of software projects in a range of languages. Of course, this site is also created from reStructuredText sources using Sphinx!
+
+最好的 Python 教程，是官方网站上的 The Python Tutorial，读它就够了。我个人完全没兴趣从头到尾写一本 Python 编程教材，不仅因为人家写得真好，而且它就放在那里。
+
+虽然你在官方网站上就是很难找到它的中文版，虽然就不告诉你到底在哪里也显得很不厚道，但是，我建议你就只看英文版 —— 因为离开了这个教程之后，还是要面对绝大多数都是英文的现实。
+
+为了照顾那些也想读完本书，但因为种种原因想着读中文可以快一些的人，链接还是放在这里：
+
+https://docs.python.org/zh-cn/3/tutorial/index.html (for v.3.7.2）
+http://www.pythondoc.com/pythontutorial3/ (for v.3.6.3)
+我曾经专门写过一本书发布在网上，叫《人人都能用英语》。其中的观点就是，大多数人之所以在英语这事上很矬，是因为他们花无数的时间去 “学”，但就是 “不用”。学以致用，用以促学。可就是不用，无论如何就是不用，那英语学了那么多年能学好吗？
+
+自学编程的一个 “副作用” 就是，你不得不用英语。而且还是天天用，不停地用。
+
+当年我上大学的时候，最初英语当然也不好。不过，因为想读当时还是禁书的《动物庄园》（Animal Farm），就只好看原版（当时好不容易搞到的是本英法对照版）…… 然后英语阅读就基本过关了。
+
+这原理大抵上是这样，刚开始，英语就好像一层毛玻璃，隔在你和你很想要了解的内容之间。然而，由于你对那内容的兴趣和需求是如此强烈，乃至于即便隔着毛玻璃你也会挣扎着去看清楚…… 挣扎久了（其实没两天就不一样），你的 “视力” 就进化了，毛玻璃还在那里，但你好像可以穿透它看清一切……
+
+自学编程，也算是一举两得了！
+
+（五）
+当然，把编程作为 “讲解如何习得自学能力的例子”，实在是太好了的最重要原因在于，自学编程对任何人来说都绝对是：
+
+现实的（Practical）
+可行动的（Actionable）
+并且还是真正是可达成的（Achievable）
+最重要的就是最后这个 “可达成的”。虽然对读者和作者来说，一个做到没那么容易，另一个讲清楚也非常难，但是，既然是所有人都 “可达成的”，总得试试吧？但是，请相信我，这事比减肥容易多了 —— 毕竟，你不是在跟基因作斗争。
+
+这只是个起点。
+
+尽量只靠阅读学会编程，哪怕仅仅是入门，这个经历和经验都是极为宝贵的。
+
+自学是门手艺。只不过它并不像卖油翁的手艺那样很容易被别人看到，也不是很容易拿它出来炫耀 —— 因为别人看不到么！然而，经年累月，就不一样了，那好处管他别人知不知道，自己却清楚得很！
+
+你身边总有些人能把别人做不好的事做得极好，你一定很羡慕。可他们为什么能做到那样呢？很简单啊，他们的自学能力强，所以他们能学会大多数自学能力差的人终生学不到的东西。而且他们的自学能力会越来越强，每学会一样新东西，他们就积累了更多自学经验，难以对外言表的经验，再遇到什么新东西，相对没那么吃力。
+
+另外，自学者最大的感受就是万物相通。他们经常说的话有这么一句：“…… 到最后，都是一样的呢。”
+
+（六）
+最后一个好处，一句话就能说清楚，并且，随着时间的推移，你对此的感触会越来越深：
+
+在这个领域里，自学的人最多……
+
+没有什么比这句话更令人舒心的了：相信我，你并不孤独。
 
 第十三章 13
 13
@@ -499,6 +1277,89 @@ A
 F a fa fjhas fh skhfash 
 S faf asfsfsfsa
 
+只靠阅读习得新技能
+习得自学能力的终极目标就是：
+
+有能力只靠阅读就能习得新技能。
+
+退而求其次，是 “尽量只靠阅读就习得新技能” —— 当然，刚开始的时候可能需要有人陪伴，一起学，一起讨论，一起克服困难…… 但就是要摆脱 “没人教，没人带，没人逼，就彻底没戏” 的状态。
+
+小时候总是听大人说：
+
+不是什么东西都可以从书本里学到的……
+
+一度，我觉得他们说的有道理。再后来，隐约感觉这话哪儿有毛病，但竟然又感觉无力反驳……
+
+那时，真被他们忽悠到了；后来，也差点被他们彻底忽悠到！
+
+幸亏后来我渐渐明白，且越来越相信：
+
+自己生活工作学习上遇到的所有疑问，书本里应该都有答案 —— 起码有所参考。
+
+“不是什么东西都可以从书本里学到的……” 这话听起来那么有道理，只不过是因为自己读书不够多、不够对而已。
+
+过了 25 岁，我放弃了读小说，虚构类作品，我只选择看电影；而非虚构类作品，我选择尽量只读英文书，虽然那时候买起来很贵也很费劲，但我觉得值 —— 英文世界和中文世界的文化风格略有不同。在英文世界里，你看到的正常作者好像更多地把 “通俗易懂”、“逻辑严谨” 当作最基本的素养；而在中文世界里，好像 “故弄玄虚”、“偷梁换柱” 更常见一些；在英文世界里，遇到读不懂的东西可以很平静地接受自己暂时的愚笨，心平气和地继续努力就好；在中文世界里，遇到装神弄鬼欺世盗名的，弄不好最初根本没认出来，到最后跟 “认贼作父” 一样令人羞辱难当不堪回首。
+
+说实话，我真觉得这事跟崇洋媚外没什么关系。我是朝鲜族，去过韩国，真觉得韩国的书更没法看（虽然明显是个人看法）…… 2015 年年底，我的律师告诉我，美国移民就快帮我办下来了，可那时候我开始觉得美国政府也各种乱七八糟，于是决定停止办理。我是个很宅的人，除了餐馆基本上哪儿都不去，陪家人朋友出去所谓旅游的时候，我只不过是换个房间继续宅着…… 可这些都不是重点，重点在于：
+
+知识原本就应该无国界…… 不是吗？不是吗！
+
+再说，这些年我其实还读了不少中国人写的英文书呢，比如，张纯如的书很值得一看；郑念的 Life and Death in Shanghai，真的很好很好。我也读了不少老外写的关于中国的书 —— 这些年我一直推荐费正清的剑桥中国史（The Cambridge History of China），当然有中文版的，不过，能读英文版的话感受很不一样。
+
+当然，英文书里同样烂书也很多，烂作者也同样一大堆，胡说八道欺世盗名的一大串…… 但总体上来看，非小说类著作质量的确更高一点。
+
+还有，英语在科学研究领域早已成为 “主导语言”（Dominant Language）也是不争的事实。不过，英语成为主导语言的结果，就是英语本身被不断 “强奸”，外来语越来越多，“Long time no see” 被辞典收录就是很好的例子。事实上，英语本身就是个大杂烩……
+
+Joseph M. Williams’ research visualized (top 10,000 words).
+
+读书越多越明白读书少会被忽悠…… 很多人真的会大头捣蒜一般地认同 “不是什么东西都可以从书本里学到的……”
+
+另外，很多人在如此教导小朋友的时候，往往是因为 “人心叵测” 啊，“江湖险恶” 啊，所以害怕小朋友吃亏。可事实上，如若说，人间那些勾心斗角的事貌似从书本里学不来的话，其实也不过还是历史书看少了 —— 勾心斗角的套路历史上全都被反复用过了。倒是有本中文书值得吐血推荐，民国时代的作者连阔如先生写的《江湖丛谈》，粗略扫过你就知道了，江湖那点事，也早就有人给你里里外外翻了个遍…… 只不过这书不太容易买到就是了。
+
+我也遇到过这样的反驳：
+
+书本能教会你做生意吗？！
+
+说实话，去回驳这个反驳还真挺难，因为反驳者是脑容量特别有限才能说出这种话 —— 世界上有那么多商学院都是干嘛的？搞得它们好像不存在一样。首先，它们的存在说明，商业这事是有迹可循的，是可学习的；其次，商业类书籍非常多，是非虚构类书籍中的一大品类；更为重要的是，做生意这事，看谁做 —— 有本事（即，比别人拥有更多技能）的人做生意和没本事的人做生意，用同样的商业技巧，能有一样的效果吗？最后啊，这世界在这方面从来没有变过：一技傍身的人，总是不愁生活……
+
+更为重要的是，这才几年啊，互联网本身已经成了一本大书 —— 关于全世界的一整本大书。仅仅是 10 多年前，大约在 2008 年前后，经过几年发展的 Wikipedia 被众多西方大学教授们群起而攻，指责它错误百出…… 可现在呢？Wikipedia 好像有天生的自我修复基因，它变得越来越值得信赖，越来越好用。
+
+七零后八零后长大的过程中，还经常被父母无故呵斥：“怎么就你事这么多！” 或者无奈敷衍：“等你长大了就明白了……” 九零后、零零后呢？他们很少有什么疑问需要向父母提问，直接问搜索引擎，效果就是父母们天天被惊到甚至吓到。最近两年更不一样了，我有朋友在旧金山生活，他的孩子整天跟 Google 说话，有点什么问题，就直接 “Hey Google...”
+
+我长大的那个年代，一句 “通过阅读了解世界” 好像还是很抽象甚至很不现实的话，现在呢？现在，除了阅读之外，你还能想出什么更有效的方法吗？反正我想不出。
+
+有个很有趣的现象：
+
+人么，只要识字，就忍不住阅读……
+
+只不过，人们阅读的选择很不同而已。有自学能力的人和没有自学能力的人，在这一点上很容易分辨：
+
+有自学能力的人，选择阅读 “有繁殖能力” 的内容；
+没有自学能力的人，阅读只是为了消磨时光……
+我把那些能给你带来新视野，能让你改变思考模式，甚至能让你拥有一项新技能的内容称之为 “有繁殖能力的内容”。
+
+人都一样，拥有什么样的能力之后，就会忍不住去用，甚至总是连下意识中也要用。
+
+那些靠阅读机器算法推送的内容而杀时间的人，恰恰就是因为他们有阅读能力才去不断地读，读啊读，像是那只被打了兴奋剂后来死在滚轮上的小白鼠。如果这些人哪怕有一点点自学能力，那么他们很快就会分辨出自己正在阅读的东西不会刺激自己的产出，只会消磨自己的时间；那么，他们就会主动放弃阅读那些杀时间的内容，把那时间和精力自然而然地用在筛选有繁殖能力的内容，让自己进步，让自己习得更多技能上去了。
+
+所以，只要你有一次 “只靠阅读习得一项新技能” 的经验，你就变成另外一个人了。你会不由自主、哪怕下意识里都会去运用你新习得的能力…… 从这个角度看，自学很上瘾！能上瘾，却不仅无害，还好处无穷，这样的好事，恐怕也就这一个了罢。
+
+我有过只靠阅读学会游泳的经历…… 听起来不像真的吧？更邪门的是，罗永浩同学的蛙泳，是我站在游泳池边，仅靠言语讲解，就让他从入水就扑腾开始三十分钟之内可以开始蛙泳的 —— 虽然当天他第一次蛙泳，一个来回五十米都坚持不下来。
+
+仅靠阅读学会新技能不仅是可能的，并且，你随后会发现的真相是：
+
+绝大多数情况下，没人能教你，也不一定有人愿意教你…… 到最后，你想学会或你必须学会什么东西的时候，你只能靠阅读！ —— 因为其实你谁都靠不上……
+
+我有很多偶像，英国数学家乔治・布尔就是其中一个 —— 因为他就是个基本上只靠阅读自学成才的人。十八、九岁，就自学了微积分 —— 那是将近两百年前，没有 Google，没有 Wikipedia…… 然后他还自己创办了学校，给自己打工…… 从来没有上过大学，后来却被皇家学院聘请为该学院第一个数学教授。然后，人家发明的布尔代数，在百年之后引发了信息革命…… 达芬奇也是这样的人 —— 要说惨，他比所有人都惨…… 因为几乎从一开始就貌似没有谁有资格有能力教他。
+
+这些例子都太遥远了。给你讲个我身边的人，我亲自打过很长时间交道的人 —— 此人姓邱，人称邱老板。
+
+邱老板所写的区块链交易所引擎，在 Github 上用的是个很霸气的名字，“貔貅”（英文用了一个生造的词，Peatio）—— 这个 Repo 至 2019 年春节的时候，总计有 2,913 个 Star，有 2,150 个 Fork…… 绝对是全球这个领域中最受关注的开源项目。2017 年 9 月，云币应有关部门要求关闭之前，是全球排名前三的区块链交易所。
+
+邱老板当年上学上到几年级呢？初中未读完，所以，跟他聊天随口说成语是很有负担的，因为他真的可能听不懂…… 然而，他的编程、他的英语，全是自学的…… 学到什么地步呢？学到可以创造极有价值的商业项目的地步。他什么学习班都没上过，全靠阅读 —— 基本上只读互联网这本大书。
+
+讲真，你没有选择，只靠阅读习得新技能，这是你唯一的出路。
+
 第十四章 14
 0
 1
@@ -526,6 +1387,88 @@ sdfasdfsdf
 8
 9
 0
+开始阅读前的一些准备
+内容概要
+关于 Python 编程的第一部分总计 7 章，主要内容概括为：
+
+以布尔值为入口开始理解程序本质
+了解值的分类和运算方法
+简要了解流程控制的原理
+简要了解函数的基本构成
+相对完整地了解字符串的操作
+了解各种容器的基础操作
+简要了解文件的读写操作
+阅读策略
+首先，不要试图一下子就全部搞懂。这不仅很难，在最初的时候也完全没必要。
+
+因为这部分的知识结构中，充满了 “过早引用”。请在第一遍粗略完成第 1 部分中的 E1 ~ E7 之后，再去阅读《如何从容应对 “过早引用”？》。
+
+其次，这一部分，注定要反复阅读若干遍。
+
+在开始之前，要明确这一部分的阅读目标。
+
+这一部分的目标，不是让你读完之后就可以开始写程序；也不是让你读完之后就对编程或者 Python 编程有了完整的了解，甚至不是让你真的学会什么…… 这一部分的目标，只是让你 “脱盲”。
+
+不要以为脱盲是很容易的事情。你看，所有人出生的时候，都天然是 “文盲”；人们要上好多年的学，才能够真正 “脱盲” —— 仔细想想吧，小学毕业的时候，所有人就真的彻底脱盲了吗？
+
+以中文脱盲为例，学字的同时，还要学习笔划；为了学更多的字，要学拼音，要学如何使用《新华字典》……
+
+学会了一些基础字之后，要学更多的词，而后在练习了那么多造词造句之后，依然会经常用错…… 你看，脱盲，和阅读能力强之间距离很长呢；不仅如此，阅读能力强和写作能力强之间的距离更长……
+
+反复阅读这一部分的结果是：
+
+你对基本概念有了一定的了解
+你开始有能力相对轻松地阅读部分官方文档
+你可以读懂一些简单的代码
+仅此而已。
+
+心理建设
+当我们开始学习一项新技能的时候，我们的大脑会不由自主地紧张。可这只不过是多年之间在学校里不断受挫的积累效应 —— 学校里别的地方不一定行，可有个地方特别行：给学生制造全方位、无死角、层层递进的挫败感。
+
+可是，你要永远记住两个字：
+
+别怕！
+
+用四个字也行：
+
+啥也别怕！
+
+六个字也可以：
+
+没什么可怕的！
+
+我遇到最多的孱弱之语大抵是这样的：
+
+我一个文科生……
+
+哈哈，从某个层面望过去，其实吧，编程既不是文科也不是理科…… 它更像是 “手工课”。你越学就越清楚这个事实，它就好像是你做木工一样，学会使用一个工具，再学会使用另外一个工具，其实总共就没多少工具。然后，你更多做的是各种拼接的工作，至于能做出什么东西，最后完全靠你的想象力……
+
+十来岁的孩子都可以学会的东西，你怕什么？
+
+别怕，无论说给自己，还是讲给别人，都是一样的，它可能是人生中最重要的鼓励词。
+
+关于这一部分内容中的代码
+所有的代码，都可以在选中代码单元格（Code Cell）之后，按快捷键 ⇧ ⏎ 或 ^ ⏎ 执行，查看结果。
+
+少量执行结果太长的代码，其输出被设置成了 “Scrolled”，是可以通过触摸板或鼠标滑轮上下滑动的。
+
+为了避免大量使用 print() 才能看到输出结果，在很多的代码单元格中，开头插入了以下代码：
+
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+你可以暂时忽略它们的意义和工作原理。注意：有时，你需要在执行第二次的时候，才能看到全部输出结果。
+
+另外，有少量代码示例，为了让读者每次执行的时候看到不同的结果，使用了随机函数，为其中的变量赋值，比如：
+
+import random
+r = random.randrange(1, 1000)
+同样，你可以暂时忽略它们的意义和工作原理；只需要知道因为有它们在，所以每次执行那个单元格中的代码会有不同的结果就可以了。
+
+如果你不是直接在网站上浏览这本 “书”、或者不是在阅读印刷版，而是在本地自己搭建 Jupyterlab 环境使用，那么请参阅附录《Jupyterlab 的安装与配置》。
+
+注意：尤其需要仔细看看《Jupyterlab 的安装与配置》的《关于 Jupyter lab themes》这一小节 —— 否则，阅读体验会有很大差别。
+
+另外，如果你使用的是 nteract 桌面版 App 浏览 .ipynb 文件，那么有些使用了 input() 函数的代码是无法在 nteract 中执行的。
 
 第十五章 15
 0
@@ -549,5 +1492,43 @@ sdfasdfsdf
 8
 9
 0
-
-
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
