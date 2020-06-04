@@ -164,12 +164,27 @@
 - (void)startReadWithBook:(RKBook *)book {
     RKBook *analysisBook = [self analysisBookContentWithBook:book];
     if (analysisBook) {
-        // 创建阅读页面
-        RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
-        readPageVC.book = analysisBook;
-        readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:readPageVC animated:YES completion:nil];
+        if (book.isSecret) {
+            __weak typeof(self) weakSelf = self;
+            [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"打开书籍" result:^(BOOL success) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf openBook:analysisBook];
+                    });
+                }
+            }];
+        } else {
+            [self openBook:analysisBook];
+        }
     }
+}
+
+- (void)openBook:(RKBook *)book {
+    // 创建阅读页面
+    RKReadPageViewController *readPageVC = [[RKReadPageViewController alloc] init];
+    readPageVC.book = book;
+    readPageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:readPageVC animated:YES completion:nil];
 }
 
 #pragma mark - 点击事件
@@ -206,16 +221,17 @@
     RKBook *book = self.dataArray[indexPath.row];
     cell.book = book;
     
-    NSMutableArray *btns = [NSMutableArray array];
+    // 右侧滑按钮
+    NSMutableArray *rightBtns = [NSMutableArray array];
     // 删除
     NSAttributedString *delete = [[NSAttributedString alloc] initWithString:@"删除"
                                                                attributes:@{
-                                                                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
-                                                                            NSForegroundColorAttributeName: [UIColor whiteColor]
-                                                                            }];
+                                                                   NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
+                                                                   NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                               }];
     // 海棠红
-    [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f03752"] attributedTitle:delete];
-    [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+    [rightBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f03752"] attributedTitle:delete];
+    [cell setRightUtilityButtons:rightBtns WithButtonWidth:80.0f];
     
     
     
@@ -223,20 +239,32 @@
     NSString *topTitle = book.isTop ? @"取消置顶" : @"置顶";
     NSAttributedString *top = [[NSAttributedString alloc] initWithString:topTitle
                                                               attributes:@{
-                                                                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
-                                                                           NSForegroundColorAttributeName: [UIColor whiteColor]
-                                                                           }];
+                                                                  NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium"size:16],
+                                                                  NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                              }];
     
     if (book.isTop) {
         // 香叶红 f1939c
-        [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f07c82"] attributedTitle:top];
-        [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+        [rightBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f07c82"] attributedTitle:top];
+        [cell setRightUtilityButtons:rightBtns WithButtonWidth:80.0f];
     } else {
 
         // 合欢红 f0a1a8
-        [btns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f0a1a8"] attributedTitle:top];
-        [cell setRightUtilityButtons:btns WithButtonWidth:80.0f];
+        [rightBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f0a1a8"] attributedTitle:top];
+        [cell setRightUtilityButtons:rightBtns WithButtonWidth:80.0f];
     }
+    
+    // 左侧滑按钮
+    NSString *secretTitle = book.isSecret ? @"解密":@"加密";
+    NSAttributedString *secret = [[NSAttributedString alloc] initWithString:secretTitle
+                                                                 attributes:@{
+                                                                     NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
+                                                                     NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                                 }];
+    NSMutableArray *leftBtns = [NSMutableArray array];
+    // 海棠红
+    [leftBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"8abcd1"] attributedTitle:secret];
+    [cell setLeftUtilityButtons:leftBtns WithButtonWidth:80.0f];
     
     cell.delegate = self;
     
@@ -305,12 +333,34 @@
     }
 }
 
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
+    RKBook *book = listCell.book;
+    if (index == 0) {
+        book.isSecret = !book.isSecret;
+        if (!book.isSecret) {
+            if ([RKTouchFaceIDUtil canUseFaceID]) {
+                __weak typeof(self) weakSelf = self;
+                [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"是否解密" result:^(BOOL success) {
+                    [[RKFileManager shareInstance] saveBookList:weakSelf.dataArray];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.tableView reloadData];
+                    });
+                }];
+            }
+        } else {
+            [[RKFileManager shareInstance] saveBookList:self.dataArray];
+            [self.tableView reloadData];
+        }
+    }
+}
+
 #pragma mark -- UIViewControllerPreviewingDelegate
 // If you return nil, a preview presentation will not be performed
 - (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location {
     
     // 获取按压的cell所在行，[previewingContext sourceView]就是按压的那个视图
-    NSIndexPath *indexPath = [_tableView indexPathForCell: (UITableViewCell *)[previewingContext sourceView]];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell: (UITableViewCell *)[previewingContext sourceView]];
     
     // 调整不被虚化的范围，按压的那个cell不被虚化
     CGRect rect = CGRectMake(0, 0, self.view.width, 110);
@@ -318,6 +368,11 @@
     
     RKHomeListTableViewCell *cell = (RKHomeListTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     RKLog(@"---- %@ ---- book:%@",NSStringFromCGPoint(location),cell.book.name);
+    
+    if (cell.book.isSecret) {
+        [self unregisterForPreviewingWithContext:previewingContext];
+        return nil;
+    }
     
     RKBook *analysisBook = [self analysisBookContentWithBook:cell.book];
     if (analysisBook) {

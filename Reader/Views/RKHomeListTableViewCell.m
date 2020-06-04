@@ -10,6 +10,7 @@
 
 @interface RKHomeListTableViewCell ()
 
+@property (nonatomic, strong) UIVisualEffectView *blurEffect; /**< 模糊层*/
 @property (nonatomic, strong) UIImageView *coverImage; /**< 封面图*/
 @property (nonatomic, strong) UILabel *name; /**< 书名*/
 @property (nonatomic, strong) UILabel *chapter; /**< 当前章节*/
@@ -115,6 +116,14 @@
         make.right.mas_offset(-5);
         make.top.mas_offset(5);
     }];
+    
+    [bgView addSubview:self.blurEffect];
+    [self.blurEffect mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.coverImage.mas_height);
+        make.left.mas_equalTo(self.coverImage.mas_right);
+        make.right.mas_equalTo(bgView);
+        make.top.mas_equalTo(self.coverImage.mas_top);
+    }];
 }
 
 #pragma mark - setting
@@ -131,6 +140,19 @@
     } else {
         self.topImage.hidden = YES;
     }
+    if (book.isSecret) {
+        self.blurEffect.hidden = NO;
+    } else {
+        self.blurEffect.hidden = YES;
+    }
+}
+
+- (UIVisualEffectView *)blurEffect {
+    if (!_blurEffect) {
+        _blurEffect = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+        _blurEffect.userInteractionEnabled = NO;
+    }
+    return _blurEffect;
 }
 
 @end

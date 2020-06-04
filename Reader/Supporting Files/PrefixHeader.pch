@@ -39,6 +39,7 @@ NSLog(@"%s %d %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 #import "RKFileManager.h" // 文件管理
 #import "RKUserConfig.h" // 用户配置
 #import "RKUtils.h" // 实用类
+#import "RKTouchFaceIDUtil.h" // 权限验证类
 
 #pragma mark - model
 #import "RKModel.h" // model 基类
