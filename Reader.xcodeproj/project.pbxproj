@@ -42,6 +42,7 @@
 		1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */; };
 		1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */; };
 		1AC0C8DF230A9D7C00194C48 /* RKSelectImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */; };
+		1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD836052488F13C00A31BA3 /* RKUtils.m */; };
 		1ADC1BFB240DFC98003C5F4B /* Hanzipen.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,8 @@
 		1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YuppySC-Regular.otf"; sourceTree = "<group>"; };
 		1AC0C8DD230A9D7C00194C48 /* RKSelectImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSelectImageViewController.h; sourceTree = "<group>"; };
 		1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSelectImageViewController.m; sourceTree = "<group>"; };
+		1AD836042488F13C00A31BA3 /* RKUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKUtils.h; sourceTree = "<group>"; };
+		1AD836052488F13C00A31BA3 /* RKUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKUtils.m; sourceTree = "<group>"; };
 		1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hanzipen.ttc; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +230,8 @@
 		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1AD836042488F13C00A31BA3 /* RKUtils.h */,
+				1AD836052488F13C00A31BA3 /* RKUtils.m */,
 				1A56A2562451795400291C2D /* MarqueeView */,
 				1A077624227854CF0073794E /* UserConfig */,
 				1A18892B226D7BB500289476 /* FileManage */,
@@ -549,6 +554,7 @@
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,
 				1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */,
 				1A188924226D7AC300289476 /* RKModel.m in Sources */,
+				1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */,
 				1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */,
 				1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */,
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,

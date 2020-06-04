@@ -92,7 +92,7 @@
 
 - (void)tapAddress:(UITapGestureRecognizer *)gesture {
     UIActivityViewController *acitivityVC = [[UIActivityViewController alloc] initWithActivityItems:@[ self.webUploader.serverURL.absoluteString ] applicationActivities:nil];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:acitivityVC animated:YES completion:nil];
+    [[RKUtils topMostController] presentViewController:acitivityVC animated:YES completion:nil];
 }
 
 #pragma mark - 代理

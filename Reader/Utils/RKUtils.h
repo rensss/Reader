@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RKUtils : NSObject
 
+/// 获取顶端控制器
++ (UIViewController *)topMostController;
+
 @end
 
 NS_ASSUME_NONNULL_END
