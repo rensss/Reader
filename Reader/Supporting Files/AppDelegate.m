@@ -63,6 +63,10 @@
     /*
      当应用进入后台，什么时候会被系统杀死，并不会通知app。那么如果需要什么状态记录的话，需放在此函数中。
      */
+    
+    // 隐藏
+    [RKUserConfig sharedInstance].isUnlock = NO;
+    [RKFileManager shareInstance].isNeedRefresh = YES;
 }
 
 
@@ -89,7 +93,6 @@
 //        }];
     }
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

@@ -141,6 +141,10 @@
         self.topImage.hidden = YES;
     }
     if (book.isSecret) {
+        if ([RKUserConfig sharedInstance].isAlwaysHidden && [RKUserConfig sharedInstance].isUnlock) {
+            self.blurEffect.hidden = YES;
+            return;
+        }
         self.blurEffect.hidden = NO;
     } else {
         self.blurEffect.hidden = YES;

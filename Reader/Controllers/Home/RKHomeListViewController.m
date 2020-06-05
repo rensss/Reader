@@ -47,7 +47,6 @@
     }
 }
 
-
 #pragma mark - 通知
 /// 快速阅读通知
 - (void)didReceiveQuickReadNotification:(NSNotification *)notification {
@@ -168,9 +167,12 @@
             __weak typeof(self) weakSelf = self;
             [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"打开书籍" result:^(BOOL success) {
                 if (success) {
+                    [RKUserConfig sharedInstance].isUnlock = YES;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weakSelf openBook:analysisBook];
                     });
+                } else {
+                    [RKUserConfig sharedInstance].isUnlock = NO;
                 }
             }];
         } else {

@@ -30,6 +30,8 @@
 @synthesize nightAlpha = _nightAlpha;
 
 @synthesize isAutoRead = _isAutoRead;
+@synthesize isAlwaysHidden = _isAlwaysHidden;
+@synthesize isUnlock = _isUnlock;
 @synthesize lastReadBookName = _lastReadBookName;
 
 #pragma mark - lifeCycle
@@ -139,6 +141,20 @@
     _isAutoRead = isAutoRead;
     
     [[NSUserDefaults standardUserDefaults] setBool:isAutoRead forKey:@"isAutoRead"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsAlwaysHidden:(BOOL)isAlwaysHidden {
+    _isAlwaysHidden = isAlwaysHidden;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isAlwaysHidden forKey:@"isAlwaysHidden"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsUnlock:(BOOL)isUnlock {
+    _isUnlock = isUnlock;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isUnlock forKey:@"isUnlock"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -274,6 +290,22 @@
 - (BOOL)isAutoRead {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAutoRead"]) {
         return [[NSUserDefaults standardUserDefaults] boolForKey:@"isAutoRead"];
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isAlwaysHidden {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAlwaysHidden"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isAlwaysHidden"];
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isUnlock {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isUnlock"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isUnlock"];
     } else {
         return NO;
     }

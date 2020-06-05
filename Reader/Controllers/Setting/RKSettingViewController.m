@@ -9,6 +9,8 @@
 #import "RKSettingViewController.h"
 #import "RKBookImprotViewController.h"
 
+#define kSwitchTag 10000
+
 @interface RKSettingViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
@@ -36,11 +38,28 @@
 
 #pragma mark - 事件
 - (void)switchChangeValue:(UISwitch *)switchBtn {
-    if (switchBtn.tag == 10000) {
-        [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
-    }
-    if (switchBtn.tag == 10001) {
-        [RKUserConfig sharedInstance].isAutoRead = switchBtn.on;
+    
+    switch (switchBtn.tag - kSwitchTag) {
+        case 0:
+        {
+            [RKUserConfig sharedInstance].isRefreshTop = switchBtn.on;
+        }
+            break;
+        case 1:
+        {
+            [RKUserConfig sharedInstance].isAutoRead = switchBtn.on;
+        }
+            break;
+        case 2:
+        {
+            [RKUserConfig sharedInstance].isAlwaysHidden = switchBtn.on;
+            [RKUserConfig sharedInstance].isUnlock = YES;
+            [RKUserConfig sharedInstance].isNeedRefreshView = YES;
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -65,7 +84,7 @@
         UISwitch *switchBtn = [[UISwitch alloc] init];
         cell.accessoryView = switchBtn;
         switchBtn.on = [RKUserConfig sharedInstance].isRefreshTop;
-        switchBtn.tag = 10000;
+        switchBtn.tag = kSwitchTag;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -73,7 +92,15 @@
         UISwitch *switchBtn = [[UISwitch alloc] init];
         cell.accessoryView = switchBtn;
         switchBtn.on = [RKUserConfig sharedInstance].isAutoRead;
-        switchBtn.tag = 10001;
+        switchBtn.tag = kSwitchTag + 1;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    if ([self.dataArr[indexPath.row] isEqualToString:@"是否解锁后全部显示"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].isAlwaysHidden;
+        switchBtn.tag = kSwitchTag + 2;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -140,6 +167,7 @@
         _dataArr = [NSMutableArray arrayWithObjects:
                     @"置顶是否按时间排序",
                     @"是否自动阅读",
+                    @"是否解锁后全部显示",
                     @"局域网导入",
                     @"删除全部书籍",
                     nil];
