@@ -50,13 +50,6 @@
             [RKUserConfig sharedInstance].isAutoRead = switchBtn.on;
         }
             break;
-        case 2:
-        {
-            [RKUserConfig sharedInstance].isAlwaysHidden = switchBtn.on;
-            [RKUserConfig sharedInstance].isUnlock = YES;
-            [RKUserConfig sharedInstance].isNeedRefreshView = YES;
-        }
-            break;
             
         default:
             break;
@@ -93,14 +86,6 @@
         cell.accessoryView = switchBtn;
         switchBtn.on = [RKUserConfig sharedInstance].isAutoRead;
         switchBtn.tag = kSwitchTag + 1;
-        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
-    }
-    
-    if ([self.dataArr[indexPath.row] isEqualToString:@"是否解锁后全部显示"]) {
-        UISwitch *switchBtn = [[UISwitch alloc] init];
-        cell.accessoryView = switchBtn;
-        switchBtn.on = [RKUserConfig sharedInstance].isAlwaysHidden;
-        switchBtn.tag = kSwitchTag + 2;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -167,7 +152,6 @@
         _dataArr = [NSMutableArray arrayWithObjects:
                     @"置顶是否按时间排序",
                     @"是否自动阅读",
-                    @"是否解锁后全部显示",
                     @"局域网导入",
                     @"删除全部书籍",
                     nil];

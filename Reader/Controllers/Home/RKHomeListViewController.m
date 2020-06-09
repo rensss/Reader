@@ -261,7 +261,7 @@
     }
     
     // 左侧滑按钮
-    NSString *secretTitle = book.isSecret ? @"解密":@"加密";
+    NSString *secretTitle = book.isSecret ? @"解密":@"隐藏";
     NSAttributedString *secret = [[NSAttributedString alloc] initWithString:secretTitle
                                                                  attributes:@{
                                                                      NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
@@ -341,7 +341,7 @@
             [[RKFileManager shareInstance] saveBookList:bookList];
             [self needReloadData];
         } else {
-            
+            RKAlertMessage(@"需要支持指纹或Face ID解锁", self.view);
         }
     }
 }

@@ -209,7 +209,7 @@
     }
     
     // 左侧滑按钮
-    NSString *secretTitle = book.isSecret ? @"解密":@"加密";
+    NSString *secretTitle = book.isSecret ? @"移出":@"加密";
     NSAttributedString *secret = [[NSAttributedString alloc] initWithString:secretTitle
                                                                  attributes:@{
                                                                      NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
@@ -282,6 +282,7 @@
         }
         
         [[RKFileManager shareInstance] saveBookList:bookList];
+        [RKFileManager shareInstance].isNeedRefresh = YES;
         [self needReloadData];
     }
 }
