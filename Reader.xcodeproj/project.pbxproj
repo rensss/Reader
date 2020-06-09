@@ -42,6 +42,7 @@
 		1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8D9230A41F100194C48 /* RKReadSettingViewController.m */; };
 		1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */; };
 		1AC0C8DF230A9D7C00194C48 /* RKSelectImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */; };
+		1AC349C1248F620400A6CB42 /* RKSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC349C0248F620400A6CB42 /* RKSecretViewController.m */; };
 		1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD836052488F13C00A31BA3 /* RKUtils.m */; };
 		1AD836092488FB2800A31BA3 /* RKTouchFaceIDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */; };
 		1ADC1BFB240DFC98003C5F4B /* Hanzipen.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */; };
@@ -141,6 +142,8 @@
 		1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YuppySC-Regular.otf"; sourceTree = "<group>"; };
 		1AC0C8DD230A9D7C00194C48 /* RKSelectImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSelectImageViewController.h; sourceTree = "<group>"; };
 		1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSelectImageViewController.m; sourceTree = "<group>"; };
+		1AC349BF248F620400A6CB42 /* RKSecretViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSecretViewController.h; sourceTree = "<group>"; };
+		1AC349C0248F620400A6CB42 /* RKSecretViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSecretViewController.m; sourceTree = "<group>"; };
 		1AD836042488F13C00A31BA3 /* RKUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKUtils.h; sourceTree = "<group>"; };
 		1AD836052488F13C00A31BA3 /* RKUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKUtils.m; sourceTree = "<group>"; };
 		1AD836072488FB2800A31BA3 /* RKTouchFaceIDUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKTouchFaceIDUtil.h; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 			children = (
 				1A188919226D79B300289476 /* RKHomeListViewController.h */,
 				1A18891A226D79B300289476 /* RKHomeListViewController.m */,
+				1AC349BF248F620400A6CB42 /* RKSecretViewController.h */,
+				1AC349C0248F620400A6CB42 /* RKSecretViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -566,6 +571,7 @@
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
 				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,
 				1A18892E226D7BC900289476 /* RKFileManage.m in Sources */,
+				1AC349C1248F620400A6CB42 /* RKSecretViewController.m in Sources */,
 				1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */,
 				1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */,
 				1AAF323B230AA796008C5E45 /* RKSelectImageCollectionViewCell.m in Sources */,

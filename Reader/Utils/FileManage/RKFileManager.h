@@ -49,7 +49,14 @@
 
 #pragma mark - 查
 /// 获取首页书籍列表
-- (NSMutableArray *)getHomeList;
+- (NSMutableArray *)getAllBookList;
+
+/// 获取全部书籍列表
+/// @param isSecret 是否包含加密
+- (NSMutableArray *)getAllBookListWithSecret:(BOOL)isSecret;
+
+/// 获取全部加密书籍
+- (NSMutableArray *)getAllSecretBooks;
 
 #pragma mark - func
 /// 书籍解码 返回内容

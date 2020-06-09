@@ -1,25 +1,23 @@
 //
-//  RKHomeListViewController.m
+//  RKSecretViewController.m
 //  Reader
 //
-//  Created by Rzk on 2019/4/22.
-//  Copyright © 2019 Rzk. All rights reserved.
+//  Created by Rzk on 2020/6/9.
+//  Copyright © 2020 Rzk. All rights reserved.
 //
 
-#import "RKHomeListViewController.h"
-#import "RKSettingViewController.h"
+#import "RKSecretViewController.h"
 #import "RKHomeListTableViewCell.h"
 #import "RKReadPageViewController.h"
-#import "RKSecretViewController.h"
 
-@interface RKHomeListViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UIViewControllerPreviewingDelegate>
+@interface RKSecretViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, strong) NSMutableArray *dataArray; /**< 数据源*/
 
 @end
 
-@implementation RKHomeListViewController
+@implementation RKSecretViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,9 +25,6 @@
     self.navigationItem.title = @"Reader";
     
     [self initUI];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveQuickReadNotification:) name:RKShortcutQuickReadItemType object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAutoReadNotification:) name:RKAutoReadNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,34 +43,8 @@
     }
 }
 
-#pragma mark - 通知
-/// 快速阅读通知
-- (void)didReceiveQuickReadNotification:(NSNotification *)notification {
-    [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-}
-
-- (void)didReceiveAutoReadNotification:(NSNotification *)notification {
-    
-    RKBook *autoRead;
-    for (RKBook *book in self.dataArray) {
-        if ([book.name isEqualToString:[RKUserConfig sharedInstance].lastReadBookName]) {
-            autoRead = book;
-        }
-    }
-    if (autoRead) {
-        [self startReadWithBook:autoRead];        
-    }
-}
-
-#pragma mark - 函数
-/// 布局UI
+#pragma mark - func
 - (void)initUI {
-    // 设置按钮
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"设置"] style:UIBarButtonItemStylePlain target:self action:@selector(settingClick)];
-    
-    // 加密
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"锁定"] style:UIBarButtonItemStylePlain target:self action:@selector(secretClick)];
-    
     UITableView *tableView = [UITableView new];
     self.tableView = tableView;
     [self.view addSubview:self.tableView];
@@ -147,7 +116,7 @@
     // 原数组
     NSMutableArray *books = self.dataArray;
     // 新数组
-    self.dataArray = [[RKFileManager shareInstance] getAllBookListWithSecret:NO];
+    self.dataArray = [[RKFileManager shareInstance] getAllSecretBooks];
     
     // 原数组加载过的内容赋值到新数组
     for (RKBook *originBook in books) {
@@ -179,28 +148,7 @@
     [self presentViewController:readPageVC animated:YES completion:nil];
 }
 
-#pragma mark - 点击事件
-- (void)settingClick {
-    RKSettingViewController *settingVC = [RKSettingViewController new];
-    [self.navigationController pushViewController:settingVC animated:YES];
-}
-
-- (void)secretClick {
-    if ([RKTouchFaceIDUtil canUseTouchID] || [RKTouchFaceIDUtil canUseFaceID]) {
-        __weak typeof(self) weakSelf = self;
-        [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"Unlock" result:^(BOOL success) {
-            if (success) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    RKSecretViewController *secretVC = [RKSecretViewController new];
-                    [weakSelf.navigationController pushViewController:secretVC animated:YES];
-                });
-            }
-        }];
-    }
-}
-
-#pragma mark - delegate
-#pragma mark -- UITableViewDataSource
+#pragma mark - 代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -308,13 +256,11 @@
     }
     
     if (index == 1) {
-        book.isTop = !book.isTop;
-        
         NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
         
         for (RKBook *subBook in bookList) {
             if ([subBook.bookID isEqualToString:book.bookID]) {
-                subBook.isTop = book.isTop;
+                subBook.isTop = !book.isTop;
             }
         }
         
@@ -324,25 +270,19 @@
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
-    
     RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
     RKBook *book = listCell.book;
-    
     if (index == 0) {
-        if ([RKTouchFaceIDUtil canUseTouchID] || [RKTouchFaceIDUtil canUseFaceID]) {
-            NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
-            
-            for (RKBook *subBook in bookList) {
-                if ([subBook.bookID isEqualToString:book.bookID]) {
-                    subBook.isSecret = !book.isSecret;
-                }
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
+        
+        for (RKBook *subBook in bookList) {
+            if ([subBook.bookID isEqualToString:book.bookID]) {
+                subBook.isSecret = !book.isSecret;
             }
-            
-            [[RKFileManager shareInstance] saveBookList:bookList];
-            [self needReloadData];
-        } else {
-            
         }
+        
+        [[RKFileManager shareInstance] saveBookList:bookList];
+        [self needReloadData];
     }
 }
 
@@ -385,7 +325,7 @@
 #pragma mark - getting
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
-        _dataArray = [[RKFileManager shareInstance] getAllBookListWithSecret:NO];
+        _dataArray = [[RKFileManager shareInstance] getAllSecretBooks];
     }
     return _dataArray;
 }

@@ -461,10 +461,11 @@ UIGestureRecognizerDelegate
                 }
             }
         }
+        if (!self.book.isSecret) {
+            [RKUserConfig sharedInstance].lastReadBookName = self.book.name;
+        }
         
-        [RKUserConfig sharedInstance].lastReadBookName = self.book.name;
-        
-        NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
         
         for (RKBook *subBook in bookList) {
             if ([subBook.bookID isEqualToString:self.book.bookID]) {
@@ -506,7 +507,7 @@ UIGestureRecognizerDelegate
         UIPreviewAction *deleteAnalysisAction = [UIPreviewAction actionWithTitle:@"删除缓存" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             RKLog(@"---- 删除缓存");
             
-            NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+            NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
             
             for (RKBook *subBook in bookList) {
                 if ([subBook.bookID isEqualToString:weakSelf.book.bookID]) {

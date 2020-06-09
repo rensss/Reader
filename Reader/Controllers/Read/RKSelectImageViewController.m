@@ -57,7 +57,7 @@
     }
     
     if (self.type == RKSelectImageTypeCoverImage) {
-        NSMutableArray *bookList = [[RKFileManager shareInstance] getHomeList];
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
         
         for (RKBook *subBook in bookList) {
             if ([subBook.bookID isEqualToString:self.book.bookID]) {

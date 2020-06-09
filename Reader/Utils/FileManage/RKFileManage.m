@@ -199,7 +199,7 @@ static RKFileManager *_fileManager;
 
 /// 删除解析文件
 - (void)deleteAnalysisWithName:(NSString *)name {
-    NSMutableArray *arr = [self getHomeList];
+    NSMutableArray *arr = [self getAllBookList];
     RKBook *deleteBook;
     for (RKBook *book in arr) {
         if ([book.name isEqualToString:name]) {
@@ -281,7 +281,7 @@ static RKFileManager *_fileManager;
  @return 首页列表
  */
 - (NSMutableArray *)updateWithBook:(RKBook *)book {
-    NSMutableArray *bookList = [self getHomeList];
+    NSMutableArray *bookList = [self getAllBookList];
     NSInteger index = 0;
     for (RKBook *subBook in bookList) {
         index++;
@@ -322,6 +322,13 @@ static RKFileManager *_fileManager;
         if (!book1.isTop && book2.isTop) {
             return NSOrderedDescending;
         }
+        if (book1.lastReadDate == book2.lastReadDate && book1.lastReadDate == 0) {
+            if (book1.addDate > book2.addDate) {
+                return NSOrderedAscending;
+            } else {
+                return NSOrderedDescending;
+            }
+        }
         if (book1.lastReadDate > book2.lastReadDate) {
             return NSOrderedAscending;
         } else {
@@ -347,9 +354,10 @@ static RKFileManager *_fileManager;
     [bookDicts writeToFile:kHomeBookListsPath atomically:YES];
 //    RKLog(@"---- save:%@",bookDicts);
 }
+
 #pragma mark - 查
-/// 获取首页书籍列表
-- (NSMutableArray *)getHomeList {
+/// 获取全部书籍列表
+- (NSMutableArray *)getAllBookList {
     NSMutableArray *bookList = [[NSMutableArray alloc] initWithContentsOfFile:kHomeBookListsPath];
     if (!bookList) {
         bookList = [NSMutableArray array];
@@ -358,6 +366,44 @@ static RKFileManager *_fileManager;
         for (NSDictionary *dict in bookList) {
             RKBook *book = [RKBook mj_objectWithKeyValues:dict];
             [books addObject:book];
+        }
+        return books;
+    }
+    return bookList;
+}
+
+- (NSMutableArray *)getAllBookListWithSecret:(BOOL)isSecret {
+    NSMutableArray *bookList = [[NSMutableArray alloc] initWithContentsOfFile:kHomeBookListsPath];
+    if (!bookList) {
+        bookList = [NSMutableArray array];
+    } else {
+        NSMutableArray *books = [NSMutableArray array];
+        for (NSDictionary *dict in bookList) {
+            RKBook *book = [RKBook mj_objectWithKeyValues:dict];
+            if (isSecret) {
+                [books addObject:book];
+            } else {
+                if (book.isSecret) continue;
+                [books addObject:book];
+            }
+        }
+        return books;
+    }
+    return bookList;
+}
+
+/// 获取全部加密书籍
+- (NSMutableArray *)getAllSecretBooks {
+    NSMutableArray *bookList = [[NSMutableArray alloc] initWithContentsOfFile:kHomeBookListsPath];
+    if (!bookList) {
+        bookList = [NSMutableArray array];
+    } else {
+        NSMutableArray *books = [NSMutableArray array];
+        for (NSDictionary *dict in bookList) {
+            RKBook *book = [RKBook mj_objectWithKeyValues:dict];
+            if (book.isSecret) {
+                [books addObject:book];
+            }
         }
         return books;
     }
