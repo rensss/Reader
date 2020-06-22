@@ -49,6 +49,16 @@
         make.left.equalTo(bgView).mas_offset(10);
     }];
     
+    UIImageView *topImage = [UIImageView new];
+    self.topImage = topImage;
+    [bgView addSubview:topImage];
+    topImage.image = [UIImage imageNamed:@"top"];
+    [topImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(18, 18));
+        make.right.mas_offset(-5);
+        make.top.mas_offset(5);
+    }];
+    
     UILabel *name = [UILabel new];
     self.name = name;
     [bgView addSubview:name];
@@ -58,7 +68,7 @@
     name.font = [UIFont systemFontOfSize:16];
 	[name mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.mas_offset(10);
-		make.right.mas_offset(-10);
+        make.right.mas_equalTo(topImage.mas_left).mas_offset(-5);
 		make.left.equalTo(coverImage.mas_right).mas_offset(8);
 	}];
     
@@ -105,16 +115,6 @@
 //    [sub mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedItemLength:16 leadSpacing:10 tailSpacing:10];
     // 固定每个间隔的量
 //    [sub mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:5 leadSpacing:10 tailSpacing:10];
-    
-    UIImageView *topImage = [UIImageView new];
-    self.topImage = topImage;
-    [bgView addSubview:topImage];
-    topImage.image = [UIImage imageNamed:@"top"];
-    [topImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(18, 18));
-        make.right.mas_offset(-5);
-        make.top.mas_offset(5);
-    }];
 }
 
 #pragma mark - setting
