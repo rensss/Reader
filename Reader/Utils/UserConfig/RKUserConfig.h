@@ -45,9 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isAutoRead; /**< 是否自动阅读*/
 
-@property (nonatomic, assign) BOOL isAlwaysHidden; /**< 是否一直隐藏加密*/
-@property (nonatomic, assign) BOOL isUnlock; /**< 是否已解锁*/
-
 @property (nonatomic, copy) NSString *lastReadBookName; /**< 最近阅读*/
 
 /// 用户设置单例

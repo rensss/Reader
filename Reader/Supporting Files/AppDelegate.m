@@ -65,7 +65,6 @@
      */
     
     // 隐藏
-    [RKUserConfig sharedInstance].isUnlock = NO;
     [RKFileManager shareInstance].isNeedRefresh = YES;
 }
 

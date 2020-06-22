@@ -30,8 +30,7 @@
 @synthesize nightAlpha = _nightAlpha;
 
 @synthesize isAutoRead = _isAutoRead;
-@synthesize isAlwaysHidden = _isAlwaysHidden;
-@synthesize isUnlock = _isUnlock;
+
 @synthesize lastReadBookName = _lastReadBookName;
 
 #pragma mark - lifeCycle
@@ -141,20 +140,6 @@
     _isAutoRead = isAutoRead;
     
     [[NSUserDefaults standardUserDefaults] setBool:isAutoRead forKey:@"isAutoRead"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)setIsAlwaysHidden:(BOOL)isAlwaysHidden {
-    _isAlwaysHidden = isAlwaysHidden;
-    
-    [[NSUserDefaults standardUserDefaults] setBool:isAlwaysHidden forKey:@"isAlwaysHidden"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)setIsUnlock:(BOOL)isUnlock {
-    _isUnlock = isUnlock;
-    
-    [[NSUserDefaults standardUserDefaults] setBool:isUnlock forKey:@"isUnlock"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
