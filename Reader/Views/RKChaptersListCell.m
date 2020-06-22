@@ -41,6 +41,7 @@
 }
 
 #pragma mark - 代理
+#pragma mark -- RKMarqueeViewDelegate
 - (NSUInteger)numberOfDataForMarqueeView:(RKMarqueeView *)marqueeView {
     return 1;
 }

@@ -120,7 +120,8 @@
     [navBar addSubview:self.chapterLabel];
     [self.chapterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(closeBtn.mas_centerY);
-        make.centerX.mas_equalTo(navBar.mas_centerX);
+        make.left.mas_equalTo(closeBtn.mas_right);
+        make.right.mas_offset(-24);
     }];
     
     // 底部view
@@ -627,6 +628,9 @@
 - (UILabel *)chapterLabel {
     if (!_chapterLabel) {
         _chapterLabel = [[UILabel alloc] init];
+        _chapterLabel.numberOfLines = 2;
+        _chapterLabel.minimumScaleFactor = 8/18.0;
+        _chapterLabel.adjustsFontSizeToFitWidth = YES;
         _chapterLabel.textColor = [UIColor whiteColor];
         _chapterLabel.font = [UIFont systemFontOfSize:18];
         _chapterLabel.textAlignment = NSTextAlignmentCenter;
