@@ -32,6 +32,7 @@
 @synthesize isAutoRead = _isAutoRead;
 
 @synthesize lastReadBookName = _lastReadBookName;
+@synthesize isSecretAutoOpen = _isSecretAutoOpen;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -141,6 +142,13 @@
     
     [[NSUserDefaults standardUserDefaults] setBool:isAutoRead forKey:@"isAutoRead"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsSecretAutoOpen:(BOOL)isSecretAutoOpen {
+	_isSecretAutoOpen = isSecretAutoOpen;
+	
+	[[NSUserDefaults standardUserDefaults] setBool:isSecretAutoOpen forKey:@"isSecretAutoOpen"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setLastReadBookName:(NSString *)lastReadBookName {
@@ -294,6 +302,14 @@
     } else {
         return NO;
     }
+}
+
+- (BOOL)isSecretAutoOpen {
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isSecretAutoOpen"]) {
+		return [[NSUserDefaults standardUserDefaults] boolForKey:@"isSecretAutoOpen"];
+	} else {
+		return NO;
+	}
 }
 
 - (NSString *)lastReadBookName {

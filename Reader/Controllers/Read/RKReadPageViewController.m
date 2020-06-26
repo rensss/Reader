@@ -461,9 +461,8 @@ UIGestureRecognizerDelegate
                 }
             }
         }
-        if (!self.book.isSecret) {
-            [RKUserConfig sharedInstance].lastReadBookName = self.book.name;
-        }
+		
+		[RKUserConfig sharedInstance].lastReadBookName = self.book.name;
         
         NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
         

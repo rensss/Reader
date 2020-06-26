@@ -48,7 +48,7 @@
 - (NSMutableArray *)updateWithBook:(RKBook *)book;
 
 #pragma mark - 查
-/// 获取首页书籍列表
+/// 获取全部书籍列表
 - (NSMutableArray *)getAllBookList;
 
 /// 获取全部书籍列表

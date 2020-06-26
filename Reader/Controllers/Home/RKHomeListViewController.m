@@ -55,15 +55,30 @@
 }
 
 - (void)didReceiveAutoReadNotification:(NSNotification *)notification {
-    
+	RKUserConfig *config = [RKUserConfig sharedInstance];
     RKBook *autoRead;
-    for (RKBook *book in self.dataArray) {
-        if ([book.name isEqualToString:[RKUserConfig sharedInstance].lastReadBookName]) {
-            autoRead = book;
+    for (RKBook *book in [[RKFileManager shareInstance] getAllBookList]) {
+        if ([book.name isEqualToString:config.lastReadBookName]) {
+			if (book.isSecret && !config.isSecretAutoOpen) {
+				[self didReceiveQuickReadNotification:nil];
+				return;
+			}
+			autoRead = book;
         }
     }
     if (autoRead) {
-        [self startReadWithBook:autoRead];        
+		if (autoRead.isSecret) {
+			__weak typeof(self) weakSelf = self;
+			[RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"Check Auth" result:^(BOOL success) {
+				if (success) {
+					dispatch_async(dispatch_get_main_queue(), ^{
+						[weakSelf startReadWithBook:autoRead];						
+					});
+				}
+			}];
+		} else {
+			[self startReadWithBook:autoRead];
+		}
     }
 }
 
