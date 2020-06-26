@@ -11,7 +11,7 @@
 //#import <IOKit/IOPowerSources.h>
 
 //IOPowerSources.h，IOPSKeys.h，IOKit
-#define kFontSize 12
+#define kFontSize 12.0
 
 @interface RKReadStatusBar()
 
@@ -41,36 +41,41 @@
         [self addSubview:self.time];
         [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
-            make.left.equalTo(self).mas_offset(3);
-            make.bottom.equalTo(self).mas_offset(-1);
+            make.left.mas_equalTo(self).mas_offset(3);
+            make.bottom.mas_equalTo(self).mas_offset(-1);
         }];
         
         [self addSubview:self.batteryNum];
         [self.batteryNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
-            make.top.equalTo(self).mas_offset(1);
-            make.left.equalTo(self).mas_offset(3);
+            make.top.mas_equalTo(self).mas_offset(1);
+            make.left.mas_equalTo(self).mas_offset(3);
         }];
         
         [self addSubview:self.batteryImage];
         [self.batteryImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(7);
-            make.centerY.equalTo(self.batteryNum);
-            make.left.equalTo(self.batteryNum.mas_right).mas_offset(3);
-        }];
-        
-        [self addSubview:self.name];
-        [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self);
-            make.centerY.equalTo(self);
+            make.centerY.mas_equalTo(self.batteryNum);
+            make.left.mas_equalTo(self.batteryNum.mas_right).mas_offset(3);
         }];
         
         [self addSubview:self.pageNum];
         [self.pageNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self).mas_offset(-3);
-            make.centerY.equalTo(self);
+            make.right.mas_equalTo(self).mas_offset(-3);
+            make.centerY.mas_equalTo(self);
         }];
-        
+		
+		[self addSubview:self.name];
+        [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
+			make.height.mas_equalTo(self);
+			make.centerY.mas_equalTo(self);
+			make.right.mas_equalTo(self.pageNum.mas_left).mas_offset(-5);
+			make.left.mas_equalTo(self.batteryImage.mas_right).mas_offset(5);
+        }];
+		
+		[self.batteryImage setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		[self.name setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+		
         [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveBatteryStateDidChangeNotification:) name:UIDeviceBatteryStateDidChangeNotification object:nil];
@@ -186,7 +191,7 @@
     
     [self.updateTime fire];
     
-    self.name.text = [NSString stringWithFormat:@"%@(%.2f%%)",book.name,book.progress*100];
+    self.name.text = [NSString stringWithFormat:@"%@ (%.2f%%)",book.name,book.progress*100];
     
     self.pageNum.text = [NSString stringWithFormat:@"%ld/%ld",(long)book.currentChapter.page + 1,(long)book.currentChapter.allPages];
     
@@ -227,7 +232,11 @@
 - (UILabel *)name {
     if (!_name) {
         _name = [[UILabel alloc] init];
-        _name.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize];
+		_name.numberOfLines = 2;
+		_name.adjustsFontSizeToFitWidth = YES;
+		_name.minimumScaleFactor = 7/kFontSize;
+		_name.textAlignment = NSTextAlignmentCenter;
+		_name.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize];
     }
     return _name;
 }
