@@ -23,16 +23,44 @@
 
 #import <Foundation/Foundation.h>
 
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/ScopedLock.hpp
 class CScopedLock {
     NSRecursiveLock *m_oLock;
 
 public:
     CScopedLock(NSRecursiveLock *oLock) : m_oLock(oLock) { [m_oLock lock]; }
+=======
+MMKV_NAMESPACE_BEGIN
+
+class MLockPtr {
+    size_t m_lockDownSize;
+    uint8_t *m_lockedPtr;
+
+public:
+    MLockPtr(void *ptr, size_t size);
+    MLockPtr(MLockPtr &&other);
+
+    ~MLockPtr();
+>>>>>>> update pod:Pods/MMKVCore/Core/MMKV_OSX.h
 
     ~CScopedLock() {
         [m_oLock unlock];
         m_oLock = nil;
     }
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/ScopedLock.hpp
 };
 
 #endif /* ScopedLock_h */
+=======
+
+    // just forbid it for possibly misuse
+    explicit MLockPtr(const MLockPtr &other) = delete;
+    MLockPtr &operator=(const MLockPtr &other) = delete;
+};
+
+std::pair<bool, MLockPtr> guardForBackgroundWriting(void *ptr, size_t size);
+
+MMKV_NAMESPACE_END
+
+#endif
+>>>>>>> update pod:Pods/MMKVCore/Core/MMKV_OSX.h

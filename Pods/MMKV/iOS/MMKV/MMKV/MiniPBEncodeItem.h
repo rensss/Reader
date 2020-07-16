@@ -22,7 +22,17 @@
 
 #ifdef __cplusplus
 
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/MiniPBEncodeItem.h
 enum MiniPBEncodeItemType {
+=======
+#include "MMBuffer.h"
+#include <cstdint>
+#include <memory.h>
+
+namespace mmkv {
+
+enum PBEncodeItemType {
+>>>>>>> update pod:Pods/MMKVCore/Core/PBEncodeItem.hpp
     PBEncodeItemType_None,
     PBEncodeItemType_NSString,
     PBEncodeItemType_NSData,
@@ -39,6 +49,7 @@ struct MiniPBEncodeItem {
         void *tmpObjectValue; // this object should release on dealloc
     } value;
 
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/MiniPBEncodeItem.h
     MiniPBEncodeItem() : type(PBEncodeItemType_None), compiledSize(0), valueSize(0) {
         memset(&value, 0, sizeof(value));
     }
@@ -70,16 +81,32 @@ struct MiniPBEncodeItem {
         }
 
         return *this;
+=======
+    PBEncodeItem() : type(PBEncodeItemType_None), compiledSize(0), valueSize(0) { memset(&value, 0, sizeof(value)); }
+
+#ifndef MMKV_APPLE
+    // opt std::vector.push_back() on slow_path
+    PBEncodeItem(PBEncodeItem &&other) = default;
+#else
+    // opt std::vector.push_back() on slow_path
+    PBEncodeItem(PBEncodeItem &&other)
+        : type(other.type), compiledSize(other.compiledSize), valueSize(other.valueSize), value(other.value) {
+        // omit unnecessary CFRetain() & CFRelease()
+        other.type = PBEncodeItemType_None;
+>>>>>>> update pod:Pods/MMKVCore/Core/PBEncodeItem.hpp
     }
 
     ~MiniPBEncodeItem() {
         if (type == PBEncodeItemType_NSString) {
-            if (value.tmpObjectValue != nullptr) {
+            if (value.tmpObjectValue) {
                 CFRelease(value.tmpObjectValue);
-                value.tmpObjectValue = nullptr;
             }
         }
     }
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/MiniPBEncodeItem.h
+=======
+#endif // MMKV_APPLE
+>>>>>>> update pod:Pods/MMKVCore/Core/PBEncodeItem.hpp
 };
 
 #endif

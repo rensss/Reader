@@ -42,6 +42,22 @@
 #include "openssl_aes.h"
 #include "openssl_aes_locl.h"
 
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/aes/openssl/openssl_aes_core.cpp
+=======
+#ifndef MMKV_DISABLE_CRYPT
+
+#if (__ARM_MAX_ARCH__ > 7) && defined(MMKV_ANDROID)
+
+aes_set_encrypt_t AES_set_encrypt_key = openssl::AES_C_set_encrypt_key;
+aes_set_decrypt_t AES_set_decrypt_key = openssl::AES_C_set_decrypt_key;
+aes_encrypt_t AES_encrypt = openssl::AES_C_encrypt;
+aes_encrypt_t AES_decrypt = openssl::AES_C_decrypt;
+
+#endif // (__ARM_MAX_ARCH__ > 7 && defined(MMKV_ANDROID)
+
+#if (__ARM_MAX_ARCH__ <= 0) || (__ARM_MAX_ARCH__ > 7 && defined(MMKV_ANDROID))
+
+>>>>>>> update pod:Pods/MMKVCore/Core/aes/openssl/openssl_aes_core.cpp
 namespace openssl {
 
 /*-
@@ -321,9 +337,12 @@ static const u32 Te3[256] = {
     0x4141c382U, 0x9999b029U, 0x2d2d775aU, 0x0f0f111eU,
     0xb0b0cb7bU, 0x5454fca8U, 0xbbbbd66dU, 0x16163a2cU,
 };
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/aes/openssl/openssl_aes_core.cpp
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored"-Wunused-variable"
+=======
+>>>>>>> update pod:Pods/MMKVCore/Core/aes/openssl/openssl_aes_core.cpp
 static const u32 Td0[256] = {
     0x51f4a750U, 0x7e416553U, 0x1a17a4c3U, 0x3a275e96U,
     0x3bab6bcbU, 0x1f9d45f1U, 0xacfa58abU, 0x4be30393U,
@@ -622,7 +641,10 @@ static const u8 Td4[256] = {
     0x17U, 0x2bU, 0x04U, 0x7eU, 0xbaU, 0x77U, 0xd6U, 0x26U,
     0xe1U, 0x69U, 0x14U, 0x63U, 0x55U, 0x21U, 0x0cU, 0x7dU,
 };
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/aes/openssl/openssl_aes_core.cpp
 #pragma clang diagnostic pop
+=======
+>>>>>>> update pod:Pods/MMKVCore/Core/aes/openssl/openssl_aes_core.cpp
 static const u32 rcon[] = {
     0x01000000, 0x02000000, 0x04000000, 0x08000000,
     0x10000000, 0x20000000, 0x40000000, 0x80000000,
@@ -633,10 +655,19 @@ static const u32 rcon[] = {
 /**
  * Expand the cipher key into the encryption key schedule.
  */
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/aes/openssl/openssl_aes_core.cpp
 int AES_set_encrypt_key(const unsigned char *userKey, const int bits,
                         AES_KEY *key)
 {
 
+=======
+#if (__ARM_MAX_ARCH__ <= 0)
+int AES_set_encrypt_key(const uint8_t *userKey, const int bits, AES_KEY *key) {
+#else
+int AES_C_set_encrypt_key(const uint8_t *userKey, const int bits, void *k) {
+    auto key = (AES_KEY*) k;
+#endif
+>>>>>>> update pod:Pods/MMKVCore/Core/aes/openssl/openssl_aes_core.cpp
     u32 *rk;
     int i = 0;
     u32 temp;
@@ -732,13 +763,77 @@ int AES_set_encrypt_key(const unsigned char *userKey, const int bits,
     return 0;
 }
 
+/**
+ * Expand the cipher key into the decryption key schedule.
+ */
+#if (__ARM_MAX_ARCH__ <= 0)
+int AES_set_decrypt_key(const uint8_t *userKey, const int bits, AES_KEY *key) {
+#else
+int AES_C_set_decrypt_key(const uint8_t *userKey, const int bits, void *k) {
+    auto key = (AES_KEY*) k;
+#endif
+    u32 *rk;
+    int i, j, status;
+    u32 temp;
+
+    /* first, start with an encryption schedule */
+    status = AES_set_encrypt_key(userKey, bits, key);
+    if (status < 0)
+        return status;
+
+    rk = key->rd_key;
+
+    /* invert the order of the round keys: */
+    for (i = 0, j = 4*(key->rounds); i < j; i += 4, j -= 4) {
+        temp = rk[i    ]; rk[i    ] = rk[j    ]; rk[j    ] = temp;
+        temp = rk[i + 1]; rk[i + 1] = rk[j + 1]; rk[j + 1] = temp;
+        temp = rk[i + 2]; rk[i + 2] = rk[j + 2]; rk[j + 2] = temp;
+        temp = rk[i + 3]; rk[i + 3] = rk[j + 3]; rk[j + 3] = temp;
+    }
+    /* apply the inverse MixColumn transform to all round keys but the first and the last: */
+    for (i = 1; i < (key->rounds); i++) {
+        rk += 4;
+        rk[0] =
+            Td0[Te1[(rk[0] >> 24)       ] & 0xff] ^
+            Td1[Te1[(rk[0] >> 16) & 0xff] & 0xff] ^
+            Td2[Te1[(rk[0] >>  8) & 0xff] & 0xff] ^
+            Td3[Te1[(rk[0]      ) & 0xff] & 0xff];
+        rk[1] =
+            Td0[Te1[(rk[1] >> 24)       ] & 0xff] ^
+            Td1[Te1[(rk[1] >> 16) & 0xff] & 0xff] ^
+            Td2[Te1[(rk[1] >>  8) & 0xff] & 0xff] ^
+            Td3[Te1[(rk[1]      ) & 0xff] & 0xff];
+        rk[2] =
+            Td0[Te1[(rk[2] >> 24)       ] & 0xff] ^
+            Td1[Te1[(rk[2] >> 16) & 0xff] & 0xff] ^
+            Td2[Te1[(rk[2] >>  8) & 0xff] & 0xff] ^
+            Td3[Te1[(rk[2]      ) & 0xff] & 0xff];
+        rk[3] =
+            Td0[Te1[(rk[3] >> 24)       ] & 0xff] ^
+            Td1[Te1[(rk[3] >> 16) & 0xff] & 0xff] ^
+            Td2[Te1[(rk[3] >>  8) & 0xff] & 0xff] ^
+            Td3[Te1[(rk[3]      ) & 0xff] & 0xff];
+    }
+    return 0;
+}
+
+
 /*
  * Encrypt a single block
  * in and out can overlap
  */
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/aes/openssl/openssl_aes_core.cpp
 void AES_encrypt(const unsigned char *in, unsigned char *out,
                  const AES_KEY *key) {
 
+=======
+#if (__ARM_MAX_ARCH__ <= 0)
+void AES_encrypt(const uint8_t *in, uint8_t *out, const AES_KEY *key) {
+#else
+void AES_C_encrypt(const uint8_t *in, uint8_t *out, const void *k) {
+    auto key = (const AES_KEY*) k;
+#endif
+>>>>>>> update pod:Pods/MMKVCore/Core/aes/openssl/openssl_aes_core.cpp
     const u32 *rk;
     u32 s0, s1, s2, s3, t0, t1, t2, t3;
 #ifndef FULL_UNROLL
@@ -923,4 +1018,132 @@ void AES_encrypt(const unsigned char *in, unsigned char *out,
     PUTU32(out + 12, s3);
 }
 
+/*
+ * Decrypt a single block
+ * in and out can overlap
+ */
+#if (__ARM_MAX_ARCH__ <= 0)
+void AES_decrypt(const uint8_t *in, uint8_t *out, const AES_KEY *key) {
+#else
+void AES_C_decrypt(const uint8_t *in, uint8_t *out, const void *k) {
+    auto key = (AES_KEY*) k;
+#endif
+    const u32 *rk;
+    u32 s0, s1, s2, s3, t0, t1, t2, t3;
+    int r;
+
+    assert(in && out && key);
+    rk = key->rd_key;
+
+    /*
+     * map byte array block to cipher state
+     * and add initial round key:
+     */
+    s0 = GETU32(in     ) ^ rk[0];
+    s1 = GETU32(in +  4) ^ rk[1];
+    s2 = GETU32(in +  8) ^ rk[2];
+    s3 = GETU32(in + 12) ^ rk[3];
+
+    /*
+     * Nr - 1 full rounds:
+     */
+    r = key->rounds >> 1;
+    for (;;) {
+        t0 =
+            Td0[(s0 >> 24)       ] ^
+            Td1[(s3 >> 16) & 0xff] ^
+            Td2[(s2 >>  8) & 0xff] ^
+            Td3[(s1      ) & 0xff] ^
+            rk[4];
+        t1 =
+            Td0[(s1 >> 24)       ] ^
+            Td1[(s0 >> 16) & 0xff] ^
+            Td2[(s3 >>  8) & 0xff] ^
+            Td3[(s2      ) & 0xff] ^
+            rk[5];
+        t2 =
+            Td0[(s2 >> 24)       ] ^
+            Td1[(s1 >> 16) & 0xff] ^
+            Td2[(s0 >>  8) & 0xff] ^
+            Td3[(s3      ) & 0xff] ^
+            rk[6];
+        t3 =
+            Td0[(s3 >> 24)       ] ^
+            Td1[(s2 >> 16) & 0xff] ^
+            Td2[(s1 >>  8) & 0xff] ^
+            Td3[(s0      ) & 0xff] ^
+            rk[7];
+
+        rk += 8;
+        if (--r == 0) {
+            break;
+        }
+
+        s0 =
+            Td0[(t0 >> 24)       ] ^
+            Td1[(t3 >> 16) & 0xff] ^
+            Td2[(t2 >>  8) & 0xff] ^
+            Td3[(t1      ) & 0xff] ^
+            rk[0];
+        s1 =
+            Td0[(t1 >> 24)       ] ^
+            Td1[(t0 >> 16) & 0xff] ^
+            Td2[(t3 >>  8) & 0xff] ^
+            Td3[(t2      ) & 0xff] ^
+            rk[1];
+        s2 =
+            Td0[(t2 >> 24)       ] ^
+            Td1[(t1 >> 16) & 0xff] ^
+            Td2[(t0 >>  8) & 0xff] ^
+            Td3[(t3      ) & 0xff] ^
+            rk[2];
+        s3 =
+            Td0[(t3 >> 24)       ] ^
+            Td1[(t2 >> 16) & 0xff] ^
+            Td2[(t1 >>  8) & 0xff] ^
+            Td3[(t0      ) & 0xff] ^
+            rk[3];
+    }
+
+    /*
+     * apply last round and
+     * map cipher state to byte array block:
+     */
+    s0 =
+        ((u32)Td4[(t0 >> 24)       ] << 24) ^
+        ((u32)Td4[(t3 >> 16) & 0xff] << 16) ^
+        ((u32)Td4[(t2 >>  8) & 0xff] <<  8) ^
+        ((u32)Td4[(t1      ) & 0xff])       ^
+        rk[0];
+    PUTU32(out     , s0);
+    s1 =
+        ((u32)Td4[(t1 >> 24)       ] << 24) ^
+        ((u32)Td4[(t0 >> 16) & 0xff] << 16) ^
+        ((u32)Td4[(t3 >>  8) & 0xff] <<  8) ^
+        ((u32)Td4[(t2      ) & 0xff])       ^
+        rk[1];
+    PUTU32(out +  4, s1);
+    s2 =
+        ((u32)Td4[(t2 >> 24)       ] << 24) ^
+        ((u32)Td4[(t1 >> 16) & 0xff] << 16) ^
+        ((u32)Td4[(t0 >>  8) & 0xff] <<  8) ^
+        ((u32)Td4[(t3      ) & 0xff])       ^
+        rk[2];
+    PUTU32(out +  8, s2);
+    s3 =
+        ((u32)Td4[(t3 >> 24)       ] << 24) ^
+        ((u32)Td4[(t2 >> 16) & 0xff] << 16) ^
+        ((u32)Td4[(t1 >>  8) & 0xff] <<  8) ^
+        ((u32)Td4[(t0      ) & 0xff])       ^
+        rk[3];
+    PUTU32(out + 12, s3);
+}
+
 } // namespace openssl
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/aes/openssl/openssl_aes_core.cpp
+=======
+
+#endif // (__ARM_MAX_ARCH__ < 0) || (__ARM_MAX_ARCH__ > 7 && defined(MMKV_ANDROID))
+
+#endif // MMKV_DISABLE_CRYPT
+>>>>>>> update pod:Pods/MMKVCore/Core/aes/openssl/openssl_aes_core.cpp

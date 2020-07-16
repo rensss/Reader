@@ -1,11 +1,86 @@
 [![license](https://img.shields.io/badge/license-BSD_3-brightgreen.svg?style=flat)](https://github.com/Tencent/MMKV/blob/master/LICENSE.TXT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tencent/MMKV/pulls)
+<<<<<<< HEAD
 [![Release Version](https://img.shields.io/badge/release-1.0.24-brightgreen.svg)](https://github.com/Tencent/MMKV/releases)
 [![Platform](https://img.shields.io/badge/Platform-%20iOS%20%7C%20Android-brightgreen.svg)](https://github.com/Tencent/MMKV/wiki/home)
 
 中文版本请参看[这里](./readme_cn.md)
 
 MMKV is an **efficient**, **small**, **easy-to-use** mobile key-value storage framework used in the WeChat application. It's currently available on **iOS**, **macOS**, **Android** and **Windows**.
+=======
+[![Release Version](https://img.shields.io/badge/release-1.2.1-brightgreen.svg)](https://github.com/Tencent/MMKV/releases)
+[![Platform](https://img.shields.io/badge/Platform-%20Android%20%7C%20iOS%2FmacOS%20%7C%20Win32%20%7C%20POSIX-brightgreen.svg)](https://github.com/Tencent/MMKV/wiki/home)
+
+中文版本请参看[这里](./readme_cn.md)
+
+MMKV is an **efficient**, **small**, **easy-to-use** mobile key-value storage framework used in the WeChat application. It's currently available on **Android**, **iOS/macOS**, **Win32** and **POSIX**.
+
+# MMKV for Android
+
+## Features
+
+* **Efficient**. MMKV uses mmap to keep memory synced with file, and protobuf to encode/decode values, making the most of Android to achieve best performance.
+  * **Multi-Process concurrency**: MMKV supports concurrent read-read and read-write access between processes.
+
+* **Easy-to-use**. You can use MMKV as you go. All changes are saved immediately, no `sync`, no `apply` calls needed.
+
+* **Small**.
+  * **A handful of files**: MMKV contains process locks, encode/decode helpers and mmap logics and nothing more. It's really tidy.
+  * **About 50K in binary size**: MMKV adds about 50K per architecture on App size, and much less when zipped (apk).
+
+
+## Getting Started
+
+### Installation Via Maven
+Add the following lines to `build.gradle` on your app module:
+
+```gradle
+dependencies {
+    implementation 'com.tencent:mmkv-static:1.2.1'
+    // replace "1.2.1" with any available version
+}
+```
+
+For other installation options, see [Android Setup](https://github.com/Tencent/MMKV/wiki/android_setup).
+
+### Quick Tutorial
+You can use MMKV as you go. All changes are saved immediately, no `sync`, no `apply` calls needed.  
+Setup MMKV on App startup, say your `Application` class, add these lines:
+
+```Java
+public void onCreate() {
+    super.onCreate();
+
+    String rootDir = MMKV.initialize(this);
+    System.out.println("mmkv root: " + rootDir);
+    //……
+}
+```
+
+MMKV has a global instance, that can be used directly:
+
+```Java
+import com.tencent.mmkv.MMKV;
+    
+MMKV kv = MMKV.defaultMMKV();
+
+kv.encode("bool", true);
+boolean bValue = kv.decodeBool("bool");
+
+kv.encode("int", Integer.MIN_VALUE);
+int iValue = kv.decodeInt("int");
+
+kv.encode("string", "Hello from mmkv");
+String str = kv.decodeString("string");
+```
+
+MMKV also supports **Multi-Process Access**. Full tutorials can be found here [Android Tutorial](https://github.com/Tencent/MMKV/wiki/android_tutorial).
+
+## Performance
+Writing random `int` for 1000 times, we get this chart:  
+![](https://github.com/Tencent/MMKV/wiki/assets/profile_android_mini.png)  
+For more benchmark data, please refer to [our benchmark](https://github.com/Tencent/MMKV/wiki/android_benchmark).
+>>>>>>> update pod
 
 # MMKV for iOS/macOS
 

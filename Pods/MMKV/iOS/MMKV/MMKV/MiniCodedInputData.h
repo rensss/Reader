@@ -18,6 +18,11 @@
  * limitations under the License.
  */
 
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/MiniCodedInputData.h
+=======
+#ifndef CHECKSUM_H
+#define CHECKSUM_H
+>>>>>>> update pod:Pods/MMKVCore/Core/crc32/Checksum.h
 #ifdef __cplusplus
 
 #import <Foundation/Foundation.h>
@@ -42,9 +47,21 @@ public:
 
 	~MiniCodedInputData();
 
+<<<<<<< HEAD:Pods/MMKV/iOS/MMKV/MMKV/MiniCodedInputData.h
 	bool isAtEnd() { return m_position == m_size; };
 
 	BOOL readBool();
+=======
+#        define MMKV_USE_ARMV8_CRC32
+
+namespace mmkv {
+uint32_t armv8_crc32(uint32_t crc, const uint8_t *buf, size_t len);
+}
+
+// have to check CPU's instruction set dynamically
+typedef uint32_t (*CRC32_Func_t)(uint32_t crc, const uint8_t *buf, size_t len);
+extern CRC32_Func_t CRC32;
+>>>>>>> update pod:Pods/MMKVCore/Core/crc32/Checksum.h
 
 	Float64 readDouble();
 
@@ -65,4 +82,5 @@ public:
 	NSData *readData();
 };
 
-#endif
+#endif // __cplusplus
+#endif // CHECKSUM_H
