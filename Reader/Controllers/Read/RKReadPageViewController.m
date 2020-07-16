@@ -353,7 +353,7 @@ UIGestureRecognizerDelegate
         self.pageNext--;
     }
 
-//    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+//    DDLogInfo(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
@@ -374,14 +374,14 @@ UIGestureRecognizerDelegate
     } else {
         self.pageNext ++;
     }
-//    RKLog(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+//    DDLogInfo(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
 #pragma mark -- UIPageViewControllerDelegate
 // 页面跳转回调
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
-//    RKLog(@"didFinishAnimating -- %@ -- completed:%@",finished?@YES:@NO,completed?@YES:@NO);
+//    DDLogInfo(@"didFinishAnimating -- %@ -- completed:%@",finished?@YES:@NO,completed?@YES:@NO);
     
     if (finished && completed) {
         // 无论有无翻页，只要动画结束就恢复交互。
@@ -394,10 +394,10 @@ UIGestureRecognizerDelegate
 
 // 页面将要跳转
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
-//    RKLog(@"willTransitionToViewControllers");
+//    DDLogInfo(@"willTransitionToViewControllers");
     //    self.currentChapter = self.chapterNext;
     //    self.currentPage = self.pageNext;
-//    RKLog(@"%ld -|- %ld",self.currentChapter,self.currentPage);
+//    DDLogInfo(@"%ld -|- %ld",self.currentChapter,self.currentPage);
 }
 
 
@@ -447,7 +447,7 @@ UIGestureRecognizerDelegate
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         self.book.currentPage = self.currentPage;
         self.book.currentChapterNum = self.currentChapter;
-//        RKLog(@"---- %ld",self.currentPage);
+//        DDLogInfo(@"---- %ld",self.currentPage);
         if (self.currentChapter == 0 && self.currentPage == 0) {
             self.book.progress = 0.0f;
             self.book.chapterName = @"开始";
@@ -504,7 +504,7 @@ UIGestureRecognizerDelegate
     if (!_previewActionArray) {
         __weak typeof(self) weakSelf = self;
         UIPreviewAction *deleteAnalysisAction = [UIPreviewAction actionWithTitle:@"删除缓存" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            RKLog(@"---- 删除缓存");
+            DDLogInfo(@"---- 删除缓存");
             
             NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
             
@@ -522,7 +522,7 @@ UIGestureRecognizerDelegate
 //        }];
         
         UIPreviewAction *backAction = [UIPreviewAction actionWithTitle:@"返回" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            RKLog(@"---- 返回");
+            DDLogInfo(@"---- 返回");
         }];
         
         _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,backAction, nil];

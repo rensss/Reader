@@ -35,9 +35,9 @@
     }];
     
 //    for (NSString *familyNames in [UIFont familyNames]) {
-//        RKLog(@"---- %@",familyNames);
+//        DDLogInfo(@"---- %@",familyNames);
 //        for (NSString *fontName in [UIFont fontNamesForFamilyName:familyNames]) {
-//            RKLog(@"---- \t%@",fontName);
+//            DDLogInfo(@"---- \t%@",fontName);
 //        }
 //    }
 }

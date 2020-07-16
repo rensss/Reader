@@ -29,7 +29,17 @@
         
         application.shortcutItems = @[quickRead, importBook];
     }
-    
+    // log初始化
+    // 添加DDASLLogger，你的日志语句将被发送到Xcode控制台
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    // 添加DDTTYLogger，你的日志语句将被发送到Console.app
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    // 添加DDFileLogger，你的日志语句将写入到一个文件中，默认路径在沙盒的Library/Caches/Logs/目录下，文件名为bundleid+空格+日期.log。
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24;
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    [DDLog addLogger:fileLogger];
+        
     // 初始化
     [RKFileManager shareInstance];
     // 首页
@@ -96,12 +106,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // 在后台时被用户杀死 将调用此函数
-    RKLog(@"---- Terminate");
+    DDLogInfo(@"---- Terminate");
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
-    RKLog(@"shortcut");
-    RKLog(@"---- %@",[UIApplication sharedApplication].keyWindow.rootViewController);
+    DDLogInfo(@"shortcut");
+    DDLogInfo(@"---- %@",[UIApplication sharedApplication].keyWindow.rootViewController);
     
     if ([shortcutItem.type isEqualToString:RKShortcutQuickReadItemType]) {
         
@@ -124,7 +134,7 @@
 //        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
 //        nav.modalPresentationStyle = UIModalPresentationFullScreen;
 //        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-//            RKLog(@"---- modalPresent");
+//            DDLogInfo(@"---- modalPresent");
 //        }];
     }
 }

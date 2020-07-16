@@ -10,16 +10,16 @@
 #define PrefixHeader_pch
 
 // 自定义log
-#define NSLog(FORMAT, ...) {\
-NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];\
-[dateFormatter setDateStyle:NSDateFormatterMediumStyle];\
-[dateFormatter setTimeStyle:NSDateFormatterShortStyle];\
-[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS "]; \
-NSString *str = [dateFormatter stringFromDate:[NSDate date]];\
-fprintf(stderr,"%s %s",[str UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);\
-}
-#define RKLog(...)\
-NSLog(@"%s %d %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
+//#define NSLog(FORMAT, ...) {\
+//NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];\
+//[dateFormatter setDateStyle:NSDateFormatterMediumStyle];\
+//[dateFormatter setTimeStyle:NSDateFormatterShortStyle];\
+//[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS "]; \
+//NSString *str = [dateFormatter stringFromDate:[NSDate date]];\
+//fprintf(stderr,"%s %s",[str UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);\
+//}
+//#define DDLogInfo(...)\
+//NSLog(@"%s %d %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 
 #pragma mark - 通用类
 
@@ -29,6 +29,7 @@ NSLog(@"%s %d %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 //#import <YYModel/YYModel.h>
 #import <SWTableViewCell.h>
 #import <MMKV/MMKV.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 #import "RKNavigationController.h" // 导航控制
 #import "RKViewController.h" // 基类
@@ -101,6 +102,13 @@ height = 20; \
 (height); \
 })
 
+#ifdef DEBUG
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static const DDLogLevel ddLogLevel = DDLogLevelWarning;
+#endif
+
+#pragma mark - 常用key
 
 // 3D touch 快速启动
 #define RKShortcutQuickReadItemType @"RKShortcutQuickReadItemType"

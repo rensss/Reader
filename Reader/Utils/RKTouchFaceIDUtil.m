@@ -50,7 +50,7 @@
     }
     if ([context canEvaluatePolicy:policyType error:nil]) {
         [context evaluatePolicy:policyType localizedReason:localizedReason reply:^(BOOL success, NSError * _Nullable error) {
-            RKLog(@"---- %d, %@", success, error);
+            DDLogInfo(@"---- %d, %@", success, error);
             if (back) {
                 back(success);
             }

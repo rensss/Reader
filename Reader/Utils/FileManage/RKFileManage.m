@@ -38,26 +38,26 @@ static RKFileManager *_fileManager;
     if (self) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         BOOL isDir;
-        RKLog(@"书籍列表\n%@",kHomeBookListsPath);
+        DDLogInfo(@"书籍列表\n%@",kHomeBookListsPath);
         
         // 先判断目录是否存在，不存在才创建
         if  (![fileManager fileExistsAtPath:kBookSavePath isDirectory:&isDir]) {
             BOOL res = [fileManager createDirectoryAtPath:kBookSavePath withIntermediateDirectories:YES attributes:nil error:nil];
             
             if (res) {
-                RKLog(@"文件已创建\nkBookSavePath:%@",kBookSavePath);
+                DDLogInfo(@"文件已创建\nkBookSavePath:%@",kBookSavePath);
             }
         } else {
-            RKLog(@"文件已存在\nkBookSavePath:%@",kBookSavePath);
+            DDLogInfo(@"文件已存在\nkBookSavePath:%@",kBookSavePath);
         }
         
         if (![fileManager fileExistsAtPath:kBookAnalysisPath isDirectory:&isDir]) {
             BOOL res = [fileManager createDirectoryAtPath:kBookAnalysisPath withIntermediateDirectories:YES attributes:nil error:nil];
             if (res) {
-                RKLog(@"文件已创建\nkBookAnalysisPath:%@",kBookAnalysisPath);
+                DDLogInfo(@"文件已创建\nkBookAnalysisPath:%@",kBookAnalysisPath);
             }
         } else {
-            RKLog(@"文件已存在\nkBookAnalysisPath:%@",kBookAnalysisPath);
+            DDLogInfo(@"文件已存在\nkBookAnalysisPath:%@",kBookAnalysisPath);
         }
     }
     return self;
@@ -112,7 +112,7 @@ static RKFileManager *_fileManager;
         
         linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
         // 打印运行时间
-        RKLog(@"---- separateChapter ---- Linked in %f ms", linkTime * 1000.0);
+        DDLogInfo(@"---- separateChapter ---- Linked in %f ms", linkTime * 1000.0);
         
         [self saveChaptersWithBook:book];
         [self addHomeListWithBook:book];
@@ -140,7 +140,7 @@ static RKFileManager *_fileManager;
     [bookList addObject:bookDict];
     [bookList writeToFile:kHomeBookListsPath atomically:YES];
     
-    RKLog(@"---- %@\n%lu",bookDict,(unsigned long)[bookList count]);
+    DDLogInfo(@"---- %@\n%lu",bookDict,(unsigned long)[bookList count]);
     
     // 首页刷新
     self.isNeedRefresh = YES;
@@ -170,7 +170,7 @@ static RKFileManager *_fileManager;
     
     CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
     //打印运行时间
-    RKLog(@"---- Linked in %f ms", linkTime * 1000.0);
+    DDLogInfo(@"---- Linked in %f ms", linkTime * 1000.0);
 }
 
 #pragma mark - 删
@@ -213,7 +213,7 @@ static RKFileManager *_fileManager;
         NSError *error;
         [manager removeItemAtPath:path error:&error];
         if (error) {
-            RKLog(@"---- %@",error);
+            DDLogInfo(@"---- %@",error);
         }
     }
 }
@@ -227,7 +227,7 @@ static RKFileManager *_fileManager;
         [manager removeItemAtPath:kHomeBookListsPath error:&error];
     }
     if (error) {
-        RKLog(@"---- %@",error);
+        DDLogInfo(@"---- %@",error);
         if (handler) {
             handler(NO);
             return;
@@ -250,7 +250,7 @@ static RKFileManager *_fileManager;
     while (fileName = [dirEnum nextObject]) {
         [manager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",kBookSavePath,fileName] error:&error];
         if (error) {
-            RKLog(@"---- %@",error);
+            DDLogInfo(@"---- %@",error);
             if (handler) {
                 handler(NO);
                 return;
@@ -270,7 +270,7 @@ static RKFileManager *_fileManager;
     NSError *error;
     [manager removeItemAtPath:path error:&error];
     if (error) {
-        RKLog(@"---- %@",error);
+        DDLogInfo(@"---- %@",error);
     }
 }
 
@@ -352,7 +352,7 @@ static RKFileManager *_fileManager;
     }
     
     [bookDicts writeToFile:kHomeBookListsPath atomically:YES];
-//    RKLog(@"---- save:%@",bookDicts);
+//    DDLogInfo(@"---- save:%@",bookDicts);
 }
 
 #pragma mark - 查
@@ -425,21 +425,21 @@ static RKFileManager *_fileManager;
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     if (!content) {
         if (error) {
-            RKLog(@"---- NSUTF8StringEncoding -- 解码错误 -- %@",error.domain);
+            DDLogInfo(@"---- NSUTF8StringEncoding -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
         } else {
-            RKLog(@"---- NSUTF8StringEncoding -- 解码成功");
+            DDLogInfo(@"---- NSUTF8StringEncoding -- 解码成功");
         }
     }
     if (!content) {
         content = [NSString stringWithContentsOfFile:path encoding:0x80000632 error:&error];
         if (error) {
-            RKLog(@"---- GBK -- 解码错误 -- %@",error.domain);
+            DDLogInfo(@"---- GBK -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
         } else {
-            RKLog(@"---- GBK -- 解码成功");
+            DDLogInfo(@"---- GBK -- 解码成功");
         }
     }
     if (!content) {
@@ -447,11 +447,11 @@ static RKFileManager *_fileManager;
         // 文件内容转换成字符串类型
         content = [NSString stringWithContentsOfFile:path encoding:enc error:&error];
         if (error) {
-            RKLog(@"---- kCFStringEncodingGB_18030_2000 -- 解码错误 -- %@",error.domain);
+            DDLogInfo(@"---- kCFStringEncodingGB_18030_2000 -- 解码错误 -- %@",error.domain);
             content = nil;
             error = NULL;
         } else {
-            RKLog(@"---- kCFStringEncodingGB_18030_2000 -- 解码成功");
+            DDLogInfo(@"---- kCFStringEncodingGB_18030_2000 -- 解码成功");
         }
     }
     if (!content) {
@@ -476,7 +476,7 @@ static RKFileManager *_fileManager;
     NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten options:NSRegularExpressionCaseInsensitive error:&error];
     
     NSArray *match = [reg matchesInString:content options:NSMatchingReportCompletion range:NSMakeRange(0, [content length])];
-    RKLog(@"---- 章节个数 -- %lu",(unsigned long)match.count);
+    DDLogInfo(@"---- 章节个数 -- %lu",(unsigned long)match.count);
     
     // 第一章
     NSRange firstRange = ((NSTextCheckingResult *)match.firstObject).range;
@@ -513,7 +513,7 @@ static RKFileManager *_fileManager;
         model.length = content.length - model.location;
         [*chapters addObject:model];
         
-//        RKLog(@"---- %ld",(long)[*chapters count]);
+//        DDLogInfo(@"---- %ld",(long)[*chapters count]);
     } else {// 没找出章节
         RKChapter *model = [[RKChapter alloc] init];
         model.title = @"开始";
@@ -575,15 +575,15 @@ static RKFileManager *_fileManager;
     
     for (int i = 0 ; i < [arrEncoding count]; i++) {
         unsigned long encodingCode = [arrEncoding[i] unsignedLongValue];
-        RKLog(@"---- (%@)", arrEncodingName[i]);
+        DDLogInfo(@"---- (%@)", arrEncodingName[i]);
         NSError *error = nil;
         NSString *aString = [NSString stringWithContentsOfFile:path encoding:encodingCode  error:&error];
-        RKLog(@"---- Error descripetion:%@", [error localizedDescription]);
+        DDLogInfo(@"---- Error descripetion:%@", [error localizedDescription]);
         NSData *data = [aString dataUsingEncoding:encodingCode];
         NSString *string = [[NSString alloc] initWithData:data encoding:encodingCode];
         if ([string length] > 0) {
-            RKLog(@"---- %@", [string substringToIndex:100]);
-            RKLog(@"---- EncodingName:%@",arrEncodingName[i]);
+            DDLogInfo(@"---- %@", [string substringToIndex:100]);
+            DDLogInfo(@"---- EncodingName:%@",arrEncodingName[i]);
         }
     }
 }
@@ -597,7 +597,7 @@ static RKFileManager *_fileManager;
 - (CGFloat)getFileSize:(NSString *)path {
     // 转码
     NSString *filePath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    RKLog(@"---- 转码\npath:%@\nfilePath:%@",path,filePath);
+    DDLogInfo(@"---- 转码\npath:%@\nfilePath:%@",path,filePath);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     float filesize = -1.0f;
     if ([fileManager fileExistsAtPath:path]) {
@@ -612,7 +612,7 @@ static RKFileManager *_fileManager;
             filesize = size/1000.0/1000.0;
         }
     }
-    RKLog(@"---- 文件大小 -- %f",filesize);
+    DDLogInfo(@"---- 文件大小 -- %f",filesize);
     return filesize;
 }
 

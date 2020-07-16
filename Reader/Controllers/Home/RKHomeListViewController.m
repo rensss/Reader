@@ -310,7 +310,7 @@
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-//    RKLog(@"---- index:%ld",(long)index);
+//    DDLogInfo(@"---- index:%ld",(long)index);
     
     RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
     RKBook *book = listCell.book;
@@ -373,7 +373,7 @@
     previewingContext.sourceRect = rect;
     
     RKHomeListTableViewCell *cell = (RKHomeListTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    RKLog(@"---- %@ ---- book:%@",NSStringFromCGPoint(location),cell.book.name);
+    DDLogInfo(@"---- %@ ---- book:%@",NSStringFromCGPoint(location),cell.book.name);
     
     RKBook *analysisBook = [self analysisBookContentWithBook:cell.book];
     if (analysisBook) {
