@@ -31,6 +31,12 @@
 		1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188930226D7BEB00289476 /* RKLoadingView.m */; };
 		1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188931226D7BEB00289476 /* RKAlertMessage.m */; };
 		1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188939226DB93E00289476 /* RKBookImprotViewController.m */; };
+		1A2E157F24DC0491009C877F /* RKPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E157E24DC0491009C877F /* RKPinViewController.m */; };
+		1A2E158224DC05C7009C877F /* RKPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158124DC05C7009C877F /* RKPinView.m */; };
+		1A2E158524DC0608009C877F /* RKPinInputCirclesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158424DC0608009C877F /* RKPinInputCirclesView.m */; };
+		1A2E158824DC0612009C877F /* RKPinInputCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158724DC0612009C877F /* RKPinInputCircleView.m */; };
+		1A2E158B24DC0E07009C877F /* RKPinNumButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158A24DC0E07009C877F /* RKPinNumButton.m */; };
+		1A2E158E24DC1744009C877F /* RKPinNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158D24DC1744009C877F /* RKPinNumPadView.m */; };
 		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
 		1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4384D8247D171800E087F3 /* ShareViewController.m */; };
 		1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4384DA247D171800E087F3 /* MainInterface.storyboard */; };
@@ -120,6 +126,18 @@
 		1A188933226D7BEB00289476 /* RKAlertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertMessage.h; sourceTree = "<group>"; };
 		1A188938226DB93E00289476 /* RKBookImprotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKBookImprotViewController.h; sourceTree = "<group>"; };
 		1A188939226DB93E00289476 /* RKBookImprotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKBookImprotViewController.m; sourceTree = "<group>"; };
+		1A2E157D24DC0491009C877F /* RKPinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinViewController.h; sourceTree = "<group>"; };
+		1A2E157E24DC0491009C877F /* RKPinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinViewController.m; sourceTree = "<group>"; };
+		1A2E158024DC05C7009C877F /* RKPinView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinView.h; sourceTree = "<group>"; };
+		1A2E158124DC05C7009C877F /* RKPinView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinView.m; sourceTree = "<group>"; };
+		1A2E158324DC0608009C877F /* RKPinInputCirclesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinInputCirclesView.h; sourceTree = "<group>"; };
+		1A2E158424DC0608009C877F /* RKPinInputCirclesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinInputCirclesView.m; sourceTree = "<group>"; };
+		1A2E158624DC0612009C877F /* RKPinInputCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinInputCircleView.h; sourceTree = "<group>"; };
+		1A2E158724DC0612009C877F /* RKPinInputCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinInputCircleView.m; sourceTree = "<group>"; };
+		1A2E158924DC0E07009C877F /* RKPinNumButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinNumButton.h; sourceTree = "<group>"; };
+		1A2E158A24DC0E07009C877F /* RKPinNumButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinNumButton.m; sourceTree = "<group>"; };
+		1A2E158C24DC1744009C877F /* RKPinNumPadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinNumPadView.h; sourceTree = "<group>"; };
+		1A2E158D24DC1744009C877F /* RKPinNumPadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinNumPadView.m; sourceTree = "<group>"; };
 		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
 		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
 		1A4384D5247D171800E087F3 /* ReaderShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReaderShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +258,7 @@
 				1AD836052488F13C00A31BA3 /* RKUtils.m */,
 				1AD836072488FB2800A31BA3 /* RKTouchFaceIDUtil.h */,
 				1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */,
+				1A2E157C24DC040C009C877F /* PinView */,
 				1A56A2562451795400291C2D /* MarqueeView */,
 				1A077624227854CF0073794E /* UserConfig */,
 				1A18892B226D7BB500289476 /* FileManage */,
@@ -361,6 +380,25 @@
 				1AC349C0248F620400A6CB42 /* RKSecretViewController.m */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		1A2E157C24DC040C009C877F /* PinView */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E157D24DC0491009C877F /* RKPinViewController.h */,
+				1A2E157E24DC0491009C877F /* RKPinViewController.m */,
+				1A2E158024DC05C7009C877F /* RKPinView.h */,
+				1A2E158124DC05C7009C877F /* RKPinView.m */,
+				1A2E158624DC0612009C877F /* RKPinInputCircleView.h */,
+				1A2E158724DC0612009C877F /* RKPinInputCircleView.m */,
+				1A2E158324DC0608009C877F /* RKPinInputCirclesView.h */,
+				1A2E158424DC0608009C877F /* RKPinInputCirclesView.m */,
+				1A2E158924DC0E07009C877F /* RKPinNumButton.h */,
+				1A2E158A24DC0E07009C877F /* RKPinNumButton.m */,
+				1A2E158C24DC1744009C877F /* RKPinNumPadView.h */,
+				1A2E158D24DC1744009C877F /* RKPinNumPadView.m */,
+			);
+			path = PinView;
 			sourceTree = "<group>";
 		};
 		1A4384D6247D171800E087F3 /* ReaderShare */ = {
@@ -551,25 +589,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AC0C8DF230A9D7C00194C48 /* RKSelectImageViewController.m in Sources */,
+				1A2E158524DC0608009C877F /* RKPinInputCirclesView.m in Sources */,
 				1A16F8AC2271A86A006568A5 /* RKReadPageViewController.m in Sources */,
 				1AAF3238230AA449008C5E45 /* RKFontSetttingViewController.m in Sources */,
 				1A188927226D7AEC00289476 /* RKBook.m in Sources */,
 				1A18891B226D79B300289476 /* RKHomeListViewController.m in Sources */,
+				1A2E158224DC05C7009C877F /* RKPinView.m in Sources */,
 				1A07E6F1230BEBEC006FB45C /* RKChaptersListView.m in Sources */,
 				1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */,
 				1AD836092488FB2800A31BA3 /* RKTouchFaceIDUtil.m in Sources */,
 				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
 				1A56A2592451798500291C2D /* RKMarqueeView.m in Sources */,
+				1A2E158824DC0612009C877F /* RKPinInputCircleView.m in Sources */,
 				1A18892A226D7B1200289476 /* RKChapter.m in Sources */,
 				1A188918226D792200289476 /* RKViewController.m in Sources */,
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,
 				1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */,
+				1A2E158B24DC0E07009C877F /* RKPinNumButton.m in Sources */,
 				1A188924226D7AC300289476 /* RKModel.m in Sources */,
 				1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */,
+				1A2E158E24DC1744009C877F /* RKPinNumPadView.m in Sources */,
 				1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */,
 				1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */,
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
 				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,
+				1A2E157F24DC0491009C877F /* RKPinViewController.m in Sources */,
 				1A18892E226D7BC900289476 /* RKFileManage.m in Sources */,
 				1AC349C1248F620400A6CB42 /* RKSecretViewController.m in Sources */,
 				1AC0C8DA230A41F100194C48 /* RKReadSettingViewController.m in Sources */,

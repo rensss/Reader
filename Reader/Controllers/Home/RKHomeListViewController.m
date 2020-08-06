@@ -11,6 +11,7 @@
 #import "RKHomeListTableViewCell.h"
 #import "RKReadPageViewController.h"
 #import "RKSecretViewController.h"
+#import "RKPinViewController.h"
 
 @interface RKHomeListViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UIViewControllerPreviewingDelegate>
 
@@ -196,6 +197,12 @@
 
 #pragma mark - 点击事件
 - (void)settingClick {
+    
+//    RKPinViewController *pinVC = [[RKPinViewController alloc] init];
+//    pinVC.modalPresentationStyle = UIModalPresentationFullScreen;
+//    [self presentViewController:pinVC animated:YES completion:nil];
+//    return;
+    
     RKSettingViewController *settingVC = [RKSettingViewController new];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
