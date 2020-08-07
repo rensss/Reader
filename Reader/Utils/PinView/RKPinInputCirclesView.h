@@ -17,8 +17,6 @@ typedef void (^RKPinInputCirclesViewShakeCompletionBlock)(void);
 @property (nonatomic, assign) NSUInteger pinLength; /**< pin码位数*/
 
 - (instancetype)initWithPinLength:(NSUInteger)pinLength NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithFrame:(CGRect)frame __attribute__((unavailable("Use -initWithPinLength: instead")));
-- (instancetype)initWithCoder:(NSCoder *)aDecoder __attribute__((unavailable("Use -initWithPinLength: instead")));
 
 - (void)fillCircleAtPosition:(NSUInteger)position;
 - (void)unfillCircleAtPosition:(NSUInteger)position;

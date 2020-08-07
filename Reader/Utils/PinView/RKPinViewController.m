@@ -9,7 +9,7 @@
 #import "RKPinViewController.h"
 #import "RKPinView.h"
 
-@interface RKPinViewController ()
+@interface RKPinViewController () <RKPinViewDelegate>
 
 
 @property (nonatomic, strong) RKPinView *pinView; /**< view*/
@@ -32,11 +32,16 @@
     
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(100);
+        make.top.mas_equalTo(44);
         make.width.mas_equalTo(100);
         make.height.mas_equalTo(50);
     }];
     
+    [self.view addSubview:self.pinView];
+    [self.pinView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(btn.mas_bottom).mas_offset(50);
+        make.left.right.mas_equalTo(self.view);
+    }];
 }
 
 #pragma mark - 事件
@@ -44,11 +49,33 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - delegate
+- (NSUInteger)pinLengthForPinView:(RKPinView *)pinView {
+    return 4;
+}
+
+- (BOOL)pinView:(RKPinView *)pinView isPinValid:(NSString *)pin {
+    return YES;
+}
+
+- (void)cancelButtonTappedInPinView:(RKPinView *)pinView {
+    DDLogInfo(@"---- cancelButtonTappedInPinView");
+}
+
+- (void)correctPinWasEnteredInPinView:(RKPinView *)pinView {
+    DDLogInfo(@"---- cancelButtonTappedInPinView");
+}
+
+- (void)incorrectPinWasEnteredInPinView:(RKPinView *)pinView {
+    
+}
 
 #pragma mark - getting
 - (RKPinView *)pinView {
     if (!_pinView) {
-        _pinView = [[RKPinView alloc] init];
+        _pinView = [[RKPinView alloc] initWithDelegate:self];
+        _pinView.promptTitle = @"Enter PIN";
+        _pinView.promptColor = [UIColor blackColor];
     }
     return _pinView;
 }

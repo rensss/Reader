@@ -59,14 +59,6 @@
     return self;
 }
 
-- (nonnull instancetype)initWithFrame:(CGRect)frame {
-    return [self initWithPinLength:0];
-}
-
-- (nonnull instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
-    return [self initWithPinLength:0];
-}
-
 - (CGSize)intrinsicContentSize {
     return CGSizeMake(self.pinLength * [RKPinInputCircleView diameter] + (self.pinLength - 1) * self.circlePadding,
                       [RKPinInputCircleView diameter]);

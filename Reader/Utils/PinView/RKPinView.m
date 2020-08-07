@@ -10,7 +10,7 @@
 #import "RKPinInputCirclesView.h"
 #import "RKPinNumPadView.h"
 
-@interface RKPinView () <RKPinViewDelegate,RKPinNumPadViewDelegate>
+@interface RKPinView () <RKPinNumPadViewDelegate>
 
 @property (nonatomic, strong) UILabel *promptLabel; /**< 提示*/
 @property (nonatomic, strong) RKPinInputCirclesView *inputCirclesView; /**< 输入*/
@@ -44,18 +44,23 @@
         _inputCirclesView = [[RKPinInputCirclesView alloc] initWithPinLength:[_delegate pinLengthForPinView:self]];
         [self addSubview:_inputCirclesView];
         [_inputCirclesView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_promptLabel.mas_bottom).offset(20);
+            make.top.mas_equalTo(_promptLabel.mas_bottom).mas_offset(22.5);
             make.centerX.mas_equalTo(self);
         }];
         
         // Num pad
         _numPad = [[RKPinNumPadView alloc] initWithDelegate:self];
-        
+        [self addSubview:_numPad];
+        [_numPad mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self);
+            make.centerX.mas_equalTo(self);
+            make.top.mas_equalTo(_inputCirclesView.mas_bottom).mas_offset(41.5);
+        }];
     }
     return self;
 }
 
-- (nonnull instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     return [self initWithDelegate:nil];
 }
 
@@ -82,27 +87,7 @@
 }
 
 #pragma mark - delegate
-- (void)cancelButtonTappedInPinView:(nonnull RKPinView *)pinView {
-    
-}
-
-- (void)correctPinWasEnteredInPinView:(nonnull RKPinView *)pinView {
-    
-}
-
-- (void)incorrectPinWasEnteredInPinView:(nonnull RKPinView *)pinView {
-    
-}
-
-- (NSUInteger)pinLengthForPinView:(nonnull RKPinView *)pinView {
-    return [self.delegate pinLengthForPinView:pinView];
-}
-
-- (BOOL)pinView:(nonnull RKPinView *)pinView isPinValid:(nonnull NSString *)pin {
-    return YES;
-}
-
-- (void)pinNumPadView:(nonnull RKPinNumPadView *)pinNumPadView numberTapped:(NSUInteger)number {
+- (void)pinNumPadView:(RKPinNumPadView *)pinNumPadView numberTapped:(NSUInteger)number {
     
 }
 
