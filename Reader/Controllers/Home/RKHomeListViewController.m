@@ -195,8 +195,18 @@
     [self presentViewController:readPageVC animated:YES completion:nil];
 }
 
+- (void)jumpToSecret {
+    RKSecretViewController *secretVC = [RKSecretViewController new];
+    [self.navigationController pushViewController:secretVC animated:YES];
+}
+
 #pragma mark - 点击事件
 - (void)settingClick {
+    RKSettingViewController *settingVC = [RKSettingViewController new];
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
+- (void)secretClick {
     
     RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
     
@@ -207,18 +217,12 @@
     [self presentViewController:pinVC animated:YES completion:nil];
     return;
     
-//    RKSettingViewController *settingVC = [RKSettingViewController new];
-//    [self.navigationController pushViewController:settingVC animated:YES];
-}
-
-- (void)secretClick {
     if ([RKTouchFaceIDUtil canUseTouchID] || [RKTouchFaceIDUtil canUseFaceID]) {
         __weak typeof(self) weakSelf = self;
         [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"Unlock" result:^(BOOL success) {
             if (success) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    RKSecretViewController *secretVC = [RKSecretViewController new];
-                    [weakSelf.navigationController pushViewController:secretVC animated:YES];
+                    [weakSelf jumpToSecret];
                 });
             }
         }];
@@ -419,6 +423,24 @@
 
 - (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController {
     return YES;
+}
+
+- (void)incorrectPinEnteredInPinViewController:(RKPinViewController *)pinViewController {
+    DDLogVerbose(@"---- incorrectPinEntered");
+}
+
+- (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
+    DDLogVerbose(@"---- WillDismiss WasSuccessful");
+    [self jumpToSecret];
+}
+
+- (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
+    DDLogVerbose(@"---- DidDismiss WasSuccessful");
+//    [self jumpToSecret];
+}
+
+- (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(RKPinViewController *)pinViewController {
+    DDLogVerbose(@"---- WasUnsuccessful");
 }
 
 #pragma mark - getting

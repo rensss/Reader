@@ -10,6 +10,7 @@
 #import "RKHomeListViewController.h"
 #import "RKBookImprotViewController.h"
 #import "RKReadPageViewController.h"
+#import "RKLogFormatter.h"
 
 @interface AppDelegate ()
 
@@ -31,7 +32,13 @@
     }
     // log初始化
     // 添加DDASLLogger，你的日志语句将被发送到Xcode控制台
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    if (@available(iOS 10.0, *)) {
+        [DDLog addLogger:[DDOSLogger sharedInstance]];
+        [DDOSLogger sharedInstance].logFormatter = [[RKLogFormatter alloc] init];
+    } else {
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        [DDTTYLogger sharedInstance].logFormatter = [[RKLogFormatter alloc] init];
+    }
     // 添加DDTTYLogger，你的日志语句将被发送到Console.app
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     // 添加DDFileLogger，你的日志语句将写入到一个文件中，默认路径在沙盒的Library/Caches/Logs/目录下，文件名为bundleid+空格+日期.log。

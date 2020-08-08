@@ -82,12 +82,31 @@
 }
 
 - (void)correctPinWasEnteredInPinView:(RKPinView *)pinView {
-    DDLogInfo(@"---- correctPinWasEnteredInPinView");
-    [self closeClick];
+    if ([self.delegate respondsToSelector:@selector(pinViewControllerWillDismissAfterPinEntryWasSuccessful:)]) {
+        [self.delegate pinViewControllerWillDismissAfterPinEntryWasSuccessful:self];
+    }
+    [self dismissViewControllerAnimated:!_disableDismissAniamtion completion:^{
+        if ([self.delegate respondsToSelector:@selector(pinViewControllerDidDismissAfterPinEntryWasSuccessful:)]) {
+            [self.delegate pinViewControllerDidDismissAfterPinEntryWasSuccessful:self];
+        }
+    }];
 }
 
 - (void)incorrectPinWasEnteredInPinView:(RKPinView *)pinView {
-    DDLogInfo(@"---- incorrectPinWasEnteredInPinView");
+    if ([self.delegate userCanRetryInPinViewController:self]) {
+        if ([self.delegate respondsToSelector:@selector(incorrectPinEnteredInPinViewController:)]) {
+            [self.delegate incorrectPinEnteredInPinViewController:self];
+        }
+    } else {
+        if ([self.delegate respondsToSelector:@selector(pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:)]) {
+            [self.delegate pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:self];
+        }
+        [self dismissViewControllerAnimated:!_disableDismissAniamtion completion:^{
+            if ([self.delegate respondsToSelector:@selector(pinViewControllerDidDismissAfterPinEntryWasUnsuccessful:)]) {
+                [self.delegate pinViewControllerDidDismissAfterPinEntryWasUnsuccessful:self];
+            }
+        }];
+    }
 }
 
 #pragma mark - Blur
