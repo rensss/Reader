@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-// when using translucentBackground assign this tag to the view that should be blurred
-static const NSInteger RKPinViewControllerContentViewTag = 23333;
-
 NS_ASSUME_NONNULL_BEGIN
+
+#define RKShowTintColor [UIColor colorWithR:168 g:168 b:168 alpha:1]
+#define RKShowHeilightTintColor [UIColor colorWithR:198 g:198 b:198 alpha:1]
 
 @class RKPinView;
 @protocol RKPinViewDelegate <NSObject>

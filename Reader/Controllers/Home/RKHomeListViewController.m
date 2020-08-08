@@ -13,7 +13,7 @@
 #import "RKSecretViewController.h"
 #import "RKPinViewController.h"
 
-@interface RKHomeListViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UIViewControllerPreviewingDelegate>
+@interface RKHomeListViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UIViewControllerPreviewingDelegate, RKPinViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, strong) NSMutableArray *dataArray; /**< 数据源*/
@@ -198,13 +198,17 @@
 #pragma mark - 点击事件
 - (void)settingClick {
     
-//    RKPinViewController *pinVC = [[RKPinViewController alloc] init];
-//    pinVC.modalPresentationStyle = UIModalPresentationFullScreen;
-//    [self presentViewController:pinVC animated:YES completion:nil];
-//    return;
+    RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
     
-    RKSettingViewController *settingVC = [RKSettingViewController new];
-    [self.navigationController pushViewController:settingVC animated:YES];
+    self.navigationController.view.tag = RKPinViewControllerContentViewTag;
+    pinVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    pinVC.translucentBackground = YES;
+    
+    [self presentViewController:pinVC animated:YES completion:nil];
+    return;
+    
+//    RKSettingViewController *settingVC = [RKSettingViewController new];
+//    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 - (void)secretClick {
@@ -402,6 +406,19 @@
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit {
     viewControllerToCommit.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:viewControllerToCommit animated:YES completion:nil];
+}
+
+#pragma mark --
+- (NSUInteger)pinLengthForPinViewController:(RKPinViewController *)pinViewController {
+    return 4;
+}
+
+- (BOOL)pinViewController:(RKPinViewController *)pinViewController isPinValid:(NSString *)pin {
+    return [pin isEqualToString:@"1234"];
+}
+
+- (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController {
+    return YES;
 }
 
 #pragma mark - getting

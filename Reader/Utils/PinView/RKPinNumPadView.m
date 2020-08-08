@@ -8,6 +8,7 @@
 
 #import "RKPinNumPadView.h"
 #import "RKPinNumButton.h"
+#import "RKPinView.h"
 
 @interface RKPinNumPadView ()
 
@@ -44,13 +45,10 @@
     // remove existing views
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    self.backgroundColor = [UIColor lightGrayColor];
-    
     NSMutableDictionary *rowViews = [NSMutableDictionary dictionary];
     
     for (NSUInteger row = 0; row < 4; row++) {
         UIView *rowView = [[UIView alloc] init];
-        rowView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:rowView];
         [rowView mas_makeConstraints:^(MASConstraintMaker *make) {
             if (row == 3) {
@@ -81,9 +79,7 @@
             }
             
             RKPinNumButton *button = [[RKPinNumButton alloc] initWithNumber:number letters:letter];
-            
-            button.translatesAutoresizingMaskIntoConstraints = NO;
-            button.backgroundColor = self.backgroundColor;
+
             [button addTarget:self action:@selector(numberButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
             [rowView addSubview:button];
             [button mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -37,6 +37,7 @@
 		1A2E158824DC0612009C877F /* RKPinInputCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158724DC0612009C877F /* RKPinInputCircleView.m */; };
 		1A2E158B24DC0E07009C877F /* RKPinNumButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158A24DC0E07009C877F /* RKPinNumButton.m */; };
 		1A2E158E24DC1744009C877F /* RKPinNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158D24DC1744009C877F /* RKPinNumPadView.m */; };
+		1A2E159124DE5D24009C877F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E159024DE5D24009C877F /* UIImage+ImageEffects.m */; };
 		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
 		1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4384D8247D171800E087F3 /* ShareViewController.m */; };
 		1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4384DA247D171800E087F3 /* MainInterface.storyboard */; };
@@ -138,6 +139,8 @@
 		1A2E158A24DC0E07009C877F /* RKPinNumButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinNumButton.m; sourceTree = "<group>"; };
 		1A2E158C24DC1744009C877F /* RKPinNumPadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKPinNumPadView.h; sourceTree = "<group>"; };
 		1A2E158D24DC1744009C877F /* RKPinNumPadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKPinNumPadView.m; sourceTree = "<group>"; };
+		1A2E158F24DE5D23009C877F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		1A2E159024DE5D24009C877F /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
 		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
 		1A4384D5247D171800E087F3 /* ReaderShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReaderShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -397,6 +400,8 @@
 				1A2E158A24DC0E07009C877F /* RKPinNumButton.m */,
 				1A2E158C24DC1744009C877F /* RKPinNumPadView.h */,
 				1A2E158D24DC1744009C877F /* RKPinNumPadView.m */,
+				1A2E158F24DE5D23009C877F /* UIImage+ImageEffects.h */,
+				1A2E159024DE5D24009C877F /* UIImage+ImageEffects.m */,
 			);
 			path = PinView;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */,
 				1A2E158E24DC1744009C877F /* RKPinNumPadView.m in Sources */,
 				1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */,
+				1A2E159124DE5D24009C877F /* UIImage+ImageEffects.m in Sources */,
 				1A16F8AF2271A877006568A5 /* RKReadViewController.m in Sources */,
 				1A18891E226D7A2D00289476 /* RKSettingViewController.m in Sources */,
 				1A188915226D78C000289476 /* RKNavigationController.m in Sources */,

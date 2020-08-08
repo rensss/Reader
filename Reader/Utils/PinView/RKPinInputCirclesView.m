@@ -8,11 +8,11 @@
 
 #import "RKPinInputCirclesView.h"
 #import "RKPinInputCircleView.h"
+#import "RKPinView.h"
 
 @interface RKPinInputCirclesView () <CAAnimationDelegate>
 
 @property (nonatomic, strong) NSMutableArray *circleViews;
-@property (nonatomic, readonly, assign) CGFloat circlePadding;
 
 @property (nonatomic, assign) NSUInteger numShakes;
 @property (nonatomic, assign) NSInteger shakeDirection;
@@ -32,40 +32,31 @@
         _pinLength = pinLength;
         
         _circleViews = [NSMutableArray array];
-        NSMutableString *format = [NSMutableString stringWithString:@"H:|"];
-        NSMutableDictionary *views = [NSMutableDictionary dictionary];
         
         for (NSUInteger i = 0; i < _pinLength; i++) {
             RKPinInputCircleView *circleView = [[RKPinInputCircleView alloc] init];
-            circleView.translatesAutoresizingMaskIntoConstraints = NO;
+            circleView.tintColor = RKShowTintColor;
             [self addSubview:circleView];
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:circleView attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0f constant:0.0f]];
+            [circleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.bottom.mas_equalTo(self);
+                make.left.mas_equalTo(self).mas_offset(i*(25+[RKPinInputCircleView diameter]));
+                if (i == _pinLength - 1) {
+                    make.right.mas_equalTo(self);
+                }
+            }];
+            
             [_circleViews addObject:circleView];
-            NSString *name = [NSString stringWithFormat:@"circle%lu", (unsigned long)i];
-            if (i > 0) {
-                [format appendString:@"-(padding)-"];
-            }
-            [format appendFormat:@"[%@]", name];
-            views[name] = circleView;
         }
-        
-        [format appendString:@"|"];
-        NSDictionary *metrics = @{ @"padding" : @(self.circlePadding) };
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:metrics views:views]];
     }
     return self;
 }
 
-- (CGSize)intrinsicContentSize {
-    return CGSizeMake(self.pinLength * [RKPinInputCircleView diameter] + (self.pinLength - 1) * self.circlePadding,
-                      [RKPinInputCircleView diameter]);
+- (instancetype)initWithFrame:(CGRect)frame {
+    return [self initWithPinLength:0];
 }
 
-- (CGFloat)circlePadding {
-    return 2.0f * [RKPinInputCircleView diameter];
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    return [self initWithPinLength:0];
 }
 
 - (void)fillCircleAtPosition:(NSUInteger)position {
@@ -102,8 +93,9 @@ static NSString * const RKPositionAnimation = @"CirclesViewPosition";
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.delegate = self;
     [animation setDuration:0.03];
-    [animation setRepeatCount:RKTotalNumberOfShakes];
     [animation setAutoreverses:YES];
+    [animation setRemovedOnCompletion:NO];
+    [animation setRepeatCount:RKTotalNumberOfShakes];
     [animation setFromValue:[NSValue valueWithCGPoint:
                    CGPointMake([self center].x - RKInitialShakeAmplitude, [self center].y)]];
     [animation setToValue:[NSValue valueWithCGPoint:
@@ -113,9 +105,9 @@ static NSString * const RKPositionAnimation = @"CirclesViewPosition";
 
 #pragma mark - delegate
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    CAAnimation *animation = [self.layer animationForKey:RKPositionAnimation];
+    CAAnimation *animation = [[self layer] animationForKey:RKPositionAnimation];
     
-    if (anim == animation) {
+    if ([anim isEqual:animation]) {
         if (self.shakeCompletionBlock) {
             self.shakeCompletionBlock();
             self.shakeCompletionBlock = nil;

@@ -8,38 +8,57 @@
 
 #import "RKPinViewController.h"
 #import "RKPinView.h"
+#import "UIImage+ImageEffects.h"
 
 @interface RKPinViewController () <RKPinViewDelegate>
 
 
 @property (nonatomic, strong) RKPinView *pinView; /**< view*/
 
+@property (nonatomic, strong) UIView *blurView;
+@property (nonatomic, strong) NSArray *blurViewContraints;
 
 @end
 
 @implementation RKPinViewController
 
+#pragma mark - init
+- (instancetype)initWithDelegate:(id<RKPinViewControllerDelegate>)delegate {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        _delegate = delegate;
+        _backgroundColor = [UIColor whiteColor];
+        _translucentBackground = NO;
+        _promptTitle = @"Enter PIN";
+    }
+    return self;
+}
+
+- (nonnull instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil {
+    return [self initWithDelegate:nil];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [self initWithDelegate:nil];
+}
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     
-    UIButton *btn = [[UIButton alloc] init];
-    [self.view addSubview:btn];
-    [btn setBackgroundColor:[UIColor blackColor]];
-    [btn setTitle:@"close" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(closeClick) forControlEvents:UIControlEventTouchUpInside];
+    if (self.translucentBackground) {
+        self.view.backgroundColor = [UIColor clearColor];
+        [self addBlurView];
+    } else {
+        self.view.backgroundColor = self.backgroundColor;
+    }
     
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(44);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(50);
-    }];
-    
+    self.pinView = [[RKPinView alloc] initWithDelegate:self];
+    self.pinView.promptTitle = @"Enter PIN";
+    self.pinView.promptColor = [UIColor blackColor];
     [self.view addSubview:self.pinView];
     [self.pinView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(btn.mas_bottom).mas_offset(50);
+        make.center.mas_equalTo(self.view);
         make.left.right.mas_equalTo(self.view);
     }];
 }
@@ -51,11 +70,11 @@
 
 #pragma mark - delegate
 - (NSUInteger)pinLengthForPinView:(RKPinView *)pinView {
-    return 4;
+    return [self.delegate pinLengthForPinViewController:self];
 }
 
 - (BOOL)pinView:(RKPinView *)pinView isPinValid:(NSString *)pin {
-    return YES;
+    return [self.delegate pinViewController:self isPinValid:pin];
 }
 
 - (void)cancelButtonTappedInPinView:(RKPinView *)pinView {
@@ -63,21 +82,41 @@
 }
 
 - (void)correctPinWasEnteredInPinView:(RKPinView *)pinView {
-    DDLogInfo(@"---- cancelButtonTappedInPinView");
+    DDLogInfo(@"---- correctPinWasEnteredInPinView");
+    [self closeClick];
 }
 
 - (void)incorrectPinWasEnteredInPinView:(RKPinView *)pinView {
-    
+    DDLogInfo(@"---- incorrectPinWasEnteredInPinView");
 }
 
-#pragma mark - getting
-- (RKPinView *)pinView {
-    if (!_pinView) {
-        _pinView = [[RKPinView alloc] initWithDelegate:self];
-        _pinView.promptTitle = @"Enter PIN";
-        _pinView.promptColor = [UIColor blackColor];
+#pragma mark - Blur
+- (void)addBlurView {
+    self.blurView = [[UIImageView alloc] initWithImage:[self blurredContentImage]];
+//    [self.view insertSubview:self.blurView belowSubview:self.pinView];
+    [self.view addSubview:self.blurView];
+    [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.mas_equalTo(self.view);
+    }];
+}
+
+- (void)removeBlurView {
+    [self.blurView removeFromSuperview];
+    self.blurView = nil;
+    self.blurViewContraints = nil;
+}
+
+- (UIImage*)blurredContentImage {
+    UIView *contentView = [[UIApplication sharedApplication].keyWindow viewWithTag:RKPinViewControllerContentViewTag];
+    if (!contentView) {
+        return nil;
     }
-    return _pinView;
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [contentView drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:NO];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [image applyBlurWithRadius:20.0f tintColor:[UIColor colorWithWhite:1.0f alpha:0.25f]
+                saturationDeltaFactor:1.8f maskImage:nil];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "RKPinNumButton.h"
+#import "RKPinViewController.h"
 #import "RKPinView.h"
 
 @interface RKPinNumButton ()
@@ -31,9 +32,12 @@
         _letters = letters;
         
         self.layer.cornerRadius = [[self class] diameter] / 2.0f;
-        self.layer.borderWidth = 1.0f;
+//        self.layer.borderWidth = 1.0f;
+        
+        self.backgroundColor = RKShowTintColor;
         
         UIView *contentView = [[UIView alloc] init];
+        contentView.userInteractionEnabled = NO;
         [self addSubview:contentView];
         [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(self);
@@ -65,7 +69,6 @@
                 make.centerX.mas_equalTo(_numberLabel);
                 make.top.mas_equalTo(_numberLabel.mas_bottom).mas_offset(numberLabelYCorrection);
                 make.bottom.mas_equalTo(contentView.mas_bottom).mas_offset(lettersLabelYCorrection);
-                make.left.right.mas_equalTo(contentView);
             }];
         } else {
             [_numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,6 +76,7 @@
             }];
         }
         
+        [self tintColorDidChange];
     }
     return self;
 }
@@ -87,23 +91,22 @@
 
 #pragma mark - func
 - (void)tintColorDidChange {
-    self.layer.borderColor = self.tintColor.CGColor;
-    self.numberLabel.textColor = self.tintColor;
-    self.lettersLabel.textColor = self.tintColor;
+    self.numberLabel.textColor = [UIColor whiteColor];
+    self.lettersLabel.textColor = [UIColor whiteColor];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
+    
     self.backgroundColorBackup = self.backgroundColor;
-    self.backgroundColor = self.tintColor;
-    UIColor *textColor = ([self.backgroundColorBackup isEqual:[UIColor clearColor]] ?
-                          [self.class averageContentColor] : self.backgroundColorBackup);
-    self.numberLabel.textColor = textColor;
-    self.lettersLabel.textColor = textColor;
+    self.backgroundColor = RKShowHeilightTintColor;
+    self.backgroundColorBackup = ([self.backgroundColorBackup isEqual:[UIColor clearColor]] ?
+                                  [self.class averageContentColor] : self.backgroundColorBackup);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    
     [self resetHighlight];
 }
 
@@ -113,12 +116,13 @@
 }
 
 - (void)resetHighlight {
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction
+    [UIView animateWithDuration:0.3f
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
                          self.backgroundColor = self.backgroundColorBackup;
                      } completion:^(BOOL finished) {
-                         self.numberLabel.textColor = self.tintColor;
-                         self.lettersLabel.textColor = self.tintColor;
+                         [self tintColorDidChange];
                      }];
 }
 
