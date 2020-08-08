@@ -18,7 +18,7 @@
 //NSString *str = [dateFormatter stringFromDate:[NSDate date]];\
 //fprintf(stderr,"%s %s",[str UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);\
 //}
-//#define DDLogInfo(...)\
+//#define RKLog(...)\
 //NSLog(@"%s %d %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__]);
 
 #pragma mark - 通用类
