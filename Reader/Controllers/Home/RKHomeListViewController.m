@@ -426,21 +426,21 @@
 }
 
 - (void)incorrectPinEnteredInPinViewController:(RKPinViewController *)pinViewController {
-    DDLogVerbose(@"---- incorrectPinEntered");
+    DDLogInfo(@"---- incorrectPinEntered");
 }
 
 - (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
-    DDLogVerbose(@"---- WillDismiss WasSuccessful");
+    DDLogInfo(@"---- WillDismiss WasSuccessful");
     [self jumpToSecret];
 }
 
 - (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
-    DDLogVerbose(@"---- DidDismiss WasSuccessful");
+    DDLogInfo(@"---- DidDismiss WasSuccessful");
 //    [self jumpToSecret];
 }
 
 - (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(RKPinViewController *)pinViewController {
-    DDLogVerbose(@"---- WasUnsuccessful");
+    DDLogInfo(@"---- WasUnsuccessful");
 }
 
 #pragma mark - getting
