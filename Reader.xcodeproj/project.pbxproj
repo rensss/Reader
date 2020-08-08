@@ -260,16 +260,15 @@
 		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1A2E159624DEA5EA009C877F /* Authentication */,
+				1A18892F226D7BCD00289476 /* AlertMessage */,
+				1A18892B226D7BB500289476 /* FileManage */,
+				1A2E159224DE9CC5009C877F /* LogFormatter */,
+				1A56A2562451795400291C2D /* MarqueeView */,
+				1A2E157C24DC040C009C877F /* PinView */,
 				1AD836042488F13C00A31BA3 /* RKUtils.h */,
 				1AD836052488F13C00A31BA3 /* RKUtils.m */,
-				1AD836072488FB2800A31BA3 /* RKTouchFaceIDUtil.h */,
-				1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */,
-				1A2E159224DE9CC5009C877F /* LogFormatter */,
-				1A2E157C24DC040C009C877F /* PinView */,
-				1A56A2562451795400291C2D /* MarqueeView */,
 				1A077624227854CF0073794E /* UserConfig */,
-				1A18892B226D7BB500289476 /* FileManage */,
-				1A18892F226D7BCD00289476 /* AlertMessage */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -417,6 +416,15 @@
 				1A2E159424DE9D67009C877F /* RKLogFormatter.m */,
 			);
 			path = LogFormatter;
+			sourceTree = "<group>";
+		};
+		1A2E159624DEA5EA009C877F /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				1AD836072488FB2800A31BA3 /* RKTouchFaceIDUtil.h */,
+				1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		1A4384D6247D171800E087F3 /* ReaderShare */ = {
