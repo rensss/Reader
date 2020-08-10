@@ -130,4 +130,12 @@
     return _lettersArray;
 }
 
+#pragma mark - setting
+- (void)setHideLetters:(BOOL)hideLetters {
+    if (self.hideLetters == hideLetters) return;
+    
+    _hideLetters = hideLetters;
+    [self setupViews];
+}
+
 @end

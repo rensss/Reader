@@ -21,7 +21,7 @@
         default : logLevel = @"🚩default"; break;
     }
     //以上是根据不同的类型 定义不同的标记字符
-    return [NSString stringWithFormat:@"%@ %@[line:%zd]: %@\n", logLevel, logMessage->_function, logMessage->_line, logMessage->_message];
+    return [NSString stringWithFormat:@"%@\t%@[line:%zd]: %@\n", logLevel, logMessage->_function, logMessage->_line, logMessage->_message];
 }
 
 @end

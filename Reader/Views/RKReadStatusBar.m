@@ -88,7 +88,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    DDLogInfo(@"---> %@ 销毁了",self.class);
+    DDLogVerbose(@"---> %@ 销毁了",self.class);
 }
 
 #pragma mark - func
@@ -112,7 +112,7 @@
     
     float level = device.batteryLevel;
     
-//    DDLogInfo(@"---- level = %f",level);
+    DDLogVerbose(@"---- level = %f",level);
     
     self.batteryNum.text = [NSString stringWithFormat:@"%.0f",level*100];
     if (level > 0 && level < 0.2f) {

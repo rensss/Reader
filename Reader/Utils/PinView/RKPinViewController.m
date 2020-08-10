@@ -52,10 +52,7 @@
     } else {
         self.view.backgroundColor = self.backgroundColor;
     }
-    
-    self.pinView = [[RKPinView alloc] initWithDelegate:self];
-    self.pinView.promptTitle = @"Enter PIN";
-    self.pinView.promptColor = [UIColor blackColor];
+        
     [self.view addSubview:self.pinView];
     [self.pinView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.view);
@@ -78,7 +75,8 @@
 }
 
 - (void)cancelButtonTappedInPinView:(RKPinView *)pinView {
-    DDLogInfo(@"---- cancelButtonTappedInPinView");
+    DDLogVerbose(@"---- cancelButtonTappedInPinView");
+    [self closeClick];
 }
 
 - (void)correctPinWasEnteredInPinView:(RKPinView *)pinView {
@@ -112,8 +110,8 @@
 #pragma mark - Blur
 - (void)addBlurView {
     self.blurView = [[UIImageView alloc] initWithImage:[self blurredContentImage]];
-//    [self.view insertSubview:self.blurView belowSubview:self.pinView];
-    [self.view addSubview:self.blurView];
+    [self.view insertSubview:self.blurView belowSubview:self.pinView];
+//    [self.view addSubview:self.blurView];
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(self.view);
     }];
@@ -136,6 +134,77 @@
     UIGraphicsEndImageContext();
     return [image applyBlurWithRadius:20.0f tintColor:[UIColor colorWithWhite:1.0f alpha:0.25f]
                 saturationDeltaFactor:1.8f maskImage:nil];
+}
+
+#pragma mark - getting
+- (RKPinView *)pinView {
+    if (!_pinView) {
+        _pinView = [[RKPinView alloc] initWithDelegate:self];
+        _pinView.promptTitle = @"Enter PIN";
+        _pinView.promptColor = [UIColor blackColor];
+    }
+    return _pinView;
+}
+
+#pragma mark - setting
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    if ([self.backgroundColor isEqual:backgroundColor]) return;
+    
+    _backgroundColor = backgroundColor;
+    if (!self.translucentBackground) {
+        self.view.backgroundColor = self.backgroundColor;
+        self.pinView.backgroundColor = self.backgroundColor;
+    }
+}
+
+- (void)setTranslucentBackground:(BOOL)translucentBackground {
+    if (self.translucentBackground == translucentBackground) return;
+    
+    _translucentBackground = translucentBackground;
+    if (self.translucentBackground) {
+        self.view.backgroundColor = [UIColor clearColor];
+        self.pinView.backgroundColor = [UIColor clearColor];
+        [self addBlurView];
+    } else {
+        self.view.backgroundColor = self.backgroundColor;
+        self.pinView.backgroundColor = self.backgroundColor;
+        [self removeBlurView];
+    }
+}
+
+- (void)setPromptTitle:(NSString *)promptTitle {
+    if ([self.promptTitle isEqualToString:promptTitle]) return;
+    
+    _promptTitle = [promptTitle copy];
+    self.pinView.promptTitle = self.promptTitle;
+}
+
+- (void)setPromptColor:(UIColor *)promptColor {
+    if ([self.promptColor isEqual:promptColor]) return;
+    
+    _promptColor = promptColor;
+    self.pinView.promptColor = self.promptColor;
+}
+
+- (void)setHideLetters:(BOOL)hideLetters {
+    if (self.hideLetters == hideLetters) return;
+    
+    _hideLetters = hideLetters;
+    self.pinView.hideLetters = self.hideLetters;
+}
+
+- (void)setDisableCancel:(BOOL)disableCancel {
+    if (self.disableCancel == disableCancel) {
+        return;
+    }
+    _disableCancel = disableCancel;
+    self.pinView.disableCancel = self.disableCancel;
+}
+
+- (void)setDisableAuthentication:(BOOL)disableAuthentication {
+    if (self.disableAuthentication == disableAuthentication) return;
+    
+    self.pinView.disableAuthentication = disableAuthentication;
 }
 
 @end

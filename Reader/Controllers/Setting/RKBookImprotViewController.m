@@ -27,7 +27,7 @@
     self.navigationItem.title = @"导入";
     
     [self.webUploader start];
-    DDLogInfo(@"Visit %@ in your web browser", self.webUploader.serverURL);
+    DDLogDebug(@"Visit %@ in your web browser", self.webUploader.serverURL);
     
     [self initUI];
 }
@@ -101,7 +101,7 @@
  *  This method is called whenever a file has been downloaded.
  */
 - (void)webUploader:(GCDWebUploader*)uploader didDownloadFileAtPath:(NSString*)path {
-    DDLogInfo(@"didDownloadFileAtPath---->\n");
+    DDLogDebug(@"didDownloadFileAtPath---->\n");
     [self reloadTableView];
 }
 
@@ -109,7 +109,7 @@
  *  This method is called whenever a file has been uploaded.
  */
 - (void)webUploader:(GCDWebUploader*)uploader didUploadFileAtPath:(NSString*)path {
-    DDLogInfo(@"didUploadFileAtPath---->\n %@",path);
+    DDLogDebug(@"didUploadFileAtPath---->\n %@",path);
     
     // 截取书名 带扩展
     NSString *title = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
@@ -129,7 +129,7 @@
  *  This method is called whenever a file or directory has been moved.
  */
 - (void)webUploader:(GCDWebUploader*)uploader didMoveItemFromPath:(NSString*)fromPath toPath:(NSString*)toPath {
-    DDLogInfo(@"didMoveItemFromPath---->\n");
+    DDLogDebug(@"didMoveItemFromPath---->\n");
     [self reloadTableView];
 }
 
@@ -137,7 +137,7 @@
  *  This method is called whenever a file or directory has been deleted.
  */
 - (void)webUploader:(GCDWebUploader*)uploader didDeleteItemAtPath:(NSString*)path {
-    DDLogInfo(@"didDeleteItemAtPath---->\n");
+    DDLogDebug(@"didDeleteItemAtPath---->\n");
     // 截取书名 带扩展
     NSString *name = [path stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/",uploader.uploadDirectory]  withString:@""];
     // 更新首页数据
@@ -152,7 +152,7 @@
  *  This method is called whenever a directory has been created.
  */
 - (void)webUploader:(GCDWebUploader*)uploader didCreateDirectoryAtPath:(NSString*)path {
-    DDLogInfo(@"didCreateDirectoryAtPath---->\n");
+    DDLogDebug(@"didCreateDirectoryAtPath---->\n");
     [self reloadTableView];
 }
 

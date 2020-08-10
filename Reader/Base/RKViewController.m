@@ -25,7 +25,7 @@
 }
 
 - (void)dealloc {
-    DDLogInfo(@"---> %@ 销毁",[self class]);
+    DDLogVerbose(@"---> %@ 销毁",[self class]);
 }
 
 #pragma mark - 重写系统方法

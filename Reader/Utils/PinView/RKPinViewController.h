@@ -35,13 +35,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RKPinViewController : UIViewController
 
 @property (nonatomic, weak, nullable) id<RKPinViewControllerDelegate> delegate;
-@property (nonatomic, strong, nullable) UIColor *backgroundColor; // is only used if translucentBackground == NO
-@property (nonatomic, assign) BOOL translucentBackground;
-@property (nonatomic, copy, nullable) NSString *promptTitle;
-@property (nonatomic, strong, nullable) UIColor *promptColor;
-@property (nonatomic, assign) BOOL hideLetters; // hides the letters on the number buttons
-@property (nonatomic, assign) BOOL disableCancel; // hides the cancel button
-@property (nonatomic, assign) BOOL disableDismissAniamtion;
+@property (nonatomic, strong, nullable) UIColor *backgroundColor;   /**< 背景色 仅当translucentBackground = no时生效*/
+@property (nonatomic, assign) BOOL translucentBackground;           /**< 是否透明背景*/
+@property (nonatomic, copy, nullable) NSString *promptTitle;        /**< title*/
+@property (nonatomic, strong, nullable) UIColor *promptColor;       /**< title的颜色*/
+@property (nonatomic, assign) BOOL hideLetters;                     /**< 是否隐藏按钮上的字母*/
+@property (nonatomic, assign) BOOL disableCancel;                   /**< 是否显示取消按钮*/
+@property (nonatomic, assign) BOOL disableAuthentication;           /**< 是否开启生物认证*/
+@property (nonatomic, assign) BOOL disableDismissAniamtion;         /**< 是否取消动画*/
 
 - (instancetype)initWithDelegate:(nullable id<RKPinViewControllerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 

@@ -211,22 +211,10 @@
     RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
     
     self.navigationController.view.tag = RKPinViewControllerContentViewTag;
-    pinVC.modalPresentationStyle = UIModalPresentationFullScreen;
     pinVC.translucentBackground = YES;
     
     [self presentViewController:pinVC animated:YES completion:nil];
     return;
-    
-    if ([RKTouchFaceIDUtil canUseTouchID] || [RKTouchFaceIDUtil canUseFaceID]) {
-        __weak typeof(self) weakSelf = self;
-        [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"Unlock" result:^(BOOL success) {
-            if (success) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf jumpToSecret];
-                });
-            }
-        }];
-    }
 }
 
 #pragma mark - delegate
@@ -388,7 +376,7 @@
     previewingContext.sourceRect = rect;
     
     RKHomeListTableViewCell *cell = (RKHomeListTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    DDLogInfo(@"---- %@ ---- book:%@",NSStringFromCGPoint(location),cell.book.name);
+    DDLogVerbose(@"---- %@ ---- book:%@",NSStringFromCGPoint(location),cell.book.name);
     
     RKBook *analysisBook = [self analysisBookContentWithBook:cell.book];
     if (analysisBook) {
@@ -418,7 +406,7 @@
 }
 
 - (BOOL)pinViewController:(RKPinViewController *)pinViewController isPinValid:(NSString *)pin {
-    return [pin isEqualToString:@"1234"];
+    return [pin isEqualToString:@"0000"];
 }
 
 - (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController {
@@ -426,21 +414,20 @@
 }
 
 - (void)incorrectPinEnteredInPinViewController:(RKPinViewController *)pinViewController {
-    DDLogInfo(@"---- incorrectPinEntered");
+    DDLogDebug(@"---- incorrectPinEntered");
 }
 
 - (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
-    DDLogInfo(@"---- WillDismiss WasSuccessful");
+    DDLogDebug(@"---- WillDismiss WasSuccessful");
     [self jumpToSecret];
 }
 
 - (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
-    DDLogInfo(@"---- DidDismiss WasSuccessful");
-//    [self jumpToSecret];
+    DDLogDebug(@"---- DidDismiss WasSuccessful");
 }
 
 - (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(RKPinViewController *)pinViewController {
-    DDLogInfo(@"---- WasUnsuccessful");
+    DDLogDebug(@"---- WasUnsuccessful");
 }
 
 #pragma mark - getting

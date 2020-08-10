@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define RKShowBtnTintColor [UIColor colorWithR:44 g:44 b:44 alpha:1]
 #define RKShowTintColor [UIColor colorWithR:168 g:168 b:168 alpha:1]
 #define RKShowHeilightTintColor [UIColor colorWithR:198 g:198 b:198 alpha:1]
 
@@ -32,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIColor *promptColor;
 @property (nonatomic, assign) BOOL hideLetters;
 @property (nonatomic, assign) BOOL disableCancel;
+@property (nonatomic, assign) BOOL disableAuthentication;
 
 - (instancetype)initWithDelegate:(nullable id<RKPinViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 

@@ -124,7 +124,7 @@
         
         // 创建并添加按钮
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            DDLogInfo(@"是否是主线程 ------- %@",[NSThread isMainThread]?@"YES":@"NO");
+            DDLogDebug(@"是否是主线程 ------- %@",[NSThread isMainThread]?@"YES":@"NO");
             RKLoadingView *loadingView = [[RKLoadingView alloc] initWithMessage:@"删除中..."];
             [loadingView showInView:weakSelf.view];
             
@@ -135,11 +135,11 @@
                 
                 CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
                 // 打印运行时间
-                DDLogInfo(@"Linked in %f ms", linkTime * 1000.0);
+                DDLogDebug(@"Linked in %f ms", linkTime * 1000.0);
                 [loadingView stop];
                 [RKFileManager shareInstance].isNeedRefresh = YES;
                 
-                DDLogInfo(@"是否是主线程 ------- %@",[NSThread isMainThread]?@"YES":@"NO");
+                DDLogDebug(@"是否是主线程 ------- %@",[NSThread isMainThread]?@"YES":@"NO");
                 
                 if (isSuccess) {
                     RKAlertMessage(@"删除成功", weakSelf.view);
