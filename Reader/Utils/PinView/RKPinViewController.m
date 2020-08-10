@@ -42,6 +42,10 @@
     return [self initWithDelegate:nil];
 }
 
+- (void)dealloc {
+    NSLog(@"---> %@ 销毁了",[self class]);
+}
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
