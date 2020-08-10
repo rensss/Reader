@@ -180,14 +180,15 @@
 
 - (void)setDisableCancel:(BOOL)disableCancel {
     if (self.disableCancel == disableCancel) return;
-    _disableCancel = disableCancel;
     
+    _disableCancel = disableCancel;
     self.cancelBtn.hidden = disableCancel;
 }
 
 - (void)setDisableAuthentication:(BOOL)disableAuthentication {
     if (self.disableAuthentication == disableAuthentication) return;
     
+    _disableAuthentication = disableAuthentication;
     self.biometricAuth.hidden = disableAuthentication;
 }
 

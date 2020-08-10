@@ -426,10 +426,6 @@
     DDLogDebug(@"---- DidDismiss WasSuccessful");
 }
 
-- (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(RKPinViewController *)pinViewController {
-    DDLogDebug(@"---- WasUnsuccessful");
-}
-
 #pragma mark - getting
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {

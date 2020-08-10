@@ -138,8 +138,8 @@
 - (RKPinView *)pinView {
     if (!_pinView) {
         _pinView = [[RKPinView alloc] initWithDelegate:self];
-        _pinView.promptTitle = @"Enter PIN";
-        _pinView.promptColor = [UIColor blackColor];
+        _pinView.promptTitle = self.promptTitle;
+        _pinView.promptColor = self.promptColor;
     }
     return _pinView;
 }
@@ -192,9 +192,8 @@
 }
 
 - (void)setDisableCancel:(BOOL)disableCancel {
-    if (self.disableCancel == disableCancel) {
-        return;
-    }
+    if (self.disableCancel == disableCancel) return;
+    
     _disableCancel = disableCancel;
     self.pinView.disableCancel = self.disableCancel;
 }
@@ -202,6 +201,7 @@
 - (void)setDisableAuthentication:(BOOL)disableAuthentication {
     if (self.disableAuthentication == disableAuthentication) return;
     
+    _disableAuthentication = disableAuthentication;
     self.pinView.disableAuthentication = disableAuthentication;
 }
 
