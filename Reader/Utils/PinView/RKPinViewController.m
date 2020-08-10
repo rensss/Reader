@@ -111,7 +111,6 @@
 - (void)addBlurView {
     self.blurView = [[UIImageView alloc] initWithImage:[self blurredContentImage]];
     [self.view insertSubview:self.blurView belowSubview:self.pinView];
-//    [self.view addSubview:self.blurView];
     [self.blurView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(self.view);
     }];
@@ -132,8 +131,7 @@
     [contentView drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:NO];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return [image applyBlurWithRadius:20.0f tintColor:[UIColor colorWithWhite:1.0f alpha:0.25f]
-                saturationDeltaFactor:1.8f maskImage:nil];
+    return [image applyBlurWithRadius:20.0f tintColor:[UIColor colorWithWhite:1.0f alpha:0.25f] saturationDeltaFactor:1.8f maskImage:nil];
 }
 
 #pragma mark - getting
