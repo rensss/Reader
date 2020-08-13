@@ -260,14 +260,14 @@
 		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1AD836042488F13C00A31BA3 /* RKUtils.h */,
+				1AD836052488F13C00A31BA3 /* RKUtils.m */,
 				1A2E159624DEA5EA009C877F /* Authentication */,
 				1A18892F226D7BCD00289476 /* AlertMessage */,
 				1A18892B226D7BB500289476 /* FileManage */,
 				1A2E159224DE9CC5009C877F /* LogFormatter */,
 				1A56A2562451795400291C2D /* MarqueeView */,
 				1A2E157C24DC040C009C877F /* PinView */,
-				1AD836042488F13C00A31BA3 /* RKUtils.h */,
-				1AD836052488F13C00A31BA3 /* RKUtils.m */,
 				1A077624227854CF0073794E /* UserConfig */,
 			);
 			path = Utils;
