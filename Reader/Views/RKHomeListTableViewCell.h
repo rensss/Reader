@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface RKHomeListTableViewCell : SWTableViewCell
+@interface RKHomeListTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) RKBook *book; /**< 书籍*/
 

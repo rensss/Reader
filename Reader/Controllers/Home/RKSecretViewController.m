@@ -10,7 +10,7 @@
 #import "RKHomeListTableViewCell.h"
 #import "RKReadPageViewController.h"
 
-@interface RKSecretViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UIViewControllerPreviewingDelegate>
+@interface RKSecretViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, strong) NSMutableArray *dataArray; /**< 数据源*/
@@ -175,53 +175,6 @@
     RKBook *book = self.dataArray[indexPath.row];
     cell.book = book;
     
-    // 右侧滑按钮
-    NSMutableArray *rightBtns = [NSMutableArray array];
-    // 删除
-    NSAttributedString *delete = [[NSAttributedString alloc] initWithString:@"删除"
-                                                               attributes:@{
-                                                                   NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
-                                                                   NSForegroundColorAttributeName: [UIColor whiteColor]
-                                                               }];
-    // 海棠红
-    [rightBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f03752"] attributedTitle:delete];
-    [cell setRightUtilityButtons:rightBtns WithButtonWidth:80.0f];
-    
-    
-    
-    // 置顶
-    NSString *topTitle = book.isTop ? @"取消置顶" : @"置顶";
-    NSAttributedString *top = [[NSAttributedString alloc] initWithString:topTitle
-                                                              attributes:@{
-                                                                  NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium"size:16],
-                                                                  NSForegroundColorAttributeName: [UIColor whiteColor]
-                                                              }];
-    
-    if (book.isTop) {
-        // 香叶红 f1939c
-        [rightBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f07c82"] attributedTitle:top];
-        [cell setRightUtilityButtons:rightBtns WithButtonWidth:80.0f];
-    } else {
-
-        // 合欢红 f0a1a8
-        [rightBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"f0a1a8"] attributedTitle:top];
-        [cell setRightUtilityButtons:rightBtns WithButtonWidth:80.0f];
-    }
-    
-    // 左侧滑按钮
-    NSString *secretTitle = book.isSecret ? @"移出":@"加密";
-    NSAttributedString *secret = [[NSAttributedString alloc] initWithString:secretTitle
-                                                                 attributes:@{
-                                                                     NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16],
-                                                                     NSForegroundColorAttributeName: [UIColor whiteColor]
-                                                                 }];
-    NSMutableArray *leftBtns = [NSMutableArray array];
-    // 海棠红
-    [leftBtns sw_addUtilityButtonWithColor:[UIColor colorWithHexString:@"8abcd1"] attributedTitle:secret];
-    [cell setLeftUtilityButtons:leftBtns WithButtonWidth:80.0f];
-    
-    cell.delegate = self;
-    
     return cell;
 }
 
@@ -233,48 +186,17 @@
     [self startReadWithBook:book];
 }
 
-#pragma mark -- SWTableViewCellDelegate
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
-    return YES;
-}
-
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
-    return YES;
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-//    DDLogDebug(@"---- index:%ld",(long)index);
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath  API_AVAILABLE(ios(11.0)) {
     
-    RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
+    __weak typeof(self) weakSelf = self;
+    RKHomeListTableViewCell *listCell = [tableView cellForRowAtIndexPath:indexPath];
     RKBook *book = listCell.book;
-    if (index == 0) {
-        [[RKFileManager shareInstance] deleteBookWithName:book.name];
-        [[RKFileManager shareInstance] setIsNeedRefresh:NO];
-        NSInteger bookIndex = [self.dataArray indexOfObject:book];
-        [self.dataArray removeObjectAtIndex:bookIndex];
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    }
     
-    if (index == 1) {
+    // 解密
+    NSString *secretTitle = book.isSecret ? @"解密":@"隐藏";
+    UIContextualAction *secretAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:secretTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        
         NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
-        
-        for (RKBook *subBook in bookList) {
-            if ([subBook.bookID isEqualToString:book.bookID]) {
-                subBook.isTop = !book.isTop;
-            }
-        }
-        
-        [[RKFileManager shareInstance] saveBookList:bookList];
-        [self needReloadData];
-    }
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
-    RKHomeListTableViewCell *listCell = (RKHomeListTableViewCell *)cell;
-    RKBook *book = listCell.book;
-    if (index == 0) {
-        NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
-        
         for (RKBook *subBook in bookList) {
             if ([subBook.bookID isEqualToString:book.bookID]) {
                 subBook.isSecret = !book.isSecret;
@@ -282,9 +204,52 @@
         }
         
         [[RKFileManager shareInstance] saveBookList:bookList];
-        [RKFileManager shareInstance].isNeedRefresh = YES;
-        [self needReloadData];
-    }
+        [weakSelf needReloadData];
+    }];
+    secretAction.backgroundColor = [UIColor colorWithHexString:@"8abcd1"];
+    
+    return [UISwipeActionsConfiguration configurationWithActions:@[secretAction]];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(nonnull NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) {
+    
+    __weak typeof(self) weakSelf = self;
+    RKHomeListTableViewCell *listCell = [tableView cellForRowAtIndexPath:indexPath];
+    RKBook *book = listCell.book;
+    
+    // 删除
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        DDLogInfo(@"---- xxxxx");
+        [[RKFileManager shareInstance] deleteBookWithName:book.name];
+        [[RKFileManager shareInstance] setIsNeedRefresh:NO];
+        NSInteger bookIndex = [weakSelf.dataArray indexOfObject:book];
+        [weakSelf.dataArray removeObjectAtIndex:bookIndex];
+        [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    
+    
+    deleteAction.backgroundColor = [UIColor colorWithHexString:@"f03752"];
+    
+    // 置顶
+    NSString *topTitle = book.isTop ? @"取消置顶" : @"置顶";
+    UIContextualAction *pinAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:topTitle handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        book.isTop = !book.isTop;
+        
+        NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
+        
+        for (RKBook *subBook in bookList) {
+            if ([subBook.bookID isEqualToString:book.bookID]) {
+                subBook.isTop = book.isTop;
+            }
+        }
+        
+        [[RKFileManager shareInstance] saveBookList:bookList];
+        [weakSelf needReloadData];
+    }];
+    UIColor *topColor = book.isTop ? [UIColor colorWithHexString:@"f1939c"] : [UIColor colorWithHexString:@"f1939c"];
+    pinAction.backgroundColor = topColor;
+    
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction, pinAction]];
 }
 
 #pragma mark -- UIViewControllerPreviewingDelegate

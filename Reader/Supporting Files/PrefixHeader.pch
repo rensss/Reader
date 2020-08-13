@@ -27,25 +27,25 @@
 #import <R_category/R_categorys.h>
 #import "MJExtension.h"
 //#import <YYModel/YYModel.h>
-#import <SWTableViewCell.h>
+//#import <SWTableViewCell.h>
 #import <MMKV/MMKV.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
-#import "RKNavigationController.h" // 导航控制
-#import "RKViewController.h" // 基类
+#import "RKNavigationController.h"  // 导航控制
+#import "RKViewController.h"        // 基类
 
-#import "RKAlertMessage.h" // 弹窗
-#import "RKMarqueeView.h" // 滚动view
-#import "RKLoadingView.h" // loading
-#import "RKFileManager.h" // 文件管理
-#import "RKUserConfig.h" // 用户配置
-#import "RKUtils.h" // 实用类
-#import "RKTouchFaceIDUtil.h" // 权限验证类
+#import "RKAlertMessage.h"          // 弹窗
+#import "RKMarqueeView.h"           // 滚动view
+#import "RKLoadingView.h"           // loading
+#import "RKFileManager.h"           // 文件管理
+#import "RKUserConfig.h"            // 用户配置
+#import "RKUtils.h"                 // 实用类
+#import "RKTouchFaceIDUtil.h"       // 权限验证类
 
 #pragma mark - model
-#import "RKModel.h" // model 基类
-#import "RKBook.h" // book对象
-#import "RKChapter.h" // 章节
+#import "RKModel.h"                 // model 基类
+#import "RKBook.h"                  // book对象
+#import "RKChapter.h"               // 章节
 
 #pragma mark - 常用宏定义
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
