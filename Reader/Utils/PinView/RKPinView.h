@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithDelegate:(nullable id<RKPinViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
+/// 生物认证
+- (void)requestBiometricAuth;
+
 @end
 
 NS_ASSUME_NONNULL_END

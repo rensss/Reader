@@ -14,8 +14,8 @@
 
 @property (nonatomic, strong) NSMutableArray *circleViews;
 
-@property (nonatomic, assign) NSUInteger numShakes;
-@property (nonatomic, assign) NSInteger shakeDirection;
+@property (nonatomic, assign) float repeatCount;
+@property (nonatomic, assign) CFTimeInterval shakeDuration;
 @property (nonatomic, assign) CGFloat shakeAmplitude;
 @property (nonatomic, strong) RKPinInputCirclesViewShakeCompletionBlock shakeCompletionBlock;
 
@@ -82,8 +82,8 @@ static const CGFloat RKInitialShakeAmplitude = 40.0f;
 static NSString * const RKPositionAnimation = @"CirclesViewPosition";
 
 - (void)shakeWithCompletion:(RKPinInputCirclesViewShakeCompletionBlock)completion {
-    self.numShakes = 0;
-    self.shakeDirection = -1;
+    self.repeatCount = RKTotalNumberOfShakes;
+    self.shakeDuration = 0.05;
     self.shakeAmplitude = RKInitialShakeAmplitude;
     self.shakeCompletionBlock = completion;
     [self performShake];
@@ -92,14 +92,14 @@ static NSString * const RKPositionAnimation = @"CirclesViewPosition";
 - (void)performShake {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.delegate = self;
-    [animation setDuration:0.03];
+    [animation setDuration:self.shakeDuration];
     [animation setAutoreverses:YES];
     [animation setRemovedOnCompletion:NO];
-    [animation setRepeatCount:RKTotalNumberOfShakes];
+    [animation setRepeatCount:self.repeatCount];
     [animation setFromValue:[NSValue valueWithCGPoint:
-                   CGPointMake([self center].x - RKInitialShakeAmplitude, [self center].y)]];
+                   CGPointMake([self center].x - self.shakeAmplitude, [self center].y)]];
     [animation setToValue:[NSValue valueWithCGPoint:
-                   CGPointMake([self center].x + RKInitialShakeAmplitude, [self center].y)]];
+                   CGPointMake([self center].x + self.shakeAmplitude, [self center].y)]];
     [[self layer] addAnimation:animation forKey:RKPositionAnimation];
 }
 

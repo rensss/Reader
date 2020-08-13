@@ -64,6 +64,14 @@
     }];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!self.disableAutoAuthentication) {
+        [self.pinView requestBiometricAuth];
+    }
+}
+
 #pragma mark - 事件
 - (void)closeClick {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -207,6 +215,12 @@
     
     _disableAuthentication = disableAuthentication;
     self.pinView.disableAuthentication = disableAuthentication;
+}
+
+- (void)setDisableAutoAuthentication:(BOOL)disableAutoAuthentication {
+    if (self.disableAutoAuthentication == disableAutoAuthentication) return;
+    
+    _disableAutoAuthentication = disableAutoAuthentication;
 }
 
 @end
