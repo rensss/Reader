@@ -108,6 +108,8 @@
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
     if ([self.dataArr[indexPath.row] isEqualToString:@"局域网导入"]) {
         RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
         importVC.showType = RKImprotShowTypePresent;
@@ -154,6 +156,11 @@
         
         [alertController addAction:okAction];           // A
         [alertController addAction:cancelAction];       // B
+        
+        if (kIsPad) {
+            alertController.popoverPresentationController.sourceView = cell;
+            alertController.popoverPresentationController.sourceRect = cell.frame;
+        }
         
         [self presentViewController:alertController animated:YES completion:nil];
     }

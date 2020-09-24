@@ -75,6 +75,7 @@ i = 0.0f; \
 } \
 (i); \
 })
+
 #define kIS_IPHONEX \
 ({ \
 BOOL flag; \
@@ -101,6 +102,8 @@ height = 20; \
 } \
 (height); \
 })
+
+#define kIsPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 #ifdef DEBUG
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
