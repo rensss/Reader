@@ -14,267 +14,267 @@
 		04A477B729B17697AAA3CB43DAD3A1ED /* UIColor+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB6FA13B253A2CB47A0B7E3A3DE1E99 /* UIColor+R_Category.m */; };
 		05D120D5B811942BB1E375035C81AE63 /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FB612A4078B5EC7B26CC97E0765103 /* GCDWebServerURLEncodedFormRequest.m */; };
 		065A9AB2C86746D78C52FFADD0A30568 /* GCDWebServerFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = F4E36632D43607C7136FBE19E3F58551 /* GCDWebServerFileResponse.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0720A634389F76C008A98F1F46D26EF9 /* openssl_opensslconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2D6922C26D1E33E57BC0383F4BC080 /* openssl_opensslconf.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		074533502DBEF67B2D680761D79BA23D /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B63477915E561DC325F8C6E802D7AC26 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0809228C1596F64D113316E8FF1B7C30 /* UIButton+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = F44FE5040B6D5D91A787F20273B3A575 /* UIButton+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0A454CAB13E4FEC1DF54BE5ABE8D173A /* CodedInputData.h in Headers */ = {isa = PBXBuildFile; fileRef = B473D6D67E6A081044CBC4B113D58C4C /* CodedInputData.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0C422C71ADB99EA5FF5E5CA56F042C62 /* MMKV.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D7E4A05CB7617C77AB9A53B5F75F863 /* MMKV.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0E62A7BD7A3829532433091FDE652B95 /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036B56140DFF139283920426F05EF76 /* MJProperty.m */; };
 		0E6D7DF472201776D9C7DB26D0BBD20B /* UILabel+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 30717972230052C310801429ECB26D69 /* UILabel+R_Category.m */; };
-		0F5BC7FB75842C4DF7D6CAA2276D412C /* openssl_md5_locl.h in Headers */ = {isa = PBXBuildFile; fileRef = 4195A7B62FF0E1E3C6AB488C1994EC22 /* openssl_md5_locl.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0E8D6263799B11D0B17B44A5D04344BA /* KeyValueHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31B1BE99F7B445E57524BAE74FDBD2D6 /* KeyValueHolder.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		115ACCE253A886181B55773DDC70D6ED /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A7A8CE559703C3AFFD4984F78899EC /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		11D6807CF168126D40A15178C9E04FCD /* openssl_aes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C7761C769C245BBD357DD72AD99E019 /* openssl_aes.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1448F45E060AC81DFC7DB258B3B95562 /* NSString+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 2266294584371AA3E5F3FF1E5AC9D418 /* NSString+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		14BD5053A3FBCBB47D95231706E10B99 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DBA2938CDD8D3DCA430E2EB8F62EF77 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1609407914B4474BD6125FC9C2BCDE67 /* MJPropertyType.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8D11FE075D71E37B8559924FF904F2 /* MJPropertyType.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		166362512425813E6A6B7A462CE14ACB /* MMKVLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4735FD2CD3F9DB36672FD68C0EF4769E /* MMKVLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		174206A450C45E65A09563FEE1EA3DA7 /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FAB639085705916E4F63374379B63C /* MJPropertyType.m */; };
+		17FD4E267E9FBB429A7C8E1D30E380AE /* openssl_aes-armv4.S in Sources */ = {isa = PBXBuildFile; fileRef = 4F98162B549F01B369C66D97BF8D074D /* openssl_aes-armv4.S */; };
 		18072E1D0B9D7CFC0C6637313DF23C8E /* GCDWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EFBFDBA99E5902FB3DF3D59169826E /* GCDWebServerConnection.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		19EBADD7D8F1808CFB34F55D03FBA413 /* CodedOutputData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F10744B2307D7B0F5A18B116E3FA00B /* CodedOutputData.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		1A7736579A6A134BBFE4E511CE6234B3 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACC30DA1BB28C5C0731FD74F7B4136 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1A7DE85430B18B3DC79ECBFDD3B6CF65 /* NSString+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = CC83B8BBE8E6D62ADB984AB591680510 /* NSString+R_Category.m */; };
 		1A9D82E0BC70D7EB103DDC8405F47110 /* UIImage+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECEB3B550A129C633773C337019AE31 /* UIImage+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1B740F24F36514C2176871E63E4DA35E /* PBEncodeItem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 509469CDC6E99EE6D9DB8658EF49B23D /* PBEncodeItem.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
+		1E26267150F68F816E81D509F67DD1E1 /* MemoryFile_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C53C93B9803F1D9F5B8E96B83DDFC63 /* MemoryFile_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		1E5D56FF58658F9F45723CA2940489EE /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA0B74189FA5A486E4566C1347EE0A1 /* MASConstraintMaker.m */; };
-		200694A4A09DC94362D0B0D12BD4E506 /* CodedOutputData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F10744B2307D7B0F5A18B116E3FA00B /* CodedOutputData.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		1F65F661C9F9AD43089045702B4644EB /* ThreadLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40D9A86846D847761F82FCE675159A9 /* ThreadLock.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		20432A86849EAB849D036DEF7B2B3E49 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D482140C680B5A50DDBE16806293FE07 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		20A96CD27D1F65CC277E1D31F919EA44 /* AESCrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F3EEEB625E0A1E1C0EDC0E9DCB9990 /* AESCrypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		21CAFEA5CBFCD0604628CA55C0FF3B55 /* InterProcessLock_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE19C5BFE4A5AFA93BB144E059206C9A /* InterProcessLock_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
-		2245EF4DBC275D733C3FCC9F6898C137 /* InterProcessLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9A776365559C3942C45CF7B7700C09 /* InterProcessLock.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		21D7F9A3DD526B12B6206C0D01BC9B2F /* AESCrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F3EEEB625E0A1E1C0EDC0E9DCB9990 /* AESCrypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		225954BE08C2A11B58527BD7E486E224 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2AB776C86ACADA8578F09C0406CBD5 /* DDLog.m */; };
 		23264922C2BC9F97BAD4396AA4E911DC /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE3B1E47466789DD7FDF2C840191F5 /* DDContextFilterLogFormatter.m */; };
-		2386935D09F479BBB9F295EC266F04B9 /* CodedInputDataCrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = A9F9C2A4B702EDAC84B2DC5261853BF3 /* CodedInputDataCrypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		253B8F7D7A49629E23C0CB07F17B27B8 /* ThreadLock_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16DB7D236D926E008FF3D77547F5FF18 /* ThreadLock_Win32.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		23EB4498D37D8EA04A4B15703E1DC327 /* openssl_cfb128.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057AE4CBA9B41A68DA12C88E5CBB6062 /* openssl_cfb128.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		253C3DC37B49553B049C04986B78CEBD /* MJPropertyKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 16658F0586A525F8381FAADD0831FE57 /* MJPropertyKey.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		26554D2B235A4A32E40C7DD6A9BA2A94 /* MMKV.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B37AC56D34AF5F7EB88A47FC9E72FD1 /* MMKV.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2663B8DD21EBB2EB99C2B028C4D569B3 /* UIColor+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = F5AF70BB5D3E5AA1AAEF9B238E7C0BB7 /* UIColor+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		278EF4681FE8283523AD04FF8E8A9697 /* KeyValueHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 967E83D7869A4D151D095C7E8E7CB18E /* KeyValueHolder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		27DE60CAD8ED27FD41ACED0825014955 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = E7982015D45CFE9E39D59EEAA2EEE4CE /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2909A40787F416B46FBAAFCF6DF54024 /* MMBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5DD35A89AB5D7CD1B2215FD98B20FB0 /* MMBuffer.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		296BA839803E51A9D27253B25DF06848 /* MemoryFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD8A8D900162BC912B730DB4B55E495 /* MemoryFile.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		29765CB05CE9FA4A2CEE05424C0AF136 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB00E3183E910BE47096254EA2EC494 /* MJFoundation.m */; };
 		29BD11FAB79791AAA2CD25BD4D5A2BAF /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF6E7723FA27E5403C28AC5897956F4 /* NSObject+MJKeyValue.m */; };
-		2D694F7CE9D45055A16D697A5E1904DC /* MMKV_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7149BEB23311FA7FAB7AE39293F7E8F6 /* MMKV_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		2B3D4F15F959E538D868798AC5F730F8 /* CodedInputData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439B4E4F234B381C66B837459ACDD6FF /* CodedInputData.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		2C9F4EAD3AEC69CB269569027B89AE82 /* MiniPBCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D2ACD696E559A1FDF9C2446BD022631 /* MiniPBCoder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		2DFF2FC7A4A89F666AE14562F3DA608B /* UILabel+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = B7F01A1CAD0821185AD1408F5F172901 /* UILabel+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2E3F75F93027ECFB710F4070E16554E3 /* libMMKV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C0F759C5E687676757C33FBC3A19B /* libMMKV.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2F7D25EA29E4167F1CED2641C0B06F01 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D404A5A323462495E27C1256110C5A /* DDASLLogger.m */; };
 		3037682418D19DBB56547B80DBEABB17 /* UIView+R_Categroy.m in Sources */ = {isa = PBXBuildFile; fileRef = 36320AD6D050BA81B6812D1A8AA14955 /* UIView+R_Categroy.m */; };
 		31037C7013DE77E8FA23C1267F7698E3 /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CC6F4F3DC11392C48AC7657487C2CB00 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3455767D7D2644355AE3FB5E7D0BD00D /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D66370011BDD18870B79ECFC4A4E7 /* GCDWebServerRequest.m */; };
+		349B6E61BE5DE9E960865F8D05A56920 /* ScopedLock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 408F90D33C9E82B51D1EAFA6A6519637 /* ScopedLock.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		34E253EB078AE14E619398EB86C16A2F /* MJExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 412261FA5A2263251D8D23A4DB74CFDE /* MJExtension.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3AFE12ED57A1326BC87C9C5D2E67C402 /* MMKVLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000DA6EC6CC62133D7A15074AFAB2CE9 /* MMKVLog.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
-		3B95DD00BB6C0D9AB86E4191B9BC551F /* MiniPBCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D2ACD696E559A1FDF9C2446BD022631 /* MiniPBCoder.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3DBE36980A233DC5A133EFA049B5B34B /* MMKVPredef.h in Headers */ = {isa = PBXBuildFile; fileRef = 18832057441936C9A6D29B6FC7969E91 /* MMKVPredef.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3F6AA0B81B38BEBCA85D698EA85F578D /* MMKV_IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A099AE35C25FA3766994F98ABEFAE0B /* MMKV_IO.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		36556C0FAF756C6C6F0D80E1C74F08B7 /* openssl_aes_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5950B2969AD8DAE980FF6B4AAB9C50E /* openssl_aes_core.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		3D08B41402E2DBCE0E997946F4D7F4E5 /* MMKV_IO.h in Headers */ = {isa = PBXBuildFile; fileRef = AEE09048C68B4DCFDDF5C735850361B2 /* MMKV_IO.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4036A2F0EC42FCDC27D669923541FFA1 /* UIDevice+R_category.m in Sources */ = {isa = PBXBuildFile; fileRef = 93510A810F8D230B5A12636B34126DF0 /* UIDevice+R_category.m */; };
-		414724F4692F8D88F49D35C4DCEA4D54 /* MMKVCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F16BD5F03F59C9400C95FD9EBD0CAE6 /* MMKVCore-dummy.m */; };
 		417BF2471F249A8DF64448E178E4C97C /* GCDWebServerMultiPartFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 17B3A35DB8D7DFE3126C7A2EA02524B4 /* GCDWebServerMultiPartFormRequest.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		42947699890A199B08A896144A878D80 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = A36B0BCB90D33E7D9E184F7D78093227 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4420DA5EB6682FD8FB9FF2C9266F58C3 /* GCDWebServerErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B0074E9ADD6F94F2AF1C38328911E12B /* GCDWebServerErrorResponse.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		46692A2E77157B00827182C8DC686F72 /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F486CC963CA9A02DF678180507001AE6 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		471C1D77368DCD1F99DA320EA6D0893C /* ScopedLock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 408F90D33C9E82B51D1EAFA6A6519637 /* ScopedLock.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
-		47EF034B1DBE29238E4A4A2A9EA3AAC3 /* openssl_md32_common.h in Headers */ = {isa = PBXBuildFile; fileRef = ABE646C2C4503A3A2FA3ED359A7AEA6C /* openssl_md32_common.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4B90704C9954AD4B1D3894941458B9DE /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E33ACAD2D552DB50A20C7B2C4D63CCED /* NSString+MJExtension.m */; };
 		4CE091F886EC6324673EFE0AEBBEA0FE /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D1A0A3C5E3C9D3D399AD6BEF110B2129 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4DC1EB07CAF6767118317408E62B60F0 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7E67542CED8FD34CE8A198A3F4D40D /* CLIColor.m */; };
+		4E3BE516185B407781430DFC3556F6D7 /* MMKV-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E985B0576F37ADA521ECC3044F62E744 /* MMKV-dummy.m */; };
 		4EAAC0D9D636CCE1258384C3488D8A8E /* UIImage+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E23E0ABE44B8A914C32701C2B474FDC5 /* UIImage+R_Category.m */; };
-		52084A3423DEFFFF30567B2B525B74E8 /* InterProcessLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F79B8D25DF84F3D343E53AB6E8BEE3E5 /* InterProcessLock.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
+		514546F2D8310E7F4C88A2C1BF4D6939 /* MMKV.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D7E4A05CB7617C77AB9A53B5F75F863 /* MMKV.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		53904AC7D05BAAAB968AAA084AB04625 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B647A9910CA27D665E3553F277ADBB /* NSObject+MJCoding.m */; };
 		5672C08B2E4A956A54FBBC0BFC17DC82 /* MJProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 100A8674FFD0009B12A19BE1B9D503EB /* MJProperty.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		56D7020942EC251D3B0860C02EB26999 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 643E275AE297F52956036E48B4AC74AA /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		572D05B146EAA3EF5530A0D0E34904A0 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 39096C5143F18EE215A4EEF9FBC5C93D /* MASViewConstraint.m */; };
+		584994C8A228079769EA560BC68F261C /* PBUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C95D2ACB036CEC23F4EF4994F4B157 /* PBUtility.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		58DA93A10DAD1E3D64DCE980C38EB912 /* R_category-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D9D7B4F6B5EF9D716D1A7A9EA8EBFB5 /* R_category-dummy.m */; };
-		58F8448BECF3B722C9B2D56C8C114E7F /* MMKV_IO.h in Headers */ = {isa = PBXBuildFile; fileRef = AEE09048C68B4DCFDDF5C735850361B2 /* MMKV_IO.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		594932D21609520B6E215F2681627151 /* KeyValueHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 967E83D7869A4D151D095C7E8E7CB18E /* KeyValueHolder.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		59EA578EED8BAC126FDC60C32AE11521 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E060806CB066C829F49DFF4A0B244726 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		5AB858EAA1F43F648D6CF4D0BD8C8AE0 /* MiniPBCoder_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB786BC7C0E96DFB607E3E8ECADFE6 /* MiniPBCoder_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		5C651E9F66FA0E47055980A43C55B71D /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8C3E7D94E526A3BE7C3D2F82DADADC /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5C95908A617839E2710FD9A00468FE71 /* GCDWebServerDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A5705007C1D522E2A43A0F9C79FBD41 /* GCDWebServerDataResponse.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5CD680AAE0F11E6C94D0E1EED3C01EA4 /* CodedInputData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 439B4E4F234B381C66B837459ACDD6FF /* CodedInputData.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		5DDD23AB0204BAFE23076E79BED26970 /* openssl_aes_locl.h in Headers */ = {isa = PBXBuildFile; fileRef = 702CB335F4A5179F796004AD9C0C5C7E /* openssl_aes_locl.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5DEEF10245F9BC47A2083D3CAF1F038E /* CodedInputDataCrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66D4AD1D381D7EB401AC8906A0FC8CF5 /* CodedInputDataCrypt.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		605CC883AFC37EE8942BA2B858510CFE /* GCDWebServer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C7819DE4C8F4D9AC4F12A741212C314A /* GCDWebServer-dummy.m */; };
-		610145B3177894F2E4C147889AB8B007 /* CodedOutputData.h in Headers */ = {isa = PBXBuildFile; fileRef = D62DF7C42E8A1179998FE4A3AF44DBC4 /* CodedOutputData.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6121F6170AADB4FEDA9174893AE7E48C /* UIView+R_Categroy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7F249D1DD1DE615419E0DDB15AF2B2 /* UIView+R_Categroy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		61A11C89D044CA4BACBB12D550761D06 /* MMBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E0132AF86E69D74432C721F365A55A1B /* MMBuffer.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		626EA24EFF429B7498CC82074C4BB00E /* UIDevice+R_category.h in Headers */ = {isa = PBXBuildFile; fileRef = 5903A34E8ED0237FA46748C4185F300B /* UIDevice+R_category.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		63F87C318437740E8202E4D3DD0826FA /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C07BAB8A9388A785707CBC35A7B3310 /* MASCompositeConstraint.m */; };
 		65C3E00D83B09BA83627BAA6AF3382C8 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 008C2C06D4211F34394839ED1EED4F64 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		65E88072A2BDC576BFC85E67EF9FBBC6 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BDDA06CD2124E30B5D0194556F820F0 /* MASUtilities.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		65F7FE2FC20662719A7E91D0E4A617C3 /* DDLoggerNames.h in Headers */ = {isa = PBXBuildFile; fileRef = B07AB2A4BA087CB7D623C39106FA0892 /* DDLoggerNames.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		66B1F1C21FDBBFF7B2BEBD318198328C /* openssl_aesv8-armx.S in Sources */ = {isa = PBXBuildFile; fileRef = 7744328C337785305B26FE7DA6F53C41 /* openssl_aesv8-armx.S */; };
 		68961F2997A8D6F2CE235FD4C5067DA2 /* R_categorys.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A20A1946FC79E7633DF21FBE3C92960 /* R_categorys.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6940EC88D79410C4B1F49B80483614EA /* DDFileLogger+Buffering.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A09AA8398B3BA0EC89470E76FD06E2 /* DDFileLogger+Buffering.m */; };
-		6B47BC2235EBB1C34AFB7B781FE49E75 /* openssl_md5_dgst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C37BF195DF66A1A1DAEDD34AB7A6BB29 /* openssl_md5_dgst.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		69827671C869E0C6BDDEE5BB0058D2F1 /* MMKVHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2EF19706402A353FA8AFF099A3E4D5 /* MMKVHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6A6680B597549B759221937170FB7255 /* InterProcessLock_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE19C5BFE4A5AFA93BB144E059206C9A /* InterProcessLock_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		6BB7DF875CAEFF8B0419B7586B242D74 /* openssl_md5_one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C72B05233F6481DB16B6AE506085B49 /* openssl_md5_one.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		6BCEF0F9DC6514CBF7555DD3F10343A0 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB7D19F513D66B85F5B51EE011C480F /* GCDWebServerStreamedResponse.m */; };
+		6C842DD9E043DB558C68CBA3DEE7A946 /* openssl_aes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C7761C769C245BBD357DD72AD99E019 /* openssl_aes.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6D29803833E4A3A93AD4165AEC2A06E7 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 601B28F1329FEAB15181DE16702E0D1B /* MJExtensionConst.m */; };
 		6E57110E528B827CC5D59552890547AA /* UIAlertController+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3EEE4ACDF331FEC7229A70811FE2E2 /* UIAlertController+R_Category.m */; };
 		6E67A48AD6ABE6BD29B08975DA61FBD0 /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C46BDDD66C0F05F0D9C935445F93322C /* GCDWebServerDataRequest.m */; };
 		71F6E03114BEB840BC6E53DF78241E26 /* GCDWebServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CCD6348D6F55A8831E9387D0776AD52 /* GCDWebServerRequest.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		73F6C41CDED09C90D710A55C8FD5457D /* GCDWebUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 22A551772BA5B34C022314D54AA55A80 /* GCDWebUploader.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7426A4DF508927ED0865330A8F501EA1 /* MemoryFile_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33F2CD38D4469C5E617B9A6BA722F667 /* MemoryFile_Win32.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
-		7438745281FEBCA15582625516C7BEF3 /* AESCrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25BBC70472D8F70BA05C312E4B0F105E /* AESCrypt.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		7448D2A99020EB1BA9AC4A1F1406964B /* UIViewController+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C83D702015DF12D0F4B42C30A185B91 /* UIViewController+R_Category.m */; };
 		75BCAD159F48A7F49337FCA96437148E /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C6C4AC04C3CA77B26E2DB59F9F2952 /* NSObject+MJProperty.m */; };
 		76FCA6043F34B1DE9D33B77C615E6914 /* GCDWebServerStreamedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A98D0CADBE24B51EB368187A70B6176 /* GCDWebServerStreamedResponse.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7762E5F80C933C068DA4A4159F8BB3AA /* openssl_md5_one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C72B05233F6481DB16B6AE506085B49 /* openssl_md5_one.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		779E61BA1028180EB85D10816B23DF91 /* openssl_opensslconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2D6922C26D1E33E57BC0383F4BC080 /* openssl_opensslconf.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		78BD54E57FCF56A8D9ED81F636FB61F4 /* UITableView+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAFA32D7A0562819D11E40922F4CB7B /* UITableView+R_Category.m */; };
 		78F55DC767AEA052701BFFFAF2E63E9F /* NSObject+MJKeyValue.h in Headers */ = {isa = PBXBuildFile; fileRef = D1C748CA481122D30924B9FC9E303440 /* NSObject+MJKeyValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7A37AE5487B43F5EE6A9CE1D6F099D47 /* MemoryFile_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C53C93B9803F1D9F5B8E96B83DDFC63 /* MemoryFile_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		7A5812C6CB9DF643DDF6D49A2891F42D /* GCDWebServerResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = CC69A9821CAF7C0D5746C8EEF760BFA1 /* GCDWebServerResponse.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7B2FC66C221C9B3750E8AB88B2DD8B46 /* ThreadLock_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16DB7D236D926E008FF3D77547F5FF18 /* ThreadLock_Win32.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		7BCB8ED3FF5C351831C99F5E54B74CC8 /* MMKV_IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A099AE35C25FA3766994F98ABEFAE0B /* MMKV_IO.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		7BDD852D28E2194E90680BE7BF1E4711 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3514F73B0A02F79AB30E1F45809D6696 /* DDLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7CF2AC7A3B3ED03B30C1E4ED662B0551 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7FA6AFB6410FC9119F9C8868DE1D9C /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7D9497493D7A39C6455573DA889129EE /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1199843FC0CF3BB3761692311B570C /* GCDWebServerFileRequest.m */; };
-		8062FBC86856B74AEB6101746CBA9E3C /* openssl_aes_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5950B2969AD8DAE980FF6B4AAB9C50E /* openssl_aes_core.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		800627125DAF3799767A0BF50E78C3F6 /* MMKVLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 000DA6EC6CC62133D7A15074AFAB2CE9 /* MMKVLog.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		815A2D6583DADE9F65065C3AFE95E834 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F4175C0E64E37C341CA953B27EF6E9 /* DDMultiFormatter.m */; };
+		81DED7DBA3E15AA79E8E5AEE3DA23EE1 /* MMKV.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B37AC56D34AF5F7EB88A47FC9E72FD1 /* MMKV.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		81F811A56B6724F7E8E2D25364E595E3 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 28447FD6B3AB006B855E92A3F95610FA /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		822B66E63ED92684C095C8BF6F55F9BE /* NSObject+MJProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 57D1FC6D9482A8B721EB9DEB6720C182 /* NSObject+MJProperty.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		8383FF76CAAF25C8FE900AEC6EBBAEF8 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B6A8548080DDF932ADD8AE618246F /* CocoaLumberjack-dummy.m */; };
 		83AD9AC86834FC2DEF56B93709F0B5ED /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 70DA193C976C1AEC3860F7D21DEE222B /* DDOSLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		83B4A685693348CA8E816BAFE320D771 /* DDFileLogger+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 230687492A30874AC207D847D772512C /* DDFileLogger+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8551D517FEBFDB14B72550B5C491A237 /* MMKV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7529CF2720D4240F0F4D7751F4FD35D8 /* MMKV.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
-		856D7C5079439CFA9892A3B2BE8FB53A /* ThreadLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 80DC7189AFBE9DF629CE9226BD73F8DB /* ThreadLock.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		86E44FCFB590682940739E804FB0147D /* CodedInputDataCrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66D4AD1D381D7EB401AC8906A0FC8CF5 /* CodedInputDataCrypt.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		869DCF6643D6117EAD3A54C6CB5D5603 /* MMKV_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DF2FDF7840D58757EE819C7C411231E /* MMKV_OSX.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		891305627A60B07BB9D7CA3F81CB00FD /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFD965129D253F5DCE472052D248A17 /* GCDWebServerResponse.m */; };
-		8CFE0645E525DB5BA8805B3B707C7433 /* CodedInputData_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91400A8214D8C570575B3CD093C59C5A /* CodedInputData_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
-		8D2FA68D3F6E5FB99B3458B88E5A698D /* openssl_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 7741724C2A01361C1D730F81C6416A4C /* openssl_md5.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9194B58ACE900ED6BAE6AD92E24A2CFF /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EEC8A68D4DD1C0CFA2E3FE49386F0B /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		91CCDF3EC1B0DA4E7A2B171111106F83 /* Pods-Reader-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B27FB8009EB1A0CEDE1779E1A8BC5AF /* Pods-Reader-dummy.m */; };
 		929FF13C69854C325174F6367DF5E26E /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B3AB9EBCB48AE23C9D101696D242244B /* DDDispatchQueueLogFormatter.m */; };
 		92BF70E9D3285561EB404A7C4A4A6DEE /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 2782BE13EB88E480BBCF3599FB7F66A7 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		92C3B3B3F4B04146A64F2D0E4FA1CD7C /* MMBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E0132AF86E69D74432C721F365A55A1B /* MMBuffer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		92C55D440CA661F4998C66FB734DD3D8 /* MMKVHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2EF19706402A353FA8AFF099A3E4D5 /* MMKVHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		94502737EC8EAA2CA9766C8D96735F79 /* crc32_armv8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344AA343B69DA01B01DBF56ABDE48043 /* crc32_armv8.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		94D2EFAE0ACB4721D7DB576D1B333482 /* MMKVPredef.h in Headers */ = {isa = PBXBuildFile; fileRef = 18832057441936C9A6D29B6FC7969E91 /* MMKVPredef.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		95680B4FC6B236EEDCAE006DF513922C /* GCDWebServerDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 29B4950F121BF9BA8182757FE6954F90 /* GCDWebServerDataRequest.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		95A21B3C36EEF7A9F3E07E0409CFDFFF /* PBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9383A850F1E808C7DC845F436ED591DF /* PBUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9835CB49408014B41AADF45664E2604E /* openssl_cfb128.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057AE4CBA9B41A68DA12C88E5CBB6062 /* openssl_cfb128.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		99B7688A77DE2E48E52D0F5B26E24CCA /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 97838712BD70B6EAD9A4E15B47A6904C /* MJPropertyKey.m */; };
 		9A118C01C80CDBD88A3CE9F9ED917B40 /* MJExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6572DF2A60648931A569D5B0CB347D20 /* MJExtension-dummy.m */; };
-		9A77A35FFAAE3148086CC3356C8061AB /* ThreadLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40D9A86846D847761F82FCE675159A9 /* ThreadLock.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		9C05AF3FAA94767A9A660B74D4146847 /* GCDWebServerFileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3400AEECB176A0249A53337A7F7EBD /* GCDWebServerFileRequest.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9F834CB5D13D16428296AFADB9D407FB /* PBUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C95D2ACB036CEC23F4EF4994F4B157 /* PBUtility.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		A01EFBDDB6BF2665B669714B9F44E440 /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4CD65290F205998A3072EEB2006420 /* GCDWebServerMultiPartFormRequest.m */; };
-		A0DC56F8B7ACC3E6B7F04D0F2AE193ED /* MMBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5DD35A89AB5D7CD1B2215FD98B20FB0 /* MMBuffer.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		A0EFAFE8DC60875D766EFFF0F821E990 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6044CD94B76F8D7B144C681907FA0A /* GCDWebServerFileResponse.m */; };
 		A1B595645415CB6BE73F602CFABCACD7 /* UIViewController+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FCCC6CA9D8CA2638D695A3B721BA7D2 /* UIViewController+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A3307B8FB6EE0A049DBAE3AA4D2C6DA0 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CC1202E8200FF5EF83B02A8298768A72 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A34EF90FD9DB3AB735F37BBC82B7C941 /* NSObject+MJClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D2748F43EA14CBC33462C9D7BB50CF /* NSObject+MJClass.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A3EC42FD150B91EAAE2B89E1239134E7 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BE2A4790C93CAEB72EC2C9E1965FE3 /* DDFileLogger.m */; };
+		A617EFD7C8082C2A6A7AA4BE779C54C6 /* openssl_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 7741724C2A01361C1D730F81C6416A4C /* openssl_md5.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A61FC4A9CCAA7751D872043029A59D88 /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F0B98AC5040F306FBD4B11AD34C59 /* DDLoggerNames.m */; };
 		A854E0BEE41BED5EF1965C511E68CFC9 /* GCDWebServerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD64073B947AA571450FB1C8C2AC62D /* GCDWebServerPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A893FFB0F9137E298D6752729850D1D6 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1CDEC3CCDB7DC4B16D46ED5F74FC0A /* MASViewAttribute.m */; };
-		AACA5654253ACB9C4C1A70C4D9942CEA /* openssl_aes-armv4.S in Sources */ = {isa = PBXBuildFile; fileRef = 4F98162B549F01B369C66D97BF8D074D /* openssl_aes-armv4.S */; };
-		ABB1CD9BAFA0540306E98E2ADF54EA30 /* MemoryFile_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06E7E98711F9D4E64ADB38EBFFE830A1 /* MemoryFile_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
+		A8EB25E248F6278EF17DC8D0C98A1E58 /* openssl_md32_common.h in Headers */ = {isa = PBXBuildFile; fileRef = ABE646C2C4503A3A2FA3ED359A7AEA6C /* openssl_md32_common.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A92E8BD161627D77EBA6C95EED2F44EF /* CodedInputDataCrypt_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F3F73B1EBAFB74E7B44E9AF7CFB14627 /* CodedInputDataCrypt_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		AC579AB7CEAB969B0E5A284347F9AEBF /* GCDWebServerFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 02B5EA185DAD305191EDCA9C5F54905F /* GCDWebServerFunctions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AE1819818F034D33338D41CF46589250 /* MMKV_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74EED4DE9312BCEAA2DD2F712D50E483 /* MMKV_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
-		B177B15EA2260A1EE3FFF5F8963CD38F /* openssl_aesv8-armx.S in Sources */ = {isa = PBXBuildFile; fileRef = 7744328C337785305B26FE7DA6F53C41 /* openssl_aesv8-armx.S */; };
-		B19C407AA7F34BA5C4DF6078690C9100 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 266F5C8B8867065B05E7CA99BB6AB68F /* Checksum.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B20A0E5D8F9BCED1A82793C4BE9E7258 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ED2E678A0C8506D8DD458F23D3A3375 /* Masonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B2EA7CA0C957344F1EFCB6CE6EA77939 /* GCDWebServerURLEncodedFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A1E154DF2248A2E5F829767620BF5253 /* GCDWebServerURLEncodedFormRequest.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B42DF04715EBC9DA57F4FDD52FD0EE7D /* openssl_arm_arch.h in Headers */ = {isa = PBXBuildFile; fileRef = 46C6925864D7EBE58635D5E95C1DE065 /* openssl_arm_arch.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B4419489EE2690E756211EC294653D04 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 266F5C8B8867065B05E7CA99BB6AB68F /* Checksum.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B629163C67B419BF6E92A4E4414FA3BC /* PBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 9383A850F1E808C7DC845F436ED591DF /* PBUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B6359596A32B855FAD947ED012D5492F /* MJFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F78C722E683EFA0CB9FE9345592E49 /* MJFoundation.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B6B0E0DDEB77D146F433FCF015501F89 /* MMKV-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E985B0576F37ADA521ECC3044F62E744 /* MMKV-dummy.m */; };
+		B7676384F1D3EB76EF1C1E7C773CDF23 /* MiniPBCoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8F6A2284081BCCF2558FDEF9027BD03 /* MiniPBCoder.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		B946AFB1A725D85E07F645A7EF086383 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515416A506AC4E8C71D70645EBA30B6B /* NSArray+MASAdditions.m */; };
 		BAE5687DAD6E700465B11A5697C6FDCA /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C38DDE7B1F4EB1390C44E7F42EB2B24 /* GCDWebServerErrorResponse.m */; };
-		BBC0420A7C0890F89A87BE27FF1B0999 /* PBEncodeItem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 509469CDC6E99EE6D9DB8658EF49B23D /* PBEncodeItem.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		BC3A006E04AC8E1CDAD5094CC2F60D63 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E8CBE46DFB9C3CB18708D019CC1F1E0E /* DDASLLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		BC7AF5E53723D518C73C0FED7AB39AA0 /* MMKVLog_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B71B34EAA7769B03E0AF3C01FF44E6E5 /* MMKVLog_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		BD60D07E389771002B00A94462B2E3D4 /* MMKVLog_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B71B34EAA7769B03E0AF3C01FF44E6E5 /* MMKVLog_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		BEA2806A316E9E55639261BB27C6B99B /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0739AD903683F1F3FA3792D95A291F9A /* NSObject+MJClass.m */; };
+		BEF182FA5E511B98A55CD2FF8AC6DEDB /* CodedInputDataCrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = A9F9C2A4B702EDAC84B2DC5261853BF3 /* CodedInputDataCrypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BFD7B55CF73D659EEEFBFC2FD3F2BD26 /* openssl_md5_locl.h in Headers */ = {isa = PBXBuildFile; fileRef = 4195A7B62FF0E1E3C6AB488C1994EC22 /* openssl_md5_locl.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		C05FC6699632FE712174ED875A605410 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 088012C6B18AF4B923EDBBB590179010 /* ViewController+MASAdditions.m */; };
 		C564C8D042998164475E13AD54B0A294 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 6421C5CFAD559A9ABC613C755B2E26D6 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C703439168B2FFE00758CAA02E4FFFE1 /* MemoryFile_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06E7E98711F9D4E64ADB38EBFFE830A1 /* MemoryFile_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		C74D2E856ADC8139CD00DBD184061B23 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C776A743EA1019EAE1B63675149BC65 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		C7920681F0164686C56327ED3C6AAC58 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 895416C6D92AB6ED60C254C05449D84E /* View+MASAdditions.m */; };
 		C7FD66D3D320095B45AD9D39EF1B858B /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD0A0865115A2F5BC1F2F2068BDC1DC /* MBProgressHUD-dummy.m */; };
-		C9CB98A908A38AD2F41310F40A53A5E8 /* MemoryFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 110264FCAEC95FCD87922AC27D91B464 /* MemoryFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CC2FB3495A6A0D9E04C77FFDC11E92BA /* GCDWebUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 918AE400B303CAA59FB93BE64ED9A27C /* GCDWebUploader.m */; };
 		CC89B598FE2D4105A8D3AA7E2B9BA8F4 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3CA6666963CB8B67BA787FECBDCCD0 /* DDTTYLogger.m */; };
-		CE9BD8128FA43A9D3B12D8AD8D6A49CA /* CodedInputDataCrypt_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F3F73B1EBAFB74E7B44E9AF7CFB14627 /* CodedInputDataCrypt_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		CCA3D331576FABDE65D7EA6D71AF375A /* libMMKV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C0F759C5E687676757C33FBC3A19B /* libMMKV.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD78FAA7F442619112A11A1BE9ECE0CF /* MMKVLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4735FD2CD3F9DB36672FD68C0EF4769E /* MMKVLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CE760787FF812B0D3977F74DC62D40E2 /* InterProcessLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B9A776365559C3942C45CF7B7700C09 /* InterProcessLock.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CECF369DE9527F4513CF57F4AE74BCEA /* MMKV_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74EED4DE9312BCEAA2DD2F712D50E483 /* MMKV_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		D00BE18BB5736BD7F31081218DAE49F9 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2823718637373A986BF0D9FE3489E1C9 /* GCDWebServerFunctions.m */; };
-		D04EF723ADBC7EEFD75A13EBAE5DFF93 /* MMKV_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DF2FDF7840D58757EE819C7C411231E /* MMKV_OSX.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D290C257228A28FCC0A9CDE248452DDA /* MMKVMetaInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D17DE517F005FBCE188EF42FC2AB5020 /* MMKVMetaInfo.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		D3D7590F76F57F561E4699B1860597B1 /* DDFileLogger+Buffering.h in Headers */ = {isa = PBXBuildFile; fileRef = 590570D6216AEBD0C67327F74E11F311 /* DDFileLogger+Buffering.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D3F65BEC02B7672363DBFF2CDA2BDBB3 /* CodedInputData_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91400A8214D8C570575B3CD093C59C5A /* CodedInputData_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		D6438BA4F863AE0A7891F212EE3C06D0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E5C39AC32E6238CA649011FADCB548 /* MBProgressHUD.m */; };
 		D72EE0E749232B2C899702FC1C9402BB /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CC092B23B81B3BF3ECC73BBF8C3F8B /* Masonry-dummy.m */; };
-		D82616F8D27871BA88D956CA6710D550 /* KeyValueHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31B1BE99F7B445E57524BAE74FDBD2D6 /* KeyValueHolder.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		D7965D4E7CDF8D37F7C132E4EF8B7A53 /* MMKVCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F16BD5F03F59C9400C95FD9EBD0CAE6 /* MMKVCore-dummy.m */; };
+		D80069DF6B711487814012EDB7DDF1A9 /* openssl_arm_arch.h in Headers */ = {isa = PBXBuildFile; fileRef = 46C6925864D7EBE58635D5E95C1DE065 /* openssl_arm_arch.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D82F631BF6697050A1B4E61B55FE10E9 /* MMKVMetaInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = D17DE517F005FBCE188EF42FC2AB5020 /* MMKVMetaInfo.hpp */; settings = {ATTRIBUTES = (Project, ); }; };
 		D893D6C7E5B0E596BA3C0AB454321280 /* MJExtensionConst.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C8D5565405B9F20A53D2BB9A72AE8F /* MJExtensionConst.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D934026649CD29EE3938E5AF83D5BFF4 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = D026E6426F14EA2C41C7EC91248E3ED4 /* DDASLLogCapture.m */; };
-		DB21EF42E208338E801F26621D3D544F /* openssl_aes_locl.h in Headers */ = {isa = PBXBuildFile; fileRef = 702CB335F4A5179F796004AD9C0C5C7E /* openssl_aes_locl.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DC45C481D847E780FD153CBDC172E701 /* openssl_md5_dgst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C37BF195DF66A1A1DAEDD34AB7A6BB29 /* openssl_md5_dgst.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		DC9F2B8E9ABB631B4B486B1D683DFC59 /* UIButton+R_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 7838132B882EF6208CCB7F8318EF09E9 /* UIButton+R_Category.m */; };
 		DCBC1C00A77F9171878F562A8CBE7628 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = F118B3898ECC4BB6F4E8E6A567A79010 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DD3C43A54C47878799F16153478F5E3D /* crc32_armv8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344AA343B69DA01B01DBF56ABDE48043 /* crc32_armv8.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		DD7095E416D8763B2BB1D6E306C91EAC /* NSObject+MJCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = CC60A91E0C21261E5A41C7AD4791B4AF /* NSObject+MJCoding.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E16996C9DE1B585A5596702D56718696 /* GCDWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = AA35CD13DF405973849A8EC183E0B6A3 /* GCDWebServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E27D1CDCA205B794AEB8D1ED3D03B611 /* UIAlertController+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 535ACB49CC18D6AD990C1123BA348709 /* UIAlertController+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E4B3CD2FA747AB5B4F7FF6ED383B5B05 /* CodedOutputData.h in Headers */ = {isa = PBXBuildFile; fileRef = D62DF7C42E8A1179998FE4A3AF44DBC4 /* CodedOutputData.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E4BE19DB9D025433FF79459CCDA85646 /* MemoryFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 110264FCAEC95FCD87922AC27D91B464 /* MemoryFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E4D750D606D46E0771A1520A0A3CEC31 /* ThreadLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 80DC7189AFBE9DF629CE9226BD73F8DB /* ThreadLock.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E5674BF97570090069756ADC456F97D1 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63A9A2BC8B5454DD34D5F070AC3C54 /* GCDWebServer.m */; };
 		E5B03E21C98E1E5DAD82764FC937A64C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C560FAF0362C79635A59993588E177B2 /* DDAbstractDatabaseLogger.m */; };
+		E5D874CF19E8007FB94CBCC212D2EE4E /* AESCrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25BBC70472D8F70BA05C312E4B0F105E /* AESCrypt.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		E76935CFF4AF327F8D9A7C1935F7D900 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A7F4CFFB5E697D95C7AC511DE50795 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E9B6250EF6419FD3D1BD35DBAF52A7B2 /* CodedInputData.h in Headers */ = {isa = PBXBuildFile; fileRef = B473D6D67E6A081044CBC4B113D58C4C /* CodedInputData.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EA7752906A16ABC5C85CAE8334BC2EB9 /* MemoryFile_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33F2CD38D4469C5E617B9A6BA722F667 /* MemoryFile_Win32.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		EB663E3E1EB4BB670DC29B77DB330135 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7192106B1EFE0142CBCD1C70B828C276 /* MASConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		ED4866EAD24F5DDD94CB4C79531B949B /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9FE9682BF5F65C6140ABDE9E58CB0A /* GCDWebServerConnection.m */; };
-		ED6BE8C0119B9A5D650B0BB3A16D44A6 /* MemoryFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD8A8D900162BC912B730DB4B55E495 /* MemoryFile.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
+		ED82003CBB97ABC641B8738A1AD826E5 /* MMKV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7529CF2720D4240F0F4D7751F4FD35D8 /* MMKV.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		EE063BC538B8FD4EBADFEAF85D731173 /* NSString+MJExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 30BD4E3972422EB16C4A4D53D2CADDC1 /* NSString+MJExtension.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		EE936A6838005A5ED1BC5F74BE37B7BD /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FB79E99AE70F3BF792B9EFAE42204D /* MASConstraint.m */; };
+		F153795679AEE13B9D69DC6DEF49E804 /* MMKV_Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7149BEB23311FA7FAB7AE39293F7E8F6 /* MMKV_Android.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		F1B75048874B8773E5568E6D3ACA12E4 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BC96FB9C1D28283C402F89B780C1088 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F5E7FC21D89006A4336348040B83A54A /* InterProcessLock_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDB9A11155C526B23A870034ED4B7AD /* InterProcessLock_Win32.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		F26C86A6DBC6F88423B6001CDA62DA2C /* Pods-Reader-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B27FB8009EB1A0CEDE1779E1A8BC5AF /* Pods-Reader-dummy.m */; };
 		F6F22B2E26DCC4B5548FBD4708320743 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 09D992242A6C6B78240189467E565ACB /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F7A4B719F57CB9861CC0659AD84BE7F4 /* InterProcessLock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F79B8D25DF84F3D343E53AB6E8BEE3E5 /* InterProcessLock.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++"; }; };
 		FA646634BBD8223C695F082C0D9FC097 /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 753170B9926A9C2844A14DF5166058C8 /* DDOSLogger.m */; };
-		FEBADA0CFA3CA34FC5F4D96D5B93A299 /* MiniPBCoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8F6A2284081BCCF2558FDEF9027BD03 /* MiniPBCoder.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		FAE1B96D5D9B7722A6C2EBA441183538 /* InterProcessLock_Win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDB9A11155C526B23A870034ED4B7AD /* InterProcessLock_Win32.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
+		FB5C4F9437C8C5ECA4A5C11C2DCB0A6F /* MiniPBCoder_OSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB786BC7C0E96DFB607E3E8ECADFE6 /* MiniPBCoder_OSX.cpp */; settings = {COMPILER_FLAGS = "-x objective-c++ -fno-objc-arc"; }; };
 		FEDCB1C22831FF23439A71BCFD211E09 /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 144CB77E2235CEB471B8796DAC450B6B /* GCDWebServerDataResponse.m */; };
 		FF8F719E7BA7240D92F7ED9FA6063FAF /* UITableView+R_Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 032FF00234D383AFF4D404F59C20073A /* UITableView+R_Category.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		04ACBF65C18DE8A0E526337C1437F9DF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC8AE887C706A43711D115E69B9D988A;
-			remoteInfo = MMKVCore;
-		};
-		181AEEEEC6D5C83CC4CE4771E3F98C5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC8AE887C706A43711D115E69B9D988A;
-			remoteInfo = MMKVCore;
-		};
-		374324363CBF2FAF1BA0C12BA793B195 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 99F79035E3B43F9DC12A3AA840A70ACE;
-			remoteInfo = R_category;
-		};
-		4C8EE071DD8CD8751833F4B5C76CE89E /* PBXContainerItemProxy */ = {
+		1B3EEAFF0BD0AD48EA214684AA1C11B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4D3BA58D0583DF37575CACAB3DDADC85;
 			remoteInfo = MJExtension;
 		};
-		6FCCFB84503E91BDD1FEF6F4C2C8DC56 /* PBXContainerItemProxy */ = {
+		3045001119A86F692F3C350EB9B06E39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 91A6826828CB9FCD0169A7547E8A79EA;
-			remoteInfo = MMKV;
+			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
+			remoteInfo = Masonry;
 		};
-		AA972FD1EC870746749695DAADB80AB8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E95654B155D25890BE8E26081FCA8265;
-			remoteInfo = CocoaLumberjack;
-		};
-		AD210C1CEDF09D6E280B2E4CD6D4837D /* PBXContainerItemProxy */ = {
+		3800C5F623DA1FE44C1F9F38929498F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AD904F32069787EFB2DFFE05EB82F5BD;
 			remoteInfo = GCDWebServer;
 		};
-		B65D0E347DE0C4A7C76EC8E2F1B48B2B /* PBXContainerItemProxy */ = {
+		3D2CFC5B53FB0D6F6CAB5B6945898AA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 82B0A41D3031FF27D78E17B0A9A46FB0;
 			remoteInfo = MBProgressHUD;
 		};
-		E525717DE7FDE0CCDFD896ED369F0931 /* PBXContainerItemProxy */ = {
+		9AA4212894A1D638A68F2C7561A05CBE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
-			remoteInfo = Masonry;
+			remoteGlobalIDString = 99F79035E3B43F9DC12A3AA840A70ACE;
+			remoteInfo = R_category;
+		};
+		AA55D974254ABDA948A6B4459CB8C61B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E95654B155D25890BE8E26081FCA8265;
+			remoteInfo = CocoaLumberjack;
+		};
+		B9A8E598E4D46B116A82DD63AF8DB61A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 91A6826828CB9FCD0169A7547E8A79EA;
+			remoteInfo = MMKV;
+		};
+		EE5690ED594A4201B9298533F6805C1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC8AE887C706A43711D115E69B9D988A;
+			remoteInfo = MMKVCore;
+		};
+		F91DDE5D341DDC0E4E3912D0AA7DA8E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC8AE887C706A43711D115E69B9D988A;
+			remoteInfo = MMKVCore;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -532,14 +532,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		06D8A572B8871C367C820AA7714C3A53 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1645B7A9413BF3E5FBE1A6FF39F6DCC0 /* Frameworks */ = {
+		1090E6E398C4709F8683CC0A9C77085E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -560,14 +553,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		88F367A8C6AFD41E82C3C117B1EE085C /* Frameworks */ = {
+		5E200064510FEF3DCD434F92355122B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D930FC996E4F472CF23D9868916C44B8 /* Frameworks */ = {
+		7388572E010AF6895E1C3157455B17A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88F367A8C6AFD41E82C3C117B1EE085C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1123,40 +1123,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		42091EC055A91B81D093A50EA560C608 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				20A96CD27D1F65CC277E1D31F919EA44 /* AESCrypt.h in Headers */,
-				B19C407AA7F34BA5C4DF6078690C9100 /* Checksum.h in Headers */,
-				0A454CAB13E4FEC1DF54BE5ABE8D173A /* CodedInputData.h in Headers */,
-				2386935D09F479BBB9F295EC266F04B9 /* CodedInputDataCrypt.h in Headers */,
-				610145B3177894F2E4C147889AB8B007 /* CodedOutputData.h in Headers */,
-				2245EF4DBC275D733C3FCC9F6898C137 /* InterProcessLock.h in Headers */,
-				594932D21609520B6E215F2681627151 /* KeyValueHolder.h in Headers */,
-				C9CB98A908A38AD2F41310F40A53A5E8 /* MemoryFile.h in Headers */,
-				3B95DD00BB6C0D9AB86E4191B9BC551F /* MiniPBCoder.h in Headers */,
-				92C3B3B3F4B04146A64F2D0E4FA1CD7C /* MMBuffer.h in Headers */,
-				26554D2B235A4A32E40C7DD6A9BA2A94 /* MMKV.h in Headers */,
-				58F8448BECF3B722C9B2D56C8C114E7F /* MMKV_IO.h in Headers */,
-				D04EF723ADBC7EEFD75A13EBAE5DFF93 /* MMKV_OSX.h in Headers */,
-				166362512425813E6A6B7A462CE14ACB /* MMKVLog.h in Headers */,
-				D290C257228A28FCC0A9CDE248452DDA /* MMKVMetaInfo.hpp in Headers */,
-				3DBE36980A233DC5A133EFA049B5B34B /* MMKVPredef.h in Headers */,
-				11D6807CF168126D40A15178C9E04FCD /* openssl_aes.h in Headers */,
-				DB21EF42E208338E801F26621D3D544F /* openssl_aes_locl.h in Headers */,
-				B42DF04715EBC9DA57F4FDD52FD0EE7D /* openssl_arm_arch.h in Headers */,
-				47EF034B1DBE29238E4A4A2A9EA3AAC3 /* openssl_md32_common.h in Headers */,
-				8D2FA68D3F6E5FB99B3458B88E5A698D /* openssl_md5.h in Headers */,
-				0F5BC7FB75842C4DF7D6CAA2276D412C /* openssl_md5_locl.h in Headers */,
-				0720A634389F76C008A98F1F46D26EF9 /* openssl_opensslconf.h in Headers */,
-				BBC0420A7C0890F89A87BE27FF1B0999 /* PBEncodeItem.hpp in Headers */,
-				95A21B3C36EEF7A9F3E07E0409CFDFFF /* PBUtility.h in Headers */,
-				471C1D77368DCD1F99DA320EA6D0893C /* ScopedLock.hpp in Headers */,
-				856D7C5079439CFA9892A3B2BE8FB53A /* ThreadLock.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4FACDEF378F034AFE3394E8C2555EDCE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1175,19 +1141,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5087588F6297F3C4C540F056E9924A0D /* Headers */ = {
+		80867B23ABAC2F8BE6BAF2692667F696 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D7F9A3DD526B12B6206C0D01BC9B2F /* AESCrypt.h in Headers */,
+				B4419489EE2690E756211EC294653D04 /* Checksum.h in Headers */,
+				E9B6250EF6419FD3D1BD35DBAF52A7B2 /* CodedInputData.h in Headers */,
+				BEF182FA5E511B98A55CD2FF8AC6DEDB /* CodedInputDataCrypt.h in Headers */,
+				E4B3CD2FA747AB5B4F7FF6ED383B5B05 /* CodedOutputData.h in Headers */,
+				CE760787FF812B0D3977F74DC62D40E2 /* InterProcessLock.h in Headers */,
+				278EF4681FE8283523AD04FF8E8A9697 /* KeyValueHolder.h in Headers */,
+				E4BE19DB9D025433FF79459CCDA85646 /* MemoryFile.h in Headers */,
+				2C9F4EAD3AEC69CB269569027B89AE82 /* MiniPBCoder.h in Headers */,
+				61A11C89D044CA4BACBB12D550761D06 /* MMBuffer.h in Headers */,
+				81DED7DBA3E15AA79E8E5AEE3DA23EE1 /* MMKV.h in Headers */,
+				3D08B41402E2DBCE0E997946F4D7F4E5 /* MMKV_IO.h in Headers */,
+				869DCF6643D6117EAD3A54C6CB5D5603 /* MMKV_OSX.h in Headers */,
+				CD78FAA7F442619112A11A1BE9ECE0CF /* MMKVLog.h in Headers */,
+				D82F631BF6697050A1B4E61B55FE10E9 /* MMKVMetaInfo.hpp in Headers */,
+				94D2EFAE0ACB4721D7DB576D1B333482 /* MMKVPredef.h in Headers */,
+				6C842DD9E043DB558C68CBA3DEE7A946 /* openssl_aes.h in Headers */,
+				5DDD23AB0204BAFE23076E79BED26970 /* openssl_aes_locl.h in Headers */,
+				D80069DF6B711487814012EDB7DDF1A9 /* openssl_arm_arch.h in Headers */,
+				A8EB25E248F6278EF17DC8D0C98A1E58 /* openssl_md32_common.h in Headers */,
+				A617EFD7C8082C2A6A7AA4BE779C54C6 /* openssl_md5.h in Headers */,
+				BFD7B55CF73D659EEEFBFC2FD3F2BD26 /* openssl_md5_locl.h in Headers */,
+				779E61BA1028180EB85D10816B23DF91 /* openssl_opensslconf.h in Headers */,
+				1B740F24F36514C2176871E63E4DA35E /* PBEncodeItem.hpp in Headers */,
+				B629163C67B419BF6E92A4E4414FA3BC /* PBUtility.h in Headers */,
+				349B6E61BE5DE9E960865F8D05A56920 /* ScopedLock.hpp in Headers */,
+				E4D750D606D46E0771A1520A0A3CEC31 /* ThreadLock.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		959C49CF5CF0916231391253B77C154C /* Headers */ = {
+		9690A460203BEE55260DFA2FEE11B5E6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C422C71ADB99EA5FF5E5CA56F042C62 /* MMKV.h in Headers */,
-				92C55D440CA661F4998C66FB734DD3D8 /* MMKVHandler.h in Headers */,
+				514546F2D8310E7F4C88A2C1BF4D6939 /* MMKV.h in Headers */,
+				69827671C869E0C6BDDEE5BB0058D2F1 /* MMKVHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,6 +1207,13 @@
 				65C3E00D83B09BA83627BAA6AF3382C8 /* DDMultiFormatter.h in Headers */,
 				83AD9AC86834FC2DEF56B93709F0B5ED /* DDOSLogger.h in Headers */,
 				04182CDABD6165E1088443BBC04E9835 /* DDTTYLogger.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4C8AC2307680DF626963204C455E40E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,23 +1264,23 @@
 		};
 		7C6364B44E5F83E39775B6E118524DB1 /* Pods-Reader */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AE57390649A310C5B83AA6089141FD01 /* Build configuration list for PBXNativeTarget "Pods-Reader" */;
+			buildConfigurationList = A0FB7B9D911DB150ABBDC21D18B806CD /* Build configuration list for PBXNativeTarget "Pods-Reader" */;
 			buildPhases = (
-				5087588F6297F3C4C540F056E9924A0D /* Headers */,
-				2DEED40B5DA0CFE9C4CB9E8F770CB8B7 /* Sources */,
-				D930FC996E4F472CF23D9868916C44B8 /* Frameworks */,
+				E4C8AC2307680DF626963204C455E40E /* Headers */,
+				1C84A6726B9D7682051A2C2B095C377F /* Sources */,
+				5E200064510FEF3DCD434F92355122B4 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0128E2AAF4F21185AB1D4175AB7F0206 /* PBXTargetDependency */,
-				9038CAD4074A2589D055706D0A26911D /* PBXTargetDependency */,
-				9C495E6EC98F1ECDCDA6F49997104371 /* PBXTargetDependency */,
-				EB2E48916489CBFB607DE256A8C5D18E /* PBXTargetDependency */,
-				C482C5BA9F7BD79A2BB7D9A9082C0993 /* PBXTargetDependency */,
-				3DBCF2A6716E63188B58C0294D89806A /* PBXTargetDependency */,
-				52DCEF86CDDBE95ED1B70922FBD541D7 /* PBXTargetDependency */,
-				DA30CC42115DE169FB0C3952B44B23C3 /* PBXTargetDependency */,
+				5D83EAB7B382558E046007C8E2B0B398 /* PBXTargetDependency */,
+				92B467030ECDDAA8291D08F72E31D37B /* PBXTargetDependency */,
+				71A1D4312D013CDC15EADBC01731143A /* PBXTargetDependency */,
+				3D94E9E7301D4482A644A7422F682E70 /* PBXTargetDependency */,
+				4162FF993D23F102D00C44611E49FCAF /* PBXTargetDependency */,
+				4C74E3A39F95420E5123F7134202E7BF /* PBXTargetDependency */,
+				0D2376F13F8C68F04ADD9C1759779F59 /* PBXTargetDependency */,
+				CC28B077CFC5DB892CE3EB004FF8AEFA /* PBXTargetDependency */,
 			);
 			name = "Pods-Reader";
 			productName = "Pods-Reader";
@@ -1306,16 +1306,16 @@
 		};
 		91A6826828CB9FCD0169A7547E8A79EA /* MMKV */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4B57B5B09434702319276612F57E9B1 /* Build configuration list for PBXNativeTarget "MMKV" */;
+			buildConfigurationList = 64DE8BBF2E149B50B066EB1C1046523C /* Build configuration list for PBXNativeTarget "MMKV" */;
 			buildPhases = (
-				959C49CF5CF0916231391253B77C154C /* Headers */,
-				4E45E4D34F5F6CBE3BB0E0850E15752C /* Sources */,
-				06D8A572B8871C367C820AA7714C3A53 /* Frameworks */,
+				9690A460203BEE55260DFA2FEE11B5E6 /* Headers */,
+				945F5E5C4521CB06976EA3D01AC80275 /* Sources */,
+				1090E6E398C4709F8683CC0A9C77085E /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B2C3C81540C6834E1F68158C2C66948D /* PBXTargetDependency */,
+				48CD38C4D8BD4A636D23ADE5CE79F6E1 /* PBXTargetDependency */,
 			);
 			name = MMKV;
 			productName = MMKV;
@@ -1341,11 +1341,11 @@
 		};
 		AC8AE887C706A43711D115E69B9D988A /* MMKVCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 438721F3C69FA03307C06B7A739846FA /* Build configuration list for PBXNativeTarget "MMKVCore" */;
+			buildConfigurationList = 53B82BA56125B9500F42273BD27171E7 /* Build configuration list for PBXNativeTarget "MMKVCore" */;
 			buildPhases = (
-				42091EC055A91B81D093A50EA560C608 /* Headers */,
-				291A9892CBDB6E5C29AC17379BC40E77 /* Sources */,
-				1645B7A9413BF3E5FBE1A6FF39F6DCC0 /* Frameworks */,
+				80867B23ABAC2F8BE6BAF2692667F696 /* Headers */,
+				22F23A457C594CFA7981EE61866314DE /* Sources */,
+				7388572E010AF6895E1C3157455B17A7 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1457,61 +1457,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		291A9892CBDB6E5C29AC17379BC40E77 /* Sources */ = {
+		1C84A6726B9D7682051A2C2B095C377F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7438745281FEBCA15582625516C7BEF3 /* AESCrypt.cpp in Sources */,
-				5CD680AAE0F11E6C94D0E1EED3C01EA4 /* CodedInputData.cpp in Sources */,
-				8CFE0645E525DB5BA8805B3B707C7433 /* CodedInputData_OSX.cpp in Sources */,
-				86E44FCFB590682940739E804FB0147D /* CodedInputDataCrypt.cpp in Sources */,
-				CE9BD8128FA43A9D3B12D8AD8D6A49CA /* CodedInputDataCrypt_OSX.cpp in Sources */,
-				200694A4A09DC94362D0B0D12BD4E506 /* CodedOutputData.cpp in Sources */,
-				DD3C43A54C47878799F16153478F5E3D /* crc32_armv8.cpp in Sources */,
-				52084A3423DEFFFF30567B2B525B74E8 /* InterProcessLock.cpp in Sources */,
-				21CAFEA5CBFCD0604628CA55C0FF3B55 /* InterProcessLock_Android.cpp in Sources */,
-				F5E7FC21D89006A4336348040B83A54A /* InterProcessLock_Win32.cpp in Sources */,
-				D82616F8D27871BA88D956CA6710D550 /* KeyValueHolder.cpp in Sources */,
-				ED6BE8C0119B9A5D650B0BB3A16D44A6 /* MemoryFile.cpp in Sources */,
-				7A37AE5487B43F5EE6A9CE1D6F099D47 /* MemoryFile_Android.cpp in Sources */,
-				ABB1CD9BAFA0540306E98E2ADF54EA30 /* MemoryFile_OSX.cpp in Sources */,
-				7426A4DF508927ED0865330A8F501EA1 /* MemoryFile_Win32.cpp in Sources */,
-				FEBADA0CFA3CA34FC5F4D96D5B93A299 /* MiniPBCoder.cpp in Sources */,
-				5AB858EAA1F43F648D6CF4D0BD8C8AE0 /* MiniPBCoder_OSX.cpp in Sources */,
-				A0DC56F8B7ACC3E6B7F04D0F2AE193ED /* MMBuffer.cpp in Sources */,
-				8551D517FEBFDB14B72550B5C491A237 /* MMKV.cpp in Sources */,
-				2D694F7CE9D45055A16D697A5E1904DC /* MMKV_Android.cpp in Sources */,
-				3F6AA0B81B38BEBCA85D698EA85F578D /* MMKV_IO.cpp in Sources */,
-				AE1819818F034D33338D41CF46589250 /* MMKV_OSX.cpp in Sources */,
-				414724F4692F8D88F49D35C4DCEA4D54 /* MMKVCore-dummy.m in Sources */,
-				3AFE12ED57A1326BC87C9C5D2E67C402 /* MMKVLog.cpp in Sources */,
-				BC7AF5E53723D518C73C0FED7AB39AA0 /* MMKVLog_Android.cpp in Sources */,
-				AACA5654253ACB9C4C1A70C4D9942CEA /* openssl_aes-armv4.S in Sources */,
-				8062FBC86856B74AEB6101746CBA9E3C /* openssl_aes_core.cpp in Sources */,
-				B177B15EA2260A1EE3FFF5F8963CD38F /* openssl_aesv8-armx.S in Sources */,
-				9835CB49408014B41AADF45664E2604E /* openssl_cfb128.cpp in Sources */,
-				6B47BC2235EBB1C34AFB7B781FE49E75 /* openssl_md5_dgst.cpp in Sources */,
-				7762E5F80C933C068DA4A4159F8BB3AA /* openssl_md5_one.cpp in Sources */,
-				9F834CB5D13D16428296AFADB9D407FB /* PBUtility.cpp in Sources */,
-				9A77A35FFAAE3148086CC3356C8061AB /* ThreadLock.cpp in Sources */,
-				253B8F7D7A49629E23C0CB07F17B27B8 /* ThreadLock_Win32.cpp in Sources */,
+				F26C86A6DBC6F88423B6001CDA62DA2C /* Pods-Reader-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2DEED40B5DA0CFE9C4CB9E8F770CB8B7 /* Sources */ = {
+		22F23A457C594CFA7981EE61866314DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91CCDF3EC1B0DA4E7A2B171111106F83 /* Pods-Reader-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4E45E4D34F5F6CBE3BB0E0850E15752C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2E3F75F93027ECFB710F4070E16554E3 /* libMMKV.mm in Sources */,
-				B6B0E0DDEB77D146F433FCF015501F89 /* MMKV-dummy.m in Sources */,
+				E5D874CF19E8007FB94CBCC212D2EE4E /* AESCrypt.cpp in Sources */,
+				2B3D4F15F959E538D868798AC5F730F8 /* CodedInputData.cpp in Sources */,
+				D3F65BEC02B7672363DBFF2CDA2BDBB3 /* CodedInputData_OSX.cpp in Sources */,
+				5DEEF10245F9BC47A2083D3CAF1F038E /* CodedInputDataCrypt.cpp in Sources */,
+				A92E8BD161627D77EBA6C95EED2F44EF /* CodedInputDataCrypt_OSX.cpp in Sources */,
+				19EBADD7D8F1808CFB34F55D03FBA413 /* CodedOutputData.cpp in Sources */,
+				94502737EC8EAA2CA9766C8D96735F79 /* crc32_armv8.cpp in Sources */,
+				F7A4B719F57CB9861CC0659AD84BE7F4 /* InterProcessLock.cpp in Sources */,
+				6A6680B597549B759221937170FB7255 /* InterProcessLock_Android.cpp in Sources */,
+				FAE1B96D5D9B7722A6C2EBA441183538 /* InterProcessLock_Win32.cpp in Sources */,
+				0E8D6263799B11D0B17B44A5D04344BA /* KeyValueHolder.cpp in Sources */,
+				296BA839803E51A9D27253B25DF06848 /* MemoryFile.cpp in Sources */,
+				1E26267150F68F816E81D509F67DD1E1 /* MemoryFile_Android.cpp in Sources */,
+				C703439168B2FFE00758CAA02E4FFFE1 /* MemoryFile_OSX.cpp in Sources */,
+				EA7752906A16ABC5C85CAE8334BC2EB9 /* MemoryFile_Win32.cpp in Sources */,
+				B7676384F1D3EB76EF1C1E7C773CDF23 /* MiniPBCoder.cpp in Sources */,
+				FB5C4F9437C8C5ECA4A5C11C2DCB0A6F /* MiniPBCoder_OSX.cpp in Sources */,
+				2909A40787F416B46FBAAFCF6DF54024 /* MMBuffer.cpp in Sources */,
+				ED82003CBB97ABC641B8738A1AD826E5 /* MMKV.cpp in Sources */,
+				F153795679AEE13B9D69DC6DEF49E804 /* MMKV_Android.cpp in Sources */,
+				7BCB8ED3FF5C351831C99F5E54B74CC8 /* MMKV_IO.cpp in Sources */,
+				CECF369DE9527F4513CF57F4AE74BCEA /* MMKV_OSX.cpp in Sources */,
+				D7965D4E7CDF8D37F7C132E4EF8B7A53 /* MMKVCore-dummy.m in Sources */,
+				800627125DAF3799767A0BF50E78C3F6 /* MMKVLog.cpp in Sources */,
+				BD60D07E389771002B00A94462B2E3D4 /* MMKVLog_Android.cpp in Sources */,
+				17FD4E267E9FBB429A7C8E1D30E380AE /* openssl_aes-armv4.S in Sources */,
+				36556C0FAF756C6C6F0D80E1C74F08B7 /* openssl_aes_core.cpp in Sources */,
+				66B1F1C21FDBBFF7B2BEBD318198328C /* openssl_aesv8-armx.S in Sources */,
+				23EB4498D37D8EA04A4B15703E1DC327 /* openssl_cfb128.cpp in Sources */,
+				DC45C481D847E780FD153CBDC172E701 /* openssl_md5_dgst.cpp in Sources */,
+				6BB7DF875CAEFF8B0419B7586B242D74 /* openssl_md5_one.cpp in Sources */,
+				584994C8A228079769EA560BC68F261C /* PBUtility.cpp in Sources */,
+				1F65F661C9F9AD43089045702B4644EB /* ThreadLock.cpp in Sources */,
+				7B2FC66C221C9B3750E8AB88B2DD8B46 /* ThreadLock_Win32.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1548,6 +1539,15 @@
 				59EA578EED8BAC126FDC60C32AE11521 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				C7920681F0164686C56327ED3C6AAC58 /* View+MASAdditions.m in Sources */,
 				C05FC6699632FE712174ED875A605410 /* ViewController+MASAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		945F5E5C4521CB06976EA3D01AC80275 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCA3D331576FABDE65D7EA6D71AF375A /* libMMKV.mm in Sources */,
+				4E3BE516185B407781430DFC3556F6D7 /* MMKV-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1593,59 +1593,59 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0128E2AAF4F21185AB1D4175AB7F0206 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CocoaLumberjack;
-			target = E95654B155D25890BE8E26081FCA8265 /* CocoaLumberjack */;
-			targetProxy = AA972FD1EC870746749695DAADB80AB8 /* PBXContainerItemProxy */;
-		};
-		3DBCF2A6716E63188B58C0294D89806A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MMKVCore;
-			target = AC8AE887C706A43711D115E69B9D988A /* MMKVCore */;
-			targetProxy = 04ACBF65C18DE8A0E526337C1437F9DF /* PBXContainerItemProxy */;
-		};
-		52DCEF86CDDBE95ED1B70922FBD541D7 /* PBXTargetDependency */ = {
+		0D2376F13F8C68F04ADD9C1759779F59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Masonry;
 			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = E525717DE7FDE0CCDFD896ED369F0931 /* PBXContainerItemProxy */;
+			targetProxy = 3045001119A86F692F3C350EB9B06E39 /* PBXContainerItemProxy */;
 		};
-		9038CAD4074A2589D055706D0A26911D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GCDWebServer;
-			target = AD904F32069787EFB2DFFE05EB82F5BD /* GCDWebServer */;
-			targetProxy = AD210C1CEDF09D6E280B2E4CD6D4837D /* PBXContainerItemProxy */;
-		};
-		9C495E6EC98F1ECDCDA6F49997104371 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MBProgressHUD;
-			target = 82B0A41D3031FF27D78E17B0A9A46FB0 /* MBProgressHUD */;
-			targetProxy = B65D0E347DE0C4A7C76EC8E2F1B48B2B /* PBXContainerItemProxy */;
-		};
-		B2C3C81540C6834E1F68158C2C66948D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MMKVCore;
-			target = AC8AE887C706A43711D115E69B9D988A /* MMKVCore */;
-			targetProxy = 181AEEEEC6D5C83CC4CE4771E3F98C5B /* PBXContainerItemProxy */;
-		};
-		C482C5BA9F7BD79A2BB7D9A9082C0993 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MMKV;
-			target = 91A6826828CB9FCD0169A7547E8A79EA /* MMKV */;
-			targetProxy = 6FCCFB84503E91BDD1FEF6F4C2C8DC56 /* PBXContainerItemProxy */;
-		};
-		DA30CC42115DE169FB0C3952B44B23C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = R_category;
-			target = 99F79035E3B43F9DC12A3AA840A70ACE /* R_category */;
-			targetProxy = 374324363CBF2FAF1BA0C12BA793B195 /* PBXContainerItemProxy */;
-		};
-		EB2E48916489CBFB607DE256A8C5D18E /* PBXTargetDependency */ = {
+		3D94E9E7301D4482A644A7422F682E70 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MJExtension;
 			target = 4D3BA58D0583DF37575CACAB3DDADC85 /* MJExtension */;
-			targetProxy = 4C8EE071DD8CD8751833F4B5C76CE89E /* PBXContainerItemProxy */;
+			targetProxy = 1B3EEAFF0BD0AD48EA214684AA1C11B4 /* PBXContainerItemProxy */;
+		};
+		4162FF993D23F102D00C44611E49FCAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMKV;
+			target = 91A6826828CB9FCD0169A7547E8A79EA /* MMKV */;
+			targetProxy = B9A8E598E4D46B116A82DD63AF8DB61A /* PBXContainerItemProxy */;
+		};
+		48CD38C4D8BD4A636D23ADE5CE79F6E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMKVCore;
+			target = AC8AE887C706A43711D115E69B9D988A /* MMKVCore */;
+			targetProxy = F91DDE5D341DDC0E4E3912D0AA7DA8E9 /* PBXContainerItemProxy */;
+		};
+		4C74E3A39F95420E5123F7134202E7BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMKVCore;
+			target = AC8AE887C706A43711D115E69B9D988A /* MMKVCore */;
+			targetProxy = EE5690ED594A4201B9298533F6805C1A /* PBXContainerItemProxy */;
+		};
+		5D83EAB7B382558E046007C8E2B0B398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaLumberjack;
+			target = E95654B155D25890BE8E26081FCA8265 /* CocoaLumberjack */;
+			targetProxy = AA55D974254ABDA948A6B4459CB8C61B /* PBXContainerItemProxy */;
+		};
+		71A1D4312D013CDC15EADBC01731143A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MBProgressHUD;
+			target = 82B0A41D3031FF27D78E17B0A9A46FB0 /* MBProgressHUD */;
+			targetProxy = 3D2CFC5B53FB0D6F6CAB5B6945898AA2 /* PBXContainerItemProxy */;
+		};
+		92B467030ECDDAA8291D08F72E31D37B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GCDWebServer;
+			target = AD904F32069787EFB2DFFE05EB82F5BD /* GCDWebServer */;
+			targetProxy = 3800C5F623DA1FE44C1F9F38929498F1 /* PBXContainerItemProxy */;
+		};
+		CC28B077CFC5DB892CE3EB004FF8AEFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = R_category;
+			target = 99F79035E3B43F9DC12A3AA840A70ACE /* R_category */;
+			targetProxy = 9AA4212894A1D638A68F2C7561A05CBE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1721,29 +1721,6 @@
 			};
 			name = Release;
 		};
-		3B90C50C6480A4F33A9450FF4B689434 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 503C4CC0DB3D80AD6134A05B8CFA8A78 /* MMKV.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/MMKV/MMKV-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = MMKV;
-				PRODUCT_NAME = MMKV;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		3E905FFFE330CEC6EF0BA98A492A913F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FF7CD81A58042FDAB24E835FB9C9D9D /* MJExtension.debug.xcconfig */;
@@ -1767,28 +1744,6 @@
 			};
 			name = Debug;
 		};
-		4E739F140E96006AD5F98A05318F897D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4786CF69D8A9000FEFB89135666B382B /* Pods-Reader.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		62DF522EFFA82C3E2C23458DE837C3F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BC83C0F11ACEF70500FD8AF6D8E25690 /* CocoaLumberjack.release.xcconfig */;
@@ -1809,6 +1764,52 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		63744FEAD710506163BF4704C6DBB6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F369CD794995B96F51112B8707054951 /* MMKVCore.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/MMKVCore/MMKVCore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = MMKVCore;
+				PRODUCT_NAME = MMKVCore;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7200254E11E20587C47C27472121CF19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4786CF69D8A9000FEFB89135666B382B /* Pods-Reader.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1837,29 +1838,26 @@
 			};
 			name = Debug;
 		};
-		7FC4BF519B6A519303C4A26F3D1BC931 /* Release */ = {
+		824DC2C10D41B390B54608BA1DF6CE23 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F369CD794995B96F51112B8707054951 /* MMKVCore.release.xcconfig */;
+			baseConfigurationReference = D876992D15776BE027496793F041FF46 /* Pods-Reader.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/MMKVCore/MMKVCore-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = MMKVCore;
-				PRODUCT_NAME = MMKVCore;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		88CE8442E17DA3262A2433362453A7E4 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1968,6 +1966,29 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
+		};
+		912C062D4E382610BA6BFBA898FAFCE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70BAC7B8FD7F65A9318FCE8596BFDAC2 /* MMKVCore.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/MMKVCore/MMKVCore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = MMKVCore;
+				PRODUCT_NAME = MMKVCore;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		916E0404255105F480DC4950B7625F7A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2081,27 +2102,6 @@
 			};
 			name = Debug;
 		};
-		BE5D17F98EC959D849E2B47E7E196109 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D876992D15776BE027496793F041FF46 /* Pods-Reader.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		BEE9EAA90A90347EC1558150C32DF640 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 162074FDD97582D9775EC7B74FA74576 /* R_category.debug.xcconfig */;
@@ -2125,7 +2125,30 @@
 			};
 			name = Debug;
 		};
-		DE691F780021ECE94B5298E4D9196FD6 /* Release */ = {
+		DBBEB03B4031F6B17D707F322158EF0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 503C4CC0DB3D80AD6134A05B8CFA8A78 /* MMKV.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/MMKV/MMKV-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = MMKV;
+				PRODUCT_NAME = MMKV;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E48A2B254405118F174E87470A356F14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8AC8AF718F67108BF63BF1AD5C835289 /* MMKV.release.xcconfig */;
 			buildSettings = {
@@ -2148,29 +2171,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		DE890C37BCD13F5E1504CF8941D6DFCD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70BAC7B8FD7F65A9318FCE8596BFDAC2 /* MMKVCore.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/MMKVCore/MMKVCore-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = MMKVCore;
-				PRODUCT_NAME = MMKVCore;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 		F99870D874C7FA838E84D9C55C010CF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2234,20 +2234,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		438721F3C69FA03307C06B7A739846FA /* Build configuration list for PBXNativeTarget "MMKVCore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DE890C37BCD13F5E1504CF8941D6DFCD /* Debug */,
-				7FC4BF519B6A519303C4A26F3D1BC931 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				916E0404255105F480DC4950B7625F7A /* Debug */,
 				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53B82BA56125B9500F42273BD27171E7 /* Build configuration list for PBXNativeTarget "MMKVCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				912C062D4E382610BA6BFBA898FAFCE9 /* Debug */,
+				63744FEAD710506163BF4704C6DBB6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64DE8BBF2E149B50B066EB1C1046523C /* Build configuration list for PBXNativeTarget "MMKV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBBEB03B4031F6B17D707F322158EF0E /* Debug */,
+				E48A2B254405118F174E87470A356F14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2261,20 +2270,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AE57390649A310C5B83AA6089141FD01 /* Build configuration list for PBXNativeTarget "Pods-Reader" */ = {
+		A0FB7B9D911DB150ABBDC21D18B806CD /* Build configuration list for PBXNativeTarget "Pods-Reader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BE5D17F98EC959D849E2B47E7E196109 /* Debug */,
-				4E739F140E96006AD5F98A05318F897D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B4B57B5B09434702319276612F57E9B1 /* Build configuration list for PBXNativeTarget "MMKV" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3B90C50C6480A4F33A9450FF4B689434 /* Debug */,
-				DE691F780021ECE94B5298E4D9196FD6 /* Release */,
+				824DC2C10D41B390B54608BA1DF6CE23 /* Debug */,
+				7200254E11E20587C47C27472121CF19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

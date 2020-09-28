@@ -52,7 +52,7 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 // 安全区域
-#define VIEWSAFEAREAINSETS \
+#define kViewSafeAreaInsets \
 ({ \
 UIEdgeInsets i; \
 if(@available(iOS 11.0, *)) { \
@@ -61,6 +61,7 @@ i = [[[UIApplication sharedApplication] delegate] window].safeAreaInsets; \
 i = UIEdgeInsetsZero;} \
 (i); \
 })
+
 #define kSafeAreaBottom \
 ({ \
 CGFloat i; \
