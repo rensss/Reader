@@ -214,7 +214,6 @@
     pinVC.translucentBackground = YES;
     
     [self presentViewController:pinVC animated:YES completion:nil];
-    return;
 }
 
 #pragma mark - delegate
@@ -289,12 +288,30 @@
     
     // 删除
     UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-        DDLogInfo(@"---- xxxxx");
-        [[RKFileManager shareInstance] deleteBookWithName:book.name];
-        [[RKFileManager shareInstance] setIsNeedRefresh:NO];
-        NSInteger bookIndex = [weakSelf.dataArray indexOfObject:book];
-        [weakSelf.dataArray removeObjectAtIndex:bookIndex];
-        [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否删除"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        // 创建并添加按钮
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            DDLogInfo(@"---- xxxxx");
+            [[RKFileManager shareInstance] deleteBookWithName:book.name];
+            [[RKFileManager shareInstance] setIsNeedRefresh:NO];
+            NSInteger bookIndex = [weakSelf.dataArray indexOfObject:book];
+            [weakSelf.dataArray removeObjectAtIndex:bookIndex];
+            [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:okAction];           // A
+        [alertController addAction:cancelAction];       // B
+        
+        if (kIsPad) {
+            alertController.popoverPresentationController.sourceView = listCell;
+//            alertController.popoverPresentationController.sourceRect = listCell.frame;
+        }
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
     
     

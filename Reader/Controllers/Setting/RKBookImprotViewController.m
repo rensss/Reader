@@ -91,7 +91,12 @@
 }
 
 - (void)tapAddress:(UITapGestureRecognizer *)gesture {
+    
     UIActivityViewController *acitivityVC = [[UIActivityViewController alloc] initWithActivityItems:@[ self.webUploader.serverURL.absoluteString ] applicationActivities:nil];
+    if (kIsPad) {
+        acitivityVC.popoverPresentationController.sourceView = gesture.view;
+        acitivityVC.popoverPresentationController.sourceRect = gesture.view.frame;
+    }
     [[RKUtils topMostController] presentViewController:acitivityVC animated:YES completion:nil];
 }
 

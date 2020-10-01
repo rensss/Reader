@@ -52,7 +52,7 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 // 安全区域
-#define VIEWSAFEAREAINSETS \
+#define kViewSafeAreaInsets \
 ({ \
 UIEdgeInsets i; \
 if(@available(iOS 11.0, *)) { \
@@ -61,6 +61,7 @@ i = [[[UIApplication sharedApplication] delegate] window].safeAreaInsets; \
 i = UIEdgeInsetsZero;} \
 (i); \
 })
+
 #define kSafeAreaBottom \
 ({ \
 CGFloat i; \
@@ -75,6 +76,7 @@ i = 0.0f; \
 } \
 (i); \
 })
+
 #define kIS_IPHONEX \
 ({ \
 BOOL flag; \
@@ -101,6 +103,8 @@ height = 20; \
 } \
 (height); \
 })
+
+#define kIsPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 #ifdef DEBUG
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;

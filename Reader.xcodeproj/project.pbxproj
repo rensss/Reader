@@ -17,7 +17,6 @@
 		1A16F8B22271B713006568A5 /* RKReadMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F8B12271B713006568A5 /* RKReadMenuView.m */; };
 		1A1888F8226D709100289476 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1888F7226D709100289476 /* AppDelegate.m */; };
 		1A188900226D709200289476 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1888FF226D709200289476 /* Assets.xcassets */; };
-		1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A188901226D709200289476 /* LaunchScreen.storyboard */; };
 		1A188906226D709200289476 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188905226D709200289476 /* main.m */; };
 		1A188915226D78C000289476 /* RKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188914226D78C000289476 /* RKNavigationController.m */; };
 		1A188918226D792200289476 /* RKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A188917226D792200289476 /* RKViewController.m */; };
@@ -39,6 +38,7 @@
 		1A2E158E24DC1744009C877F /* RKPinNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E158D24DC1744009C877F /* RKPinNumPadView.m */; };
 		1A2E159124DE5D24009C877F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E159024DE5D24009C877F /* UIImage+ImageEffects.m */; };
 		1A2E159524DE9D67009C877F /* RKLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E159424DE9D67009C877F /* RKLogFormatter.m */; };
+		1A31912B2521807A0033448E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A31912A2521807A0033448E /* Launch Screen.storyboard */; };
 		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
 		1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4384D8247D171800E087F3 /* ShareViewController.m */; };
 		1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4384DA247D171800E087F3 /* MainInterface.storyboard */; };
@@ -100,7 +100,6 @@
 		1A1888F6226D709100289476 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A1888F7226D709100289476 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1A1888FF226D709200289476 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A188902226D709200289476 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A188904226D709200289476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A188905226D709200289476 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1A188912226D780800289476 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -144,6 +143,7 @@
 		1A2E159024DE5D24009C877F /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		1A2E159324DE9D67009C877F /* RKLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKLogFormatter.h; sourceTree = "<group>"; };
 		1A2E159424DE9D67009C877F /* RKLogFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKLogFormatter.m; sourceTree = "<group>"; };
+		1A31912A2521807A0033448E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
 		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
 		1A4384D5247D171800E087F3 /* ReaderShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReaderShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,14 +260,14 @@
 		1A18890C226D774100289476 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1AD836042488F13C00A31BA3 /* RKUtils.h */,
+				1AD836052488F13C00A31BA3 /* RKUtils.m */,
 				1A2E159624DEA5EA009C877F /* Authentication */,
 				1A18892F226D7BCD00289476 /* AlertMessage */,
 				1A18892B226D7BB500289476 /* FileManage */,
 				1A2E159224DE9CC5009C877F /* LogFormatter */,
 				1A56A2562451795400291C2D /* MarqueeView */,
 				1A2E157C24DC040C009C877F /* PinView */,
-				1AD836042488F13C00A31BA3 /* RKUtils.h */,
-				1AD836052488F13C00A31BA3 /* RKUtils.m */,
 				1A077624227854CF0073794E /* UserConfig */,
 			);
 			path = Utils;
@@ -334,7 +334,7 @@
 				1A1888F6226D709100289476 /* AppDelegate.h */,
 				1A1888F7226D709100289476 /* AppDelegate.m */,
 				1A1888FF226D709200289476 /* Assets.xcassets */,
-				1A188901226D709200289476 /* LaunchScreen.storyboard */,
+				1A31912A2521807A0033448E /* Launch Screen.storyboard */,
 				1A188904226D709200289476 /* Info.plist */,
 				1A188905226D709200289476 /* main.m */,
 				1A188912226D780800289476 /* PrefixHeader.pch */,
@@ -551,9 +551,9 @@
 				1A07E6EE230B9CB5006FB45C /* LingWaiSC-Medium.otf in Resources */,
 				1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */,
 				1ADC1BFB240DFC98003C5F4B /* Hanzipen.ttc in Resources */,
-				1A188903226D709200289476 /* LaunchScreen.storyboard in Resources */,
 				1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */,
 				1A188900226D709200289476 /* Assets.xcassets in Resources */,
+				1A31912B2521807A0033448E /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,14 +674,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1A188901226D709200289476 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1A188902226D709200289476 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		1A4384DA247D171800E087F3 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -744,7 +736,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -797,7 +789,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
