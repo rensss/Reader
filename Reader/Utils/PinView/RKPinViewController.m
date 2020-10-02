@@ -43,7 +43,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"---> %@ 销毁了",[self class]);
+//    NSLog(@"---> %@ 销毁了",[self class]);
 }
 
 #pragma mark - lifeCycle

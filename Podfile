@@ -11,4 +11,6 @@ target 'Reader' do
 	pod 'MBProgressHUD', '~> 1.1.0'
   pod 'MMKV'
   pod 'CocoaLumberjack'
+	
+	pod 'LookinServer', :configurations => ['Debug']
 end

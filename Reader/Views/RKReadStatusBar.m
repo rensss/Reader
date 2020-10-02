@@ -88,7 +88,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    DDLogVerbose(@"---> %@ 销毁了",self.class);
+//    DDLogVerbose(@"---> %@ 销毁了",self.class);
 }
 
 #pragma mark - func

@@ -37,7 +37,7 @@ UIGestureRecognizerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+	
     // 添加点击手势
     [self.view addGestureRecognizer:({
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showToolMenu)];
@@ -77,8 +77,8 @@ UIGestureRecognizerDelegate
     // 设置UIPageViewController 尺寸
     _pageViewController.view.frame = self.view.bounds;
     
-//    //是否双面显示，默认为NO
-//    _pageViewController.doubleSided = YES;
+	// 是否双面显示，默认为NO
+    _pageViewController.doubleSided = YES;
     
     // 在页面上，显示UIPageViewController对象的View
     [self addChildViewController:_pageViewController];
@@ -126,10 +126,6 @@ UIGestureRecognizerDelegate
 - (BOOL)prefersHomeIndicatorAutoHidden {
     return true;
 }
-
-//- (UIViewController *)childViewControllerForHomeIndicatorAutoHidden {
-//    return self;
-//}
 
 #pragma mark - 手势事件
 - (void)showToolMenu {
@@ -217,7 +213,6 @@ UIGestureRecognizerDelegate
     
     // 行间距
     [menu shouldChangeLineSpace:^{
-        
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
@@ -485,6 +480,13 @@ UIGestureRecognizerDelegate
 - (void)dissmiss {
     // 关闭
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -- 刷新
+- (void)refreshCurrentVC {
+	DDLogInfo(@"---- frame = %@", NSStringFromCGRect([RKUserConfig sharedInstance].readViewFrame));
+	// 设置当前显示的readVC
+	[self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 #pragma mark - setting

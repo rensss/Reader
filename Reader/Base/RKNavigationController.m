@@ -36,7 +36,7 @@
 }
 
 - (void)dealloc {
-	DDLogVerbose(@"---> %@ 销毁",[self class]);
+	DDLogVerbose(@"---> %@ 销毁了",[self class]);
 }
 
 #pragma mark -- UIGestureRecognizerDelegate
