@@ -11,6 +11,7 @@
 #import "RKReadMenuView.h"
 #import "RKReadSettingViewController.h"
 #import "RKChaptersListView.h"
+#import "RKBackViewController.h"
 
 @interface RKReadPageViewController ()
 <
@@ -131,19 +132,10 @@ UIGestureRecognizerDelegate
 - (void)showToolMenu {
     
     // 若已显示菜单则忽略
-    if (self.isShowMenu) {
-        return ;
-    }
+    if (self.isShowMenu) return;
     
     [UIApplication sharedApplication].statusBarHidden = NO;
     
-    // 改变状态栏的颜色
-//    if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-//    } else {
-//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-//    }
-
     self.isShowMenu = YES;
     // 菜单view
     RKReadMenuView *menu = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
@@ -171,11 +163,13 @@ UIGestureRecognizerDelegate
 
     // 退出阅读
     [menu closeBlock:^{
+        
         [weakSelf dissmiss];
     }];
     
     // 章节跳转
     [menu shouldChangeChapter:^(BOOL isNextChapter) {
+        
         if (isNextChapter) {
             // 最后一章
             if (weakSelf.currentChapter == weakSelf.book.chapters.count - 1) {
@@ -207,23 +201,27 @@ UIGestureRecognizerDelegate
     
     // 字号
     [menu shouldChangeFontSize:^{
+        
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 行间距
     [menu shouldChangeLineSpace:^{
+        
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 目录
     [menu shouldShowBookCatalog:^{
+        
         RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:weakSelf.view.bounds withBook:weakSelf.book withSuperView:weakSelf.view];
         // 显示
         [chaptersListView show];
         
         [chaptersListView didSelectChapter:^{
+            
             // 更新阅读记录
             weakSelf.currentPage = 0;
             weakSelf.currentChapter = weakSelf.book.currentChapterNum;
@@ -243,41 +241,17 @@ UIGestureRecognizerDelegate
             [RKUserConfig sharedInstance].bgImageName = @"reader_bg_3";
         }
         
-//        // 改变状态栏的颜色
-//        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-//            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-//        } else {
-//            if (@available(iOS 13.0, *)) {
-//                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-//            } else {
-//                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-//            }
-//        }
-        
         // 设置当前显示的readVC
         [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 打开设置
     [menu shouldOpenSetting:^{
+        
         RKReadSettingViewController *settingVC = [[RKReadSettingViewController alloc] init];
         settingVC.book = self.book;
         RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];
-        // 强制不可下拉返回
-//        if (@available(iOS 13.0, *)) {
-//            [nav setModalInPresentation:YES];
-//        }
         [settingVC needRefresh:^{
-//            // 改变状态栏的颜色
-//            if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-//                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-//            } else {
-//                if (@available(iOS 13.0, *)) {
-//                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-//                } else {
-//                    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-//                }
-//            }
             // 设置当前显示的readVC
             [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
         }];
@@ -355,6 +329,12 @@ UIGestureRecognizerDelegate
 #pragma mark -- 返回下一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     
+    if ([viewController isKindOfClass:[RKReadViewController class]]) {
+        RKBackViewController *backViewController = [[RKBackViewController alloc] init];
+        [backViewController updateWithViewController:viewController];
+        return backViewController;
+    }
+    
     self.pageNext = self.currentPage;
     self.chapterNext = self.currentChapter;
     // 最后一章 && 最后一页
@@ -363,7 +343,7 @@ UIGestureRecognizerDelegate
         return nil;
     }
     // 本章节的最后一页
-    if (self.pageNext == self.book.currentChapter.allPages - 1) {
+    if (self.pageNext >= self.book.currentChapter.allPages - 1) {
         self.chapterNext ++;
         self.pageNext = 0;
     } else {
