@@ -32,13 +32,13 @@
     }
     // log初始化
     // 添加DDASLLogger，你的日志语句将被发送到Xcode控制台
-    if (@available(iOS 10.0, *)) {
-        [DDLog addLogger:[DDOSLogger sharedInstance]];
-        [DDOSLogger sharedInstance].logFormatter = [[RKLogFormatter alloc] init];
-    } else {
+//    if (@available(iOS 10.0, *)) {
+//        [DDLog addLogger:[DDOSLogger sharedInstance]];
+//        [DDOSLogger sharedInstance].logFormatter = [[RKLogFormatter alloc] init];
+//    } else {
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
         [DDTTYLogger sharedInstance].logFormatter = [[RKLogFormatter alloc] init];
-    }
+//    }
     // 添加DDFileLogger，你的日志语句将写入到一个文件中，默认路径在沙盒的Library/Caches/Logs/目录下，文件名为bundleid+空格+日期.log。
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
     fileLogger.rollingFrequency = 60 * 60 * 24;
