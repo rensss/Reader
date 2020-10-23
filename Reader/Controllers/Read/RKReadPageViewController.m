@@ -285,25 +285,7 @@ UIGestureRecognizerDelegate
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     
     if ([RKUserConfig sharedInstance].isAllNextPage) {
-        
-//        self.pageNext = self.currentPage;
-//        self.chapterNext = self.currentChapter;
-//        // 最后一章 && 最后一页
-//        if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
-//            RKAlertMessage(@"已经看完了!", self.view);
-//            return nil;
-//        }
-//        // 本章节的最后一页
-//        if (self.pageNext == self.book.currentChapter.allPages - 1) {
-//            self.chapterNext ++;
-//            self.pageNext = 0;
-//        } else {
-//            self.pageNext ++;
-//        }
-//
-//        // 设置当前显示的readVC
-//        [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.chapterNext andPage:self.pageNext]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-//        return nil;
+//		return [self pageViewController:pageViewController viewControllerAfterViewController:viewController];
     }
     
     self.pageNext = self.currentPage;

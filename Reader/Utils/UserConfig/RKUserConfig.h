@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RKUserConfig : NSObject
 
-// 翻页方式
 @property (nonatomic, assign) UIPageViewControllerTransitionStyle transitionStyle; /**< 翻页模式*/
 @property (nonatomic, assign) UIPageViewControllerNavigationOrientation navigationOrientation; /**< 上下/左右 翻页*/
 
@@ -24,12 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat bottomPadding; /**< 下边距*/
 @property (nonatomic, assign) CGFloat rightPadding; /**< 右边距*/
 
-// 阅读页大小
 @property (nonatomic, assign) CGRect readViewFrame; /**< 阅读页大小*/
 
 @property (nonatomic, assign) CGRect readStatusBarFrame; /**< 状态栏*/
 
-// 阅读页背景图
 @property (nonatomic, copy) NSString *bgImageName; /**< 背景图*/
 
 // 内容展示相关配置  字号/行间距/字体颜色/字体
@@ -37,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat lineSpace; /**< 行间距*/
 @property (nonatomic, copy) NSString *fontColor; /**< 字体颜色*/
 @property (nonatomic, copy) NSString *fontName; /**< 字体*/
-
 
 @property (nonatomic, assign) BOOL isRefreshTop; /**< 置顶书籍是否需要按时间排序*/
 
