@@ -215,13 +215,11 @@ UIGestureRecognizerDelegate
     
     // 目录
     [menu shouldShowBookCatalog:^{
-        
         RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:weakSelf.view.bounds withBook:weakSelf.book withSuperView:weakSelf.view];
         // 显示
         [chaptersListView show];
         
         [chaptersListView didSelectChapter:^{
-            
             // 更新阅读记录
             weakSelf.currentPage = 0;
             weakSelf.currentChapter = weakSelf.book.currentChapterNum;
@@ -233,7 +231,6 @@ UIGestureRecognizerDelegate
     
     // 夜间模式
     [menu shouldChangeNightModle:^(BOOL isOpen) {
-        
         if (isOpen) {
             [RKUserConfig sharedInstance].bgImageName = @"black";
         } else {
@@ -247,7 +244,6 @@ UIGestureRecognizerDelegate
     
     // 打开设置
     [menu shouldOpenSetting:^{
-        
         RKReadSettingViewController *settingVC = [[RKReadSettingViewController alloc] init];
         settingVC.book = self.book;
         RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];

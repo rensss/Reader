@@ -9,6 +9,8 @@
 #import "RKChaptersListView.h"
 #import "RKChaptersListCell.h"
 
+#define kListWidth (kScreenWidth * 0.8)
+
 @interface RKChaptersListView () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) RKBook *book; /**< 当前书籍*/
@@ -43,8 +45,8 @@
         [self addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(kStatusHight);
-            make.left.mas_equalTo(self.mas_left).mas_offset(-260);
-            make.width.mas_equalTo(260);
+            make.left.mas_equalTo(self.mas_left).mas_offset(-kListWidth);
+            make.width.mas_equalTo(kListWidth);
             make.height.mas_equalTo(kScreenHeight-kSafeAreaBottom-20);
         }];
         
