@@ -520,7 +520,7 @@
 			attributes = {
 				CLASSPREFIX = RK;
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = Rzk;
+				ORGANIZATIONNAME = RK;
 				TargetAttributes = {
 					1A1888F2226D709100289476 = {
 						CreatedOnToolsVersion = 10.2.1;
