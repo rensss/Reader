@@ -42,7 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isAutoRead; /**< 是否自动阅读*/
 
 @property (nonatomic, copy) NSString *lastReadBookName; /**< 最近阅读*/
-@property (nonatomic, assign) BOOL isSecretAutoOpen; /**< 是否加密书籍自动可以打开*/
+@property (nonatomic, assign) BOOL isSecretAutoOpen; /**< 加密书籍是否自动打开*/
+@property (nonatomic, assign) BOOL isChapterListAutoScroll; /**< 目录是否自动滚动*/
+
 
 /// 用户设置单例
 + (instancetype)sharedInstance;

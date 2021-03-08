@@ -33,6 +33,7 @@
 
 @synthesize lastReadBookName = _lastReadBookName;
 @synthesize isSecretAutoOpen = _isSecretAutoOpen;
+@synthesize isChapterListAutoScroll = _isChapterListAutoScroll;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -162,6 +163,13 @@
     _nightAlpha = nightAlpha;
     
     [[NSUserDefaults standardUserDefaults] setFloat:nightAlpha forKey:@"nightAlpha"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsChapterListAutoScroll:(BOOL)isChapterListAutoScroll {
+    _isChapterListAutoScroll = isChapterListAutoScroll;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isChapterListAutoScroll forKey:@"isChapterListAutoScroll"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -310,6 +318,14 @@
 	} else {
 		return NO;
 	}
+}
+
+- (BOOL)isChapterListAutoScroll {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isChapterListAutoScroll"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isChapterListAutoScroll"];
+    } else {
+        return NO;
+    }
 }
 
 - (NSString *)lastReadBookName {

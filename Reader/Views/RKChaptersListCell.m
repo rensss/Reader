@@ -20,22 +20,22 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        [self.contentView addSubview:self.titleMarqueeView];
-//        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.contentView);
-//            make.top.mas_offset(0);
-//            make.left.mas_offset(8);
-//            make.bottom.mas_offset(0);
-//            make.right.mas_offset(-8);
-//        }];
-        
-        [self.contentView addSubview:self.titleView];
-        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.contentView addSubview:self.titleMarqueeView];
+        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.contentView);
             make.top.mas_offset(0);
             make.left.mas_offset(8);
             make.bottom.mas_offset(0);
             make.right.mas_offset(-8);
         }];
+        
+//        [self.contentView addSubview:self.titleView];
+//        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_offset(0);
+//            make.left.mas_offset(8);
+//            make.bottom.mas_offset(0);
+//            make.right.mas_offset(-8);
+//        }];
     }
     return self;
 }
@@ -75,14 +75,16 @@
 - (void)setChapter:(RKChapter *)chapter {
     _chapter = chapter;
     self.titleView.text = [self.chapter.title stringByTrimmingCharactersInSet];
-//    [self.titleMarqueeView reloadData];
+    [self.titleMarqueeView reloadData];
 }
 
 - (void)setIsCurrent:(BOOL)isCurrent {
     _isCurrent = isCurrent;
     
     if (_isCurrent) {
-        [self.titleMarqueeView start];
+        if ([RKUserConfig sharedInstance].isChapterListAutoScroll) {
+            [self.titleMarqueeView start];
+        }
     } else {
         [self.titleMarqueeView pause];
     }
