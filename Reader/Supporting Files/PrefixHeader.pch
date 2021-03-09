@@ -128,6 +128,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelWarning;
 // 阅读页 底部状态栏颜色
 #define kReadViewBottomTintColor [UIColor colorWithHexString:@"707070"]
 
+// group name
+#define kAPPGroupName @"group.micsoft.Reader"
+
+#pragma mark - 路径
 // 书籍存放文件夹路径
 #define kBookSavePath [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"/Books"]
 
