@@ -23,6 +23,7 @@
 
 // disable encryption & decryption to reduce some code
 //#define MMKV_DISABLE_CRYPT
+//#define MMKV_DISABLE_FLUTTER
 
 // using POSIX implementation
 //#define FORCE_POSIX
@@ -33,10 +34,22 @@
 #include <vector>
 #include <unordered_map>
 
-constexpr auto MMKV_VERSION = "v1.2.2";
+constexpr auto MMKV_VERSION = "v1.2.7";
+
+#ifdef DEBUG
+#    define MMKV_DEBUG
+#endif
+
+#ifdef NDEBUG
+#    undef MMKV_DEBUG
+#endif
 
 #ifdef __ANDROID__
-#    define MMKV_ANDROID
+#    ifdef FORCE_POSIX
+#        define MMKV_POSIX
+#    else
+#        define MMKV_ANDROID
+#    endif
 #elif __APPLE__
 #    ifdef FORCE_POSIX
 #        define MMKV_POSIX
@@ -186,7 +199,7 @@ constexpr size_t AES_KEY_BITSET_LEN = 128;
 
 } // namespace mmkv
 
-#ifndef NDEBUG
+#ifdef MMKV_DEBUG
 #    include <cassert>
 #    define MMKV_ASSERT(var) assert(var)
 #else
