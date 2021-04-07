@@ -59,6 +59,10 @@ UIGestureRecognizerDelegate
     _pageViewController.delegate = self;
     _pageViewController.dataSource = self;
     
+    // 设置UIPageViewController 尺寸
+    DDLogInfo(@"---- view:%@", NSStringFromCGRect(self.view.frame));
+    _pageViewController.view.frame = self.view.bounds;
+    
     // 让UIPageViewController对象，显示相应的页数据。
     // UIPageViewController对象要显示的页数据封装成为一个NSArray。
     // 因为我们定义UIPageViewController对象显示样式为显示一页（options参数指定）。
@@ -75,10 +79,7 @@ UIGestureRecognizerDelegate
                                    animated:NO
                                  completion:nil];
     
-    // 设置UIPageViewController 尺寸
-    _pageViewController.view.frame = self.view.bounds;
-    
-	// 是否双面显示，默认为NO
+    // 是否双面显示，默认为NO
     _pageViewController.doubleSided = YES;
     
     // 在页面上，显示UIPageViewController对象的View
@@ -122,6 +123,10 @@ UIGestureRecognizerDelegate
     
     // 关闭屏幕常亮
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    DDLogInfo(@"---- Transition size:%@", NSStringFromCGSize(size));
 }
 
 - (BOOL)prefersHomeIndicatorAutoHidden {
@@ -180,7 +185,7 @@ UIGestureRecognizerDelegate
             weakSelf.pageNext = 0;
             weakSelf.chapterNext = weakSelf.currentChapter + 1;
             
-        }else {
+        } else {
             // 第一章的最后一页
             if (weakSelf.currentChapter == 0) {
                 RKAlertMessage(@"没有上一章了~", weakSelf.view);
@@ -201,14 +206,12 @@ UIGestureRecognizerDelegate
     
     // 字号
     [menu shouldChangeFontSize:^{
-        
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 行间距
     [menu shouldChangeLineSpace:^{
-        
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
@@ -268,7 +271,7 @@ UIGestureRecognizerDelegate
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
         return NO;
     }
-    return  YES;
+    return YES;
 }
 
 #pragma mark -- RKReadMenuViewDelegate
@@ -286,11 +289,12 @@ UIGestureRecognizerDelegate
     
     self.pageNext = self.currentPage;
     self.chapterNext = self.currentChapter;
-
+    
     if (self.pageNext == 0 && self.chapterNext == 0) {
         RKAlertMessage(@"前面没有了!", self.view);
         return nil;
     }
+    
     if (self.pageNext == 0) {
         self.chapterNext--;
         // 上一章节最后一页
@@ -299,7 +303,7 @@ UIGestureRecognizerDelegate
     } else {
         self.pageNext--;
     }
-
+    
 //    DDLogInfo(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
@@ -320,6 +324,7 @@ UIGestureRecognizerDelegate
         RKAlertMessage(@"已经看完了!", self.view);
         return nil;
     }
+    
     // 本章节的最后一页
     if (self.pageNext >= self.book.currentChapter.allPages - 1) {
         self.chapterNext ++;
@@ -352,7 +357,6 @@ UIGestureRecognizerDelegate
     //    self.currentPage = self.pageNext;
 //    DDLogInfo(@"%ld -|- %ld",self.currentChapter,self.currentPage);
 }
-
 
 #pragma mark - 函数
 #pragma mark -- 根据index得到对应的UIViewController
@@ -486,7 +490,6 @@ UIGestureRecognizerDelegate
         }];
         
         _previewActionArray = [NSMutableArray arrayWithObjects:deleteAnalysisAction,backAction, nil];
-        
     }
     return _previewActionArray;
 }

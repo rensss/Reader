@@ -231,12 +231,12 @@
 }
 
 - (CGRect)readViewFrame {
-    CGRect rect = CGRectMake(self.leftPadding, kStatusHight + self.topPadding, kScreenWidth - self.leftPadding - self.rightPadding, kScreenHeight - self.topPadding - kStatusHight - self.bottomPadding - (kSafeAreaBottom));
+    CGRect rect = CGRectMake(self.leftPadding, kStatusHight + self.topPadding, kWindowWidth - self.leftPadding - self.rightPadding, kWindowHeight - self.topPadding - kStatusHight - self.bottomPadding - (kSafeAreaBottom));
     return rect;
 }
 
 - (CGRect)readStatusBarFrame {
-    CGRect rect = CGRectMake(0, kScreenHeight - (kSafeAreaBottom) - (kIsPad?15:8), kScreenWidth, 22);
+    CGRect rect = CGRectMake(0, kWindowHeight - (kSafeAreaBottom) - (kIsPad?15:8), kWindowWidth, 22);
     return rect;
 }
 

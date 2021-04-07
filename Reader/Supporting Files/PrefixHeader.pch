@@ -48,6 +48,10 @@
 #import "RKChapter.h"               // 章节
 
 #pragma mark - 常用宏定义
+#define kKeyWindow [UIApplication sharedApplication].keyWindow
+#define kWindowWidth kKeyWindow.size.width
+#define kWindowHeight kKeyWindow.size.height
+
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 

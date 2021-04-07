@@ -62,7 +62,6 @@
 - (RKReadView *)readView {
     if (!_readView) {
         _readView = [[RKReadView alloc] initWithFrame:[RKUserConfig sharedInstance].readViewFrame];
-//        _readView = [[RKReadView alloc] init];
         _readView.content = self.content;
     }
     return _readView;

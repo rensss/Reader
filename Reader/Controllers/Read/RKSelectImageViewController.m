@@ -101,7 +101,7 @@
         flowLayout.minimumInteritemSpacing = kPadding;
         flowLayout.itemSize = CGSizeMake(kWidth, kHeight);
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - TOP_MARGIN) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - TOP_MARGIN) collectionViewLayout:flowLayout];
         UIEdgeInsets edgeInsets = UIEdgeInsetsMake(kPadding, kPadding, kSafeAreaBottom, kPadding);
         _collectionView.contentInset = edgeInsets;
         

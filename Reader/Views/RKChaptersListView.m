@@ -9,7 +9,7 @@
 #import "RKChaptersListView.h"
 #import "RKChaptersListCell.h"
 
-#define kListWidth (kScreenWidth * 0.8)
+#define kListWidth (kWindowWidth * 0.8)
 
 @interface RKChaptersListView () <UITableViewDelegate,UITableViewDataSource>
 
@@ -47,7 +47,7 @@
             make.top.mas_equalTo(kStatusHight);
             make.left.mas_equalTo(self.mas_left).mas_offset(-kListWidth);
             make.width.mas_equalTo(kListWidth);
-            make.height.mas_equalTo(kScreenHeight-kSafeAreaBottom-20);
+            make.height.mas_equalTo(kWindowHeight-kSafeAreaBottom-20);
         }];
         
         [self layoutIfNeeded];

@@ -112,7 +112,7 @@
     
     float level = device.batteryLevel;
     
-    DDLogVerbose(@"---- level = %f",level);
+//    DDLogVerbose(@"---- level = %f",level);
     
     self.batteryNum.text = [NSString stringWithFormat:@"%.0f",level*100];
     if (level > 0 && level < 0.2f) {
