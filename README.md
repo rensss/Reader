@@ -1,5 +1,11 @@
 ![rensss's GitHub stats](https://github-readme-stats.vercel.app/api?username=rensss)
 
+<img src="https://img.shields.io/github/issues/rensss/Reader?color=green">
+<img src="https://img.shields.io/github/stars/rensss/Reader?color=yellow">
+<img src="https://img.shields.io/github/forks/rensss/Reader?color=orange">
+<img src="https://img.shields.io/github/license/rensss/Reader?color=ff69b4">
+<img src="https://img.shields.io/github/languages/code-size/rensss/Reader?color=blueviolet">
+
 # Reader
 自用阅读器
 
