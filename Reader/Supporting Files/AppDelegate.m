@@ -57,6 +57,8 @@
         }
     });
     
+    [self checkShare];
+    
     return YES;
 }
 
@@ -102,6 +104,9 @@
 //            }
 //        }];
     }
+    
+    [self checkShare];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -178,6 +183,10 @@
 //    }
 
     return handled;
+}
+
+- (void)checkShare {
+    [[RKFileManager shareInstance] checkShareImportBook];
 }
 
 @end

@@ -195,6 +195,7 @@ static RKFileManager *_fileManager;
     
     // 首页刷新
     self.isNeedRefresh = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:RKHomeListRefresh object:nil];
 }
 
 /// 删除解析文件
@@ -408,6 +409,28 @@ static RKFileManager *_fileManager;
         return books;
     }
     return bookList;
+}
+
+#pragma mark - share import
+/// 检查share导入书籍
+- (void)checkShareImportBook {
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *groupURL = [fileManager containerURLForSecurityApplicationGroupIdentifier:kAPPGroupName];
+//    groupURL.filePathURL
+    NSArray *fileArray = [fileManager contentsOfDirectoryAtPath:groupURL.path error:nil];
+    DDLogDebug(@"---- %@", fileArray);
+    for (NSString *path in fileArray) {
+        if ([path.pathExtension isEqualToString:@"txt"]) {
+            NSURL *bookFullPathUrl = [groupURL URLByAppendingPathComponent:path];
+            NSString *newPath = [kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]];
+            NSError *error;
+            [fileManager moveItemAtURL:bookFullPathUrl toURL:[NSURL fileURLWithPath:newPath] error:&error];
+            if (!error) {
+                [self saveBookWithPath:path];
+            }
+            break;
+        }
+    }
 }
 
 #pragma mark - func

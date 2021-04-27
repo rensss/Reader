@@ -58,6 +58,10 @@
 /// 获取全部加密书籍
 - (NSMutableArray *)getAllSecretBooks;
 
+#pragma mark - share import
+/// 检查share导入书籍
+- (void)checkShareImportBook;
+
 #pragma mark - func
 /// 书籍解码 返回内容
 - (NSString *)encodeWithFilePath:(NSString *)path;

@@ -31,6 +31,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveQuickReadNotification:) name:RKShortcutQuickReadItemType object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAutoReadNotification:) name:RKAutoReadNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveHomeListRefreshNotification:) name:RKHomeListRefresh object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,6 +51,11 @@
 }
 
 #pragma mark - 通知
+- (void)didReceiveHomeListRefreshNotification:(NSNotification *)notification {
+    [self needReloadData];
+    [RKFileManager shareInstance].isNeedRefresh = NO;
+}
+
 /// 快速阅读通知
 - (void)didReceiveQuickReadNotification:(NSNotification *)notification {
     [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -297,8 +303,12 @@
             [[RKFileManager shareInstance] deleteBookWithName:book.name];
             [[RKFileManager shareInstance] setIsNeedRefresh:NO];
             NSInteger bookIndex = [weakSelf.dataArray indexOfObject:book];
-            [weakSelf.dataArray removeObjectAtIndex:bookIndex];
-            [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            if (bookIndex != NSNotFound) {
+                if (weakSelf.dataArray.count >= bookIndex) {
+                    [weakSelf.dataArray removeObjectAtIndex:bookIndex];
+                    [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+                }                
+            }
         }];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
