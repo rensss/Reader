@@ -38,7 +38,7 @@ UIGestureRecognizerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+    
     // 添加点击手势
     [self.view addGestureRecognizer:({
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showToolMenu)];
@@ -284,7 +284,7 @@ UIGestureRecognizerDelegate
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     
     if ([RKUserConfig sharedInstance].isAllNextPage) {
-//		return [self pageViewController:pageViewController viewControllerAfterViewController:viewController];
+//        return [self pageViewController:pageViewController viewControllerAfterViewController:viewController];
     }
     
     self.pageNext = self.currentPage;
@@ -418,8 +418,8 @@ UIGestureRecognizerDelegate
                 }
             }
         }
-		
-		[RKUserConfig sharedInstance].lastReadBookName = self.book.name;
+        
+        [RKUserConfig sharedInstance].lastReadBookName = self.book.name;
         
         NSMutableArray *bookList = [[RKFileManager shareInstance] getAllBookList];
         
@@ -446,9 +446,9 @@ UIGestureRecognizerDelegate
 
 #pragma mark -- 刷新
 - (void)refreshCurrentVC {
-	DDLogInfo(@"---- frame = %@", NSStringFromCGRect([RKUserConfig sharedInstance].readViewFrame));
-	// 设置当前显示的readVC
-	[self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    DDLogInfo(@"---- frame = %@", NSStringFromCGRect([RKUserConfig sharedInstance].readViewFrame));
+    // 设置当前显示的readVC
+    [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 #pragma mark - setting

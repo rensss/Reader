@@ -52,7 +52,9 @@
 
 #pragma mark - 通知
 - (void)didReceiveHomeListRefreshNotification:(NSNotification *)notification {
-    [self needReloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self needReloadData];
+    });
     [RKFileManager shareInstance].isNeedRefresh = NO;
 }
 
@@ -62,30 +64,30 @@
 }
 
 - (void)didReceiveAutoReadNotification:(NSNotification *)notification {
-	RKUserConfig *config = [RKUserConfig sharedInstance];
+    RKUserConfig *config = [RKUserConfig sharedInstance];
     RKBook *autoRead;
     for (RKBook *book in [[RKFileManager shareInstance] getAllBookList]) {
         if ([book.name isEqualToString:config.lastReadBookName]) {
-			if (book.isSecret && !config.isSecretAutoOpen) {
-				[self didReceiveQuickReadNotification:nil];
-				return;
-			}
-			autoRead = book;
+            if (book.isSecret && !config.isSecretAutoOpen) {
+                [self didReceiveQuickReadNotification:nil];
+                return;
+            }
+            autoRead = book;
         }
     }
     if (autoRead) {
-		if (autoRead.isSecret) {
-			__weak typeof(self) weakSelf = self;
-			[RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"Check Auth" result:^(BOOL success) {
-				if (success) {
-					dispatch_async(dispatch_get_main_queue(), ^{
-						[weakSelf startReadWithBook:autoRead];						
-					});
-				}
-			}];
-		} else {
-			[self startReadWithBook:autoRead];
-		}
+        if (autoRead.isSecret) {
+            __weak typeof(self) weakSelf = self;
+            [RKTouchFaceIDUtil requestAuthenticationEvaluatePolicy:YES localizedReason:@"Check Auth" result:^(BOOL success) {
+                if (success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf startReadWithBook:autoRead];
+                    });
+                }
+            }];
+        } else {
+            [self startReadWithBook:autoRead];
+        }
     }
 }
 
@@ -307,7 +309,7 @@
                 if (weakSelf.dataArray.count >= bookIndex) {
                     [weakSelf.dataArray removeObjectAtIndex:bookIndex];
                     [weakSelf.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:bookIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-                }                
+                }
             }
         }];
         

@@ -50,11 +50,11 @@
             [RKUserConfig sharedInstance].isAutoRead = switchBtn.on;
         }
             break;
-		case 2:
-		{
-			[RKUserConfig sharedInstance].isSecretAutoOpen = switchBtn.on;
-		}
-			break;
+        case 2:
+        {
+            [RKUserConfig sharedInstance].isSecretAutoOpen = switchBtn.on;
+        }
+            break;
         case 3:
         {
             [RKUserConfig sharedInstance].isChapterListAutoScroll = switchBtn.on;
@@ -98,7 +98,7 @@
         switchBtn.tag = kSwitchTag + 1;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
-	
+    
     if ([self.dataArr[indexPath.row] isEqualToString:@"加密书籍是否自动打开"]) {
         UISwitch *switchBtn = [[UISwitch alloc] init];
         cell.accessoryView = switchBtn;
@@ -185,7 +185,7 @@
         _dataArr = [NSMutableArray arrayWithObjects:
                     @"置顶是否按时间排序",
                     @"是否自动阅读",
-					@"加密书籍是否自动打开",
+                    @"加密书籍是否自动打开",
                     @"目录是否自动滚动",
                     @"局域网导入",
                     @"删除全部书籍",

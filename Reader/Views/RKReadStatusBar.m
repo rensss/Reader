@@ -64,18 +64,18 @@
             make.right.mas_equalTo(self).mas_offset(-3);
             make.centerY.mas_equalTo(self);
         }];
-		
-		[self addSubview:self.name];
+        
+        [self addSubview:self.name];
         [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-			make.height.mas_equalTo(self);
-			make.centerY.mas_equalTo(self);
-			make.right.mas_equalTo(self.pageNum.mas_left).mas_offset(-5);
-			make.left.mas_equalTo(self.batteryImage.mas_right).mas_offset(5);
+            make.height.mas_equalTo(self);
+            make.centerY.mas_equalTo(self);
+            make.right.mas_equalTo(self.pageNum.mas_left).mas_offset(-5);
+            make.left.mas_equalTo(self.batteryImage.mas_right).mas_offset(5);
         }];
-		
-		[self.batteryImage setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-		[self.name setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-		
+        
+        [self.batteryImage setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+        [self.name setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+        
         [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveBatteryStateDidChangeNotification:) name:UIDeviceBatteryStateDidChangeNotification object:nil];
@@ -232,11 +232,11 @@
 - (UILabel *)name {
     if (!_name) {
         _name = [[UILabel alloc] init];
-		_name.numberOfLines = 2;
-		_name.adjustsFontSizeToFitWidth = YES;
-		_name.minimumScaleFactor = 7/kFontSize;
-		_name.textAlignment = NSTextAlignmentCenter;
-		_name.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize];
+        _name.numberOfLines = 2;
+        _name.adjustsFontSizeToFitWidth = YES;
+        _name.minimumScaleFactor = 7/kFontSize;
+        _name.textAlignment = NSTextAlignmentCenter;
+        _name.font = [UIFont fontWithName:[RKUserConfig sharedInstance].fontName size:kFontSize];
     }
     return _name;
 }

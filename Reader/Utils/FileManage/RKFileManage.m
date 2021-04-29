@@ -77,7 +77,6 @@ static RKFileManager *_fileManager;
     return _fileManager;
 }
 
-#pragma mark - func
 #pragma mark - 增
 /// 添加书籍
 - (void)saveBookWithPath:(NSString *)path {
@@ -88,6 +87,7 @@ static RKFileManager *_fileManager;
     book.path = path;
     book.size = [self getFileSize:[kBookSavePath stringByAppendingString:[NSString stringWithFormat:@"/%@",path]]];
     book.addDate = [[NSDate date] timeIntervalSince1970];
+    book.lastReadDate = book.addDate;
     book.bookID = [NSString stringWithFormat:@"%@_%f",[book.name md5Encrypt],book.addDate];
     
     // 开线程解析
@@ -144,6 +144,7 @@ static RKFileManager *_fileManager;
     
     // 首页刷新
     self.isNeedRefresh = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:RKHomeListRefresh object:nil];
 }
 
 /// 解析书籍
@@ -302,40 +303,7 @@ static RKFileManager *_fileManager;
  */
 - (void)saveBookList:(NSMutableArray<RKBook *> *)bookList {
     
-    [bookList sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        
-        RKBook *book1 = obj1;
-        RKBook *book2 = obj2;
-        
-        if (book1.isTop && book2.isTop) {
-            if ([RKUserConfig sharedInstance].isRefreshTop) {
-                if (book1.lastReadDate > book2.lastReadDate) {
-                    return NSOrderedAscending;
-                } else {
-                    return NSOrderedDescending;
-                }
-            }
-            return NSOrderedSame;
-        }
-        if (book1.isTop && !book2.isTop) {
-            return NSOrderedAscending;
-        }
-        if (!book1.isTop && book2.isTop) {
-            return NSOrderedDescending;
-        }
-        if (book1.lastReadDate == book2.lastReadDate && book1.lastReadDate == 0) {
-            if (book1.addDate > book2.addDate) {
-                return NSOrderedAscending;
-            } else {
-                return NSOrderedDescending;
-            }
-        }
-        if (book1.lastReadDate > book2.lastReadDate) {
-            return NSOrderedAscending;
-        } else {
-            return NSOrderedDescending;
-        }
-    }];
+    bookList = [self sortBookList:bookList];
     
     NSMutableArray *bookDicts = [NSMutableArray array];
     for (RKBook *book in bookList) {
@@ -388,6 +356,9 @@ static RKFileManager *_fileManager;
                 [books addObject:book];
             }
         }
+        
+        books = [self sortBookList:books];
+        
         return books;
     }
     return bookList;
@@ -411,6 +382,44 @@ static RKFileManager *_fileManager;
     return bookList;
 }
 
+- (NSMutableArray<RKBook *> *)sortBookList:(NSMutableArray<RKBook *> *)bookList {
+    [bookList sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        
+        RKBook *book1 = obj1;
+        RKBook *book2 = obj2;
+        
+        if (book1.isTop && book2.isTop) {
+            if ([RKUserConfig sharedInstance].isRefreshTop) {
+                if (book1.lastReadDate > book2.lastReadDate) {
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedDescending;
+                }
+            }
+            return NSOrderedSame;
+        }
+        if (book1.isTop && !book2.isTop) {
+            return NSOrderedAscending;
+        }
+        if (!book1.isTop && book2.isTop) {
+            return NSOrderedDescending;
+        }
+        if (book1.lastReadDate == book2.lastReadDate && book1.lastReadDate == 0) {
+            if (book1.addDate > book2.addDate) {
+                return NSOrderedAscending;
+            } else {
+                return NSOrderedDescending;
+            }
+        }
+        if (book1.lastReadDate > book2.lastReadDate) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+    return bookList;
+}
+
 #pragma mark - share import
 /// 检查share导入书籍
 - (void)checkShareImportBook {
@@ -427,6 +436,11 @@ static RKFileManager *_fileManager;
             [fileManager moveItemAtURL:bookFullPathUrl toURL:[NSURL fileURLWithPath:newPath] error:&error];
             if (!error) {
                 [self saveBookWithPath:path];
+            } else {
+                DDLogError(@"---- error %@", error);
+                if (error.code == 516) {
+                    [fileManager removeItemAtURL:bookFullPathUrl error:nil];
+                }
             }
             break;
         }

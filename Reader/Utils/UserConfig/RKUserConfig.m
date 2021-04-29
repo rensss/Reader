@@ -146,10 +146,10 @@
 }
 
 - (void)setIsSecretAutoOpen:(BOOL)isSecretAutoOpen {
-	_isSecretAutoOpen = isSecretAutoOpen;
-	
-	[[NSUserDefaults standardUserDefaults] setBool:isSecretAutoOpen forKey:@"isSecretAutoOpen"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+    _isSecretAutoOpen = isSecretAutoOpen;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isSecretAutoOpen forKey:@"isSecretAutoOpen"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setLastReadBookName:(NSString *)lastReadBookName {
@@ -313,11 +313,11 @@
 }
 
 - (BOOL)isSecretAutoOpen {
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isSecretAutoOpen"]) {
-		return [[NSUserDefaults standardUserDefaults] boolForKey:@"isSecretAutoOpen"];
-	} else {
-		return NO;
-	}
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isSecretAutoOpen"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isSecretAutoOpen"];
+    } else {
+        return NO;
+    }
 }
 
 - (BOOL)isChapterListAutoScroll {
