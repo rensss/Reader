@@ -7,12 +7,13 @@
 //
 
 #import "RKUserConfig.h"
+#import "AppDelegate.h"
 
 @implementation RKUserConfig
 
 @synthesize transitionStyle = _transitionStyle;
 @synthesize navigationOrientation = _navigationOrientation;
-
+@synthesize isAllowRotation = _isAllowRotation;
 @synthesize topPadding = _topPadding;
 @synthesize leftPadding = _leftPadding;
 @synthesize bottomPadding = _bottomPadding;
@@ -58,6 +59,14 @@
     _navigationOrientation = navigationOrientation;
     
     [[NSUserDefaults standardUserDefaults] setInteger:navigationOrientation forKey:@"navigationOrientation"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsAllowRotation:(BOOL)isAllowRotation {
+    _isAllowRotation = isAllowRotation;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = isAllowRotation;
+    [[NSUserDefaults standardUserDefaults] setBool:isAllowRotation forKey:@"isAllowRotation"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -198,6 +207,14 @@
     }
 }
 
+- (BOOL)isAllowRotation {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAllowRotation"]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"isAllowRotation"];
+    } else {
+        return YES;
+    }
+}
+
 - (CGFloat)topPadding {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"topPadding"]) {
         return [[NSUserDefaults standardUserDefaults] floatForKey:@"topPadding"];
@@ -208,7 +225,7 @@
 
 - (CGFloat)leftPadding {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"leftPadding"]) {
-        return [[NSUserDefaults standardUserDefaults] floatForKey:@"leftPadding"];
+        return [[NSUserDefaults standardUserDefaults] floatForKey:@"leftPadding"] + self.currentSafeAreaInsets.left;
     } else {
         return 20;
     }
@@ -224,19 +241,19 @@
 
 - (CGFloat)rightPadding {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rightPadding"]) {
-        return [[NSUserDefaults standardUserDefaults] floatForKey:@"rightPadding"];
+        return [[NSUserDefaults standardUserDefaults] floatForKey:@"rightPadding"] + self.currentSafeAreaInsets.right;
     } else {
         return 20;
     }
 }
 
 - (CGRect)readViewFrame {
-    CGRect rect = CGRectMake(self.leftPadding, kStatusHight + self.topPadding, kWindowWidth - self.leftPadding - self.rightPadding, kWindowHeight - self.topPadding - kStatusHight - self.bottomPadding - (kSafeAreaBottom));
+    CGRect rect = CGRectMake(self.leftPadding, kStatusHight + self.topPadding, self.currentViewWidth - self.leftPadding - self.rightPadding, self.currentViewHeight - self.topPadding - kStatusHight - self.bottomPadding - (kSafeAreaBottom));
     return rect;
 }
 
 - (CGRect)readStatusBarFrame {
-    CGRect rect = CGRectMake(0, kWindowHeight - (kSafeAreaBottom) - (kIsPad?15:8), kWindowWidth, 22);
+    CGRect rect = CGRectMake(0, self.currentViewHeight - self.currentSafeAreaInsets.bottom - (kIsPad?15:12), self.currentViewWidth, 22);
     return rect;
 }
 

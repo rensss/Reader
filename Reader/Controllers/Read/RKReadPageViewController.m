@@ -126,7 +126,22 @@ UIGestureRecognizerDelegate
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    DDLogInfo(@"---- Transition size:%@", NSStringFromCGSize(size));
+    RKUserConfig.sharedInstance.currentViewWidth = size.width;
+    RKUserConfig.sharedInstance.currentViewHeight = size.height;
+    
+    if (@available(iOS 11.0, *)) {
+        DDLogInfo(@"---- Transition size:%@ -- keywindow:%@ -- safaArea:%@", NSStringFromCGSize(size), NSStringFromCGRect(kKeyWindow.frame), NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
+    }
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    DDLogInfo(@"---- safaArea:%@", NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
+
+    RKUserConfig.sharedInstance.currentSafeAreaInsets = self.view.safeAreaInsets;
+    
+    [self refreshCurrentVC];
 }
 
 - (BOOL)prefersHomeIndicatorAutoHidden {

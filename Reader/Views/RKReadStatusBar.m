@@ -41,7 +41,7 @@
         [self addSubview:self.time];
         [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
-            make.left.mas_equalTo(self).mas_offset(3);
+            make.left.mas_equalTo(self).mas_offset(3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.left);
             make.bottom.mas_equalTo(self).mas_offset(-1);
         }];
         
@@ -49,7 +49,7 @@
         [self.batteryNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
             make.top.mas_equalTo(self).mas_offset(1);
-            make.left.mas_equalTo(self).mas_offset(3);
+            make.left.mas_equalTo(self).mas_offset(3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.left);
         }];
         
         [self addSubview:self.batteryImage];
@@ -61,7 +61,7 @@
         
         [self addSubview:self.pageNum];
         [self.pageNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self).mas_offset(-3);
+            make.right.mas_equalTo(self).mas_offset(-(3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.right));
             make.centerY.mas_equalTo(self);
         }];
         

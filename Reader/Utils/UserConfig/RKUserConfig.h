@@ -12,10 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RKUserConfig : NSObject
 
+@property (nonatomic, assign) CGFloat currentViewWidth; /**< 当前屏幕宽*/
+@property (nonatomic, assign) CGFloat currentViewHeight; /**< 当前屏幕高*/
 @property (nonatomic, assign) UIPageViewControllerTransitionStyle transitionStyle; /**< 翻页模式*/
 @property (nonatomic, assign) UIPageViewControllerNavigationOrientation navigationOrientation; /**< 上下/左右 翻页*/
-
 @property (nonatomic, assign) BOOL isAllNextPage; /**< 点击左侧翻下一页*/
+@property (nonatomic, assign) BOOL isAllowRotation; /**< 是否可以横屏*/
+@property (nonatomic, assign) UIEdgeInsets currentSafeAreaInsets; /**< 当前安全区域*/
 
 // 上左下右 边距
 @property (nonatomic, assign) CGFloat topPadding; /**< 上边距*/
@@ -24,9 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat rightPadding; /**< 右边距*/
 
 @property (nonatomic, assign) CGRect readViewFrame; /**< 阅读页大小*/
-
 @property (nonatomic, assign) CGRect readStatusBarFrame; /**< 状态栏*/
-
 @property (nonatomic, copy) NSString *bgImageName; /**< 背景图*/
 
 // 内容展示相关配置  字号/行间距/字体颜色/字体

@@ -25,6 +25,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"导入";
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self.webUploader start];
     DDLogDebug(@"Visit %@ in your web browser", self.webUploader.serverURL);

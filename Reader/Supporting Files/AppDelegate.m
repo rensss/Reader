@@ -43,12 +43,16 @@
     
     // 初始化
     [RKFileManager shareInstance];
+    
     // 首页
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     RKHomeListViewController *listVC = [[RKHomeListViewController alloc] init];
     RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:listVC];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
+    
+    // 根据用户配置初始化数据
+    [self initWithUserConfig];
     
     // 自动打开阅读
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -109,6 +113,13 @@
     
 }
 
+- (UIInterfaceOrientationMask )application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    if (self.allowRotation) {
+        return UIInterfaceOrientationMaskAll;
+    }
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // 在后台时被用户杀死 将调用此函数
@@ -149,7 +160,7 @@
 // 处理 Quick Action 的跳转操作的方法
 - (BOOL)handleShortCutItem:(UIApplicationShortcutItem *)shortcutItem {
     BOOL handled = NO;
-
+    
     if (!shortcutItem) {
         return NO;
     }
@@ -183,6 +194,13 @@
 //    }
 
     return handled;
+}
+
+- (void)initWithUserConfig {
+    RKUserConfig.sharedInstance.currentViewWidth = kWindowWidth;
+    RKUserConfig.sharedInstance.currentViewHeight = kWindowHeight;
+    DDLogInfo(@"---- keywindow:%@", NSStringFromCGRect(kKeyWindow.frame));
+    self.allowRotation = RKUserConfig.sharedInstance.isAllowRotation;
 }
 
 - (void)checkShare {

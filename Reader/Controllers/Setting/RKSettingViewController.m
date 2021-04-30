@@ -60,6 +60,11 @@
             [RKUserConfig sharedInstance].isChapterListAutoScroll = switchBtn.on;
         }
             break;
+        case 4:
+        {
+            [RKUserConfig sharedInstance].isAllowRotation = switchBtn.on;
+        }
+            break;
             
         default:
             break;
@@ -112,6 +117,14 @@
         cell.accessoryView = switchBtn;
         switchBtn.on = [RKUserConfig sharedInstance].isChapterListAutoScroll;
         switchBtn.tag = kSwitchTag + 3;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    if ([self.dataArr[indexPath.row] isEqualToString:@"是否允许横屏"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].isAllowRotation;
+        switchBtn.tag = kSwitchTag + 4;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -187,6 +200,7 @@
                     @"是否自动阅读",
                     @"加密书籍是否自动打开",
                     @"目录是否自动滚动",
+                    @"是否允许横屏",
                     @"局域网导入",
                     @"删除全部书籍",
                     nil];
