@@ -14,6 +14,7 @@
 - [x] 局域网导入书籍 
 - [x] 加密功能 
 - [x] TXT文件分享接收 (Share Extension) 
+- [x] 横屏阅读
 - [ ] 书签 
 - [ ] 搜索查找功能 
 - [ ] Home Screen Quick Actions 快捷进入 
