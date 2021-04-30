@@ -21,13 +21,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.titleMarqueeView];
-        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.contentView);
-            make.top.mas_offset(0);
-            make.left.mas_offset(8);
-            make.bottom.mas_offset(0);
-            make.right.mas_offset(-8);
-        }];
         
 //        [self.contentView addSubview:self.titleView];
 //        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
