@@ -131,6 +131,12 @@ UIGestureRecognizerDelegate
     
     if (@available(iOS 11.0, *)) {
         DDLogInfo(@"---- Transition size:%@ -- keywindow:%@ -- safaArea:%@", NSStringFromCGSize(size), NSStringFromCGRect(kKeyWindow.frame), NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
+        
+        if (kIsPad) {
+//            [UIApplication sharedApplication].applicationState != UIApplicationStateBackground;
+            RKUserConfig.sharedInstance.currentSafeAreaInsets = self.view.safeAreaInsets;
+            [self refreshCurrentVC];
+        }
     }
 }
 
@@ -138,7 +144,7 @@ UIGestureRecognizerDelegate
     [super viewSafeAreaInsetsDidChange];
     
     DDLogInfo(@"---- safaArea:%@", NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
-
+    
     RKUserConfig.sharedInstance.currentSafeAreaInsets = self.view.safeAreaInsets;
     
     [self refreshCurrentVC];
