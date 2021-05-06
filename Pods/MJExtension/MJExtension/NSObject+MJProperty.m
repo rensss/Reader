@@ -25,9 +25,6 @@ static const char MJObjectClassInArrayKey = '\0';
 
 static const char MJCachedPropertiesKey = '\0';
 
-dispatch_semaphore_t mje_signalSemaphore;
-dispatch_once_t mje_onceTokenSemaphore;
-
 @implementation NSObject (Property)
 
 + (NSMutableDictionary *)mj_propertyDictForKey:(const void *)key
@@ -127,12 +124,12 @@ dispatch_once_t mje_onceTokenSemaphore;
 {
     // 获得成员变量
     MJExtensionSemaphoreCreate
-    MJ_LOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreWait
     NSArray *cachedProperties = [self mj_properties];
-    MJ_UNLOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreSignal
     // 遍历成员变量
     BOOL stop = NO;
-    for (MJProperty *property in [cachedProperties copy]) {
+    for (MJProperty *property in cachedProperties) {
         enumeration(property, &stop);
         if (stop) break;
     }
@@ -141,35 +138,37 @@ dispatch_once_t mje_onceTokenSemaphore;
 #pragma mark - 公共方法
 + (NSMutableArray *)mj_properties
 {
-    NSMutableDictionary *cachedInfo = [self mj_propertyDictForKey:&MJCachedPropertiesKey];
-    NSMutableArray *cachedProperties = cachedInfo[NSStringFromClass(self)];
+    NSMutableArray *cachedProperties = [self mj_propertyDictForKey:&MJCachedPropertiesKey][NSStringFromClass(self)];
     if (cachedProperties == nil) {
-        cachedProperties = [NSMutableArray array];
-        
-        [self mj_enumerateClasses:^(__unsafe_unretained Class c, BOOL *stop) {
-            // 1.获得所有的成员变量
-            unsigned int outCount = 0;
-            objc_property_t *properties = class_copyPropertyList(c, &outCount);
+    
+        if (cachedProperties == nil) {
+            cachedProperties = [NSMutableArray array];
             
-            // 2.遍历每一个成员变量
-            for (unsigned int i = 0; i<outCount; i++) {
-                MJProperty *property = [MJProperty cachedPropertyWithProperty:properties[i]];
-                // 过滤掉Foundation框架类里面的属性
-                if ([MJFoundation isClassFromFoundation:property.srcClass]) continue;
-                // 过滤掉`hash`, `superclass`, `description`, `debugDescription`
-                if ([MJFoundation isFromNSObjectProtocolProperty:property.name]) continue;
+            [self mj_enumerateClasses:^(__unsafe_unretained Class c, BOOL *stop) {
+                // 1.获得所有的成员变量
+                unsigned int outCount = 0;
+                objc_property_t *properties = class_copyPropertyList(c, &outCount);
                 
-                property.srcClass = c;
-                [property setOriginKey:[self mj_propertyKey:property.name] forClass:self];
-                [property setObjectClassInArray:[self mj_propertyObjectClassInArray:property.name] forClass:self];
-                [cachedProperties addObject:property];
-            }
+                // 2.遍历每一个成员变量
+                for (unsigned int i = 0; i<outCount; i++) {
+                    MJProperty *property = [MJProperty cachedPropertyWithProperty:properties[i]];
+                    // 过滤掉Foundation框架类里面的属性
+                    if ([MJFoundation isClassFromFoundation:property.srcClass]) continue;
+                    // 过滤掉`hash`, `superclass`, `description`, `debugDescription`
+                    if ([MJFoundation isFromNSObjectProtocolProperty:property.name]) continue;
+                    
+                    property.srcClass = c;
+                    [property setOriginKey:[self mj_propertyKey:property.name] forClass:self];
+                    [property setObjectClassInArray:[self mj_propertyObjectClassInArray:property.name] forClass:self];
+                    [cachedProperties addObject:property];
+                }
+                
+                // 3.释放内存
+                free(properties);
+            }];
             
-            // 3.释放内存
-            free(properties);
-        }];
-        
-        [self mj_propertyDictForKey:&MJCachedPropertiesKey][NSStringFromClass(self)] = cachedProperties;
+            [self mj_propertyDictForKey:&MJCachedPropertiesKey][NSStringFromClass(self)] = cachedProperties;
+        }
     }
     
     return cachedProperties;
@@ -205,9 +204,9 @@ dispatch_once_t mje_onceTokenSemaphore;
     [self mj_setupBlockReturnValue:objectClassInArray key:&MJObjectClassInArrayKey];
     
     MJExtensionSemaphoreCreate
-    MJ_LOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreWait
     [[self mj_propertyDictForKey:&MJCachedPropertiesKey] removeAllObjects];
-    MJ_UNLOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreSignal
 }
 
 #pragma mark - key配置
@@ -216,9 +215,9 @@ dispatch_once_t mje_onceTokenSemaphore;
     [self mj_setupBlockReturnValue:replacedKeyFromPropertyName key:&MJReplacedKeyFromPropertyNameKey];
     
     MJExtensionSemaphoreCreate
-    MJ_LOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreWait
     [[self mj_propertyDictForKey:&MJCachedPropertiesKey] removeAllObjects];
-    MJ_UNLOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreSignal
 }
 
 + (void)mj_setupReplacedKeyFromPropertyName121:(MJReplacedKeyFromPropertyName121)replacedKeyFromPropertyName121
@@ -226,9 +225,9 @@ dispatch_once_t mje_onceTokenSemaphore;
     objc_setAssociatedObject(self, &MJReplacedKeyFromPropertyName121Key, replacedKeyFromPropertyName121, OBJC_ASSOCIATION_COPY_NONATOMIC);
     
     MJExtensionSemaphoreCreate
-    MJ_LOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreWait
     [[self mj_propertyDictForKey:&MJCachedPropertiesKey] removeAllObjects];
-    MJ_UNLOCK(mje_signalSemaphore);
+    MJExtensionSemaphoreSignal
 }
 @end
 #pragma clang diagnostic pop

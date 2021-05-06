@@ -147,7 +147,7 @@
     if ([originKey isKindOfClass:[NSString class]]) { // 字符串类型的key
         NSArray *propertyKeys = [self propertyKeysWithStringKey:originKey];
         if (propertyKeys.count) {
-            [self setPropertyKeys:@[propertyKeys] forClass:c];
+            [self setPorpertyKeys:@[propertyKeys] forClass:c];
         }
     } else if ([originKey isKindOfClass:[NSArray class]]) {
         NSMutableArray *keyses = [NSMutableArray array];
@@ -158,13 +158,13 @@
             }
         }
         if (keyses.count) {
-            [self setPropertyKeys:keyses forClass:c];
+            [self setPorpertyKeys:keyses forClass:c];
         }
     }
 }
 
 /** 对应着字典中的多级key */
-- (void)setPropertyKeys:(NSArray *)propertyKeys forClass:(Class)c
+- (void)setPorpertyKeys:(NSArray *)propertyKeys forClass:(Class)c
 {
     if (propertyKeys.count == 0) return;
     NSString *key = NSStringFromClass(c);

@@ -22,18 +22,18 @@
 #define MMKVHandler_h
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, MMKVRecoverStrategic) {
-    MMKVOnErrorDiscard = 0,
-    MMKVOnErrorRecover,
-};
+typedef enum : NSUInteger {
+	MMKVOnErrorDiscard = 0,
+	MMKVOnErrorRecover,
+} MMKVRecoverStrategic;
 
-typedef NS_ENUM(NSUInteger, MMKVLogLevel) {
-    MMKVLogDebug = 0, // not available for release/product build
-    MMKVLogInfo = 1,  // default level
-    MMKVLogWarning,
-    MMKVLogError,
-    MMKVLogNone, // special level used to disable all log messages
-};
+typedef enum : NSUInteger {
+	MMKVLogDebug = 0, // not available for release/product build
+	MMKVLogInfo = 1,  // default level
+	MMKVLogWarning,
+	MMKVLogError,
+	MMKVLogNone, // special level used to disable all log messages
+} MMKVLogLevel;
 
 // callback is called on the operating thread of the MMKV instance
 @protocol MMKVHandler <NSObject>
@@ -50,10 +50,6 @@ typedef NS_ENUM(NSUInteger, MMKVLogLevel) {
 // by default MMKV will print log using NSLog
 // implement this method to redirect MMKV's log
 - (void)mmkvLogWithLevel:(MMKVLogLevel)level file:(const char *)file line:(int)line func:(const char *)funcname message:(NSString *)message;
-
-// called when content is changed by other process
-// doesn't guarantee real-time notification
-- (void)onMMKVContentChange:(NSString *)mmapID;
 
 @end
 
