@@ -29,6 +29,7 @@ UIGestureRecognizerDelegate
 @property (nonatomic, assign) NSInteger pageNext; /**< 上/下 一页*/
 
 @property (nonatomic, assign) BOOL isShowMenu; /**< 是否已弹出菜单*/
+@property (nonatomic, strong) RKReadMenuView *menuView; /**< 菜单view*/
 
 @property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
 
@@ -135,6 +136,8 @@ UIGestureRecognizerDelegate
         if (kIsPad) {
 //            [UIApplication sharedApplication].applicationState != UIApplicationStateBackground;
             RKUserConfig.sharedInstance.currentSafeAreaInsets = self.view.safeAreaInsets;
+            
+            if (self.isShowMenu) [self.menuView dismiss];
             [self refreshCurrentVC];
         }
     }
@@ -147,6 +150,7 @@ UIGestureRecognizerDelegate
     
     RKUserConfig.sharedInstance.currentSafeAreaInsets = self.view.safeAreaInsets;
     
+    if (self.isShowMenu) [self.menuView dismiss];
     [self refreshCurrentVC];
 }
 
@@ -164,13 +168,12 @@ UIGestureRecognizerDelegate
     
     self.isShowMenu = YES;
     // 菜单view
-    RKReadMenuView *menu = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
-    [menu show];
+    self.menuView = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
+    [self.menuView show];
 
     __weak typeof(self) weakSelf = self;
     // 菜单消失
-    [menu dismissWithHandler:^{
-        
+    [self.menuView dismissWithHandler:^{
         [UIApplication sharedApplication].statusBarHidden = YES;
         
         weakSelf.isShowMenu = NO;
@@ -188,14 +191,12 @@ UIGestureRecognizerDelegate
     }];
 
     // 退出阅读
-    [menu closeBlock:^{
-        
+    [self.menuView closeBlock:^{
         [weakSelf dissmiss];
     }];
     
     // 章节跳转
-    [menu shouldChangeChapter:^(BOOL isNextChapter) {
-        
+    [self.menuView shouldChangeChapter:^(BOOL isNextChapter) {
         if (isNextChapter) {
             // 最后一章
             if (weakSelf.currentChapter == weakSelf.book.chapters.count - 1) {
@@ -226,19 +227,19 @@ UIGestureRecognizerDelegate
     }];
     
     // 字号
-    [menu shouldChangeFontSize:^{
+    [self.menuView shouldChangeFontSize:^{
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 行间距
-    [menu shouldChangeLineSpace:^{
+    [self.menuView shouldChangeLineSpace:^{
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }];
     
     // 目录
-    [menu shouldShowBookCatalog:^{
+    [self.menuView shouldShowBookCatalog:^{
         RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:weakSelf.view.bounds withBook:weakSelf.book withSuperView:weakSelf.view];
         // 显示
         [chaptersListView show];
@@ -254,7 +255,7 @@ UIGestureRecognizerDelegate
     }];
     
     // 夜间模式
-    [menu shouldChangeNightModle:^(BOOL isOpen) {
+    [self.menuView shouldChangeNightModle:^(BOOL isOpen) {
         if (isOpen) {
             [RKUserConfig sharedInstance].bgImageName = @"black";
         } else {
@@ -267,7 +268,7 @@ UIGestureRecognizerDelegate
     }];
     
     // 打开设置
-    [menu shouldOpenSetting:^{
+    [self.menuView shouldOpenSetting:^{
         RKReadSettingViewController *settingVC = [[RKReadSettingViewController alloc] init];
         settingVC.book = self.book;
         RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:settingVC];
@@ -278,7 +279,7 @@ UIGestureRecognizerDelegate
         [self presentViewController:nav animated:YES completion:nil];
     }];
     
-    [menu fontAlphaChange:^(CGFloat alpha) {
+    [self.menuView fontAlphaChange:^(CGFloat alpha) {
         [RKUserConfig sharedInstance].nightAlpha = alpha;
         // 设置当前显示的readVC
         [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];

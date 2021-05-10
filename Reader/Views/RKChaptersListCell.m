@@ -87,7 +87,7 @@
 #pragma mark - getting
 - (RKMarqueeView *)titleMarqueeView {
     if (!_titleMarqueeView) {
-        _titleMarqueeView = [[RKMarqueeView alloc] initWithFrame:CGRectMake(8, 0, 244, 50) direction:RKMarqueeViewDirectionLeftward];
+        _titleMarqueeView = [[RKMarqueeView alloc] initWithFrame:CGRectMake(8, 0, (RKUserConfig.sharedInstance.currentViewWidth*0.8) - 16, 50) direction:RKMarqueeViewDirectionLeftward];
         _titleMarqueeView.timeIntervalPerScroll = 0.0f;
         _titleMarqueeView.userInteractionEnabled = NO;
         _titleMarqueeView.scrollSpeed = 60.0f;

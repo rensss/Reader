@@ -9,7 +9,7 @@
 #import "RKChaptersListView.h"
 #import "RKChaptersListCell.h"
 
-#define kListWidth (kWindowWidth * 0.8)
+#define kListWidth (RKUserConfig.sharedInstance.currentViewWidth * 0.8)
 
 @interface RKChaptersListView () <UITableViewDelegate,UITableViewDataSource>
 
@@ -88,7 +88,7 @@
 - (void)dismiss {
     [UIView animateWithDuration:0.25f animations:^{
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.mas_left).mas_offset(-260);
+            make.left.mas_equalTo(self.mas_left).mas_offset(-kListWidth);
         }];
         // 注意需要再执行一次更新约束
         [self layoutIfNeeded];

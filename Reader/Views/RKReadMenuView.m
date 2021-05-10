@@ -34,6 +34,7 @@
 @property (nonatomic, strong) UIButton *chaptersButton; /**< 目录*/
 @property (nonatomic, strong) UIButton *nightButton; /**< 夜间模式*/
 @property (nonatomic, strong) UIButton *settingButton; /**< 设置*/
+@property (nonatomic, strong) UIButton *turnScreenButton; /**< 横屏*/
 
 @property (nonatomic, strong) UILabel *title; /**< 书名*/
 
@@ -214,13 +215,22 @@
         make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
     }];
     
+    // 转屏
+    [bottomView addSubview:self.turnScreenButton];
+    [self.turnScreenButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(self.chaptersButton.mas_width);
+        make.height.mas_equalTo(self.chaptersButton.mas_height);
+        make.left.mas_equalTo(self.nightButton.mas_right).with.mas_offset(12);
+        make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
+    }];
+    
     // 设置
     [bottomView addSubview:self.settingButton];
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.chaptersButton.mas_width);
         make.height.mas_equalTo(self.chaptersButton.mas_height);
-        make.left.mas_equalTo(self.nightButton.mas_right).with.mas_offset(12);
-        make.centerY.mas_equalTo(self.nightButton.mas_centerY);
+        make.left.mas_equalTo(self.turnScreenButton.mas_right).with.mas_offset(12);
+        make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
     }];
     
     [bottomView addSubview:self.title];
@@ -482,6 +492,11 @@
     }
 }
 
+- (void)turnScreenClick:(UIButton *)btn {
+    btn.selected = !btn.selected;
+    RKUserConfig.sharedInstance.isAllowRotation = btn.selected;
+}
+
 - (void)settingClick:(UIButton *)btn {
     if (self.settingBlock) {
         self.settingBlock();
@@ -612,6 +627,20 @@
         }
     }
     return _nightButton;
+}
+
+- (UIButton *)turnScreenButton {
+    if (!_turnScreenButton) {
+        _turnScreenButton = [[UIButton alloc] init];
+        _turnScreenButton.selected = RKUserConfig.sharedInstance.isAllowRotation;
+        
+        _turnScreenButton.tintColor = [UIColor whiteColor];
+        [_turnScreenButton setBackgroundImage:[[UIImage imageNamed:@"横屏"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_turnScreenButton setBackgroundImage:[[UIImage imageNamed:@"横屏"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateSelected];
+        
+        [_turnScreenButton addTarget:self action:@selector(turnScreenClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _turnScreenButton;
 }
 
 - (UIButton *)settingButton {
