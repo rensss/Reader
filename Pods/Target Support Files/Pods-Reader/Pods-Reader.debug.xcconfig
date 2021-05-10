@@ -1,13 +1,11 @@
-CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/LookinServer"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/GCDWebServer" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MJExtension" "${PODS_ROOT}/Headers/Public/MMKV" "${PODS_ROOT}/Headers/Public/Masonry" "${PODS_ROOT}/Headers/Public/R_category"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/GCDWebServer" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MJExtension" "${PODS_ROOT}/Headers/Public/MMKV" "${PODS_ROOT}/Headers/Public/MMKVCore" "${PODS_ROOT}/Headers/Public/Masonry" "${PODS_ROOT}/Headers/Public/R_category"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/CocoaLumberjack" "${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/MJExtension" "${PODS_CONFIGURATION_BUILD_DIR}/MMKV" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/R_category"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"CocoaLumberjack" -l"GCDWebServer" -l"MBProgressHUD" -l"MJExtension" -l"MMKV" -l"Masonry" -l"R_category" -l"c++" -l"z" -framework "CFNetwork" -framework "CoreFoundation" -framework "CoreGraphics" -framework "Foundation" -framework "LookinServer" -framework "MobileCoreServices" -framework "QuartzCore" -framework "UIKit"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/CocoaLumberjack" "${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/MJExtension" "${PODS_CONFIGURATION_BUILD_DIR}/MMKV" "${PODS_CONFIGURATION_BUILD_DIR}/MMKVCore" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/R_category"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"CocoaLumberjack" -l"GCDWebServer" -l"MBProgressHUD" -l"MJExtension" -l"MMKV" -l"MMKVCore" -l"Masonry" -l"R_category" -l"c++" -l"z" -framework "CFNetwork" -framework "CoreFoundation" -framework "CoreGraphics" -framework "Foundation" -framework "LookinServer" -framework "MobileCoreServices" -framework "QuartzCore" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
-PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
