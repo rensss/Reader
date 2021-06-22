@@ -50,6 +50,11 @@
     }
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    RKUserConfig.sharedInstance.currentViewWidth = size.width;
+    RKUserConfig.sharedInstance.currentViewHeight = size.height;
+}
+
 #pragma mark - 通知
 - (void)didReceiveHomeListRefreshNotification:(NSNotification *)notification {
     dispatch_async(dispatch_get_main_queue(), ^{

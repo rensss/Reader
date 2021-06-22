@@ -829,7 +829,7 @@
 				CODE_SIGN_ENTITLEMENTS = Reader/Reader.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2MC8B96QW9;
+				DEVELOPMENT_TEAM = KY9HF8C4PA;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -852,7 +852,7 @@
 				CODE_SIGN_ENTITLEMENTS = Reader/Reader.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2MC8B96QW9;
+				DEVELOPMENT_TEAM = KY9HF8C4PA;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

@@ -94,13 +94,25 @@ flag = NO; \
 #define NAV_BAR_HEIGHT (44)
 #define TOP_MARGIN (NAV_BAR_HEIGHT + kStatusHight)
 
+// 是否是横屏
+#define kIsHorizonScreen \
+({ \
+BOOL flag; \
+flag = (kWindowWidth > kWindowHeight ? YES : NO); \
+(flag); \
+})
+
 // 电池条高度
 #define kStatusHight \
 ({\
 CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height; \
 if (height == 0) { \
 if (kIS_IPHONEX) { \
+if (kIsHorizonScreen) { \
+height = 20; \
+} else { \
 height = 44; \
+} \
 } else { \
 height = 20; \
 } \
