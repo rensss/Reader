@@ -249,6 +249,7 @@
 
 - (CGRect)readViewFrame {
     CGRect rect = CGRectMake(self.leftPadding, kStatusHight + self.topPadding, self.currentViewWidth - self.leftPadding - self.rightPadding, self.currentViewHeight - self.topPadding - kStatusHight - self.bottomPadding - (kSafeAreaBottom));
+    DDLogDebug(@"---- readViewFrame:%@", NSStringFromCGRect(rect));
     return rect;
 }
 

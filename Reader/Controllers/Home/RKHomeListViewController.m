@@ -51,8 +51,22 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    RKUserConfig.sharedInstance.currentViewWidth = size.width;
-    RKUserConfig.sharedInstance.currentViewHeight = size.height;
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        // what ever you want to prepare
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self handleInterfaceOrientation];
+    }];
+}
+
+- (void)handleInterfaceOrientation {
+    RKUserConfig.sharedInstance.currentViewWidth = kWindowWidth;
+    RKUserConfig.sharedInstance.currentViewHeight = kWindowHeight;
+    
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight) {
+        // Landscape
+    } else {
+        // Portrait
+    }
 }
 
 #pragma mark - 通知

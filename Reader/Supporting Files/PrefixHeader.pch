@@ -60,7 +60,7 @@
 ({ \
 UIEdgeInsets i; \
 if(@available(iOS 11.0, *)) { \
-i = [[[UIApplication sharedApplication] delegate] window].safeAreaInsets; \
+i = kKeyWindow.safeAreaInsets; \
 } else { \
 i = UIEdgeInsetsZero;} \
 (i); \
@@ -71,8 +71,8 @@ i = UIEdgeInsetsZero;} \
 CGFloat i; \
 if(kIS_IPHONEX) { \
 if (@available(iOS 11.0, *)) { \
-i = [[[UIApplication sharedApplication] delegate] window].safeAreaInsets.bottom; \
-} else {\
+i = kViewSafeAreaInsets.bottom; \
+} else { \
 i = 0.0f; \
 } \
 } else { \
@@ -109,7 +109,7 @@ CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height;
 if (height == 0) { \
 if (kIS_IPHONEX) { \
 if (kIsHorizonScreen) { \
-height = 20; \
+height = 0; \
 } else { \
 height = 44; \
 } \
