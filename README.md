@@ -12,15 +12,17 @@
 ### 待办
 - [x] peek and pop 快捷操作 
 - [x] 局域网导入书籍 
-- [x] 加密功能 
+- [x] 加密功能 (Face ID)
 - [x] TXT文件分享接收 (Share Extension) 
 - [x] 横屏阅读
-- [ ] 书签 
+- [ ] 设置密码
+- [ ] 书签
 - [ ] 搜索查找功能 
-- [ ] Home Screen Quick Actions 快捷进入 
+- [ ] Home Screen Quick Actions 快捷进入
 - [ ] 复制 
 - [ ] 收藏 
-- [ ] 标注 
-- [ ] 语音阅读 
+- [ ] 标注
+- [ ] 语音阅读
 - [ ] 日志
+- [ ] widget ?
 - [ ] ... 
