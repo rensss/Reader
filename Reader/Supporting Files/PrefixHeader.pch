@@ -148,7 +148,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelWarning;
 #define kReadViewBottomTintColor [UIColor colorWithHexString:@"707070"]
 
 // group name
-#define kAPPGroupName @"group.micsoft.Reader"
+#define kAPPGroupName @"group.smart.test"
 
 #pragma mark - 路径
 // 书籍存放文件夹路径

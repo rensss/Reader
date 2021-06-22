@@ -9,7 +9,7 @@
 #import "ShareViewController.h"
 #import <CoreServices/CoreServices.h>
 
-#define kAPPGroupName @"group.micsoft.Reader"
+#define kAPPGroupName @"group.smart.test"
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 

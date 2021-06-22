@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.micsoft.Reader</string>
+		<string>group.smart.test</string>
 	</array>
 </dict>
 </plist>
