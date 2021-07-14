@@ -234,11 +234,16 @@
 }
 
 - (void)secretClick {
-    
+    DDLogInfo(@"---- pin:%@", RKUserConfig.sharedInstance.pinString);
+    if (RKUserConfig.sharedInstance.pinString.length == 0) {
+        [self jumpToSecret];
+        return;
+    }
     RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
     
     self.navigationController.view.tag = RKPinViewControllerContentViewTag;
     pinVC.translucentBackground = YES;
+    pinVC.promptColor = [UIColor blackColor];
     
     [self presentViewController:pinVC animated:YES completion:nil];
 }
@@ -406,13 +411,13 @@
     [self presentViewController:viewControllerToCommit animated:YES completion:nil];
 }
 
-#pragma mark --
+#pragma mark -- RKPinViewControllerDelegate
 - (NSUInteger)pinLengthForPinViewController:(RKPinViewController *)pinViewController {
     return 4;
 }
 
 - (BOOL)pinViewController:(RKPinViewController *)pinViewController isPinValid:(NSString *)pin {
-    return [pin isEqualToString:@"0000"];
+    return [pin isEqualToString:RKUserConfig.sharedInstance.pinString];
 }
 
 - (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController {

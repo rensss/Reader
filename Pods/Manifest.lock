@@ -1,15 +1,17 @@
 PODS:
-  - CocoaLumberjack (3.6.2):
-    - CocoaLumberjack/Core (= 3.6.2)
-  - CocoaLumberjack/Core (3.6.2)
-  - GCDWebServer/Core (3.5.3)
-  - GCDWebServer/WebUploader (3.5.3):
+  - CocoaLumberjack (3.7.0):
+    - CocoaLumberjack/Core (= 3.7.0)
+  - CocoaLumberjack/Core (3.7.0)
+  - GCDWebServer/Core (3.5.4)
+  - GCDWebServer/WebUploader (3.5.4):
     - GCDWebServer/Core
   - LookinServer (1.0.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
-  - MJExtension (3.2.1)
-  - MMKV (1.0.24)
+  - MJExtension (3.2.4)
+  - MMKV (1.2.7):
+    - MMKVCore (~> 1.2.7)
+  - MMKVCore (1.2.7)
   - R_category (0.0.8)
 
 DEPENDENCIES:
@@ -31,18 +33,20 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MMKV
+    - MMKVCore
     - R_category
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
-  GCDWebServer: c0ab22c73e1b84f358d1e2f74bf6afd1c60829f2
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
-  MMKV: 758b2edee46b08bdd958db4169191afb9a6d4ebd
+  MJExtension: 88e0900751b6cac8de1cf724ca9838a0b28d5acb
+  MMKV: 22e5136f7d00197bc0fc9694b7f71519f0d1ca12
+  MMKVCore: 607b7b05f2c2140056b5d338e45f2c14bf3f4232
   R_category: abb3d864d530f44cf61e6fa28a13ce11c044689d
 
 PODFILE CHECKSUM: b353eb78f6d38ced70962a57176d92aff9a0fce0
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

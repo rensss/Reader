@@ -10,8 +10,8 @@
 #import <CoreServices/CoreServices.h>
 
 #define kAPPGroupName @"group.smart.test"
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenWidth self.view.frame.size.width
+#define kScreenHeight self.view.frame.size.height
 
 @interface ShareViewController ()
 

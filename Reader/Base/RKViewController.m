@@ -22,6 +22,7 @@
     }
     
     self.view.backgroundColor = [UIColor blackColor];
+    self.view.clipsToBounds = YES;
 }
 
 - (void)dealloc {

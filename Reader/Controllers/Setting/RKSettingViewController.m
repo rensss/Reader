@@ -8,10 +8,11 @@
 
 #import "RKSettingViewController.h"
 #import "RKBookImprotViewController.h"
+#import "RKPinViewController.h"
 
 #define kSwitchTag 10000
 
-@interface RKSettingViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface RKSettingViewController () <UITableViewDelegate, UITableViewDataSource, RKPinViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, strong) NSMutableArray *dataArr; /**< 数据源*/
@@ -65,12 +66,54 @@
             [RKUserConfig sharedInstance].isAllowRotation = switchBtn.on;
         }
             break;
+        case 5:
+        {
+            if (switchBtn.on) {
+                // 打开密码
+                [self pinClick];
+            } else {
+                // 关闭密码
+                [self checkPin];
+            }
+        }
+            break;
             
         default:
             break;
     }
 }
 
+#pragma mark - func
+- (void)pinClick {
+    RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
+    
+    self.navigationController.view.tag = RKPinViewControllerContentViewTag;
+    pinVC.translucentBackground = YES;
+    pinVC.promptTitle = @"设置 Pin 码";
+    pinVC.disableAuthentication = YES;
+    pinVC.disableAutoAuthentication = YES;
+
+    [self presentViewController:pinVC animated:YES completion:nil];
+}
+
+- (void)checkPin {
+    RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
+    
+    self.navigationController.view.tag = RKPinViewControllerContentViewTag;
+    pinVC.translucentBackground = YES;
+    pinVC.promptTitle = @"输入 Pin 码";
+    pinVC.disableAuthentication = NO;
+    pinVC.disableAutoAuthentication = NO;
+    
+    [self presentViewController:pinVC animated:YES completion:nil];
+}
+
+/// 根据 tag 获取 switch 的值
+/// @param tag tag
+- (BOOL)getSwichValueWithTag:(NSInteger)tag {
+    UISwitch *switchView = [self.view viewWithTag:tag];
+    return switchView.on;
+}
 
 #pragma mark - delegate
 #pragma mark -- UITableViewDataSource
@@ -125,6 +168,14 @@
         cell.accessoryView = switchBtn;
         switchBtn.on = [RKUserConfig sharedInstance].isAllowRotation;
         switchBtn.tag = kSwitchTag + 4;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    if ([self.dataArr[indexPath.row] isEqualToString:@"是否打开 Pin"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [RKUserConfig sharedInstance].pinString.length > 0;
+        switchBtn.tag = kSwitchTag + 5;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -192,6 +243,35 @@
     }
 }
 
+#pragma mark -- RKPinViewControllerDelegate
+- (NSUInteger)pinLengthForPinViewController:(RKPinViewController *)pinViewController {
+    return 4;
+}
+
+- (BOOL)pinViewController:(RKPinViewController *)pinViewController isPinValid:(NSString *)pin {
+    if ([self getSwichValueWithTag:kSwitchTag+5]) {
+        RKUserConfig.sharedInstance.pinString = pin;
+        return YES;
+    } else {
+        return [RKUserConfig.sharedInstance.pinString isEqualToString:pin];
+    }
+}
+
+- (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController {
+    return YES;
+}
+
+- (void)cancelButtonTappedInpinViewController:(RKPinViewController *)pinViewController {
+    [self.tableView reloadData];
+}
+
+- (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
+    if (![self getSwichValueWithTag:kSwitchTag+5]) {
+        RKUserConfig.sharedInstance.pinString = @"";
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - getting
 - (NSMutableArray *)dataArr {
     if (!_dataArr) {
@@ -201,6 +281,7 @@
                     @"加密书籍是否自动打开",
                     @"目录是否自动滚动",
                     @"是否允许横屏",
+                    @"是否打开 Pin",
                     @"局域网导入",
                     @"删除全部书籍",
                     nil];

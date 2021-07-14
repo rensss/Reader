@@ -35,6 +35,7 @@
 @synthesize lastReadBookName = _lastReadBookName;
 @synthesize isSecretAutoOpen = _isSecretAutoOpen;
 @synthesize isChapterListAutoScroll = _isChapterListAutoScroll;
+@synthesize pinString = _pinString;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -182,6 +183,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+-(void)setPinString:(NSString *)pinString {
+    _pinString = pinString;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:pinString forKey:@"pinString"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - getting
 - (UIPageViewControllerTransitionStyle)transitionStyle {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"transitionStyle"]) {
@@ -219,7 +227,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"topPadding"]) {
         return [[NSUserDefaults standardUserDefaults] floatForKey:@"topPadding"];
     } else {
-        return 20;
+        return 10;
     }
 }
 
@@ -359,6 +367,14 @@
         return [[NSUserDefaults standardUserDefaults] floatForKey:@"nightAlpha"];
     } else {
         return 1.0f;
+    }
+}
+
+- (NSString *)pinString {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pinString"]) {
+        return [[NSUserDefaults standardUserDefaults] stringForKey:@"pinString"];
+    } else {
+        return @"";
     }
 }
 

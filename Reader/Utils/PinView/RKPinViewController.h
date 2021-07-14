@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController;
 
 @optional
+- (void)cancelButtonTappedInpinViewController:(RKPinViewController *)pinViewController;
 - (void)incorrectPinEnteredInPinViewController:(RKPinViewController *)pinViewController;
 - (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController;
 - (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController;

@@ -109,7 +109,7 @@
         _collectionView.dataSource = self;
         _collectionView.alwaysBounceVertical = YES;
         
-        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[RKSelectImageCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([RKSelectImageCollectionViewCell class])];
     }
     return _collectionView;

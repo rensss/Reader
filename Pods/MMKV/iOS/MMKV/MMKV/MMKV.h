@@ -20,6 +20,11 @@
 
 #import "MMKVHandler.h"
 
+typedef NS_ENUM(NSUInteger, MMKVMode) {
+    MMKVSingleProcess = 0x1,
+    MMKVMultiProcess = 0x2,
+};
+
 @interface MMKV : NSObject
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,42 +34,78 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return root dir of MMKV
 + (NSString *)initializeMMKV:(nullable NSString *)rootDir NS_SWIFT_NAME(initialize(rootDir:));
 
-// a generic purpose instance
-+ (instancetype)defaultMMKV;
+/// call this in main thread, before calling any other MMKV methods
+/// @param rootDir the root dir of MMKV, passing nil defaults to {NSDocumentDirectory}/mmkv
+/// @param logLevel MMKVLogInfo by default, MMKVLogNone to disable all logging
+/// @return root dir of MMKV
++ (NSString *)initializeMMKV:(nullable NSString *)rootDir logLevel:(MMKVLogLevel)logLevel NS_SWIFT_NAME(initialize(rootDir:logLevel:));
 
-// mmapID: any unique ID (com.tencent.xin.pay, etc)
-// if you want a per-user mmkv, you could merge user-id within mmapID
+/// call this in main thread, before calling any other MMKV methods
+/// @param rootDir the root dir of MMKV, passing nil defaults to {NSDocumentDirectory}/mmkv
+/// @param groupDir the root dir of multi-process MMKV, MMKV with MMKVMultiProcess mode will be stored in groupDir/mmkv
+/// @param logLevel MMKVLogInfo by default, MMKVLogNone to disable all logging
+/// @return root dir of MMKV
++ (NSString *)initializeMMKV:(nullable NSString *)rootDir groupDir:(NSString *)groupDir logLevel:(MMKVLogLevel)logLevel NS_SWIFT_NAME(initialize(rootDir:groupDir:logLevel:));
+
+/// a generic purpose instance (in MMKVSingleProcess mode)
++ (nullable instancetype)defaultMMKV;
+
+/// an encrypted generic purpose instance (in MMKVSingleProcess mode)
++ (nullable instancetype)defaultMMKVWithCryptKey:(nullable NSData *)cryptKey;
+
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
 + (nullable instancetype)mmkvWithID:(NSString *)mmapID NS_SWIFT_NAME(init(mmapID:));
 
-// mmapID: any unique ID (com.tencent.xin.pay, etc)
-// if you want a per-user mmkv, you could merge user-id within mmapID
-// cryptKey: 16 byte at most
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param mode MMKVMultiProcess for multi-process MMKV
++ (nullable instancetype)mmkvWithID:(NSString *)mmapID mode:(MMKVMode)mode NS_SWIFT_NAME(init(mmapID:mode:));
+
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param cryptKey 16 bytes at most
 + (nullable instancetype)mmkvWithID:(NSString *)mmapID cryptKey:(nullable NSData *)cryptKey NS_SWIFT_NAME(init(mmapID:cryptKey:));
 
-// mmapID: any unique ID (com.tencent.xin.pay, etc)
-// if you want a per-user mmkv, you could merge user-id within mmapID
-// relativePath: custom path of the file, `NSDocumentDirectory/mmkv` by default
-+ (nullable instancetype)mmkvWithID:(NSString *)mmapID relativePath:(nullable NSString *)path NS_SWIFT_NAME(init(mmapID:relativePath:));
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param cryptKey 16 bytes at most
+/// @param mode MMKVMultiProcess for multi-process MMKV
++ (nullable instancetype)mmkvWithID:(NSString *)mmapID cryptKey:(nullable NSData *)cryptKey mode:(MMKVMode)mode NS_SWIFT_NAME(init(mmapID:cryptKey:mode:));
 
-// clang-format off
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param relativePath custom path of the file, `NSDocumentDirectory/mmkv` by default
++ (nullable instancetype)mmkvWithID:(NSString *)mmapID relativePath:(nullable NSString *)relativePath NS_SWIFT_NAME(init(mmapID:relativePath:)) __attribute__((deprecated("use +mmkvWithID:rootPath: instead")));
 
-// mmapID: any unique ID (com.tencent.xin.pay, etc)
-// if you want a per-user mmkv, you could merge user-id within mmapID
-// cryptKey: 16 byte at most
-// relativePath: custom path of the file, `NSDocumentDirectory/mmkv` by default
-+ (nullable instancetype)mmkvWithID:(NSString *)mmapID cryptKey:(nullable NSData *)cryptKey relativePath:(nullable NSString *)path NS_SWIFT_NAME(init(mmapID:cryptKey:relativePath:));
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param rootPath custom path of the file, `NSDocumentDirectory/mmkv` by default
++ (nullable instancetype)mmkvWithID:(NSString *)mmapID rootPath:(nullable NSString *)rootPath NS_SWIFT_NAME(init(mmapID:rootPath:));
 
-// clang-format on
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param cryptKey 16 bytes at most
+/// @param relativePath custom path of the file, `NSDocumentDirectory/mmkv` by default
++ (nullable instancetype)mmkvWithID:(NSString *)mmapID cryptKey:(nullable NSData *)cryptKey relativePath:(nullable NSString *)relativePath NS_SWIFT_NAME(init(mmapID:cryptKey:relativePath:)) __attribute__((deprecated("use +mmkvWithID:cryptKey:rootPath: instead")));
 
-// default to `NSDocumentDirectory/mmkv`
+/// @param mmapID any unique ID (com.tencent.xin.pay, etc), if you want a per-user mmkv, you could merge user-id within mmapID
+/// @param cryptKey 16 bytes at most
+/// @param rootPath custom path of the file, `NSDocumentDirectory/mmkv` by default
++ (nullable instancetype)mmkvWithID:(NSString *)mmapID cryptKey:(nullable NSData *)cryptKey rootPath:(nullable NSString *)rootPath NS_SWIFT_NAME(init(mmapID:cryptKey:rootPath:));
+
+// you can call this on applicationWillTerminate, it's totally fine if you don't call
++ (void)onAppTerminate;
+
 + (NSString *)mmkvBasePath;
 
 // if you want to change the base path, do it BEFORE getting any MMKV instance
 // otherwise the behavior is undefined
-+ (void)setMMKVBasePath:(NSString *)basePath;
++ (void)setMMKVBasePath:(NSString *)basePath __attribute__((deprecated("use +initializeMMKV: instead", "+initializeMMKV:")));
 
+- (NSString *)mmapID;
+
+// transform plain text into encrypted text, or vice versa by passing newKey = nil
+// you can change existing crypt key with different key
 - (BOOL)reKey:(nullable NSData *)newKey NS_SWIFT_NAME(reset(cryptKey:));
 - (nullable NSData *)cryptKey;
+
+// just reset cryptKey (will not encrypt or decrypt anything)
+// usually you should call this method after other process reKey() the multi-process mmkv
+- (void)checkReSetCryptKey:(nullable NSData *)cryptKey NS_SWIFT_NAME(checkReSet(cryptKey:));
 
 - (BOOL)setObject:(nullable NSObject<NSCoding> *)object forKey:(NSString *)key NS_SWIFT_NAME(set(_:forKey:));
 
@@ -122,7 +163,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 // return the actual size consumption of the key's value
 // Note: might be a little bigger than value's length
-- (size_t)getValueSizeForKey:(NSString *)key NS_SWIFT_NAME(valueSize(forKey:));
+- (size_t)getValueSizeForKey:(NSString *)key actualSize:(BOOL)actualSize NS_SWIFT_NAME(valueSize(forKey:actualSize:));
+
+// return size written into buffer
+// return -1 on any error
+- (int32_t)writeValueForKey:(NSString *)key toBuffer:(NSMutableData *)buffer NS_SWIFT_NAME(writeValue(forKey:buffer:));
 
 - (BOOL)containsKey:(NSString *)key NS_SWIFT_NAME(contains(key:));
 
@@ -131,6 +176,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (size_t)totalSize;
 
 - (size_t)actualSize;
+
++ (size_t)pageSize;
+
++ (NSString *)version;
 
 - (void)enumerateKeys:(void (^)(NSString *key, BOOL *stop))block;
 - (NSArray *)allKeys;
@@ -142,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)clearAll;
 
 // MMKV's size won't reduce after deleting key-values
-// call this method after lots of deleting f you care about disk usage
+// call this method after lots of deleting if you care about disk usage
 // note that `clearAll` has the similar effect of `trim`
 - (void)trim;
 
@@ -154,25 +203,35 @@ NS_ASSUME_NONNULL_BEGIN
 // any subsequent call to the instance will load all key-values from file again
 - (void)clearMemoryCache;
 
+// enable auto cleanup items that not been accessed recently
+// disable by default
+// note: if an item is strong referenced by outside, it won't be cleanup
++ (void)enableAutoCleanUp:(uint32_t)maxIdleMinutes NS_SWIFT_NAME(enableAutoCleanUp(maxIdleMinutes:));
+
++ (void)disableAutoCleanUp;
+
 // you don't need to call this, really, I mean it
-// unless you care about out of battery
+// unless you worry about running out of battery
 - (void)sync;
 - (void)async;
 
-// for CrashProtected Only!!
-+ (BOOL)isFileValid:(NSString *)mmapID NS_SWIFT_NAME(isFileValid(for:));
-+ (BOOL)isFileValid:(NSString *)mmapID relativePath:(nullable NSString *)path NS_SWIFT_NAME(isFileValid(for:relativePath:));
+// check if content changed by other process
+- (void)checkContentChanged;
 
 + (void)registerHandler:(id<MMKVHandler>)handler;
 + (void)unregiserHandler;
 
 // MMKVLogInfo by default
 // MMKVLogNone to disable all logging
-+ (void)setLogLevel:(MMKVLogLevel)logLevel;
++ (void)setLogLevel:(MMKVLogLevel)logLevel __attribute__((deprecated("use +initializeMMKV:logLevel: instead", "initializeMMKV:nil logLevel")));
 
 // Migrate NSUserDefault data to MMKV
 // return imported count of key-values
 - (uint32_t)migrateFromUserDefaults:(NSUserDefaults *)userDaults NS_SWIFT_NAME(migrateFrom(userDefaults:));
+
+// for CrashProtected Only
++ (BOOL)isFileValid:(NSString *)mmapID NS_SWIFT_NAME(isFileValid(for:));
++ (BOOL)isFileValid:(NSString *)mmapID rootPath:(nullable NSString *)path NS_SWIFT_NAME(isFileValid(for:rootPath:));
 
 NS_ASSUME_NONNULL_END
 

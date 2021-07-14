@@ -12,7 +12,6 @@
 
 @interface RKPinViewController () <RKPinViewDelegate>
 
-
 @property (nonatomic, strong) RKPinView *pinView; /**< view*/
 
 @property (nonatomic, strong) UIView *blurView;
@@ -88,6 +87,9 @@
 
 - (void)cancelButtonTappedInPinView:(RKPinView *)pinView {
     DDLogVerbose(@"---- cancelButtonTappedInPinView");
+    if ([self.delegate respondsToSelector:@selector(cancelButtonTappedInpinViewController:)]) {
+        [self.delegate  cancelButtonTappedInpinViewController:self];
+    }
     [self closeClick];
 }
 

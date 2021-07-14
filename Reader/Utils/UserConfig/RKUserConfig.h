@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isAllNextPage; /**< 点击左侧翻下一页*/
 @property (nonatomic, assign) BOOL isAllowRotation; /**< 是否可以横屏*/
 @property (nonatomic, assign) UIEdgeInsets currentSafeAreaInsets; /**< 当前安全区域*/
+@property (nonatomic, copy) NSString *pinString; /**< 密码*/
 
 // 上左下右 边距
 @property (nonatomic, assign) CGFloat topPadding; /**< 上边距*/
