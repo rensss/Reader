@@ -14,3 +14,7 @@ target 'Reader' do
 	
 	pod 'LookinServer', :configurations => ['Debug']
 end
+
+target 'ReaderShare' do
+  pod 'Masonry'
+end

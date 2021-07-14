@@ -8,6 +8,7 @@
 
 #import "ShareViewController.h"
 #import <CoreServices/CoreServices.h>
+#import <Masonry/Masonry.h>
 
 #define kAPPGroupName @"group.smart.test"
 #define kScreenWidth self.view.frame.size.width
@@ -25,17 +26,31 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenWidth-100)/2, 100, 100, 45)];
+    NSLog(@"---- %@", NSStringFromCGRect(self.view.frame));
+    
+    UIButton *cancelButton = [[UIButton alloc] init];
     cancelButton.backgroundColor = [UIColor redColor];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(cancelBtnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelButton];
+    [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_offset(100);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(45);
+    }];
     
-    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenWidth-100)/2, 100 + 45 + 20, 100, 45)];
+    UIButton *addButton = [[UIButton alloc] init];
     addButton.backgroundColor = [UIColor redColor];
     [addButton setTitle:@"添加" forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addButton];
+    [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(cancelButton.mas_bottom).mas_offset(20);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(45);
+    }];
 }
 
 

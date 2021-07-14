@@ -56,6 +56,7 @@
 		1AD836092488FB2800A31BA3 /* RKTouchFaceIDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */; };
 		1ADC1BFB240DFC98003C5F4B /* Hanzipen.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */; };
 		2F87695335C4479095D5B371 /* libPods-Reader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */; };
+		808E312727B580D4C8BA2AF3 /* libPods-ReaderShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CBCC556A8D027DDA150191 /* libPods-ReaderShare.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,9 @@
 		1AD836072488FB2800A31BA3 /* RKTouchFaceIDUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKTouchFaceIDUtil.h; sourceTree = "<group>"; };
 		1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKTouchFaceIDUtil.m; sourceTree = "<group>"; };
 		1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hanzipen.ttc; sourceTree = "<group>"; };
+		39B4DD11DBC9BAB4D18DB83C /* Pods-ReaderShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaderShare.release.xcconfig"; path = "Target Support Files/Pods-ReaderShare/Pods-ReaderShare.release.xcconfig"; sourceTree = "<group>"; };
+		87CBCC556A8D027DDA150191 /* libPods-ReaderShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReaderShare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94177DC82BD34600795374E4 /* Pods-ReaderShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaderShare.debug.xcconfig"; path = "Target Support Files/Pods-ReaderShare/Pods-ReaderShare.debug.xcconfig"; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.debug.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808E312727B580D4C8BA2AF3 /* libPods-ReaderShare.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */,
+				87CBCC556A8D027DDA150191 /* libPods-ReaderShare.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -466,6 +472,8 @@
 			children = (
 				EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */,
 				A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */,
+				94177DC82BD34600795374E4 /* Pods-ReaderShare.debug.xcconfig */,
+				39B4DD11DBC9BAB4D18DB83C /* Pods-ReaderShare.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -499,6 +507,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A4384E4247D171800E087F3 /* Build configuration list for PBXNativeTarget "ReaderShare" */;
 			buildPhases = (
+				86C654FFAF8BF471F193DD93 /* [CP] Check Pods Manifest.lock */,
 				1A4384D1247D171800E087F3 /* Sources */,
 				1A4384D2247D171800E087F3 /* Frameworks */,
 				1A4384D3247D171800E087F3 /* Resources */,
@@ -590,6 +599,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Reader-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86C654FFAF8BF471F193DD93 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReaderShare-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -869,7 +900,9 @@
 		};
 		1A4384E2247D171800E087F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94177DC82BD34600795374E4 /* Pods-ReaderShare.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = ReaderShare/ReaderShare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -890,7 +923,9 @@
 		};
 		1A4384E3247D171800E087F3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39B4DD11DBC9BAB4D18DB83C /* Pods-ReaderShare.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = ReaderShare/ReaderShare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
