@@ -37,6 +37,10 @@
 @synthesize isChapterListAutoScroll = _isChapterListAutoScroll;
 @synthesize pinString = _pinString;
 
+@synthesize pitchMultiplier = _pitchMultiplier;
+@synthesize rate = _rate;
+@synthesize volume = _volume;
+
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
 {
@@ -187,6 +191,27 @@
     _pinString = pinString;
     
     [[NSUserDefaults standardUserDefaults] setObject:pinString forKey:@"pinString"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setPitchMultiplier:(float)pitchMultiplier {
+    _pitchMultiplier = pitchMultiplier;
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:pitchMultiplier forKey:@"pitchMultiplier"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setRate:(float)rate {
+    _rate = rate;
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:rate forKey:@"rate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setVolume:(float)volume {
+    _volume = volume;
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:volume forKey:@"volume"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -375,6 +400,30 @@
         return [[NSUserDefaults standardUserDefaults] stringForKey:@"pinString"];
     } else {
         return @"";
+    }
+}
+
+- (float)pitchMultiplier {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pitchMultiplier"]) {
+        return [[NSUserDefaults standardUserDefaults] floatForKey:@"pitchMultiplier"];
+    } else {
+        return 1.0f;
+    }
+}
+
+- (float)rate {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rate"]) {
+        return [[NSUserDefaults standardUserDefaults] floatForKey:@"rate"];
+    } else {
+        return 1.0f;
+    }
+}
+
+- (float)volume {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"volume"]) {
+        return [[NSUserDefaults standardUserDefaults] floatForKey:@"volume"];
+    } else {
+        return 1.0f;
     }
 }
 

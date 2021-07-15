@@ -47,6 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isSecretAutoOpen; /**< 加密书籍是否自动打开*/
 @property (nonatomic, assign) BOOL isChapterListAutoScroll; /**< 目录是否自动滚动*/
 
+// TTS
+@property (nonatomic, assign) float pitchMultiplier; /**< 音调*/
+@property (nonatomic, assign) float rate; /**< 音速*/
+@property (nonatomic, assign) float volume; /**< 音量*/
 
 /// 用户设置单例
 + (instancetype)sharedInstance;

@@ -12,12 +12,15 @@
 #import "RKReadSettingViewController.h"
 #import "RKChaptersListView.h"
 #import "RKBackViewController.h"
+#import "RKTTSMenuView.h"
 
 @interface RKReadPageViewController ()
 <
 UIPageViewControllerDelegate,
 UIPageViewControllerDataSource,
-UIGestureRecognizerDelegate
+UIGestureRecognizerDelegate,
+RKTTSMenuViewDelegate,
+RKTTSManagerDelegate
 >
 
 @property (nonatomic, strong) UIPageViewController *pageViewController; /**< 显示内容的VC*/
@@ -32,6 +35,8 @@ UIGestureRecognizerDelegate
 @property (nonatomic, strong) RKReadMenuView *menuView; /**< 菜单view*/
 
 @property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
+
+@property (nonatomic, strong) RKTTSManager *ttsManager; /**< tts*/
 
 @end
 
@@ -279,6 +284,14 @@ UIGestureRecognizerDelegate
         [self presentViewController:nav animated:YES completion:nil];
     }];
     
+    // TTS 菜单
+    [self.menuView shouldOpenTTS:^{
+        RKTTSMenuView *tts = [[RKTTSMenuView alloc] initWithFrame:weakSelf.view.bounds];
+        [weakSelf.view addSubview:tts];
+        tts.delegate = weakSelf;
+        [tts show];
+    }];
+    
     [self.menuView fontAlphaChange:^(CGFloat alpha) {
         [RKUserConfig sharedInstance].nightAlpha = alpha;
         // 设置当前显示的readVC
@@ -378,6 +391,21 @@ UIGestureRecognizerDelegate
     //    self.currentChapter = self.chapterNext;
     //    self.currentPage = self.pageNext;
 //    DDLogInfo(@"%ld -|- %ld",self.currentChapter,self.currentPage);
+}
+
+#pragma mark -- RKTTSMenuViewDelegate
+- (void)stopButtonClickForTTSMenuView:(RKTTSMenuView *)menuView {
+    DDLogInfo(@"---- stopButtonClickForTTSMenuView");
+    
+}
+
+#pragma mark -- RKTTSManagerDelegate
+- (void)didStartSpeechUtteranceForRKTTSManager:(RKTTSManager *)manager {
+    
+}
+
+- (void)didFinishSpeechUtteranceForRKTTSManager:(RKTTSManager *)manager {
+    
 }
 
 #pragma mark - 函数

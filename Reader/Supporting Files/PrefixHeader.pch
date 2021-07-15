@@ -41,6 +41,7 @@
 #import "RKUserConfig.h"            // 用户配置
 #import "RKUtils.h"                 // 实用类
 #import "RKTouchFaceIDUtil.h"       // 权限验证类
+#import "RKTTSManager.h"            // TTS 管理单例
 
 #pragma mark - model
 #import "RKModel.h"                 // model 基类
@@ -121,6 +122,9 @@ height = 20; \
 })
 
 #define kIsPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
+// menu 菜单高度
+#define kBottomViewHeight 170
 
 #ifdef DEBUG
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;

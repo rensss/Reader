@@ -8,7 +8,7 @@
 
 #import "RKReadMenuView.h"
 
-#define kBottomViewHeight 170
+#define kButtonPadding (14)
 
 @interface RKReadMenuView ()
 
@@ -35,6 +35,7 @@
 @property (nonatomic, strong) UIButton *nightButton; /**< 夜间模式*/
 @property (nonatomic, strong) UIButton *settingButton; /**< 设置*/
 @property (nonatomic, strong) UIButton *turnScreenButton; /**< 横屏*/
+@property (nonatomic, strong) UIButton *ttsButton; /**< tts*/
 
 @property (nonatomic, strong) UILabel *title; /**< 书名*/
 
@@ -51,6 +52,7 @@
 @property (nonatomic, copy) void(^catalogBlock)(void); /**< 目录回调*/
 @property (nonatomic, copy) void(^nightModeBlock)(BOOL); /**< 夜间模式回调*/
 @property (nonatomic, copy) void(^settingBlock)(void); /**< 设置回调*/
+@property (nonatomic, copy) void(^TTSBlock)(void); /**< TTS回调*/
 @property (nonatomic, copy) void(^alphaChangeBlock)(CGFloat); /**< 透明度改变回调*/
 
 @end
@@ -211,7 +213,7 @@
     [self.nightButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.chaptersButton.mas_width);
         make.height.mas_equalTo(self.chaptersButton.mas_height);
-        make.left.mas_equalTo(self.chaptersButton.mas_right).with.mas_offset(12);
+        make.left.mas_equalTo(self.chaptersButton.mas_right).with.mas_offset(kButtonPadding);
         make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
     }];
     
@@ -220,7 +222,16 @@
     [self.turnScreenButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.chaptersButton.mas_width);
         make.height.mas_equalTo(self.chaptersButton.mas_height);
-        make.left.mas_equalTo(self.nightButton.mas_right).with.mas_offset(12);
+        make.left.mas_equalTo(self.nightButton.mas_right).with.mas_offset(kButtonPadding);
+        make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
+    }];
+    
+    // TTS
+    [bottomView addSubview:self.ttsButton];
+    [self.ttsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(self.chaptersButton.mas_width);
+        make.height.mas_equalTo(self.chaptersButton.mas_height);
+        make.left.mas_equalTo(self.turnScreenButton.mas_right).with.mas_offset(kButtonPadding);
         make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
     }];
     
@@ -229,7 +240,7 @@
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self.chaptersButton.mas_width);
         make.height.mas_equalTo(self.chaptersButton.mas_height);
-        make.left.mas_equalTo(self.turnScreenButton.mas_right).with.mas_offset(12);
+        make.left.mas_equalTo(self.ttsButton.mas_right).with.mas_offset(kButtonPadding);
         make.centerY.mas_equalTo(self.chaptersButton.mas_centerY);
     }];
     
@@ -338,6 +349,11 @@
 
 - (void)fontAlphaChange:(void (^)(CGFloat))handler {
     self.alphaChangeBlock = handler;
+}
+
+/// 打开 TTS
+- (void)shouldOpenTTS:(void (^)(void))handler {
+    self.TTSBlock = handler;
 }
 
 #pragma mark - 点击事件
@@ -510,6 +526,13 @@
     }
 }
 
+- (void)ttsClick:(UIButton *)btn {
+    if (self.TTSBlock) {
+        self.TTSBlock();
+    }
+    [self dismiss];
+}
+
 #pragma mark - getting
 - (UILabel *)fontSize {
     if (!_fontSize) {
@@ -652,6 +675,17 @@
         [_settingButton addTarget:self action:@selector(settingClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _settingButton;
+}
+
+- (UIButton *)ttsButton {
+    if (!_ttsButton) {
+        _ttsButton = [[UIButton alloc] init];
+        
+        _ttsButton.tintColor = [UIColor whiteColor];
+        [_ttsButton setBackgroundImage:[[UIImage imageNamed:@"tts"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_ttsButton addTarget:self action:@selector(ttsClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _ttsButton;
 }
 
 - (UILabel *)chapterLabel {

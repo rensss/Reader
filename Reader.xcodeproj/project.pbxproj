@@ -43,6 +43,8 @@
 		1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4384D8247D171800E087F3 /* ShareViewController.m */; };
 		1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4384DA247D171800E087F3 /* MainInterface.storyboard */; };
 		1A4384E0247D171800E087F3 /* ReaderShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1A4384D5247D171800E087F3 /* ReaderShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1A47F5E626A025610000DC1D /* RKTTSMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47F5E526A025610000DC1D /* RKTTSMenuView.m */; };
+		1A47F5EA26A0316E0000DC1D /* RKTTSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A47F5E926A0316E0000DC1D /* RKTTSManager.m */; };
 		1A56A2592451798500291C2D /* RKMarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56A2582451798500291C2D /* RKMarqueeView.m */; };
 		1A56A25C24517C1E00291C2D /* RKChaptersListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56A25B24517C1E00291C2D /* RKChaptersListCell.m */; };
 		1A971A132539839E00711B10 /* RKBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A971A122539839E00711B10 /* RKBackViewController.m */; };
@@ -155,6 +157,10 @@
 		1A4384DD247D171800E087F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A4384E5247D186D00E087F3 /* Reader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reader.entitlements; sourceTree = "<group>"; };
 		1A4384E6247D302200E087F3 /* ReaderShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReaderShare.entitlements; sourceTree = "<group>"; };
+		1A47F5E426A025610000DC1D /* RKTTSMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKTTSMenuView.h; sourceTree = "<group>"; };
+		1A47F5E526A025610000DC1D /* RKTTSMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKTTSMenuView.m; sourceTree = "<group>"; };
+		1A47F5E826A0316E0000DC1D /* RKTTSManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKTTSManager.h; sourceTree = "<group>"; };
+		1A47F5E926A0316E0000DC1D /* RKTTSManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKTTSManager.m; sourceTree = "<group>"; };
 		1A56A2572451798500291C2D /* RKMarqueeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKMarqueeView.h; sourceTree = "<group>"; };
 		1A56A2582451798500291C2D /* RKMarqueeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKMarqueeView.m; sourceTree = "<group>"; };
 		1A56A25A24517C1E00291C2D /* RKChaptersListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKChaptersListCell.h; sourceTree = "<group>"; };
@@ -272,12 +278,13 @@
 			children = (
 				1AD836042488F13C00A31BA3 /* RKUtils.h */,
 				1AD836052488F13C00A31BA3 /* RKUtils.m */,
-				1A2E159624DEA5EA009C877F /* Authentication */,
 				1A18892F226D7BCD00289476 /* AlertMessage */,
+				1A2E159624DEA5EA009C877F /* Authentication */,
 				1A18892B226D7BB500289476 /* FileManage */,
 				1A2E159224DE9CC5009C877F /* LogFormatter */,
 				1A56A2562451795400291C2D /* MarqueeView */,
 				1A2E157C24DC040C009C877F /* PinView */,
+				1A47F5E726A031470000DC1D /* TTSManager */,
 				1A077624227854CF0073794E /* UserConfig */,
 			);
 			path = Utils;
@@ -300,6 +307,8 @@
 				1A188920226D7A8600289476 /* RKHomeListTableViewCell.m */,
 				1A16F8B02271B713006568A5 /* RKReadMenuView.h */,
 				1A16F8B12271B713006568A5 /* RKReadMenuView.m */,
+				1A47F5E426A025610000DC1D /* RKTTSMenuView.h */,
+				1A47F5E526A025610000DC1D /* RKTTSMenuView.m */,
 				1A03F1BA22730FAE000BB1E8 /* RKReadView.h */,
 				1A03F1BB22730FAE000BB1E8 /* RKReadView.m */,
 				1A34E0C22379637800D27799 /* RKReadStatusBar.h */,
@@ -447,6 +456,15 @@
 				1A4384DD247D171800E087F3 /* Info.plist */,
 			);
 			path = ReaderShare;
+			sourceTree = "<group>";
+		};
+		1A47F5E726A031470000DC1D /* TTSManager */ = {
+			isa = PBXGroup;
+			children = (
+				1A47F5E826A0316E0000DC1D /* RKTTSManager.h */,
+				1A47F5E926A0316E0000DC1D /* RKTTSManager.m */,
+			);
+			path = TTSManager;
 			sourceTree = "<group>";
 		};
 		1A56A2562451795400291C2D /* MarqueeView */ = {
@@ -678,6 +696,7 @@
 				1A07E6F1230BEBEC006FB45C /* RKChaptersListView.m in Sources */,
 				1A2E159524DE9D67009C877F /* RKLogFormatter.m in Sources */,
 				1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */,
+				1A47F5EA26A0316E0000DC1D /* RKTTSManager.m in Sources */,
 				1AD836092488FB2800A31BA3 /* RKTouchFaceIDUtil.m in Sources */,
 				1A077627227854EB0073794E /* RKUserConfig.m in Sources */,
 				1A56A2592451798500291C2D /* RKMarqueeView.m in Sources */,
@@ -686,6 +705,7 @@
 				1A188918226D792200289476 /* RKViewController.m in Sources */,
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,
 				1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */,
+				1A47F5E626A025610000DC1D /* RKTTSMenuView.m in Sources */,
 				1A2E158B24DC0E07009C877F /* RKPinNumButton.m in Sources */,
 				1A188924226D7AC300289476 /* RKModel.m in Sources */,
 				1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */,
