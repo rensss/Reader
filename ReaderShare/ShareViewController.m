@@ -13,6 +13,8 @@
 #define kAPPGroupName @"group.smart.test"
 #define kScreenWidth self.view.frame.size.width
 #define kScreenHeight self.view.frame.size.height
+#define kButtonWidth (100)
+#define kButtonHeight (45)
 
 @interface ShareViewController ()
 
@@ -36,8 +38,8 @@
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_offset(100);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(45);
+        make.width.mas_equalTo(kButtonWidth);
+        make.height.mas_equalTo(kButtonHeight);
     }];
     
     UIButton *addButton = [[UIButton alloc] init];
@@ -48,8 +50,8 @@
     [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.top.mas_equalTo(cancelButton.mas_bottom).mas_offset(20);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(45);
+        make.width.mas_equalTo(kButtonWidth);
+        make.height.mas_equalTo(kButtonHeight);
     }];
 }
 
