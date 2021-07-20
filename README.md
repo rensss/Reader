@@ -16,13 +16,13 @@
 - [x] TXT文件分享接收 (Share Extension) 
 - [x] 横屏阅读
 - [x] 设置密码
+- [x] 语音阅读
 - [ ] 书签
 - [ ] 搜索查找功能 
 - [ ] Home Screen Quick Actions 快捷进入
 - [ ] 复制 
 - [ ] 收藏 
 - [ ] 标注
-- [ ] 语音阅读
 - [ ] 日志
 - [ ] widget ?
 - [ ] ... 
