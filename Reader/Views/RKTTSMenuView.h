@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol RKTTSMenuViewDelegate <NSObject>
 
 @required
+- (void)sliderValueChangeForTTSMenuView:(RKTTSMenuView *)menuView;
 - (void)stopButtonClickForTTSMenuView:(RKTTSMenuView *)menuView;
 
 @optional
@@ -24,11 +25,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<RKTTSMenuViewDelegate> delegate; /**<  代理*/
 
+- (instancetype)initWithFrame:(CGRect)frame withSuperview:(UIView *)superView;
+
 /// 显示
 - (void)show;
 
 /// 消失
 - (void)dismiss;
+
+/// 消失回调
+- (void)dismissWithHandler:(void(^)(void))handler;
 
 /// 关闭回调
 - (void)closeBlock:(void(^)(void))handler;

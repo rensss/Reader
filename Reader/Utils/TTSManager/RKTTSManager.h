@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RKTTSManager : NSObject
 
 @property (nonatomic, weak) id<RKTTSManagerDelegate> delegate; /**< 代理*/
+@property (nonatomic, copy) NSString *currentContent; /**< 当前阅读内容*/
+/// 开始阅读
+/// @param string 内容
+- (void)startSpeechWithContent:(NSString *)string;
 
 /// 停止speak
 - (void)stop;

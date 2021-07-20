@@ -415,7 +415,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rate"]) {
         return [[NSUserDefaults standardUserDefaults] floatForKey:@"rate"];
     } else {
-        return 1.0f;
+        return AVSpeechUtteranceDefaultSpeechRate;
     }
 }
 

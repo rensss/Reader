@@ -286,10 +286,14 @@ RKTTSManagerDelegate
     
     // TTS 菜单
     [self.menuView shouldOpenTTS:^{
-        RKTTSMenuView *tts = [[RKTTSMenuView alloc] initWithFrame:weakSelf.view.bounds];
-        [weakSelf.view addSubview:tts];
+        RKTTSMenuView *tts = [[RKTTSMenuView alloc] initWithFrame:weakSelf.view.bounds withSuperview:weakSelf.view];
         tts.delegate = weakSelf;
         [tts show];
+        [tts dismissWithHandler:^{
+            [weakSelf.ttsManager stop];
+        }];
+        
+        [weakSelf startSpeech];
     }];
     
     [self.menuView fontAlphaChange:^(CGFloat alpha) {
@@ -301,9 +305,12 @@ RKTTSManagerDelegate
 
 #pragma mark - 代理
 #pragma mark -- UIGestureRecognizerDelegate
-//解决TabView与Tap手势冲突
+// 解决TabView与Tap手势冲突
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    if ([NSStringFromClass([touch.view.superview class]) isEqualToString:@"RKTTSMenuView"]) {
         return NO;
     }
     return YES;
@@ -399,13 +406,54 @@ RKTTSManagerDelegate
     
 }
 
+- (void)sliderValueChangeForTTSMenuView:(RKTTSMenuView *)menuView {
+    [self.ttsManager stop];
+    self.ttsManager.delegate = nil;
+    self.ttsManager = nil;
+    
+    [self startSpeech];
+}
+
 #pragma mark -- RKTTSManagerDelegate
 - (void)didStartSpeechUtteranceForRKTTSManager:(RKTTSManager *)manager {
-    
+    DDLogInfo(@"---- start speech");
 }
 
 - (void)didFinishSpeechUtteranceForRKTTSManager:(RKTTSManager *)manager {
+    DDLogInfo(@"---- didFinishSpeech");
     
+    if ([manager.currentContent isEqualToString:@"当前page获取错误"]) {
+        return;
+    }
+    
+    if ([manager.currentContent isEqualToString:@"已经看完了!"]) {
+        return;
+    }
+    
+    self.pageNext = self.currentPage;
+    self.chapterNext = self.currentChapter;
+    // 最后一章 && 最后一页
+    if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
+        RKAlertMessage(@"已经看完了!", self.view);
+        self.ttsManager = [[RKTTSManager alloc] init];
+        [self.ttsManager startSpeechWithContent:@"已经看完了!"];
+        return;
+    }
+    
+    // 本章节的最后一页
+    if (self.pageNext >= self.book.currentChapter.allPages - 1) {
+        self.chapterNext ++;
+        self.pageNext = 0;
+    } else {
+        self.pageNext ++;
+    }
+    
+    self.currentPage = self.pageNext;
+    self.currentChapter = self.chapterNext;
+    
+    [self startSpeech];
+    
+    [self refreshCurrentVC];
 }
 
 #pragma mark - 函数
@@ -415,21 +463,7 @@ RKTTSManagerDelegate
     // 创建一个新的控制器类，并且分配给相应的数据
     RKReadViewController *readVC = [[RKReadViewController alloc] init];
     
-    // 准备章节
-    RKChapter *Chapter = self.book.chapters[chapter];
-    NSRange contentRange = NSMakeRange(Chapter.location, Chapter.length);
-    
-    if (Chapter.location > self.book.content.length) {
-        RKAlertMessage(@"错误 code:3", self.view);
-        return nil;
-    }
-    
-    if (contentRange.location+contentRange.length > self.book.content.length) {
-        RKAlertMessage(@"错误 code:4", self.view);
-        return nil;
-    }
-    Chapter.content = [self.book.content substringWithRange:contentRange];
-    Chapter.page = page;
+    RKChapter *Chapter = [self getPageContentWithChapter:chapter andPage:page];
     self.book.currentChapter = Chapter;
     
     // 修改当前book对象的信息
@@ -445,6 +479,25 @@ RKTTSManagerDelegate
         readVC.content = @"开始";
     }
     return readVC;
+}
+
+- (RKChapter *)getPageContentWithChapter:(NSInteger)chapter andPage:(NSInteger)page {
+    // 准备章节
+    RKChapter *Chapter = self.book.chapters[chapter];
+    NSRange contentRange = NSMakeRange(Chapter.location, Chapter.length);
+    
+    if (Chapter.location > self.book.content.length) {
+        RKAlertMessage(@"错误 code:3", self.view);
+        return nil;
+    }
+    
+    if (contentRange.location+contentRange.length > self.book.content.length) {
+        RKAlertMessage(@"错误 code:4", self.view);
+        return nil;
+    }
+    Chapter.content = [self.book.content substringWithRange:contentRange];
+    Chapter.page = page;
+    return Chapter;
 }
 
 #pragma mark -- 保存阅读进度
@@ -499,6 +552,19 @@ RKTTSManagerDelegate
     DDLogInfo(@"---- frame = %@", NSStringFromCGRect([RKUserConfig sharedInstance].readViewFrame));
     // 设置当前显示的readVC
     [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+}
+
+#pragma mark -- 阅读
+- (void)startSpeech {
+    self.ttsManager = [[RKTTSManager alloc] init];
+    self.ttsManager.delegate = self;
+    RKChapter *chapter = [self getPageContentWithChapter:self.currentChapter andPage:self.currentPage];
+    if (chapter) {
+        NSString *content = [chapter stringOfPage:self.currentPage];
+        [self.ttsManager startSpeechWithContent:content];
+    } else {
+        [self.ttsManager startSpeechWithContent:@"当前page获取错误"];
+    }
 }
 
 #pragma mark - setting

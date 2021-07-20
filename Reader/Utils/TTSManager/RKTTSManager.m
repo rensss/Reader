@@ -11,42 +11,50 @@
 
 @interface RKTTSManager () <AVSpeechSynthesizerDelegate>
 
-@property (nonatomic, strong) AVSpeechUtterance *utterance; /**< */
 @property (nonatomic, strong) AVSpeechSynthesizer *synth; /**< */
 
 @end
 
 @implementation RKTTSManager
 
+#pragma mark - lifeCycle
+- (void)dealloc {
+    DDLogInfo(@"---- %@ dealloc!", self);
+}
+
 #pragma mark - func
 - (void)startSpeechWithContent:(NSString *)string {
-    self.utterance = nil;
+    self.currentContent = string;
     
     // 语音播报
-    self.utterance = [AVSpeechUtterance speechUtteranceWithString:string];
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:string];
     
     // 音调
-    self.utterance.pitchMultiplier = RKUserConfig.sharedInstance.pitchMultiplier;
+    utterance.pitchMultiplier = RKUserConfig.sharedInstance.pitchMultiplier;
     // 音速
-    self.utterance.rate = RKUserConfig.sharedInstance.rate;
+    utterance.rate = RKUserConfig.sharedInstance.rate;
     // 音量
-    self.utterance.volume = RKUserConfig.sharedInstance.volume;
+    utterance.volume = RKUserConfig.sharedInstance.volume;
     
     // 中式发音
     AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
-    self.utterance.voice = voice;
+    utterance.voice = voice;
     
-    DDLogInfo(@"---- %@",[AVSpeechSynthesisVoice speechVoices]);
+    DDLogInfo(@"---- %f -- %f -- %f", RKUserConfig.sharedInstance.pitchMultiplier, RKUserConfig.sharedInstance.rate, RKUserConfig.sharedInstance.volume);
     
     self.synth = [[AVSpeechSynthesizer alloc] init];
     self.synth.delegate = self;
-    [self.synth speakUtterance:self.utterance];
+    [self.synth speakUtterance:utterance];
+    
+    if (@available(iOS 13.0, *)) {
+        self.synth.mixToTelephonyUplink = YES;
+    }
 }
 
 - (void)stop {
-    [self.synth stopSpeakingAtBoundary:AVSpeechBoundaryWord];
+    [self.synth stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     
-    self.utterance = nil;
+    self.synth.delegate = nil;
     self.synth = nil;
 }
 

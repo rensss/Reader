@@ -9,7 +9,7 @@
 #import "RKTTSMenuView.h"
 
 #define kSliderTag 5000
-#define kSliderHeight 50
+#define kSliderHeight 30
 #define kSliderPadding 20
 
 @interface RKTTSMenuView ()
@@ -30,9 +30,10 @@
 
 @implementation RKTTSMenuView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame withSuperview:(UIView *)superView {
     self = [super initWithFrame:frame];
     if (self) {
+        [superView addSubview:self];
         [self initUI];
     }
     return self;
@@ -51,7 +52,7 @@
     // 底部view
     UIView *bottomView = [UIView new];
     self.bottomView = bottomView;
-    [bgButton addSubview:bottomView];
+    [self addSubview:bottomView];
     bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8f];
     CGFloat height = kSafeAreaBottom + kBottomViewHeight;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,28 +61,62 @@
         make.height.mas_equalTo(height);
     }];
     
-    [bottomView addSubview:self.rateSlider];
-    [self.rateSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(bottomView);
-        make.bottom.mas_equalTo(bottomView).mas_offset(- kSliderPadding);
-        make.height.mas_equalTo(kSliderHeight);
-        make.width.mas_equalTo(bottomView.mas_width).mas_offset(-60);
-    }];
-    
-    [bottomView addSubview:self.volumeSlider];
-    [self.volumeSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(self.rateSlider);
-        make.height.mas_equalTo(kSliderHeight);
-        make.center.mas_equalTo(bottomView);
-        make.bottom.mas_equalTo(self.rateSlider.mas_top).mas_offset(-kSliderPadding);
-    }];
-    
     [bottomView addSubview:self.pitchMultiplierSlider];
+    [bottomView addSubview:self.volumeSlider];
+    [bottomView addSubview:self.rateSlider];
+    
+    UILabel *pitch = [[UILabel alloc] init];
+    [bottomView addSubview:pitch];
+    pitch.text = @"语调:";
+    pitch.textColor = [UIColor whiteColor];
+    pitch.font = [UIFont systemFontOfSize:16];
+    
+    UILabel *volume = [[UILabel alloc] init];
+    [bottomView addSubview:volume];
+    volume.text = @"音量:";
+    volume.textColor = [UIColor whiteColor];
+    volume.font = [UIFont systemFontOfSize:16];
+    
+    UILabel *rate = [[UILabel alloc] init];
+    [bottomView addSubview:rate];
+    rate.text = @"语速:";
+    rate.textColor = [UIColor whiteColor];
+    rate.font = [UIFont systemFontOfSize:16];
+    
     [self.pitchMultiplierSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(bottomView).mas_offset(-(kSafeAreaBottom+kSliderPadding));
         make.height.mas_equalTo(kSliderHeight);
-        make.width.mas_equalTo(self.rateSlider);
-        make.centerX.mas_equalTo(bottomView);
+        make.left.mas_equalTo(pitch.mas_right).mas_offset(20);
+        make.right.mas_equalTo(bottomView).mas_offset(-(30+kViewSafeAreaInsets.right));
+    }];
+    
+    [self.volumeSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(volume.mas_right).mas_offset(20);
+        make.width.mas_equalTo(self.pitchMultiplierSlider);
+        make.height.mas_equalTo(kSliderHeight);
+        make.bottom.mas_equalTo(self.pitchMultiplierSlider.mas_top).mas_offset(-kSliderPadding);
+    }];
+    
+    [self.rateSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(rate.mas_right).mas_offset(20);
+        make.height.mas_equalTo(kSliderHeight);
+        make.width.mas_equalTo(self.pitchMultiplierSlider);
         make.bottom.mas_equalTo(self.volumeSlider.mas_top).mas_offset(-kSliderPadding);
+    }];
+    
+    [pitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(kViewSafeAreaInsets.left + 30);
+        make.centerY.mas_equalTo(self.pitchMultiplierSlider.mas_centerY);
+    }];
+    
+    [volume mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(kViewSafeAreaInsets.left + 30);
+        make.centerY.mas_equalTo(self.volumeSlider.mas_centerY);
+    }];
+    
+    [rate mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(kViewSafeAreaInsets.left + 30);
+        make.centerY.mas_equalTo(self.rateSlider.mas_centerY);
     }];
     
     [self layoutIfNeeded];
@@ -137,25 +172,24 @@
 }
 
 - (void)sliderValueChange:(UISlider *)slider {
+    DDLogInfo(@"---- slider%ld  value %f", slider.tag, slider.value);
     switch (slider.tag - kSliderTag) {
         case 0:
-        {
             RKUserConfig.sharedInstance.pitchMultiplier = slider.value;
-        }
             break;
         case 1:
-        {
             RKUserConfig.sharedInstance.rate = slider.value;
-        }
             break;
         case 2:
-        {
             RKUserConfig.sharedInstance.volume = slider.value;
-        }
             break;
             
         default:
             break;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(sliderValueChangeForTTSMenuView:)]) {
+        [self.delegate sliderValueChangeForTTSMenuView:self];
     }
 }
 
@@ -177,12 +211,9 @@
 - (UISlider *)pitchMultiplierSlider {
     if (!_pitchMultiplierSlider) {
         _pitchMultiplierSlider = [[UISlider alloc] init];
-        _pitchMultiplierSlider.backgroundColor = [UIColor colorWithRandom];
         _pitchMultiplierSlider.tag = kSliderTag;
-        _pitchMultiplierSlider.minimumTrackTintColor = [UIColor clearColor];
-        _pitchMultiplierSlider.maximumTrackTintColor = [UIColor clearColor];
-        _pitchMultiplierSlider.maximumValue = 0.5;
-        _pitchMultiplierSlider.minimumValue = 2.0;
+        _pitchMultiplierSlider.maximumValue = 2.0;
+        _pitchMultiplierSlider.minimumValue = 0.5;
         _pitchMultiplierSlider.value = RKUserConfig.sharedInstance.pitchMultiplier;
         _pitchMultiplierSlider.minimumTrackTintColor = [UIColor whiteColor];      // 滑轮左边颜色，如果设置了左边的图片就不会显示
         _pitchMultiplierSlider.maximumTrackTintColor = [UIColor blackColor];      // 滑轮右边颜色，如果设置了右边的图片就不会显示
@@ -197,12 +228,9 @@
 - (UISlider *)rateSlider {
     if (!_rateSlider) {
         _rateSlider = [[UISlider alloc] init];
-        _rateSlider.backgroundColor = [UIColor colorWithRandom];
         _rateSlider.tag = kSliderTag + 1;
-        _rateSlider.minimumTrackTintColor = [UIColor clearColor];
-        _rateSlider.maximumTrackTintColor = [UIColor clearColor];
-        _rateSlider.maximumValue = AVSpeechUtteranceMinimumSpeechRate;
-        _rateSlider.minimumValue = AVSpeechUtteranceMaximumSpeechRate;
+        _rateSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate;
+        _rateSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate;
         _rateSlider.value = RKUserConfig.sharedInstance.rate;
         _rateSlider.minimumTrackTintColor = [UIColor whiteColor];      // 滑轮左边颜色，如果设置了左边的图片就不会显示
         _rateSlider.maximumTrackTintColor = [UIColor blackColor];      // 滑轮右边颜色，如果设置了右边的图片就不会显示
@@ -217,12 +245,9 @@
 - (UISlider *)volumeSlider {
     if (!_volumeSlider) {
         _volumeSlider = [[UISlider alloc] init];
-        _volumeSlider.backgroundColor = [UIColor colorWithRandom];
         _volumeSlider.tag = kSliderTag + 2;
-        _volumeSlider.minimumTrackTintColor = [UIColor clearColor];
-        _volumeSlider.maximumTrackTintColor = [UIColor clearColor];
-        _volumeSlider.maximumValue = 0.0;
-        _volumeSlider.minimumValue = 1.0;
+        _volumeSlider.maximumValue = 1.0;
+        _volumeSlider.minimumValue = 0.0;
         _volumeSlider.value = RKUserConfig.sharedInstance.volume;
         _volumeSlider.minimumTrackTintColor = [UIColor whiteColor];      // 滑轮左边颜色，如果设置了左边的图片就不会显示
         _volumeSlider.maximumTrackTintColor = [UIColor blackColor];      // 滑轮右边颜色，如果设置了右边的图片就不会显示

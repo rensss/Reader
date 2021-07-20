@@ -114,7 +114,7 @@
     [closeBtn addTarget:self action:@selector(clickCloseBtn) forControlEvents:UIControlEventTouchUpInside];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(navBar.mas_bottom).mas_offset(-10);
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(kViewSafeAreaInsets.left + 15);
         make.width.mas_equalTo(24);
         make.height.mas_equalTo(24);
     }];
@@ -147,7 +147,7 @@
     [lastChapter setBackgroundImage:[[UIImage imageNamed:@"上一章"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [lastChapter mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
-        make.left.mas_equalTo(10);
+        make.left.mas_equalTo(kViewSafeAreaInsets.left +10);
         make.width.mas_equalTo(30);
         make.height.mas_equalTo(24);
     }];
@@ -160,7 +160,7 @@
     [nextChapter setBackgroundImage:[[UIImage imageNamed:@"下一章"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [nextChapter mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
-        make.right.mas_equalTo(-10);
+        make.right.mas_equalTo(-(10 + kViewSafeAreaInsets.right));
         make.width.mas_equalTo(30);
         make.height.mas_equalTo(24);
     }];
@@ -193,7 +193,7 @@
     [bottomView addSubview:self.bigSpace];
     
     NSMutableArray *array = [NSMutableArray arrayWithArray:@[self.smallSpace,self.middleSpace,self.bigSpace]];
-    [array mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:15 tailSpacing:15];
+    [array mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10 leadSpacing:kViewSafeAreaInsets.left + 15 tailSpacing:kViewSafeAreaInsets.right + 15];
     [array mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lastChapter.mas_bottom).mas_offset(12);
         make.height.mas_equalTo(60);
@@ -204,7 +204,7 @@
     [self.chaptersButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(24);
         make.height.mas_equalTo(24);
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(kViewSafeAreaInsets.left +15);
         make.top.mas_equalTo(self.smallSpace.mas_bottom).with.mas_offset(5);
     }];
     
@@ -717,8 +717,6 @@
 - (UISlider *)alphaSlider {
     if (!_alphaSlider) {
         _alphaSlider = [[UISlider alloc] init];
-        _alphaSlider.minimumTrackTintColor = [UIColor clearColor];
-        _alphaSlider.maximumTrackTintColor = [UIColor clearColor];
         _alphaSlider.maximumValue = 1;
         _alphaSlider.minimumValue = 0;
         _alphaSlider.value = [RKUserConfig sharedInstance].nightAlpha;
