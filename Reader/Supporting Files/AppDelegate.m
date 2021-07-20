@@ -11,6 +11,7 @@
 #import "RKBookImprotViewController.h"
 #import "RKReadPageViewController.h"
 #import "RKLogFormatter.h"
+#import "IFlyMSC/IFlyMSC.h"
 
 @interface AppDelegate ()
 
@@ -111,6 +112,7 @@
     
     [self checkShare];
     
+    [self initIFlySpeech];
 }
 
 - (UIInterfaceOrientationMask )application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -194,6 +196,12 @@
 //    }
 
     return handled;
+}
+
+- (void)initIFlySpeech {
+    //Appid是应用的身份信息，具有唯一性，初始化时必须要传入Appid。
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", @"c98826dd"];
+    [IFlySpeechUtility createUtility:initString];
 }
 
 - (void)initWithUserConfig {
