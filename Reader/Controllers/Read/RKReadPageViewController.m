@@ -20,7 +20,8 @@ UIPageViewControllerDelegate,
 UIPageViewControllerDataSource,
 UIGestureRecognizerDelegate,
 RKTTSMenuViewDelegate,
-RKTTSManagerDelegate
+RKTTSManagerDelegate,
+RKIFLYTTSManagerDelegate
 >
 
 @property (nonatomic, strong) UIPageViewController *pageViewController; /**< 显示内容的VC*/
@@ -36,7 +37,8 @@ RKTTSManagerDelegate
 
 @property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
 
-@property (nonatomic, strong) RKTTSManager *ttsManager; /**< tts*/
+//@property (nonatomic, strong) RKTTSManager *ttsManager; /**< tts*/
+@property (nonatomic, strong) RKIFLYTTSManager *IFLYTTSManager; /**< tts*/
 
 @end
 
@@ -66,7 +68,7 @@ RKTTSManagerDelegate
     _pageViewController.dataSource = self;
     
     // 设置UIPageViewController 尺寸
-    DDLogInfo(@"---- view:%@", NSStringFromCGRect(self.view.frame));
+//    DDLogVerbose(@"---- view:%@", NSStringFromCGRect(self.view.frame));
     _pageViewController.view.frame = self.view.bounds;
     
     // 让UIPageViewController对象，显示相应的页数据。
@@ -151,7 +153,7 @@ RKTTSManagerDelegate
 - (void)viewSafeAreaInsetsDidChange {
     [super viewSafeAreaInsetsDidChange];
     
-    DDLogInfo(@"---- safaArea:%@", NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
+//    DDLogVerbose(@"---- safaArea:%@", NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
     
     RKUserConfig.sharedInstance.currentSafeAreaInsets = self.view.safeAreaInsets;
     
@@ -290,7 +292,8 @@ RKTTSManagerDelegate
         tts.delegate = weakSelf;
         [tts show];
         [tts dismissWithHandler:^{
-            [weakSelf.ttsManager stop];
+//            [weakSelf.ttsManager stop];
+            [weakSelf.IFLYTTSManager stop];
         }];
         
         [weakSelf startSpeech];
@@ -407,9 +410,13 @@ RKTTSManagerDelegate
 }
 
 - (void)sliderValueChangeForTTSMenuView:(RKTTSMenuView *)menuView {
-    [self.ttsManager stop];
-    self.ttsManager.delegate = nil;
-    self.ttsManager = nil;
+//    [self.ttsManager stop];
+//    self.ttsManager.delegate = nil;
+//    self.ttsManager = nil;
+    
+    [self.IFLYTTSManager stop];
+    self.IFLYTTSManager.delegate = nil;
+    self.IFLYTTSManager = nil;
     
     [self startSpeech];
 }
@@ -435,8 +442,8 @@ RKTTSManagerDelegate
     // 最后一章 && 最后一页
     if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
         RKAlertMessage(@"已经看完了!", self.view);
-        self.ttsManager = [[RKTTSManager alloc] init];
-        [self.ttsManager startSpeechWithContent:@"已经看完了!"];
+//        self.ttsManager = [[RKTTSManager alloc] init];
+//        [self.ttsManager startSpeechWithContent:@"已经看完了!"];
         return;
     }
     
@@ -454,6 +461,61 @@ RKTTSManagerDelegate
     [self startSpeech];
     
     [self refreshCurrentVC];
+}
+
+#pragma mark - RKIFLYTTSManagerDelegate
+- (void)onSpeakBeginForRKIFLYTTSManager:(RKIFLYTTSManager *)manager {
+    
+}
+
+- (void)onSpeakPausedForRKIFLYTTSManager:(RKIFLYTTSManager *)manager {
+    
+}
+
+- (void)onBufferProgress:(int)progress message:(NSString *)msg RKIFLYTTSManager:(RKIFLYTTSManager *)manager {
+    
+}
+
+- (void)onSpeakProgress:(int)progress beginPos:(int)beginPos endPos:(int)endPos RKIFLYTTSManager:(RKIFLYTTSManager *)manager {
+    
+    if (progress < 100) { return; }
+    
+    if ([manager.currentContent isEqualToString:@"当前page获取错误"]) {
+        return;
+    }
+
+    if ([manager.currentContent isEqualToString:@"已经看完了!"]) {
+        return;
+    }
+
+    self.pageNext = self.currentPage;
+    self.chapterNext = self.currentChapter;
+    // 最后一章 && 最后一页
+    if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
+        RKAlertMessage(@"已经看完了!", self.view);
+        self.IFLYTTSManager = [[RKIFLYTTSManager alloc] init];
+        [self.IFLYTTSManager startSpeechWithContent:@"已经看完了!"];
+        return;
+    }
+
+    // 本章节的最后一页
+    if (self.pageNext >= self.book.currentChapter.allPages - 1) {
+        self.chapterNext ++;
+        self.pageNext = 0;
+    } else {
+        self.pageNext ++;
+    }
+
+    self.currentPage = self.pageNext;
+    self.currentChapter = self.chapterNext;
+
+    [self startSpeech];
+
+    [self refreshCurrentVC];
+}
+
+- (void)onCompletedRKIFLYTTSManager:(RKIFLYTTSManager *)manager {
+    
 }
 
 #pragma mark - 函数
@@ -549,22 +611,33 @@ RKTTSManagerDelegate
 
 #pragma mark -- 刷新
 - (void)refreshCurrentVC {
-    DDLogInfo(@"---- frame = %@", NSStringFromCGRect([RKUserConfig sharedInstance].readViewFrame));
+//    DDLogVerbose(@"---- frame = %@", NSStringFromCGRect([RKUserConfig sharedInstance].readViewFrame));
     // 设置当前显示的readVC
     [self.pageViewController setViewControllers:@[[self viewControllerChapter:self.currentChapter andPage:self.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 #pragma mark -- 阅读
 - (void)startSpeech {
-    self.ttsManager = [[RKTTSManager alloc] init];
-    self.ttsManager.delegate = self;
+//    self.ttsManager = [[RKTTSManager alloc] init];
+//    self.ttsManager.delegate = self;
+//    RKChapter *chapter = [self getPageContentWithChapter:self.currentChapter andPage:self.currentPage];
+//    if (chapter) {
+//        NSString *content = [chapter stringOfPage:self.currentPage];
+//        [self.ttsManager startSpeechWithContent:content];
+//    } else {
+//        [self.ttsManager startSpeechWithContent:@"当前page获取错误"];
+//    }
+    
+    self.IFLYTTSManager = [[RKIFLYTTSManager alloc] init];
+    self.IFLYTTSManager.delegate = self;
     RKChapter *chapter = [self getPageContentWithChapter:self.currentChapter andPage:self.currentPage];
     if (chapter) {
         NSString *content = [chapter stringOfPage:self.currentPage];
-        [self.ttsManager startSpeechWithContent:content];
+        [self.IFLYTTSManager startSpeechWithContent:content];
     } else {
-        [self.ttsManager startSpeechWithContent:@"当前page获取错误"];
+        [self.IFLYTTSManager startSpeechWithContent:@"当前page获取错误"];
     }
+    
 }
 
 #pragma mark - setting

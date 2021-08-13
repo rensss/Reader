@@ -42,6 +42,7 @@
 #import "RKUtils.h"                 // 实用类
 #import "RKTouchFaceIDUtil.h"       // 权限验证类
 #import "RKTTSManager.h"            // TTS 管理单例
+#import "RKIFLYTTSManager.h"        // 科大讯飞
 
 #pragma mark - model
 #import "RKModel.h"                 // model 基类

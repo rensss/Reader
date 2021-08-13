@@ -207,7 +207,7 @@
 - (void)initWithUserConfig {
     RKUserConfig.sharedInstance.currentViewWidth = kWindowWidth;
     RKUserConfig.sharedInstance.currentViewHeight = kWindowHeight;
-    DDLogInfo(@"---- keywindow:%@", NSStringFromCGRect(kKeyWindow.frame));
+//    DDLogVerbose(@"---- keywindow:%@", NSStringFromCGRect(kKeyWindow.frame));
     self.allowRotation = RKUserConfig.sharedInstance.isAllowRotation;
 }
 

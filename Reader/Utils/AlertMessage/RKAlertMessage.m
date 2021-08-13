@@ -27,6 +27,24 @@
 
 - (void)showInView:(UIView *)view dismiss:(void (^)(void))dismiss {
     
+    CGFloat delay = 1.5;
+    
+    if (_message.length > 10) {
+        delay = 1.8;
+    }
+    
+    if (_message.length > 15) {
+        delay = 2.0;
+    }
+    
+    if (_message.length > 20) {
+        delay = 2.2;
+    }
+    
+    [self showInView:view andDelay:delay dismiss:dismiss];
+}
+
+- (void)showInView:(UIView *)view andDelay:(float)delay dismiss:(void (^)(void))dismiss {
     if (!view) {
         return;
     }
@@ -50,20 +68,6 @@
         _hud.detailsLabel.text = self.message;
     }
     
-    CGFloat delay = 1.5;
-    
-    if (_message.length > 10) {
-        delay = 1.8;
-    }
-    
-    if (_message.length > 15) {
-        delay = 2.0;
-    }
-    
-    if (_message.length > 20) {
-        delay = 2.2;
-    }
-    
     [_hud hideAnimated:YES afterDelay:delay];
     
     if (dismiss) {
@@ -72,4 +76,5 @@
         });
     }
 }
+
 @end

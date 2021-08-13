@@ -39,6 +39,10 @@
 		1A2E159124DE5D24009C877F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E159024DE5D24009C877F /* UIImage+ImageEffects.m */; };
 		1A2E159524DE9D67009C877F /* RKLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E159424DE9D67009C877F /* RKLogFormatter.m */; };
 		1A31912B2521807A0033448E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A31912A2521807A0033448E /* Launch Screen.storyboard */; };
+		1A31E51C26C5188900B818CB /* RKIFLYTTSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A31E51B26C5188900B818CB /* RKIFLYTTSManager.m */; };
+		1A31E52926C51D1000B818CB /* TTSConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A31E52726C51D1000B818CB /* TTSConfig.m */; };
+		1A31E53826C6427E00B818CB /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A31E53726C6427E00B818CB /* iflyMSC.framework */; };
+		1A31E54B26C6503300B818CB /* aisound in Resources */ = {isa = PBXBuildFile; fileRef = 1A31E54A26C6503300B818CB /* aisound */; };
 		1A34E0C42379637800D27799 /* RKReadStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A34E0C32379637800D27799 /* RKReadStatusBar.m */; };
 		1A4384D9247D171800E087F3 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4384D8247D171800E087F3 /* ShareViewController.m */; };
 		1A4384DC247D171800E087F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4384DA247D171800E087F3 /* MainInterface.storyboard */; };
@@ -54,7 +58,6 @@
 		1AC0C8DC230A496200194C48 /* YuppySC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DB230A496200194C48 /* YuppySC-Regular.otf */; };
 		1AC0C8DF230A9D7C00194C48 /* RKSelectImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */; };
 		1AC349C1248F620400A6CB42 /* RKSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC349C0248F620400A6CB42 /* RKSecretViewController.m */; };
-		1AD152FF26A6BD13004A58F8 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD152FE26A6BD13004A58F8 /* iflyMSC.framework */; };
 		1AD1530126A6BD30004A58F8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD1530026A6BD30004A58F8 /* AddressBook.framework */; };
 		1AD1530326A6BD3B004A58F8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD1530226A6BD3B004A58F8 /* AudioToolbox.framework */; };
 		1AD1530526A6BD46004A58F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD1530426A6BD46004A58F8 /* AVFoundation.framework */; };
@@ -163,6 +166,12 @@
 		1A2E159324DE9D67009C877F /* RKLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKLogFormatter.h; sourceTree = "<group>"; };
 		1A2E159424DE9D67009C877F /* RKLogFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKLogFormatter.m; sourceTree = "<group>"; };
 		1A31912A2521807A0033448E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		1A31E51A26C5188900B818CB /* RKIFLYTTSManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKIFLYTTSManager.h; sourceTree = "<group>"; };
+		1A31E51B26C5188900B818CB /* RKIFLYTTSManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKIFLYTTSManager.m; sourceTree = "<group>"; };
+		1A31E52726C51D1000B818CB /* TTSConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSConfig.m; sourceTree = "<group>"; };
+		1A31E52826C51D1000B818CB /* TTSConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSConfig.h; sourceTree = "<group>"; };
+		1A31E53726C6427E00B818CB /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		1A31E54A26C6503300B818CB /* aisound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = aisound; sourceTree = "<group>"; };
 		1A34E0C22379637800D27799 /* RKReadStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReadStatusBar.h; sourceTree = "<group>"; };
 		1A34E0C32379637800D27799 /* RKReadStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReadStatusBar.m; sourceTree = "<group>"; };
 		1A4384D5247D171800E087F3 /* ReaderShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReaderShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,7 +202,6 @@
 		1AC0C8DE230A9D7C00194C48 /* RKSelectImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSelectImageViewController.m; sourceTree = "<group>"; };
 		1AC349BF248F620400A6CB42 /* RKSecretViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSecretViewController.h; sourceTree = "<group>"; };
 		1AC349C0248F620400A6CB42 /* RKSecretViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSecretViewController.m; sourceTree = "<group>"; };
-		1AD152FE26A6BD13004A58F8 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		1AD1530026A6BD30004A58F8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1AD1530226A6BD3B004A58F8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1AD1530426A6BD46004A58F8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -228,8 +236,8 @@
 				1AD1530126A6BD30004A58F8 /* AddressBook.framework in Frameworks */,
 				1AD1531A26A6BDD6004A58F8 /* UIKit.framework in Frameworks */,
 				1AD1531826A6BDCE004A58F8 /* SystemConfiguration.framework in Frameworks */,
-				1AD152FF26A6BD13004A58F8 /* iflyMSC.framework in Frameworks */,
 				1AD1531626A6BDBC004A58F8 /* QuartzCore.framework in Frameworks */,
+				1A31E53826C6427E00B818CB /* iflyMSC.framework in Frameworks */,
 				1AD1530E26A6BD7D004A58F8 /* CoreTelephony.framework in Frameworks */,
 				1AD1530526A6BD46004A58F8 /* AVFoundation.framework in Frameworks */,
 				1AD1531426A6BDB4004A58F8 /* libz.tbd in Frameworks */,
@@ -307,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4384E5247D186D00E087F3 /* Reader.entitlements */,
+				1A31E53926C643A800B818CB /* resource */,
 				1A188910226D776B00289476 /* Base */,
 				1A18890F226D776200289476 /* Models */,
 				1A18890E226D775A00289476 /* Views */,
@@ -491,6 +500,14 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		1A31E53926C643A800B818CB /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				1A31E54A26C6503300B818CB /* aisound */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
 		1A4384D6247D171800E087F3 /* ReaderShare */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +525,10 @@
 			children = (
 				1A47F5E826A0316E0000DC1D /* RKTTSManager.h */,
 				1A47F5E926A0316E0000DC1D /* RKTTSManager.m */,
+				1A31E52826C51D1000B818CB /* TTSConfig.h */,
+				1A31E52726C51D1000B818CB /* TTSConfig.m */,
+				1A31E51A26C5188900B818CB /* RKIFLYTTSManager.h */,
+				1A31E51B26C5188900B818CB /* RKIFLYTTSManager.m */,
 			);
 			path = TTSManager;
 			sourceTree = "<group>";
@@ -524,17 +545,9 @@
 		1AD152FC26A6B94B004A58F8 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				1AD1531B26A6BEF5004A58F8 /* Resource */,
-				1AD152FE26A6BD13004A58F8 /* iflyMSC.framework */,
+				1A31E53726C6427E00B818CB /* iflyMSC.framework */,
 			);
 			path = ThirdParty;
-			sourceTree = "<group>";
-		};
-		1AD1531B26A6BEF5004A58F8 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		296C8907161B58EE0DDBEC40 /* Frameworks */ = {
@@ -655,6 +668,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A31E54B26C6503300B818CB /* aisound in Resources */,
 				1A07E6EE230B9CB5006FB45C /* LingWaiSC-Medium.otf in Resources */,
 				1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */,
 				1ADC1BFB240DFC98003C5F4B /* Hanzipen.ttc in Resources */,
@@ -779,9 +793,11 @@
 				1A188918226D792200289476 /* RKViewController.m in Sources */,
 				1A188935226D7BEB00289476 /* RKAlertMessage.m in Sources */,
 				1A188934226D7BEB00289476 /* RKLoadingView.m in Sources */,
+				1A31E52926C51D1000B818CB /* TTSConfig.m in Sources */,
 				1A47F5E626A025610000DC1D /* RKTTSMenuView.m in Sources */,
 				1A2E158B24DC0E07009C877F /* RKPinNumButton.m in Sources */,
 				1A188924226D7AC300289476 /* RKModel.m in Sources */,
+				1A31E51C26C5188900B818CB /* RKIFLYTTSManager.m in Sources */,
 				1AD836062488F13C00A31BA3 /* RKUtils.m in Sources */,
 				1A2E158E24DC1744009C877F /* RKPinNumPadView.m in Sources */,
 				1A18893A226DB93E00289476 /* RKBookImprotViewController.m in Sources */,
