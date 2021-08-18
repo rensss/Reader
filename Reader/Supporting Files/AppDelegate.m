@@ -199,6 +199,18 @@
 }
 
 - (void)initIFlySpeech {
+    
+    //Set log level
+    [IFlySetting setLogFile:LVL_NORMAL];
+    
+    //Set whether to output log messages in Xcode console
+    [IFlySetting showLogcat:NO];
+
+    //Set the local storage path of SDK
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [paths objectAtIndex:0];
+    [IFlySetting setLogFilePath:cachePath];
+    
     //Appid是应用的身份信息，具有唯一性，初始化时必须要传入Appid。
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", @"c98826dd"];
     [IFlySpeechUtility createUtility:initString];

@@ -22,6 +22,10 @@
     return self;
 }
 
+- (void)dealloc {
+    DDLogInfo(@"%@ 销毁了!", [self class]);
+}
+
 #pragma mark -- initSynthesizer
 - (void)initSynthesizer {
 //    {
