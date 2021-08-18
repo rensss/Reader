@@ -40,6 +40,7 @@
 @synthesize pitchMultiplier = _pitchMultiplier;
 @synthesize rate = _rate;
 @synthesize volume = _volume;
+@synthesize engineType = _engineType;
 
 #pragma mark - lifeCycle
 + (instancetype)sharedInstance
@@ -212,6 +213,13 @@
     _volume = volume;
     
     [[NSUserDefaults standardUserDefaults] setFloat:volume forKey:@"volume"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setEngineType:(NSString *)engineType {
+    _engineType = engineType;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:engineType forKey:@"engineType"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -427,6 +435,15 @@
     }
 }
 
+- (NSString *)engineType {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"engineType"]) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"engineType"];
+    } else {
+        return @"local";
+    }
+}
+
+#pragma mark - parserAttribute
 /**
  内容显示的属性(字号/字体/颜色...)
  @return 属性字典

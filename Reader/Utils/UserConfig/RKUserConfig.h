@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) float pitchMultiplier; /**< 音调*/
 @property (nonatomic, assign) float rate; /**< 音速*/
 @property (nonatomic, assign) float volume; /**< 音量*/
+@property (nonatomic, copy) NSString *engineType; /**< 引擎类型 local(default)，cloud，auto*/
 
 /// 用户设置单例
 + (instancetype)sharedInstance;

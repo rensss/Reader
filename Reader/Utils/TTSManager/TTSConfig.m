@@ -34,9 +34,7 @@
     _volume = [NSString stringWithFormat:@"%.0f",RKUserConfig.sharedInstance.volume*100];
     _pitch = [NSString stringWithFormat:@"%.0f",RKUserConfig.sharedInstance.pitchMultiplier*100];
     _sampleRate = @"16000";
-    _engineType = @"local";
-//    _engineType = @"cloud";
-//    _engineType = @"auto";
+    _engineType = RKUserConfig.sharedInstance.engineType;
     _vcnName = @"xiaoyan";
 }
 

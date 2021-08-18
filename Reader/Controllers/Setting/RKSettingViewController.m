@@ -78,6 +78,15 @@
         }
             break;
             
+        case 6:
+        {
+            if (switchBtn.on) {
+                RKUserConfig.sharedInstance.engineType = @"local";
+            } else {
+                RKUserConfig.sharedInstance.engineType = @"cloud";
+            }
+        }
+            
         default:
             break;
     }
@@ -176,6 +185,14 @@
         cell.accessoryView = switchBtn;
         switchBtn.on = [RKUserConfig sharedInstance].pinString.length > 0;
         switchBtn.tag = kSwitchTag + 5;
+        [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    if ([self.dataArr[indexPath.row] isEqualToString:@"是否使用本地阅读引擎"]) {
+        UISwitch *switchBtn = [[UISwitch alloc] init];
+        cell.accessoryView = switchBtn;
+        switchBtn.on = [[RKUserConfig sharedInstance].engineType isEqualToString:@"local"];
+        switchBtn.tag = kSwitchTag + 6;
         [switchBtn addTarget:self action:@selector(switchChangeValue:) forControlEvents:UIControlEventValueChanged];
     }
     
@@ -280,6 +297,7 @@
                     @"是否自动阅读",
                     @"加密书籍是否自动打开",
                     @"目录是否自动滚动",
+                    @"是否使用本地阅读引擎",
                     @"是否允许横屏",
                     @"是否打开 Pin",
                     @"局域网导入",

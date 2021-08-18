@@ -212,8 +212,8 @@
     if (!_pitchMultiplierSlider) {
         _pitchMultiplierSlider = [[UISlider alloc] init];
         _pitchMultiplierSlider.tag = kSliderTag;
-        _pitchMultiplierSlider.maximumValue = 2.0;
-        _pitchMultiplierSlider.minimumValue = 0.5;
+        _pitchMultiplierSlider.maximumValue = 1.0;
+        _pitchMultiplierSlider.minimumValue = 0.0;
         _pitchMultiplierSlider.value = RKUserConfig.sharedInstance.pitchMultiplier;
         _pitchMultiplierSlider.minimumTrackTintColor = [UIColor whiteColor];      // 滑轮左边颜色，如果设置了左边的图片就不会显示
         _pitchMultiplierSlider.maximumTrackTintColor = [UIColor blackColor];      // 滑轮右边颜色，如果设置了右边的图片就不会显示
@@ -229,8 +229,8 @@
     if (!_rateSlider) {
         _rateSlider = [[UISlider alloc] init];
         _rateSlider.tag = kSliderTag + 1;
-        _rateSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate;
-        _rateSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate;
+        _rateSlider.maximumValue = 1.0;
+        _rateSlider.minimumValue = 0.0;
         _rateSlider.value = RKUserConfig.sharedInstance.rate;
         _rateSlider.minimumTrackTintColor = [UIColor whiteColor];      // 滑轮左边颜色，如果设置了左边的图片就不会显示
         _rateSlider.maximumTrackTintColor = [UIColor blackColor];      // 滑轮右边颜色，如果设置了右边的图片就不会显示
