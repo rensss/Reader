@@ -28,95 +28,29 @@
 
 #pragma mark -- initSynthesizer
 - (void)initSynthesizer {
-//    {
-//        //设置语音合成的启动参数
-//        [[IFlySpeechUtility getUtility] setParameter:@"tts" forKey:[IFlyResourceUtil ENGINE_START]];
-//        //获得语音合成的单例
-//        _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
-//        //set speed,range from 1 to 100.
-//        [_iFlySpeechSynthesizer setParameter:[NSString stringWithFormat:@"%.0f",RKUserConfig.sharedInstance.rate*100] forKey:[IFlySpeechConstant SPEED]];
-//        //set volume,range from 1 to 100.
-//        [_iFlySpeechSynthesizer setParameter:[NSString stringWithFormat:@"%.0f",RKUserConfig.sharedInstance.volume*100] forKey:[IFlySpeechConstant VOLUME]];
-//        //set pitch,range from 1 to 100.
-//        [_iFlySpeechSynthesizer setParameter:[NSString stringWithFormat:@"%.0f",RKUserConfig.sharedInstance.pitchMultiplier*100] forKey:[IFlySpeechConstant PITCH]];
-//        //设置协议委托对象
-//        _iFlySpeechSynthesizer.delegate = self;
-//        //设置本地引擎类型
-//        [_iFlySpeechSynthesizer setParameter:[IFlySpeechConstant TYPE_LOCAL] forKey:[IFlySpeechConstant ENGINE_TYPE]];
-//        //设置发音人为小燕
-//        [_iFlySpeechSynthesizer setParameter:@"xiaoyan" forKey:[IFlySpeechConstant VOICE_NAME]];
-//    }
-    {
-        TTSConfig *instance = [[TTSConfig alloc] init];
-        if (instance == nil) { return; }
-        //设置语音合成的启动参数
-        [[IFlySpeechUtility getUtility] setParameter:@"tts" forKey:[IFlyResourceUtil ENGINE_START]];
-        //获得语音合成的单例
-        _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
-        //设置协议委托对象
-        _iFlySpeechSynthesizer.delegate = self;
-        //set speed,range from 1 to 100.
-        [_iFlySpeechSynthesizer setParameter:instance.speed forKey:[IFlySpeechConstant SPEED]];
-        //set volume,range from 1 to 100.
-        [_iFlySpeechSynthesizer setParameter:instance.volume forKey:[IFlySpeechConstant VOLUME]];
-        //set pitch,range from 1 to 100.
-        [_iFlySpeechSynthesizer setParameter:instance.pitch forKey:[IFlySpeechConstant PITCH]];
-        //设置本地引擎类型，普通版设置为TYPE_LOCAL，高品质版设置为TYPE_LOCAL_XTTS
-        [_iFlySpeechSynthesizer setParameter:instance.engineType forKey:[IFlySpeechConstant ENGINE_TYPE]];
-        //设置发音人为小燕
-        [_iFlySpeechSynthesizer setParameter:instance.vcnName forKey:[IFlySpeechConstant VOICE_NAME]];
-        //获取离线语音合成发音人资源文件路径。以发音人小燕为例，请确保资源文件的存在。
-        NSString *resPath = [[NSBundle mainBundle] resourcePath];
-        NSString *vcnResPath = [[NSString alloc] initWithFormat:@"%@/aisound/common.jet;%@/aisound/xiaoyan.jet",resPath,resPath];
-        //设置离线语音合成发音人资源文件路径
-        [_iFlySpeechSynthesizer setParameter:vcnResPath forKey:@"tts_res_path"];
-    }
-    
-//    {
-//        TTSConfig *instance = [[TTSConfig alloc] init];
-//        if (instance == nil) { return; }
-//
-//        //TTS singleton
-//        if (_iFlySpeechSynthesizer == nil) {
-//            _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
-//        }
-//
-//        _iFlySpeechSynthesizer.delegate = self;
-//
-//        //set the resource path, only for offline TTS
-//        NSString *resPath = [[NSBundle mainBundle] resourcePath];
-//        NSString *newResPath = [[NSString alloc] initWithFormat:@"%@/aisound/common.jet;%@/aisound/xiaoyan.jet;%@/aisound/xiaofeng.jet",resPath,resPath,resPath];
-//
-//        NSArray *pathArray = [newResPath componentsSeparatedByString:@";"];
-//        [pathArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            BOOL result = [[NSFileManager defaultManager] fileExistsAtPath:obj];
-//            DDLogInfo(@"%@ - %@", obj, result ? @"YES" : @"NO");
-//        }];
-//
-//        [[IFlySpeechUtility getUtility] setParameter:@"tts" forKey:[IFlyResourceUtil ENGINE_START]];
-//        [_iFlySpeechSynthesizer setParameter:newResPath forKey:@"tts_res_path"];
-//
-//        //set speed,range from 1 to 100.
-//        [_iFlySpeechSynthesizer setParameter:instance.speed forKey:[IFlySpeechConstant SPEED]];
-//
-//        //set volume,range from 1 to 100.
-//        [_iFlySpeechSynthesizer setParameter:instance.volume forKey:[IFlySpeechConstant VOLUME]];
-//
-//        //set pitch,range from 1 to 100.
-//        [_iFlySpeechSynthesizer setParameter:instance.pitch forKey:[IFlySpeechConstant PITCH]];
-//
-//        //set sample rate
-//        [_iFlySpeechSynthesizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];
-//
-//        //set TTS speaker
-//        [_iFlySpeechSynthesizer setParameter:instance.vcnName forKey:[IFlySpeechConstant VOICE_NAME]];
-//
-//        //set text encoding mode
-//        [_iFlySpeechSynthesizer setParameter:@"unicode" forKey:[IFlySpeechConstant TEXT_ENCODING]];
-//
-//        //set engine type
-//        [_iFlySpeechSynthesizer setParameter:instance.engineType forKey:[IFlySpeechConstant ENGINE_TYPE]];
-//    }
+    TTSConfig *instance = [[TTSConfig alloc] init];
+    if (instance == nil) { return; }
+    //设置语音合成的启动参数
+    [[IFlySpeechUtility getUtility] setParameter:@"tts" forKey:[IFlyResourceUtil ENGINE_START]];
+    //获得语音合成的单例
+    _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
+    //设置协议委托对象
+    _iFlySpeechSynthesizer.delegate = self;
+    //set speed,range from 1 to 100.
+    [_iFlySpeechSynthesizer setParameter:instance.speed forKey:[IFlySpeechConstant SPEED]];
+    //set volume,range from 1 to 100.
+    [_iFlySpeechSynthesizer setParameter:instance.volume forKey:[IFlySpeechConstant VOLUME]];
+    //set pitch,range from 1 to 100.
+    [_iFlySpeechSynthesizer setParameter:instance.pitch forKey:[IFlySpeechConstant PITCH]];
+    //设置本地引擎类型，普通版设置为TYPE_LOCAL，高品质版设置为TYPE_LOCAL_XTTS
+    [_iFlySpeechSynthesizer setParameter:instance.engineType forKey:[IFlySpeechConstant ENGINE_TYPE]];
+    //设置发音人为小燕
+    [_iFlySpeechSynthesizer setParameter:instance.vcnName forKey:[IFlySpeechConstant VOICE_NAME]];
+    //获取离线语音合成发音人资源文件路径。以发音人小燕为例，请确保资源文件的存在。
+    NSString *resPath = [[NSBundle mainBundle] resourcePath];
+    NSString *vcnResPath = [[NSString alloc] initWithFormat:@"%@/aisound/common.jet;%@/aisound/xiaoyan.jet",resPath,resPath];
+    //设置离线语音合成发音人资源文件路径
+    [_iFlySpeechSynthesizer setParameter:vcnResPath forKey:@"tts_res_path"];
 }
 
 #pragma mark - func
@@ -219,7 +153,7 @@
     NSString *text;
     if (self.isCanceled) {
         text = @"合成已取消";
-    } else if (error.errorCode == 0) {
+    } else {
         text = @"合成结束";
     }
     

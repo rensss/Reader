@@ -33,7 +33,6 @@ typedef NS_OPTIONS(NSInteger, Status) {
 - (void)onBufferProgress:(int)progress message:(NSString *)msg RKIFLYTTSManager:(RKIFLYTTSManager *)manager;
 - (void)onSpeakProgress:(int)progress beginPos:(int)beginPos endPos:(int)endPos RKIFLYTTSManager:(RKIFLYTTSManager *)manager;
 - (void)onCompletedRKIFLYTTSManager:(RKIFLYTTSManager *)manager;
-//- (void)RKIFLYTTSManager:(RKIFLYTTSManager *)manager willSpeakRangeOfSpeechString:(NSRange)characterRange utterance:(AVSpeechUtterance *)utterance;
 
 @end
 

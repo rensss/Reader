@@ -20,7 +20,6 @@ UIPageViewControllerDelegate,
 UIPageViewControllerDataSource,
 UIGestureRecognizerDelegate,
 RKTTSMenuViewDelegate,
-RKTTSManagerDelegate,
 RKIFLYTTSManagerDelegate
 >
 
@@ -37,7 +36,6 @@ RKIFLYTTSManagerDelegate
 
 @property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
 
-//@property (nonatomic, strong) RKTTSManager *ttsManager; /**< tts*/
 @property (nonatomic, strong) RKIFLYTTSManager *IFLYTTSManager; /**< tts*/
 
 @end
@@ -421,49 +419,7 @@ RKIFLYTTSManagerDelegate
     [self startSpeech];
 }
 
-#pragma mark -- RKTTSManagerDelegate
-- (void)didStartSpeechUtteranceForRKTTSManager:(RKTTSManager *)manager {
-    DDLogInfo(@"---- start speech");
-}
-
-- (void)didFinishSpeechUtteranceForRKTTSManager:(RKTTSManager *)manager {
-    DDLogInfo(@"---- didFinishSpeech");
-    
-    if ([manager.currentContent isEqualToString:@"当前page获取错误"]) {
-        return;
-    }
-    
-    if ([manager.currentContent isEqualToString:@"已经看完了!"]) {
-        return;
-    }
-    
-    self.pageNext = self.currentPage;
-    self.chapterNext = self.currentChapter;
-    // 最后一章 && 最后一页
-    if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
-        RKAlertMessage(@"已经看完了!", self.view);
-//        self.ttsManager = [[RKTTSManager alloc] init];
-//        [self.ttsManager startSpeechWithContent:@"已经看完了!"];
-        return;
-    }
-    
-    // 本章节的最后一页
-    if (self.pageNext >= self.book.currentChapter.allPages - 1) {
-        self.chapterNext ++;
-        self.pageNext = 0;
-    } else {
-        self.pageNext ++;
-    }
-    
-    self.currentPage = self.pageNext;
-    self.currentChapter = self.chapterNext;
-    
-    [self startSpeech];
-    
-    [self refreshCurrentVC];
-}
-
-#pragma mark - RKIFLYTTSManagerDelegate
+#pragma mark -- RKIFLYTTSManagerDelegate
 - (void)onSpeakBeginForRKIFLYTTSManager:(RKIFLYTTSManager *)manager {
     
 }
@@ -473,7 +429,9 @@ RKIFLYTTSManagerDelegate
 }
 
 - (void)onBufferProgress:(int)progress message:(NSString *)msg RKIFLYTTSManager:(RKIFLYTTSManager *)manager {
-    
+    if (progress == 100) {
+        
+    }
 }
 
 - (void)onSpeakProgress:(int)progress beginPos:(int)beginPos endPos:(int)endPos RKIFLYTTSManager:(RKIFLYTTSManager *)manager {
@@ -483,39 +441,22 @@ RKIFLYTTSManagerDelegate
     if ([manager.currentContent isEqualToString:@"当前page获取错误"]) {
         return;
     }
-
+    
     if ([manager.currentContent isEqualToString:@"已经看完了!"]) {
         return;
     }
-
-    self.pageNext = self.currentPage;
-    self.chapterNext = self.currentChapter;
-    // 最后一章 && 最后一页
-    if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
-        RKAlertMessage(@"已经看完了!", self.view);
-        self.IFLYTTSManager = [[RKIFLYTTSManager alloc] init];
-        [self.IFLYTTSManager startSpeechWithContent:@"已经看完了!"];
-        return;
-    }
-
-    // 本章节的最后一页
-    if (self.pageNext >= self.book.currentChapter.allPages - 1) {
-        self.chapterNext ++;
-        self.pageNext = 0;
-    } else {
-        self.pageNext ++;
-    }
-
-    self.currentPage = self.pageNext;
-    self.currentChapter = self.chapterNext;
-
-    [self startSpeech];
-
-    [self refreshCurrentVC];
+    
+    [self performSelector:@selector(delay) withObject:nil afterDelay:0.5];
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1*NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+//        [self getNextPageContent];
+//        [self refreshCurrentVC];
+//        [self updateLocalBookData];
+//    });
 }
 
 - (void)onCompletedRKIFLYTTSManager:(RKIFLYTTSManager *)manager {
-    
+    DDLogInfo(@"onCompleted");
 }
 
 #pragma mark - 函数
@@ -618,26 +559,53 @@ RKIFLYTTSManagerDelegate
 
 #pragma mark -- 阅读
 - (void)startSpeech {
-//    self.ttsManager = [[RKTTSManager alloc] init];
-//    self.ttsManager.delegate = self;
-//    RKChapter *chapter = [self getPageContentWithChapter:self.currentChapter andPage:self.currentPage];
-//    if (chapter) {
-//        NSString *content = [chapter stringOfPage:self.currentPage];
-//        [self.ttsManager startSpeechWithContent:content];
-//    } else {
-//        [self.ttsManager startSpeechWithContent:@"当前page获取错误"];
-//    }
-    
-    self.IFLYTTSManager = [[RKIFLYTTSManager alloc] init];
-    self.IFLYTTSManager.delegate = self;
+    NSString *content;
     RKChapter *chapter = [self getPageContentWithChapter:self.currentChapter andPage:self.currentPage];
     if (chapter) {
-        NSString *content = [chapter stringOfPage:self.currentPage];
-        [self.IFLYTTSManager startSpeechWithContent:content];
+        content = [chapter stringOfPage:self.currentPage];
     } else {
-        [self.IFLYTTSManager startSpeechWithContent:@"当前page获取错误"];
+        content = @"当前page获取错误";
+    }
+    [self startSpeechWithContent:content];
+}
+
+- (void)startSpeechWithContent:(NSString *)content {
+    self.IFLYTTSManager = [[RKIFLYTTSManager alloc] init];
+    self.IFLYTTSManager.delegate = self;
+    [self.IFLYTTSManager startSpeechWithContent:content];
+}
+
+#pragma mark -- 获取内容
+- (void)getNextPageContent {
+    self.pageNext = self.currentPage;
+    self.chapterNext = self.currentChapter;
+    // 最后一章 && 最后一页
+    if (self.pageNext == self.book.currentChapter.allPages - 1 && self.chapterNext == self.book.chapters.count - 1) {
+        RKAlertMessage(@"已经看完了!", self.view);
+        self.IFLYTTSManager = [[RKIFLYTTSManager alloc] init];
+        [self.IFLYTTSManager startSpeechWithContent:@"已经看完了!"];
+        return;
+    }
+
+    // 本章节的最后一页
+    if (self.pageNext >= self.book.currentChapter.allPages - 1) {
+        self.chapterNext ++;
+        self.pageNext = 0;
+    } else {
+        self.pageNext ++;
     }
     
+    self.currentPage = self.pageNext;
+    self.currentChapter = self.chapterNext;
+    
+    [self startSpeech];
+}
+
+#pragma mark -- 延时执行
+- (void)delay {
+    [self getNextPageContent];
+    [self refreshCurrentVC];
+    [self updateLocalBookData];
 }
 
 #pragma mark - setting
