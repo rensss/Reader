@@ -438,15 +438,15 @@ RKIFLYTTSManagerDelegate
     
     if (progress < 100) { return; }
     
-    if ([manager.currentContent isEqualToString:@"当前page获取错误"]) {
-        return;
-    }
-    
-    if ([manager.currentContent isEqualToString:@"已经看完了!"]) {
-        return;
-    }
-    
-    [self performSelector:@selector(delay) withObject:nil afterDelay:0.5];
+//    if ([manager.currentContent isEqualToString:@"当前page获取错误"]) {
+//        return;
+//    }
+//
+//    if ([manager.currentContent isEqualToString:@"已经看完了!"]) {
+//        return;
+//    }
+//
+//    [self performSelector:@selector(delay) withObject:nil afterDelay:0.5];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1*NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
 //        [self getNextPageContent];
@@ -457,6 +457,14 @@ RKIFLYTTSManagerDelegate
 
 - (void)onCompletedRKIFLYTTSManager:(RKIFLYTTSManager *)manager {
     DDLogInfo(@"onCompleted");
+    
+    if ([manager.currentContent isEqualToString:@"当前page获取错误"]) { return; }
+    
+    if ([manager.currentContent isEqualToString:@"已经看完了!"]) { return; }
+    
+    [self delay];
+    
+//    [self performSelector:@selector(delay) withObject:nil afterDelay:0.5];
 }
 
 #pragma mark - 函数
