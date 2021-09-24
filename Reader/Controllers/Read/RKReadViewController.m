@@ -40,7 +40,7 @@
 }
 
 - (BOOL)prefersHomeIndicatorAutoHidden {
-    return true;
+    return YES;
 }
 
 - (void)dealloc {
