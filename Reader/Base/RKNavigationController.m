@@ -33,6 +33,18 @@
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.interactivePopGestureRecognizer.delegate = self;
     }
+    
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+        [appearance configureWithOpaqueBackground];
+        appearance.backgroundColor = [UIColor whiteColor];
+        appearance.titleTextAttributes = @{
+//            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:20],
+            NSForegroundColorAttributeName: [UIColor blackColor]
+        };
+        UINavigationBar.appearance.standardAppearance = appearance;
+        UINavigationBar.appearance.scrollEdgeAppearance = appearance;
+    }
 }
 
 - (void)dealloc {
