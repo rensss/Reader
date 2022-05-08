@@ -34,7 +34,7 @@
 #include <vector>
 #include <unordered_map>
 
-constexpr auto MMKV_VERSION = "v1.2.7";
+constexpr auto MMKV_VERSION = "v1.2.13";
 
 #ifdef DEBUG
 #    define MMKV_DEBUG
@@ -88,6 +88,7 @@ constexpr auto MMKV_PATH_SLASH = L"\\";
 using MMKVFileHandle_t = HANDLE;
 using MMKVPath_t = std::wstring;
 extern MMKVPath_t string2MMKVPath_t(const std::string &str);
+extern std::string MMKVPath_t2String(const MMKVPath_t &str);
 
 #    ifndef MMKV_EMBED_ZLIB
 #        define MMKV_EMBED_ZLIB 1
@@ -100,6 +101,7 @@ constexpr auto MMKV_PATH_SLASH = "/";
 using MMKVFileHandle_t = int;
 using MMKVPath_t = std::string;
 #    define string2MMKVPath_t(str) (str)
+#    define MMKVPath_t2String(str) (str)
 
 #    ifndef MMKV_EMBED_ZLIB
 #        define MMKV_EMBED_ZLIB 0
@@ -207,5 +209,37 @@ constexpr size_t AES_KEY_BITSET_LEN = 128;
 #endif
 
 #endif //cplus-plus
+
+#if defined(__arm__)
+  #if defined(__ARM_ARCH_7A__)
+    #if defined(__ARM_NEON__)
+      #if defined(__ARM_PCS_VFP)
+        #define MMKV_ABI "armeabi-v7a/NEON (hard-float)"
+      #else
+        #define MMKV_ABI "armeabi-v7a/NEON"
+      #endif
+    #else
+      #if defined(__ARM_PCS_VFP)
+        #define MMKV_ABI "armeabi-v7a (hard-float)"
+      #else
+        #define MMKV_ABI "armeabi-v7a"
+      #endif
+    #endif
+  #else
+   #define MMKV_ABI "armeabi"
+  #endif
+#elif defined(__i386__) || defined(_M_IX86)
+  #define MMKV_ABI "x86"
+#elif defined(__x86_64__) || defined(_M_X64)
+  #define MMKV_ABI "x86_64"
+#elif defined(__mips64)
+  #define MMKV_ABI "mips64"
+#elif defined(__mips__)
+  #define MMKV_ABI "mips"
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  #define MMKV_ABI "arm64-v8a"
+#else
+  #define MMKV_ABI "unknown"
+#endif
 
 #endif //MMKV_SRC_MMKVPREDEF_H

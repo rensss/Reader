@@ -16,7 +16,7 @@
     
     [[UIDevice currentDevice] setValue:resetOrientationTarget forKey:@"orientation"];
     
-    NSNumber *orientationTarget = [NSNumber numberWithInt:interfaceOrientation];
+    NSNumber *orientationTarget = [NSNumber numberWithInteger:interfaceOrientation];
     
     [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
 }
