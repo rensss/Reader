@@ -31,6 +31,6 @@
  *
  *  @return 启动图
  */
-+ (UIImage *)getTheLaunchImage;
+//+ (UIImage *)getTheLaunchImage;
 
 @end

@@ -18,4 +18,6 @@
 
 @property (nonatomic, assign, readonly) UIEdgeInsets safeAreaInsets; /**< 安全区域*/
 
+/// 当前最顶部 VC
+- (UIViewController *)topMostController;
 @end

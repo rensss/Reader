@@ -30,4 +30,12 @@
     }
 }
 
+- (UIViewController *)topMostController {
+    UIViewController *topController = [UIApplication sharedApplication].windows.firstObject.rootViewController;
+    while(topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    return topController;
+}
+
 @end
