@@ -139,6 +139,11 @@
     }
     
     cell.textLabel.text = self.dataArr[indexPath.row];
+    if (cell.accessoryView) {
+        UIView *switchView = cell.accessoryView;
+        [switchView removeFromSuperview];
+        cell.accessoryView = nil;
+    }
     
     if ([self.dataArr[indexPath.row] isEqualToString:@"置顶是否按时间排序"]) {
         UISwitch *switchBtn = [[UISwitch alloc] init];
