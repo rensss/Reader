@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Connection/RequestHandler/LKS_HierarchyDetailsHandler.h
+../../../LookinServer/Src/Main/Server/Connection/RequestHandler/LKS_HierarchyDetailsHandler.h

@@ -116,11 +116,6 @@ MMKV::MMKV(const string &mmapID, MMKVMode mode, string *cryptKey, MMKVPath_t *ro
     m_sharedProcessLock->m_enable = m_isInterProcess;
     m_exclusiveProcessLock->m_enable = m_isInterProcess;
 
-    // sensitive zone
-    {
-        SCOPED_LOCK(m_sharedProcessLock);
-        loadFromFile();
-    }
 }
 #endif
 
@@ -189,15 +184,16 @@ void initialize() {
 #endif     // __aarch64__ && defined(__linux__)
 
 #if defined(MMKV_DEBUG) && !defined(MMKV_DISABLE_CRYPT)
-    AESCrypt::testAESCrypt();
-    KeyValueHolderCrypt::testAESToMMBuffer();
+    // AESCrypt::testAESCrypt();
+    // KeyValueHolderCrypt::testAESToMMBuffer();
 #endif
 }
 
 ThreadOnceToken_t once_control = ThreadOnceUninitialized;
 
-void MMKV::initializeMMKV(const MMKVPath_t &rootDir, MMKVLogLevel logLevel) {
+void MMKV::initializeMMKV(const MMKVPath_t &rootDir, MMKVLogLevel logLevel, mmkv::LogHandler handler) {
     g_currentLogLevel = logLevel;
+    g_logHandler = handler;
 
     ThreadLock::ThreadOnce(&once_control, initialize);
 
@@ -306,6 +302,7 @@ void MMKV::clearMemoryCache() {
     m_output = nullptr;
 
     m_file->clearMemoryCache();
+    m_metaFile->clearMemoryCache();
     m_actualSize = 0;
     m_metaInfo->m_crcDigest = 0;
 }
@@ -540,6 +537,7 @@ bool MMKV::getString(MMKVKey_t key, string &result) {
         return false;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -558,6 +556,7 @@ bool MMKV::getBytes(MMKVKey_t key, mmkv::MMBuffer &result) {
         return false;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -576,6 +575,7 @@ MMBuffer MMKV::getBytes(MMKVKey_t key) {
         return MMBuffer();
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -593,6 +593,7 @@ bool MMKV::getVector(MMKVKey_t key, vector<string> &result) {
         return false;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -615,6 +616,7 @@ bool MMKV::getBool(MMKVKey_t key, bool defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -641,6 +643,7 @@ int32_t MMKV::getInt32(MMKVKey_t key, int32_t defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -667,6 +670,7 @@ uint32_t MMKV::getUInt32(MMKVKey_t key, uint32_t defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -693,6 +697,7 @@ int64_t MMKV::getInt64(MMKVKey_t key, int64_t defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -719,6 +724,7 @@ uint64_t MMKV::getUInt64(MMKVKey_t key, uint64_t defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -745,6 +751,7 @@ float MMKV::getFloat(MMKVKey_t key, float defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -771,6 +778,7 @@ double MMKV::getDouble(MMKVKey_t key, double defaultValue, bool *hasValue) {
         return defaultValue;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (data.length() > 0) {
         try {
@@ -794,6 +802,7 @@ size_t MMKV::getValueSize(MMKVKey_t key, bool actualSize) {
         return 0;
     }
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     if (actualSize) {
         try {
@@ -819,6 +828,7 @@ int32_t MMKV::writeValueToBuffer(MMKVKey_t key, void *ptr, int32_t size) {
     auto s_size = static_cast<size_t>(size);
 
     SCOPED_LOCK(m_lock);
+    SCOPED_LOCK(m_sharedProcessLock);
     auto data = getDataForKey(key);
     try {
         CodedInputData input(data.getPtr(), data.length());
@@ -962,12 +972,15 @@ void MMKV::sync(SyncFlag flag) {
 }
 
 void MMKV::lock() {
+    SCOPED_LOCK(m_lock);
     m_exclusiveProcessLock->lock();
 }
 void MMKV::unlock() {
+    SCOPED_LOCK(m_lock);
     m_exclusiveProcessLock->unlock();
 }
 bool MMKV::try_lock() {
+    SCOPED_LOCK(m_lock);
     return m_exclusiveProcessLock->try_lock();
 }
 
@@ -982,7 +995,7 @@ static bool backupOneToDirectoryByFilePath(const string &mmapKey, const MMKVPath
     bool ret = false;
     {
 #ifdef MMKV_WIN32
-        MMKVInfo("backup one mmkv[%s] from [%ws] to [%ws]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
+        MMKVInfo("backup one mmkv[%s] from [%ls] to [%ls]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #else
         MMKVInfo("backup one mmkv[%s] from [%s] to [%s]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #endif
@@ -1022,7 +1035,7 @@ bool MMKV::backupOneToDirectory(const string &mmapKey, const MMKVPath_t &dstPath
     // get one in cache, do it the easy way
     if (kv) {
 #ifdef MMKV_WIN32
-        MMKVInfo("backup one cached mmkv[%s] from [%ws] to [%ws]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
+        MMKVInfo("backup one cached mmkv[%s] from [%ls] to [%ls]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #else
         MMKVInfo("backup one cached mmkv[%s] from [%s] to [%s]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #endif
@@ -1096,7 +1109,7 @@ size_t MMKV::backupAllToDirectory(const MMKVPath_t &dstDir, const MMKVPath_t &sr
             auto srcCRCPath = srcPath + CRC_SUFFIX;
             if (mmapIDCRCSet.find(srcCRCPath) == mmapIDCRCSet.end()) {
 #ifdef MMKV_WIN32
-                MMKVWarning("crc not exist [%ws]", srcCRCPath.c_str());
+                MMKVWarning("crc not exist [%ls]", srcCRCPath.c_str());
 #else
                 MMKVWarning("crc not exist [%s]", srcCRCPath.c_str());
 #endif
@@ -1141,7 +1154,7 @@ static bool restoreOneFromDirectoryByFilePath(const string &mmapKey, const MMKVP
     bool ret = false;
     {
 #ifdef MMKV_WIN32
-        MMKVInfo("restore one mmkv[%s] from [%ws] to [%ws]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
+        MMKVInfo("restore one mmkv[%s] from [%ls] to [%ls]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #else
         MMKVInfo("restore one mmkv[%s] from [%s] to [%s]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #endif
@@ -1183,7 +1196,7 @@ bool MMKV::restoreOneFromDirectory(const string &mmapKey, const MMKVPath_t &srcP
     // get one in cache, do it the easy way
     if (kv) {
 #ifdef MMKV_WIN32
-        MMKVInfo("restore one cached mmkv[%s] from [%ws] to [%ws]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
+        MMKVInfo("restore one cached mmkv[%s] from [%ls] to [%ls]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #else
         MMKVInfo("restore one cached mmkv[%s] from [%s] to [%s]", mmapKey.c_str(), srcPath.c_str(), dstPath.c_str());
 #endif
@@ -1250,7 +1263,7 @@ size_t MMKV::restoreAllFromDirectory(const MMKVPath_t &srcDir, const MMKVPath_t 
             auto srcCRCPath = srcPath + CRC_SUFFIX;
             if (mmapIDCRCSet.find(srcCRCPath) == mmapIDCRCSet.end()) {
 #ifdef MMKV_WIN32
-                MMKVWarning("crc not exist [%ws]", srcCRCPath.c_str());
+                MMKVWarning("crc not exist [%ls]", srcCRCPath.c_str());
 #else
                 MMKVWarning("crc not exist [%s]", srcCRCPath.c_str());
 #endif

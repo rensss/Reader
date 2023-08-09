@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/LookinHierarchyInfo.h
+../../../LookinServer/Src/Main/Shared/LookinHierarchyInfo.h

@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/LookinCodingValueType.h
+../../../LookinServer/Src/Main/Shared/LookinCodingValueType.h

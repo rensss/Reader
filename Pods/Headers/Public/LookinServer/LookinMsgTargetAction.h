@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/Message/LookinMsgTargetAction.h
+../../../LookinServer/Src/Main/Shared/Message/LookinMsgTargetAction.h

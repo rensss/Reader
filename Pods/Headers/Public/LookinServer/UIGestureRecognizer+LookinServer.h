@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Category/UIGestureRecognizer+LookinServer.h
+../../../LookinServer/Src/Main/Server/Category/UIGestureRecognizer+LookinServer.h

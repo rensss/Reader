@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/Category/NSObject+Lookin.h
+../../../LookinServer/Src/Main/Shared/Category/NSObject+Lookin.h

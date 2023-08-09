@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/LookinScreenshotFetchManager.h
+../../../LookinServer/Src/Main/Shared/LookinScreenshotFetchManager.h

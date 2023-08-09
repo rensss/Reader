@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Inspect/LKS_LocalInspectViewController.h
+../../../LookinServer/Src/Main/Server/Inspect/LKS_LocalInspectViewController.h

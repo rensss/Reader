@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Others/LKS_AttrGroupsMaker.h
+../../../LookinServer/Src/Main/Server/Others/LKS_AttrGroupsMaker.h

@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/LookinAttributesSection.h
+../../../LookinServer/Src/Main/Shared/LookinAttributesSection.h

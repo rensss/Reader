@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/LookinDashboardBlueprint.h
+../../../LookinServer/Src/Main/Shared/LookinDashboardBlueprint.h

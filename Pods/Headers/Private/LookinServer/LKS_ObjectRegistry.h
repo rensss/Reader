@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Others/LKS_ObjectRegistry.h
+../../../LookinServer/Src/Main/Server/Others/LKS_ObjectRegistry.h

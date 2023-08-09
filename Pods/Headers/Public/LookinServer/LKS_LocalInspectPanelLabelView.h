@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Inspect/LKS_LocalInspectPanelLabelView.h
+../../../LookinServer/Src/Main/Server/Inspect/LKS_LocalInspectPanelLabelView.h

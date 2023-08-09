@@ -1,6 +1,6 @@
 [![license](https://img.shields.io/badge/license-BSD_3-brightgreen.svg?style=flat)](https://github.com/Tencent/MMKV/blob/master/LICENSE.TXT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tencent/MMKV/pulls)
-[![Release Version](https://img.shields.io/badge/release-1.2.13-brightgreen.svg)](https://github.com/Tencent/MMKV/releases)
+[![Release Version](https://img.shields.io/badge/release-1.2.16-brightgreen.svg)](https://github.com/Tencent/MMKV/releases)
 [![Platform](https://img.shields.io/badge/Platform-%20Android%20%7C%20iOS%2FmacOS%20%7C%20Win32%20%7C%20POSIX-brightgreen.svg)](https://github.com/Tencent/MMKV/wiki/home)
 
 中文版本请参看[这里](./README_CN.md)
@@ -28,8 +28,8 @@ Add the following lines to `build.gradle` on your app module:
 
 ```gradle
 dependencies {
-    implementation 'com.tencent:mmkv:1.2.13'
-    // replace "1.2.13" with any available version
+    implementation 'com.tencent:mmkv:1.2.16'
+    // replace "1.2.16" with any available version
 }
 ```
 
@@ -286,3 +286,6 @@ To give clarity of what is expected of our members, MMKV has adopted the code of
 
 ## FAQ & Feedback
 Check out the [FAQ](https://github.com/Tencent/MMKV/wiki/FAQ) first. Should there be any questions, don't hesitate to create [issues](https://github.com/Tencent/MMKV/issues).
+
+## Personal Information Protection Rules
+User privacy is taken very seriously: MMKV does not obtain, collect or upload any personal information. Please refer to the [MMKV SDK Personal Information Protection Rules](https://support.weixin.qq.com/cgi-bin/mmsupportacctnodeweb-bin/pages/aY5BAtRiO1BpoHxo) for details.

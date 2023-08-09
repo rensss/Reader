@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Perspective/LKS_PerspectiveHierarchyView.h
+../../../LookinServer/Src/Main/Server/Perspective/LKS_PerspectiveHierarchyView.h

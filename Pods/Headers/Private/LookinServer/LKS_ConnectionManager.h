@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Connection/LKS_ConnectionManager.h
+../../../LookinServer/Src/Main/Server/Connection/LKS_ConnectionManager.h

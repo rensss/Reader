@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/Peertalk/Lookin_PTPrivate.h
+../../../LookinServer/Src/Main/Shared/Peertalk/Lookin_PTPrivate.h

@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/Message/LookinMsgAttribute.h
+../../../LookinServer/Src/Main/Shared/Message/LookinMsgAttribute.h

@@ -5,13 +5,15 @@ PODS:
   - GCDWebServer/Core (3.5.4)
   - GCDWebServer/WebUploader (3.5.4):
     - GCDWebServer/Core
-  - LookinServer (1.0.5)
+  - LookinServer (1.1.7):
+    - LookinServer/Core (= 1.1.7)
+  - LookinServer/Core (1.1.7)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJExtension (3.4.1)
-  - MMKV (1.2.13):
-    - MMKVCore (~> 1.2.13)
-  - MMKVCore (1.2.13)
+  - MMKV (1.2.16):
+    - MMKVCore (~> 1.2.16)
+  - MMKVCore (1.2.16)
   - R_category (0.0.9)
 
 DEPENDENCIES:
@@ -39,14 +41,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
-  LookinServer: 3d9a02529ed94a6a08154440c26f6d7f453bb1e7
+  LookinServer: 4ce0469b066871525611d009d8d16a7a50c23491
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
-  MMKV: aac95d817a100479445633f2b3ed8961b4ac5043
-  MMKVCore: 3388952ded307e41b3ed8a05892736a236ed1b8e
+  MMKV: 784471ce430a2e2d16afef9053d63fab1b357d9e
+  MMKVCore: 9cfef4c48c6c46f66226fc2e4634d78490206a48
   R_category: 4b6a2f491cc1cbbd6440342123a9f75855c9f96f
 
 PODFILE CHECKSUM: 61452e6463bd615fdba8b864ecfb5f7b60df9cb6
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.12.1

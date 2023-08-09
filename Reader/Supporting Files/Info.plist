@@ -20,8 +20,16 @@
 	<string>0041</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+	<string></string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Would Like to Access to your Face ID.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string></string>
+	<key>NSLocationUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>YuppySC-Regular.otf</string>
@@ -57,13 +65,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSMicrophoneUsageDescription</key>
-    <string></string>
-    <key>NSLocationUsageDescription</key>
-    <string></string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string></string>
-    <key>NSContactsUsageDescription</key>
-    <string></string>
 </dict>
 </plist>

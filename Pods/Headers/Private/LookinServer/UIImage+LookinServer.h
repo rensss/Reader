@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Server/Category/UIImage+LookinServer.h
+../../../LookinServer/Src/Main/Server/Category/UIImage+LookinServer.h

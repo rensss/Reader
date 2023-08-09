@@ -224,6 +224,8 @@
 		87CBCC556A8D027DDA150191 /* libPods-ReaderShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReaderShare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94177DC82BD34600795374E4 /* Pods-ReaderShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaderShare.debug.xcconfig"; path = "Target Support Files/Pods-ReaderShare/Pods-ReaderShare.debug.xcconfig"; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
+		AE2814872A83342B006B8D48 /* ReaderDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReaderDebug.entitlements; sourceTree = "<group>"; };
+		AE2814882A833461006B8D48 /* ReaderShareDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReaderShareDebug.entitlements; sourceTree = "<group>"; };
 		D421B9BE9DB0080C1EDE9100 /* libPods-Reader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Reader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.debug.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,6 +316,7 @@
 		1A1888F5226D709100289476 /* Reader */ = {
 			isa = PBXGroup;
 			children = (
+				AE2814872A83342B006B8D48 /* ReaderDebug.entitlements */,
 				1A4384E5247D186D00E087F3 /* Reader.entitlements */,
 				1A31E53926C643A800B818CB /* resource */,
 				1A188910226D776B00289476 /* Base */,
@@ -511,6 +514,7 @@
 		1A4384D6247D171800E087F3 /* ReaderShare */ = {
 			isa = PBXGroup;
 			children = (
+				AE2814882A833461006B8D48 /* ReaderShareDebug.entitlements */,
 				1A4384E6247D302200E087F3 /* ReaderShare.entitlements */,
 				1A4384D7247D171800E087F3 /* ShareViewController.h */,
 				1A4384D8247D171800E087F3 /* ShareViewController.m */,
@@ -949,7 +953,7 @@
 			baseConfigurationReference = EA09352FB9B7EA91A845E811 /* Pods-Reader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Reader/Reader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Reader/ReaderDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
@@ -965,7 +969,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader;
+				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader.pro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1005,7 +1009,7 @@
 			baseConfigurationReference = 94177DC82BD34600795374E4 /* Pods-ReaderShare.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_ENTITLEMENTS = ReaderShare/ReaderShare.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ReaderShare/ReaderShareDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY9HF8C4PA;
@@ -1016,7 +1020,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader.ReaderShare;
+				PRODUCT_BUNDLE_IDENTIFIER = micsoft.Reader.pro.ReaderShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

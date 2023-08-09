@@ -1,1 +1,1 @@
-../../../LookinServer/Src/Shared/LookinConnectionAttachment.h
+../../../LookinServer/Src/Main/Shared/LookinConnectionAttachment.h
