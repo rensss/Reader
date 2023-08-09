@@ -9,7 +9,7 @@
 #import "RKIFLYTTSManager.h"
 #import "TTSConfig.h"
 
-#define kIFlyAppid @"c98826dd"
+#define kIFlyAppid @"0c589578"
 
 @implementation RKIFLYTTSManager
 

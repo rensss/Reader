@@ -132,15 +132,17 @@
         cell.isCurrent = NO;
     }
     
-    /*
-     if (indexPath.row == self.book.currentChapterNum) { // 当前章节
-         cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
-             cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:1.0f];
-         }
-     }
-     */
+    if (indexPath.row == self.book.currentChapterNum) { // 当前章节
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"reader_bg_2"] || [[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
+//            cell.textLabel.textColor = [UIColor colorWithHexString:@"ffffff" withAlpha:1.0f];
+//        }
+    } else {
+        cell.textLabel.font = [UIFont systemFontOfSize:18.0f];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+     
     
     return cell;
 }

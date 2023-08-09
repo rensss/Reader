@@ -21,7 +21,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.titleMarqueeView];
-        
+        [self.titleMarqueeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).mas_offset(0);
+            make.bottom.equalTo(self.contentView.mas_bottom).mas_offset(0);
+            make.leading.equalTo(self.contentView.mas_leading).mas_offset(8);
+            make.trailing.equalTo(self.contentView.mas_trailing).mas_offset(-8);
+        }];
 //        [self.contentView addSubview:self.titleView];
 //        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.top.mas_offset(0);
@@ -87,7 +92,7 @@
 #pragma mark - getting
 - (RKMarqueeView *)titleMarqueeView {
     if (!_titleMarqueeView) {
-        _titleMarqueeView = [[RKMarqueeView alloc] initWithFrame:CGRectMake(8, 0, (RKUserConfig.sharedInstance.currentViewWidth*0.8) - 16, 50) direction:RKMarqueeViewDirectionLeftward];
+        _titleMarqueeView = [[RKMarqueeView alloc] initWithFrame:CGRectZero direction:RKMarqueeViewDirectionLeftward];
         _titleMarqueeView.timeIntervalPerScroll = 0.0f;
         _titleMarqueeView.userInteractionEnabled = NO;
         _titleMarqueeView.scrollSpeed = 60.0f;

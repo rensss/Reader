@@ -323,6 +323,7 @@
     self.changeChapterBlock = handler;
 }
 
+/// 字号调整
 - (void)shouldChangeFontSize:(void (^)(void))handler {
     self.fontSizrChangeBlock = handler;
 }
@@ -408,7 +409,7 @@
     }
     
     RKChapter *chapter = self.book.chapters[self.currentIndex];
-    self.chapterLabel.text = chapter.title;
+    self.chapterLabel.text = [chapter.title stringByTrimmingWhitespaceAndAllNewLine];
     
     if (self.changeChapterBlock) {
         self.changeChapterBlock(isNextChapter);
@@ -697,7 +698,7 @@
         _chapterLabel.textColor = [UIColor whiteColor];
         _chapterLabel.font = [UIFont systemFontOfSize:18];
         _chapterLabel.textAlignment = NSTextAlignmentCenter;
-        _chapterLabel.text = self.book.currentChapter.title;
+        _chapterLabel.text = [self.book.currentChapter.title stringByTrimmingWhitespaceAndAllNewLine];
         self.currentIndex = self.book.currentChapterNum;
     }
     return _chapterLabel;
