@@ -263,8 +263,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    // 注册需要实现 Touch 效果的view， 这里是 用力按下cell,弹出预览小视图，同时上滑底部出现若干个选项（peek功能）
-    // 首先判断设备系统是否支持，否则会崩溃
+    // 注册需要实现 Touch 效果的 view, 这里是 用力按下cell, 弹出预览小视图, 同时上滑底部出现若干个选项（peek功能）
+    // 首先判断设备系统是否支持, 否则会崩溃
     if ([self respondsToSelector:@selector(traitCollection)]) {
         if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
             if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {

@@ -375,7 +375,12 @@ RKIFLYTTSManagerDelegate
     } else {
         self.pageNext ++;
     }
-//    DDLogInfo(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
+    
+    if (self.chapterNext >= self.book.chapters.count) {
+        RKAlertMessage(@"恭喜全部看完!", self.view);
+        return nil;
+    }
+    DDLogInfo(@"chapter:%ld -- page:%ld",self.chapterNext,self.pageNext);
     return [self viewControllerChapter:self.chapterNext andPage:self.pageNext];
 }
 
@@ -494,6 +499,12 @@ RKIFLYTTSManagerDelegate
 
 - (RKChapter *)getPageContentWithChapter:(NSInteger)chapter andPage:(NSInteger)page {
     // 准备章节
+    
+    if (chapter >= self.book.chapters.count) {
+        RKAlertMessage(@"错误 code:5", self.view);
+        return nil;
+    }
+    
     RKChapter *Chapter = self.book.chapters[chapter];
     NSRange contentRange = NSMakeRange(Chapter.location, Chapter.length);
     

@@ -80,7 +80,7 @@
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         if ([self.book.chapters count] > 0) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.book.currentChapterNum inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];            
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.book.currentChapterNum inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         }
     }];
 }
