@@ -101,6 +101,7 @@
     pinVC.promptTitle = @"设置 Pin 码";
     pinVC.disableAuthentication = YES;
     pinVC.disableAutoAuthentication = YES;
+    pinVC.sourceString = @"打开 Pin";
 
     [self presentViewController:pinVC animated:YES completion:nil];
 }
@@ -113,6 +114,12 @@
     pinVC.promptTitle = @"输入 Pin 码";
     pinVC.disableAuthentication = NO;
     pinVC.disableAutoAuthentication = NO;
+    pinVC.sourceString = @"关闭 Pin";
+    
+    __weak typeof(self) weakSelf = self;
+    [pinVC pinVCDidDisappear:^{
+        [weakSelf.tableView reloadData];
+    }];
     
     [self presentViewController:pinVC animated:YES completion:nil];
 }
@@ -122,6 +129,14 @@
 - (BOOL)getSwichValueWithTag:(NSInteger)tag {
     UISwitch *switchView = [self.view viewWithTag:tag];
     return switchView.on;
+}
+
+- (void)jumpToImport {
+    RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
+    importVC.showType = RKImprotShowTypePresent;
+    RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - delegate
@@ -210,11 +225,20 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     if ([self.dataArr[indexPath.row] isEqualToString:@"局域网导入"]) {
-        RKBookImprotViewController *importVC = [[RKBookImprotViewController alloc] init];
-        importVC.showType = RKImprotShowTypePresent;
-        RKNavigationController *nav = [[RKNavigationController alloc] initWithRootViewController:importVC];
-        nav.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:nav animated:YES completion:nil];
+        if (RKUserConfig.sharedInstance.pinString.length == 0) {
+            [self jumpToImport];
+            return;
+        }
+        
+        RKPinViewController *pinVC = [[RKPinViewController alloc] initWithDelegate:self];
+        
+        self.navigationController.view.tag = RKPinViewControllerContentViewTag;
+        pinVC.translucentBackground = YES;
+        pinVC.promptColor = [UIColor blackColor];
+        pinVC.sourceString = @"局域网导入";
+        
+        [self presentViewController:pinVC animated:YES completion:nil];
+        
     }
     
     if ([self.dataArr[indexPath.row] isEqualToString:@"删除全部书籍"]) {
@@ -271,12 +295,27 @@
 }
 
 - (BOOL)pinViewController:(RKPinViewController *)pinViewController isPinValid:(NSString *)pin {
-    if ([self getSwichValueWithTag:kSwitchTag+5]) {
-        RKUserConfig.sharedInstance.pinString = pin;
-        return YES;
-    } else {
+    DDLogDebug(@"---- pin:%@", pin);
+    
+    if ([pinViewController.sourceString isEqualToString:@"关闭 Pin"]) {
+        if ([RKUserConfig.sharedInstance.pinString isEqualToString:pin]) {
+            RKUserConfig.sharedInstance.pinString = @"";
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    if ([pinViewController.sourceString isEqualToString:@"局域网导入"]) {
         return [RKUserConfig.sharedInstance.pinString isEqualToString:pin];
     }
+    
+    if ([pinViewController.sourceString isEqualToString:@"打开 Pin"]) {
+        RKUserConfig.sharedInstance.pinString = pin;
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (BOOL)userCanRetryInPinViewController:(RKPinViewController *)pinViewController {
@@ -287,10 +326,24 @@
     [self.tableView reloadData];
 }
 
+- (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
+    DDLogDebug(@"---- WillDismiss WasSuccessful");
+}
+
 - (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(RKPinViewController *)pinViewController {
-    if (![self getSwichValueWithTag:kSwitchTag+5]) {
+    DDLogDebug(@"---- DidDismiss WasSuccessful");
+    
+    if ([pinViewController.sourceString isEqualToString:@"关闭 Pin"]) {
         RKUserConfig.sharedInstance.pinString = @"";
         [self.tableView reloadData];
+    }
+    
+    if ([pinViewController.sourceString isEqualToString:@"打开 Pin"]) {
+        [self.tableView reloadData];
+    }
+    
+    if ([pinViewController.sourceString isEqualToString:@"局域网导入"]) {
+        [self jumpToImport];
     }
 }
 

@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIView *blurView;
 @property (nonatomic, strong) NSArray *blurViewContraints;
 
+@property (nonatomic, copy) void(^disappearCallback)(void); /**< 消失回调 */
+
 @end
 
 @implementation RKPinViewController
@@ -71,9 +73,22 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if (self.disappearCallback) {
+        self.disappearCallback();
+    }
+}
+
 #pragma mark - 事件
 - (void)closeClick {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - func
+- (void)pinVCDidDisappear:(void(^)(void))handler {
+    self.disappearCallback = handler;
 }
 
 #pragma mark - delegate

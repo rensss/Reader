@@ -45,8 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL disableAuthentication;           /**< 是否开启生物认证*/
 @property (nonatomic, assign) BOOL disableAutoAuthentication;       /**< 是否自动校验生物认证*/
 @property (nonatomic, assign) BOOL disableDismissAniamtion;         /**< 是否取消动画*/
+@property (nonatomic, copy) NSString *sourceString;                 /**< 来源 */
 
 - (instancetype)initWithDelegate:(nullable id<RKPinViewControllerDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+
+/// VC DidDisappear
+/// - Parameter handler: 回调
+- (void)pinVCDidDisappear:(void(^)(void))handler;
 
 @end
 
