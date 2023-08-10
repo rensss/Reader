@@ -295,7 +295,7 @@
 }
 
 - (CGRect)readStatusBarFrame {
-    CGRect rect = CGRectMake(0, self.currentViewHeight - self.currentSafeAreaInsets.bottom - (kIsPad?15:12), self.currentViewWidth, 22);
+    CGRect rect = CGRectMake(0, self.currentViewHeight - self.currentSafeAreaInsets.bottom - (kIsPad?15:12) - (kIS_IPHONEX?0:10), self.currentViewWidth, 22);
     return rect;
 }
 
