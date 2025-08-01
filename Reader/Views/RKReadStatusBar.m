@@ -41,27 +41,27 @@
         [self addSubview:self.time];
         [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
-            make.left.mas_equalTo(self).mas_offset(3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.left);
+            make.leading.mas_equalTo(self).mas_offset(kIS_IPHONEX ? 13 : 3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.left);
             make.bottom.mas_equalTo(self).mas_offset(-1);
         }];
         
         [self addSubview:self.batteryNum];
         [self.batteryNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(10);
-            make.top.mas_equalTo(self).mas_offset(1);
-            make.left.mas_equalTo(self).mas_offset(3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.left);
+            make.top.mas_offset(1);
+            make.leading.mas_equalTo(self).mas_offset(kIS_IPHONEX ? 6 : 3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.left);
         }];
         
         [self addSubview:self.batteryImage];
         [self.batteryImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(7);
             make.centerY.mas_equalTo(self.batteryNum);
-            make.left.mas_equalTo(self.batteryNum.mas_right).mas_offset(3);
+            make.leading.mas_equalTo(self.batteryNum.mas_trailing).mas_offset(3);
         }];
         
         [self addSubview:self.pageNum];
         [self.pageNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self).mas_offset(-(3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.right));
+            make.trailing.mas_equalTo(self).mas_offset(-(kIS_IPHONEX ? 13 : 3 + RKUserConfig.sharedInstance.currentSafeAreaInsets.right));
             make.centerY.mas_equalTo(self);
         }];
         
@@ -69,8 +69,8 @@
         [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(self);
             make.centerY.mas_equalTo(self);
-            make.right.mas_equalTo(self.pageNum.mas_left).mas_offset(-5);
-            make.left.mas_equalTo(self.batteryImage.mas_right).mas_offset(5);
+            make.trailing.mas_equalTo(self.pageNum.mas_leading).mas_offset(-5);
+            make.leading.mas_equalTo(self.batteryImage.mas_trailing).mas_offset(5);
         }];
         
         [self.batteryImage setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
@@ -86,6 +86,16 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    // 获取 safeAreaInsets
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets insets = self.safeAreaInsets;
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 //    DDLogVerbose(@"---> %@ 销毁了",self.class);
@@ -95,7 +105,7 @@
 - (void)updateCurrentTime {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm:ss"];
-
+    
     NSDate *datenow = [NSDate date];
     NSString *currentTimeString = [formatter stringFromDate:datenow];
     

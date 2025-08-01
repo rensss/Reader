@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param superView 父view
  @return 菜单
  */
-- (instancetype)initWithFrame:(CGRect)frame withBook:(RKBook *)book withSuperView:(UIView *)superView;
+- (instancetype)initWithFrame:(CGRect)frame withBook:(RKBook *)book withSuperView:(UIView *)superView dismissHandler:(void(^)(void))handler;
 
 /**
  选中章节的回调

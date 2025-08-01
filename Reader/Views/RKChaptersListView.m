@@ -11,13 +11,14 @@
 
 #define kListWidth (RKUserConfig.sharedInstance.currentViewWidth * 0.8)
 
-@interface RKChaptersListView () <UITableViewDelegate,UITableViewDataSource>
+@interface RKChaptersListView () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) RKBook *book; /**< 当前书籍*/
 @property (nonatomic, strong) UIButton *bgButton; /**< 大背景*/
+@property (nonatomic, strong) UIView *tableViewBgView; /**< 列表背景 */
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, copy) void(^callBack)(void); /**< 回调*/
-
+@property (nonatomic, copy) void(^dismissHandler)(void); /**< 消失的回调 */
 @end
 
 
@@ -31,7 +32,7 @@
  @param superView 父view
  @return 菜单
  */
-- (instancetype)initWithFrame:(CGRect)frame withBook:(RKBook *)book withSuperView:(UIView *)superView {
+- (instancetype)initWithFrame:(CGRect)frame withBook:(RKBook *)book withSuperView:(UIView *)superView dismissHandler:(void(^)(void))handler {
     self = [super initWithFrame:frame];
     if (self) {
         _book = book;
@@ -42,14 +43,14 @@
             make.edges.mas_equalTo(self);
         }];
         
-        [self addSubview:self.tableView];
-        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kStatusHight);
-            make.left.mas_equalTo(self.mas_left).mas_offset(-kListWidth);
+        [self addSubview:self.tableViewBgView];
+        [self.tableViewBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(0);
+            make.leading.mas_equalTo(self.mas_leading).mas_offset(-kListWidth);
             make.width.mas_equalTo(kListWidth);
-            make.height.mas_equalTo(kWindowHeight-kSafeAreaBottom-20);
+            make.height.mas_equalTo(kWindowHeight);
         }];
-        
+        self.dismissHandler = handler;
         [self layoutIfNeeded];
     }
     return self;
@@ -71,9 +72,8 @@
 
 /// 显示
 - (void)show {
-
     [UIView animateWithDuration:0.25f animations:^{
-        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.tableViewBgView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left);
         }];
         // 注意需要再执行一次更新约束
@@ -87,13 +87,14 @@
 
 - (void)dismiss {
     [UIView animateWithDuration:0.25f animations:^{
-        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.tableViewBgView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).mas_offset(-kListWidth);
         }];
         // 注意需要再执行一次更新约束
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        self.dismissHandler();
     }];
 }
 
@@ -121,6 +122,7 @@
     if (!cell) {
         cell = [[RKChaptersListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([RKChaptersListCell class])];
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     RKChapter *chapter = self.book.chapters[indexPath.row];
@@ -145,25 +147,58 @@
     return _bgButton;
 }
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] init];
+- (UIView *)tableViewBgView {
+    if (!_tableViewBgView) {
+        // 外层 View：负责阴影
+        _tableViewBgView = [[UIView alloc] init];
+        _tableViewBgView.backgroundColor = [UIColor clearColor];
+        _tableViewBgView.layer.shadowColor = [UIColor blackColor].CGColor;
+        _tableViewBgView.layer.shadowOffset = CGSizeMake(3, 0);
+        _tableViewBgView.layer.shadowOpacity = 0.8;
+        _tableViewBgView.layer.shadowRadius = 8;
         
+        // 内层容器 View：负责背景图和裁剪
+        UIView *bgContainerView = [[UIView alloc] init];
+        bgContainerView.backgroundColor = [UIColor clearColor];
+        bgContainerView.layer.masksToBounds = YES;
+        
+        // 设置背景图
         UIImage *image = [UIImage imageNamed:[RKUserConfig sharedInstance].bgImageName];
         if ([[RKUserConfig sharedInstance].bgImageName isEqualToString:@"black"]) {
             image = [UIImage imageWithColor:[UIColor blackColor]];
         }
-        _tableView.layer.contents = (id)image.CGImage;
-        _tableView.layer.contentsGravity = kCAGravityResizeAspectFill;
+        bgContainerView.layer.contents = (id)image.CGImage;
+        bgContainerView.layer.contentsGravity = kCAGravityResizeAspectFill;
         
+        [_tableViewBgView addSubview:bgContainerView];
+        [bgContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_tableViewBgView);
+        }];
+        
+        // 添加 tableView 到 bgContainerView 中
+        [bgContainerView addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(kStatusHight);
+            make.leading.trailing.mas_equalTo(bgContainerView);
+            make.bottom.mas_offset(-(kSafeAreaBottom + RKUserConfig.sharedInstance.readStatusBarFrame.size.height));
+        }];
+    }
+    return _tableViewBgView;
+}
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.rowHeight = 50;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.layer.masksToBounds = YES;
         
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
-
 
 @end

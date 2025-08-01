@@ -32,6 +32,7 @@ RKIFLYTTSManagerDelegate
 @property (nonatomic, assign) NSInteger pageNext; /**< 上/下 一页*/
 
 @property (nonatomic, assign) BOOL isShowMenu; /**< 是否已弹出菜单*/
+@property (nonatomic, assign) BOOL isShowList; /**< 是否已展示章节列表 */
 @property (nonatomic, strong) RKReadMenuView *menuView; /**< 菜单view*/
 
 @property (nonatomic, strong) NSMutableArray *previewActionArray; /**< 3Dtouch 上滑选项*/
@@ -169,13 +170,15 @@ RKIFLYTTSManagerDelegate
     // 若已显示菜单则忽略
     if (self.isShowMenu) return;
     
+    if (self.isShowList) return;
+    
     [UIApplication sharedApplication].statusBarHidden = NO;
     
     self.isShowMenu = YES;
     // 菜单view
     self.menuView = [[RKReadMenuView alloc] initWithFrame:self.view.bounds withBook:self.book withSuperView:self.view];
     [self.menuView show];
-
+    
     __weak typeof(self) weakSelf = self;
     // 菜单消失
     [self.menuView dismissWithHandler:^{
@@ -245,11 +248,15 @@ RKIFLYTTSManagerDelegate
     
     // 目录
     [self.menuView shouldShowBookCatalog:^{
-        RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:weakSelf.view.bounds withBook:weakSelf.book withSuperView:weakSelf.view];
+        RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:kKeyWindow.bounds withBook:weakSelf.book withSuperView:weakSelf.view dismissHandler:^{
+            weakSelf.isShowList = NO;
+        }];
+        weakSelf.isShowList = YES;
         // 显示
         [chaptersListView show];
         
         [chaptersListView didSelectChapter:^{
+            weakSelf.isShowList = NO;
             // 更新阅读记录
             weakSelf.currentPage = 0;
             weakSelf.currentChapter = weakSelf.book.currentChapterNum;
