@@ -95,8 +95,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     if ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending) {
-        // 用于处理来自 ShortcutItem 的唤醒动作，我们的 App 一开始有一大堆的界面广告之类的，调用早的话，tabbarController 还没创建，就没办法定位发动跳转的界面了
-        // 所以还是稍等下，等 tabbarController 创建好了我们再继续处理跳转逻辑
+        // 用于处理来自 ShortcutItem 的唤醒动作，等 tabbarController 创建好了我们再继续处理跳转逻辑
         // 另外，这里仅仅处理首次启动时来自 ShortcutItem 的跳转逻辑，如果是从后台唤醒的话，请使用 -application:performActionForShortcutItem: completionHandler:这个回调
 //        __weak typeof(self) weakSelf = self;
 //        [[RACObserve(self, tabbarController) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(MTGroupTabbarController *tabbarController) {
