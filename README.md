@@ -29,8 +29,12 @@
 - [ ] ... 
 
 ---
+<details>
 
-screenshot 
+<summary>screenshot </summary>
+
 | home                                 | setting                                  | detail                                          |
 | ------------------------------------ | ---------------------------------------- | ----------------------------------------------- |
 | ![home](./reader_screenshot/home.png) | ![settings](./reader_screenshot/settings.png) | ![detail-settings](./reader_screenshot/detail-settings.png) |
+
+</details>
