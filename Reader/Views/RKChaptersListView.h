@@ -27,6 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)didSelectChapter:(void(^)(void))handler;
 
+/**
+ 选中书签的回调
+ @param handler 回调(回传选中的书签)
+ */
+- (void)didSelectBookmark:(void(^)(RKBookmark *bookmark))handler;
+
 /// 显示
 - (void)show;
 

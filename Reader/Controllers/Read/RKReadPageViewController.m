@@ -260,11 +260,13 @@ RKIFLYTTSManagerDelegate
     [self.menuView shouldShowBookCatalog:^{
         RKChaptersListView *chaptersListView = [[RKChaptersListView alloc] initWithFrame:kKeyWindow.bounds withBook:weakSelf.book withSuperView:weakSelf.view dismissHandler:^{
             weakSelf.isShowList = NO;
+            // 列表内可能删了当前页书签,回来刷新角标
+            [weakSelf refreshCurrentBookmarkFlag];
         }];
         weakSelf.isShowList = YES;
         // 显示
         [chaptersListView show];
-        
+
         [chaptersListView didSelectChapter:^{
             weakSelf.isShowList = NO;
             // 更新阅读记录
@@ -272,6 +274,21 @@ RKIFLYTTSManagerDelegate
             weakSelf.currentChapter = weakSelf.book.currentChapterNum;
             // 设置当前显示的readVC
             [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:weakSelf.currentChapter andPage:weakSelf.currentPage]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+            [weakSelf updateLocalBookData];
+        }];
+
+        [chaptersListView didSelectBookmark:^(RKBookmark *bookmark) {
+            weakSelf.isShowList = NO;
+            if (bookmark.chapterNum >= weakSelf.book.chapters.count) return;
+
+            // 先取章节触发分页,再按偏移换算页码
+            RKChapter *chapterObj = [weakSelf getPageContentWithChapter:bookmark.chapterNum andPage:0];
+            if (!chapterObj) return;
+            NSInteger page = [chapterObj pageOfLocation:bookmark.location];
+
+            weakSelf.currentChapter = bookmark.chapterNum;
+            weakSelf.currentPage = page;
+            [weakSelf.pageViewController setViewControllers:@[[weakSelf viewControllerChapter:bookmark.chapterNum andPage:page]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
             [weakSelf updateLocalBookData];
         }];
     }];

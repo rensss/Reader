@@ -8,6 +8,7 @@
 
 #import "RKChaptersListView.h"
 #import "RKChaptersListCell.h"
+#import "RKBookmarkListCell.h"
 
 #define kListWidth (RKUserConfig.sharedInstance.currentViewWidth * 0.8)
 
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) UITableView *tableView; /**< 列表*/
 @property (nonatomic, copy) void(^callBack)(void); /**< 回调*/
 @property (nonatomic, copy) void(^dismissHandler)(void); /**< 消失的回调 */
+@property (nonatomic, strong) UISegmentedControl *segmentControl; /**< 目录/书签 切换*/
+@property (nonatomic, strong) UILabel *emptyLabel; /**< 书签空占位*/
+@property (nonatomic, copy) void(^bookmarkCallBack)(RKBookmark *bookmark); /**< 书签回调*/
 @end
 
 
@@ -70,6 +74,26 @@
     self.callBack = handler;
 }
 
+/**
+ 选中书签的回调
+ @param handler 回调(回传选中的书签)
+ */
+- (void)didSelectBookmark:(void(^)(RKBookmark *bookmark))handler {
+    self.bookmarkCallBack = handler;
+}
+
+/// 分段切换
+- (void)segmentChanged {
+    [self.tableView reloadData];
+    [self updateEmptyLabel];
+}
+
+/// 更新空占位显隐
+- (void)updateEmptyLabel {
+    BOOL showEmpty = (self.segmentControl.selectedSegmentIndex == 1) && (self.book.bookmarks.count == 0);
+    self.emptyLabel.hidden = !showEmpty;
+}
+
 /// 显示
 - (void)show {
     [UIView animateWithDuration:0.25f animations:^{
@@ -79,7 +103,7 @@
         // 注意需要再执行一次更新约束
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
-        if ([self.book.chapters count] > 0) {
+        if (self.segmentControl.selectedSegmentIndex == 0 && [self.book.chapters count] > 0) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.book.currentChapterNum inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         }
     }];
@@ -101,39 +125,91 @@
 #pragma mark - 代理
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.segmentControl.selectedSegmentIndex == 1) {
+        if (indexPath.row < self.book.bookmarks.count && self.bookmarkCallBack) {
+            self.bookmarkCallBack(self.book.bookmarks[indexPath.row]);
+        }
+        [self dismiss];
+        return;
+    }
+
     self.book.currentChapterNum = indexPath.row;
     self.book.currentPage = 0;
-    
+
     if (self.callBack) {
         self.callBack();
     }
-    
+
     [self dismiss];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.segmentControl.selectedSegmentIndex == 1 ? 72 : 50;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.segmentControl.selectedSegmentIndex == 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle != UITableViewCellEditingStyleDelete) return;
+    if (self.segmentControl.selectedSegmentIndex != 1) return;
+    if (indexPath.row >= self.book.bookmarks.count) return;
+
+    [self.book.bookmarks removeObjectAtIndex:indexPath.row];
+    [[RKFileManager shareInstance] updateBookmarksForBook:self.book];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updateEmptyLabel];
 }
 
 #pragma mark -- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.segmentControl.selectedSegmentIndex == 1) {
+        return [self.book.bookmarks count];
+    }
     return [self.book.chapters count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.segmentControl.selectedSegmentIndex == 1) {
+        RKBookmarkListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RKBookmarkListCell class])];
+        if (!cell) {
+            cell = [[RKBookmarkListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([RKBookmarkListCell class])];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        RKBookmark *bookmark = self.book.bookmarks[indexPath.row];
+        cell.bookmark = bookmark;
+        if (bookmark.chapterNum < self.book.chapters.count) {
+            RKChapter *chapter = self.book.chapters[bookmark.chapterNum];
+            cell.chapterTitle = chapter.title;
+        } else {
+            cell.chapterTitle = @"未知章节";
+        }
+        return cell;
+    }
+
     RKChaptersListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RKChaptersListCell class])];
-    
+
     if (!cell) {
         cell = [[RKChaptersListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([RKChaptersListCell class])];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+
     RKChapter *chapter = self.book.chapters[indexPath.row];
     cell.chapter = chapter;
-    
+
     if (indexPath.row == self.book.currentChapterNum) { // 当前章节
         cell.isCurrent = YES;
     } else {
         cell.isCurrent = NO;
     }
-    
+
     return cell;
 }
 
@@ -175,12 +251,27 @@
             make.edges.equalTo(_tableViewBgView);
         }];
         
+        // 目录/书签 分段
+        [bgContainerView addSubview:self.segmentControl];
+        [self.segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(kStatusHight + 8);
+            make.leading.mas_equalTo(16);
+            make.trailing.mas_equalTo(-16);
+            make.height.mas_equalTo(32);
+        }];
+
         // 添加 tableView 到 bgContainerView 中
         [bgContainerView addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kStatusHight);
+            make.top.mas_equalTo(self.segmentControl.mas_bottom).mas_offset(8);
             make.leading.trailing.mas_equalTo(bgContainerView);
             make.bottom.mas_offset(-(kSafeAreaBottom + RKUserConfig.sharedInstance.readStatusBarFrame.size.height));
+        }];
+
+        // 书签空占位
+        [bgContainerView addSubview:self.emptyLabel];
+        [self.emptyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(bgContainerView);
         }];
     }
     return _tableViewBgView;
@@ -189,16 +280,36 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
-        
+
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.rowHeight = 50;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.layer.masksToBounds = YES;
-        
+
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
+}
+
+- (UISegmentedControl *)segmentControl {
+    if (!_segmentControl) {
+        _segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"目录", @"书签"]];
+        _segmentControl.selectedSegmentIndex = 0;
+        [_segmentControl addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
+    }
+    return _segmentControl;
+}
+
+- (UILabel *)emptyLabel {
+    if (!_emptyLabel) {
+        _emptyLabel = [[UILabel alloc] init];
+        _emptyLabel.text = @"暂无书签,阅读页下拉即可添加";
+        _emptyLabel.font = [UIFont systemFontOfSize:14.0f];
+        _emptyLabel.textColor = kReadViewBottomTintColor;
+        _emptyLabel.hidden = YES;
+    }
+    return _emptyLabel;
 }
 
 @end
