@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) RKChapter *chapter; /**< 当前章节*/
 @property (nonatomic, copy) NSString *content; /**< 内容*/
 @property (nonatomic, strong) RKBook *book; /**< 当前书籍*/
+@property (nonatomic, assign) BOOL isBookmarked; /**< 当前页是否有书签*/
 
 @end
 

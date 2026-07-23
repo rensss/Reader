@@ -496,7 +496,8 @@ RKIFLYTTSManagerDelegate
     readVC.chapter = self.book.currentChapter;
     readVC.content = [Chapter stringOfPage:page];
     readVC.book = self.book;
-    
+    readVC.isBookmarked = [self isPageBookmarkedWithChapterObj:Chapter chapterNum:chapter page:page];
+
     // 排除开始页内容为空
     if (self.book.currentChapterNum == 0 && [readVC.content length] == 0) {
         readVC.content = @"开始";
@@ -527,6 +528,33 @@ RKIFLYTTSManagerDelegate
     Chapter.content = [self.book.content substringWithRange:contentRange];
     Chapter.page = page;
     return Chapter;
+}
+
+#pragma mark -- 书签判定
+/// 当前页是否已有书签
+- (BOOL)isPageBookmarkedWithChapterObj:(RKChapter *)chapterObj chapterNum:(NSInteger)chapterNum page:(NSInteger)page {
+    if (!chapterObj || self.book.bookmarks.count == 0) return NO;
+
+    NSRange range = [chapterObj rangeOfPage:page];
+    if (range.location == NSNotFound) return NO;
+
+    for (RKBookmark *bm in self.book.bookmarks) {
+        if (bm.chapterNum != chapterNum) continue;
+        if (bm.location >= (NSInteger)range.location && bm.location < (NSInteger)(range.location + MAX(range.length, 1))) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+/// 刷新当前显示页的角标
+- (void)refreshCurrentBookmarkFlag {
+    UIViewController *vc = self.pageViewController.viewControllers.firstObject;
+    if (![vc isKindOfClass:[RKReadViewController class]]) return;
+    if (self.currentChapter >= self.book.chapters.count) return;
+
+    RKChapter *chapterObj = self.book.chapters[self.currentChapter];
+    ((RKReadViewController *)vc).isBookmarked = [self isPageBookmarkedWithChapterObj:chapterObj chapterNum:self.currentChapter page:self.currentPage];
 }
 
 #pragma mark -- 保存阅读进度
