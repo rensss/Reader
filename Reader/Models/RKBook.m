@@ -10,4 +10,8 @@
 
 @implementation RKBook
 
++ (NSDictionary *)mj_objectClassInArray {
+    return @{@"bookmarks" : @"RKBookmark"};
+}
+
 @end

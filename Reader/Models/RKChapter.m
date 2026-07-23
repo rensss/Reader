@@ -114,4 +114,28 @@
     return [self.content substringWithRange:NSMakeRange(local, length)];
 }
 
+/// 页起始偏移与长度
+- (NSRange)rangeOfPage:(NSUInteger)index {
+    if (self.pageArray.count == 0) return NSMakeRange(NSNotFound, 0);
+    if (index >= self.pageArray.count) {
+        index = self.pageArray.count - 1;
+    }
+    NSUInteger start = [self.pageArray[index] integerValue];
+    NSUInteger end = (index < self.pageArray.count - 1) ? [self.pageArray[index + 1] integerValue] : self.content.length;
+    return NSMakeRange(start, end - start);
+}
+
+/// 章节内字符偏移 换算 页码
+- (NSInteger)pageOfLocation:(NSInteger)location {
+    NSInteger page = 0;
+    for (NSInteger i = 0; i < self.pageArray.count; i++) {
+        if ([self.pageArray[i] integerValue] <= location) {
+            page = i;
+        } else {
+            break;
+        }
+    }
+    return page;
+}
+
 @end

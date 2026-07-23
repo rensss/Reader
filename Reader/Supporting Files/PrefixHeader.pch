@@ -48,6 +48,7 @@
 #import "RKModel.h"                 // model 基类
 #import "RKBook.h"                  // book对象
 #import "RKChapter.h"               // 章节
+#import "RKBookmark.h"             // 书签
 
 #pragma mark - 常用宏定义
 #define kKeyWindow [UIApplication sharedApplication].keyWindow

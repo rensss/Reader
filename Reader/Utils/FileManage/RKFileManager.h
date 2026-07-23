@@ -47,6 +47,12 @@
  */
 - (NSMutableArray *)updateWithBook:(RKBook *)book;
 
+/**
+ 更新书籍书签并落盘
+ @param book 书籍
+ */
+- (void)updateBookmarksForBook:(RKBook *)book;
+
 #pragma mark - 查
 /// 获取全部书籍列表
 - (NSMutableArray *)getAllBookList;

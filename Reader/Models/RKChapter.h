@@ -21,4 +21,10 @@
 /// 根据页码取出 当页内容
 - (NSString *)stringOfPage:(NSUInteger)index;
 
+/// 页起始偏移与长度;未分页返回 {NSNotFound, 0},index 越界按最后一页处理
+- (NSRange)rangeOfPage:(NSUInteger)index;
+
+/// 章节内字符偏移 换算 页码
+- (NSInteger)pageOfLocation:(NSInteger)location;
+
 @end

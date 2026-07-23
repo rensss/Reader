@@ -33,4 +33,6 @@
 
 @property (nonatomic, assign) BOOL isNeedRefreshChapters; /**< 是否需要重新解析章节*/
 
+@property (nonatomic, strong) NSMutableArray *bookmarks; /**< 书签列表*/
+
 @end

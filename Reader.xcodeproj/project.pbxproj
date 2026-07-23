@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18092C17B0869506A59A8773 /* RKBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8BE9F2CEA99304F5E72B4C /* RKBookmark.m */; };
 		1A03F1BC22730FAE000BB1E8 /* RKReadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A03F1BB22730FAE000BB1E8 /* RKReadView.m */; };
 		1A077627227854EB0073794E /* RKUserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A077626227854EB0073794E /* RKUserConfig.m */; };
 		1A07E6ED230B9CA9006FB45C /* Hannotate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1A07E6EC230B9CA9006FB45C /* Hannotate.ttc */; };
@@ -221,6 +222,8 @@
 		1AD836082488FB2800A31BA3 /* RKTouchFaceIDUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKTouchFaceIDUtil.m; sourceTree = "<group>"; };
 		1ADC1BFA240DFC98003C5F4B /* Hanzipen.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hanzipen.ttc; sourceTree = "<group>"; };
 		39B4DD11DBC9BAB4D18DB83C /* Pods-ReaderShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaderShare.release.xcconfig"; path = "Target Support Files/Pods-ReaderShare/Pods-ReaderShare.release.xcconfig"; sourceTree = "<group>"; };
+		3D274C857958EDFBF8736C51 /* RKBookmark.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RKBookmark.h; sourceTree = "<group>"; };
+		5F8BE9F2CEA99304F5E72B4C /* RKBookmark.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RKBookmark.m; sourceTree = "<group>"; };
 		87CBCC556A8D027DDA150191 /* libPods-ReaderShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReaderShare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94177DC82BD34600795374E4 /* Pods-ReaderShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaderShare.debug.xcconfig"; path = "Target Support Files/Pods-ReaderShare/Pods-ReaderShare.debug.xcconfig"; sourceTree = "<group>"; };
 		A7185894243780E73AEEC108 /* Pods-Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader.release.xcconfig"; path = "Target Support Files/Pods-Reader/Pods-Reader.release.xcconfig"; sourceTree = "<group>"; };
@@ -389,6 +392,8 @@
 				1A188926226D7AEC00289476 /* RKBook.m */,
 				1A188928226D7B1200289476 /* RKChapter.h */,
 				1A188929226D7B1200289476 /* RKChapter.m */,
+				3D274C857958EDFBF8736C51 /* RKBookmark.h */,
+				5F8BE9F2CEA99304F5E72B4C /* RKBookmark.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -803,6 +808,7 @@
 				1A188921226D7A8600289476 /* RKHomeListTableViewCell.m in Sources */,
 				1A03F1BC22730FAE000BB1E8 /* RKReadView.m in Sources */,
 				1A56A25C24517C1E00291C2D /* RKChaptersListCell.m in Sources */,
+				18092C17B0869506A59A8773 /* RKBookmark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
