@@ -39,6 +39,10 @@ RKIFLYTTSManagerDelegate
 
 @property (nonatomic, strong) RKIFLYTTSManager *IFLYTTSManager; /**< tts*/
 
+@property (nonatomic, strong) UIPanGestureRecognizer *bookmarkPan; /**< 下拉书签手势*/
+@property (nonatomic, strong) UIView *bookmarkHintView; /**< 下拉提示条*/
+@property (nonatomic, strong) UILabel *bookmarkHintLabel; /**< 下拉提示文案*/
+
 @end
 
 @implementation RKReadPageViewController
@@ -92,6 +96,12 @@ RKIFLYTTSManagerDelegate
     // 在页面上，显示UIPageViewController对象的View
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
+
+    // 下拉书签:提示条垫在内容层下方,仅左右翻页模式启用手势
+    [self.view insertSubview:self.bookmarkHintView belowSubview:_pageViewController.view];
+    if ([RKUserConfig sharedInstance].navigationOrientation == UIPageViewControllerNavigationOrientationHorizontal) {
+        [self.view addGestureRecognizer:self.bookmarkPan];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -311,6 +321,94 @@ RKIFLYTTSManagerDelegate
     }];
 }
 
+#pragma mark -- 下拉书签
+- (void)handleBookmarkPan:(UIPanGestureRecognizer *)pan {
+    CGFloat translationY = [pan translationInView:self.view].y;
+    // 阻尼 0.5,上限 120pt
+    CGFloat offset = MIN(MAX(translationY * 0.5f, 0), 120);
+
+    BOOL bookmarked = NO;
+    if (self.currentChapter < self.book.chapters.count) {
+        bookmarked = [self isPageBookmarkedWithChapterObj:self.book.chapters[self.currentChapter] chapterNum:self.currentChapter page:self.currentPage];
+    }
+
+    switch (pan.state) {
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateChanged: {
+            self.pageViewController.view.transform = CGAffineTransformMakeTranslation(0, offset);
+            if (offset >= 60) {
+                self.bookmarkHintLabel.text = bookmarked ? @"松手移除书签" : @"松手添加书签";
+            } else {
+                self.bookmarkHintLabel.text = bookmarked ? @"下拉移除书签" : @"下拉添加书签";
+            }
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            if (offset >= 60) {
+                [self toggleBookmark];
+            }
+            [self resetBookmarkPan];
+            break;
+        }
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed: {
+            [self resetBookmarkPan];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+/// 回弹复位
+- (void)resetBookmarkPan {
+    [UIView animateWithDuration:0.35f delay:0 usingSpringWithDamping:0.8f initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.pageViewController.view.transform = CGAffineTransformIdentity;
+    } completion:nil];
+}
+
+/// 当前页书签 toggle:无则加,有则删该页全部
+- (void)toggleBookmark {
+    if (self.currentChapter >= self.book.chapters.count) return;
+
+    RKChapter *chapterObj = self.book.chapters[self.currentChapter];
+    NSRange range = [chapterObj rangeOfPage:self.currentPage];
+    if (range.location == NSNotFound) return;
+
+    if (!self.book.bookmarks) {
+        self.book.bookmarks = [NSMutableArray array];
+    }
+
+    NSMutableArray *inPage = [NSMutableArray array];
+    for (RKBookmark *bm in self.book.bookmarks) {
+        if (bm.chapterNum != self.currentChapter) continue;
+        if (bm.location >= (NSInteger)range.location && bm.location < (NSInteger)(range.location + MAX(range.length, 1))) {
+            [inPage addObject:bm];
+        }
+    }
+
+    if (inPage.count > 0) {
+        [self.book.bookmarks removeObjectsInArray:inPage];
+        RKAlertMessage(@"已移除书签", self.view);
+    } else {
+        RKBookmark *bookmark = [[RKBookmark alloc] init];
+        bookmark.chapterNum = self.currentChapter;
+        bookmark.location = range.location;
+        NSString *pageText = [chapterObj stringOfPage:self.currentPage];
+        NSString *summary = [pageText stringByTrimmingWhitespaceAndAllNewLine] ?: @"";
+        if (summary.length > 40) {
+            summary = [summary substringToIndex:40];
+        }
+        bookmark.summary = summary;
+        bookmark.createDate = [[NSDate date] timeIntervalSince1970];
+        [self.book.bookmarks addObject:bookmark];
+        RKAlertMessage(@"已添加书签", self.view);
+    }
+
+    [[RKFileManager shareInstance] updateBookmarksForBook:self.book];
+    [self refreshCurrentBookmarkFlag];
+}
+
 #pragma mark - 代理
 #pragma mark -- UIGestureRecognizerDelegate
 // 解决TabView与Tap手势冲突
@@ -322,6 +420,21 @@ RKIFLYTTSManagerDelegate
         return NO;
     }
     return YES;
+}
+
+// 下拉书签:竖直下滑分量占优才开始;菜单/目录展示中不响应
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer == self.bookmarkPan) {
+        if (self.isShowMenu || self.isShowList) return NO;
+        CGPoint velocity = [self.bookmarkPan velocityInView:self.view];
+        return velocity.y > 0 && fabs(velocity.y) > fabs(velocity.x);
+    }
+    return YES;
+}
+
+// 下拉书签手势与翻页内部手势并存,互不阻塞
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return gestureRecognizer == self.bookmarkPan || otherGestureRecognizer == self.bookmarkPan;
 }
 
 #pragma mark -- RKReadMenuViewDelegate
@@ -660,6 +773,31 @@ RKIFLYTTSManagerDelegate
     [self getNextPageContent];
     [self refreshCurrentVC];
     [self updateLocalBookData];
+}
+
+#pragma mark - getting
+- (UIPanGestureRecognizer *)bookmarkPan {
+    if (!_bookmarkPan) {
+        _bookmarkPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleBookmarkPan:)];
+        _bookmarkPan.delegate = self;
+    }
+    return _bookmarkPan;
+}
+
+- (UIView *)bookmarkHintView {
+    if (!_bookmarkHintView) {
+        _bookmarkHintView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 140)];
+        _bookmarkHintView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _bookmarkHintView.backgroundColor = [UIColor clearColor];
+
+        _bookmarkHintLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.view.bounds.size.width, 20)];
+        _bookmarkHintLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _bookmarkHintLabel.font = [UIFont systemFontOfSize:13];
+        _bookmarkHintLabel.textColor = kReadViewBottomTintColor;
+        _bookmarkHintLabel.textAlignment = NSTextAlignmentCenter;
+        [_bookmarkHintView addSubview:_bookmarkHintLabel];
+    }
+    return _bookmarkHintView;
 }
 
 #pragma mark - setting
