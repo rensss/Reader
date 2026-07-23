@@ -161,7 +161,10 @@
     if (indexPath.row >= self.book.bookmarks.count) return;
 
     [self.book.bookmarks removeObjectAtIndex:indexPath.row];
-    [[RKFileManager shareInstance] updateBookmarksForBook:self.book];
+    // 与 updateLocalBookData 一致,落盘走后台队列
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [[RKFileManager shareInstance] updateBookmarksForBook:self.book];
+    });
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self updateEmptyLabel];
 }
