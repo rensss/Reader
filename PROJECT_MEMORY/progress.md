@@ -1,6 +1,6 @@
 # 进行中与待办
 
-## 2026-07-23 书签功能完成(待真机人工验证)
+## 2026-07-23 书签功能完成(2026-07-24 真机人工验证通过)
 - 阅读页下拉超 60pt 松手 toggle 书签(仅左右翻页模式),右上角红 ribbon 角标;目录侧滑加「目录/书签」分段,支持跳转与左滑删除
 - 定位存「章节 index + 章节内字符偏移」,改字号/行距不漂移;持久化挂 `RKBook.bookmarks` 随 BookLists.plist
 - commits bb9ef9a / 73571ae / 5993b5b / 8e37dc2;设计 docs/superpowers/specs/2026-07-23-bookmark-design.md,计划 docs/superpowers/plans/2026-07-23-bookmark.md(含人工验证清单,Task 5)
