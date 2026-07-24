@@ -5,7 +5,8 @@
 - 首版接受此限制(设计文档 docs/superpowers/specs/2026-07-23-bookmark-design.md 第 5 节),后续可改存全书绝对偏移解决
 
 ## 构建
-- `iflyMSC.framework` 为手动集成二进制,可能不含部分模拟器架构;模拟器构建失败先换真机 scheme 验证,不要急着改工程配置
+- `iflyMSC.framework` 为手动集成二进制(fat: i386/armv7/x86_64/arm64,arm64 为真机切片);arm64 模拟器链接必失败(`building for 'iOS-simulator', but linking in object file ... built for 'iOS'`)
+- 模拟器可跑:加 `ARCHS=x86_64 ONLY_ACTIVE_ARCH=NO` 走 Rosetta,如 `xcodebuild -workspace Reader.xcworkspace -scheme Reader -sdk iphonesimulator -destination 'platform=iOS Simulator,id=<UDID>' ARCHS=x86_64 ONLY_ACTIVE_ARCH=NO build`,再 `simctl install/launch`(2026-07-24 在 iPhone Xs Max iOS 16.0 模拟器验证通过)
 - 必须用 `Reader.xcworkspace` 打开/构建;直接用 xcodeproj 会缺 Pods
 
 ## 安全现状(历史遗留,改动前先与维护者确认)
